@@ -1,0 +1,724 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>SuSE10下支持中文的ftp客户端</title>
+	<meta name="description" content="SuSE10下支持中文的ftp客户端"> 
+	<meta name="keywords" content="SuSE10,ftp">
+	<meta http-equiv="content-type" content="text/html;charset=GB2312">
+
+	<link href="style/NewA.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" language="javascript" src="inc/NewJs.js"></script>
+</head>
+<body onmousemove="HideMenu()">
+<div id=menuDiv style="Z-INDEX: 1000; VISIBILITY: hidden; WIDTH: 0px; POSITION: absolute; HEIGHT: 0px; BACKGROUND-COLOR: #0164F9"></div>
+
+<div class="DIVChannel" style="padding:0px;">
+</div>
+<div class="DIVChannel" style="padding-top:2px;">
+<iframe1 name=myad src1="ads.html"  marginwidth=0 scrolling=no border=0 frameborder=0 width=0 height=0></iframe1>
+</div>
+<div class="DIVTitle">
+	<script language="JavaScript" type="text/JavaScript" src="inc/menu.js"></script>
+	<DIV class="DIVMenu">
+		<a href="./">首页</a> | <a href="-0c1.htm" onMouseOver="ShowMenu(menu1,100)">编程语言</a> | <a href="-0c2.htm"  onMouseOver="ShowMenu(menu2,100)">网站建设</a> | <a href="-0c3.htm"  onMouseOver="ShowMenu(menu3,100)">游戏天堂</a> | <a href="-0c4.htm" onMouseOver="ShowMenu(menu4,100)">冲浪宝典</a> | <a href="-0c5.htm" onMouseOver="ShowMenu(menu5,100)">网络安全</a> | <a href="-0c6.htm" onMouseOver="ShowMenu(menu6,100)">操作系统</a> | <a href="-0c7.htm" onMouseOver="ShowMenu(menu7,100)">软件时空</a> | <a href="-0c8.htm" onMouseOver="ShowMenu(menu8,100)">硬件指南</a> | <a href="-0c9.htm" onMouseOver="ShowMenu(menu9,100)">病毒相关</a> | <a href="IT-0c10.htm" onMouseOver="ShowMenu(menu10,100)">IT 认证</a>
+	</div>
+</div>
+
+
+
+
+<div class="DIVBody" style="margin-top:0px;">
+	<div class="DIVContent"><span id="LbPath"> <a href=./>软讯网络</a> > <a href=-0c6.htm>操作系统</a> > <a href=Linux-0c46.htm>Linux</a> > SuSE10下支持中文的ftp客户端</span> </div>
+	<div class="DIVChannel" style="padding:0px">
+		【标&nbsp;&nbsp;题】：SuSE10下支持中文的ftp客户端<br />
+		【关键字】：<b>SuSE10,ftp</b><br />
+		【来&nbsp;&nbsp;源】：http://www.cublog.cn/u/23177/showart.php?id=160622<br />
+		<div align="center"><h1>SuSE10下支持中文的ftp客户端</h1></div>
+		<div style="padding:10px;background-color:#FFFFFF;">
+			<div style="z-index:100;float: right;margin: 0px 0 0 0;padding: 0 0 0 0;">
+			</div>
+			<div style="">
+<script type="text/javascript"><!--
+google_ad_client = "pub-1534216445189830";
+google_alternate_ad_url = "http://www.1to2.us/noad.html";
+google_ad_width = 336;
+google_ad_height = 280;
+google_ad_format = "336x280_as";
+google_ad_type = "text";
+google_ad_channel = "";
+google_color_border = "FFFFFF";
+google_color_bg = "FFFFFF";
+google_color_link = "0000FF";
+google_color_text = "000000";
+google_color_url = "008000";
+//-->
+</script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<script type="text/javascript"><!--
+google_ad_client = "pub-1534216445189830";
+google_alternate_ad_url = "http://www.1to2.us/noad.html";
+google_ad_width = 336;
+google_ad_height = 280;
+google_ad_format = "336x280_as";
+google_ad_type = "text";
+google_ad_channel = "";
+google_color_border = "FFFFFF";
+google_color_bg = "FFFFFF";
+google_color_link = "0000FF";
+google_color_text = "000000";
+google_color_url = "008000";
+//-->
+</script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+			第一个是crossftp，到官方网站上下载源码只是如下一个名为crossftp.jnlp的文件：<br>
+<br>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;<br>
+<br>
+&lt;jnlp<br>
+&nbsp; spec="1.0+"<br>
+&nbsp; codebase="http://crossftp.googlepages.com/"<br>
+&nbsp; href="crossftp.jnlp"&gt;<br>
+&nbsp; &lt;information&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;title&gt;CrossFTP&lt;/title&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;vendor&gt;Crossworld, cross the world&lt;/vendor&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;homepage href="index.htm"/&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;description&gt;CrossFTP, a versatile file tranport tool&lt;/description&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;description kind="short"&gt;CrossFTP is a
+versatile ftp client for file transportation. It is fast, clean, safe,
+and easy to use. It is compatible with W<br>
+indows, Linux, and Mac OS X, and other operating systems. Please register it to support this software.&lt;/description&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;icon href="http://crossftp.googlepages.com/logo_big.jpg"/&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;icon kind="splash" href="http://crossftp.googlepages.com/logo_pane.jpg"/&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;offline-allowed/&gt;<br>
+&nbsp; &lt;/information&gt;<br>
+<br>
+&nbsp; &lt;security&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;all-permissions/&gt;<br>
+&nbsp; &lt;/security&gt;<br>
+<br>
+&nbsp; &lt;resources&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;j2se version="1.4+"/&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;jar href="crossftp.jar"/&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;jar href="swing-layout-0.9.jar"/&gt;<br>
+&nbsp; &lt;/resources&gt;<br>
+<br>
+&lt;!-- Prefer a shortcut for online operation --&gt;<br>
+&lt;shortcut online="false"&gt;<br>
+&nbsp; &lt;desktop/&gt;<br>
+&nbsp; &lt;menu submenu="CrossFTP"/&gt;<br>
+&lt;/shortcut&gt;<br>
+<br>
+&nbsp; &lt;application-desc main-class="crossftp.ui.MainFrameWindow"/&gt;<br>
+&lt;/jnlp&gt;<br>
+用jdk1.5的javaws打开，即javaws crossftp.jnlp。如果你的jdk1.5还不能很好的支持中文，请参考我的另外一篇文章<font><b><a target="" class="list1" href="http://blog.chinaunix.net/u/23177/showart.php?id=160602"><font style="font-size: 10pt;" color="#02368d"><b>"SuSE10下jdk1.4和jdk1.5中文显示</b></font></a>"<br>
+<br>
+</b>第二个是gftp，下载源码gftp-2.0.18.tar.bz2，还有一个台湾网友打的中文补丁，补丁内容如下：<br>
+<br>
+diff -Nur gftp-2.0.18/lib/local.c gftp-2.0.18.patched/lib/local.c<br>
+--- gftp-2.0.18/lib/local.c&nbsp;&nbsp;&nbsp; 2005-02-02 09:24:51.000000000 +0800<br>
++++ gftp-2.0.18.patched/lib/local.c&nbsp;&nbsp;&nbsp; 2005-02-28 14:41:00.000000000 +0800<br>
+@@ -26,6 +26,18 @@<br>
+&nbsp;&nbsp; GHashTable *userhash, *grouphash;<br>
+&nbsp;} local_protocol_data;<br>
+&nbsp;<br>
++static char *<br>
++_local_force_to_utf8(gftp_request * request, const char *name)<br>
++{<br>
++&nbsp; char *utf8_name;<br>
++<br>
++&nbsp; if (name == NULL) return NULL;<br>
++<br>
++&nbsp; if (g_utf8_validate (name, -1, NULL)) return g_strdup(name);<br>
++&nbsp; utf8_name = gftp_string_to_utf8 (request, name);<br>
++&nbsp; if (utf8_name == NULL) return g_strdup(name);<br>
++&nbsp; return utf8_name;<br>
++}<br>
+&nbsp;<br>
+&nbsp;static void<br>
+&nbsp;local_remove_key (gpointer key, gpointer value, gpointer user_data)<br>
+@@ -112,6 +124,7 @@<br>
+&nbsp;{<br>
+&nbsp;&nbsp; off_t size;<br>
+&nbsp;&nbsp; int flags;<br>
++&nbsp; char *utf8_name;<br>
+&nbsp;<br>
+&nbsp;&nbsp; g_return_val_if_fail (request != NULL, GFTP_EFATAL);<br>
+&nbsp;&nbsp; g_return_val_if_fail (request-&gt;protonum == GFTP_LOCAL_NUM, GFTP_EFATAL);<br>
+@@ -124,8 +137,15 @@<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; flags |= O_LARGEFILE;<br>
+&nbsp;#endif<br>
+&nbsp;<br>
+-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ((request-&gt;datafd = gftp_fd_open (request, filename, flags, 0)) == -1)<br>
+-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return (GFTP_ERETRYABLE); <br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; utf8_name = _local_force_to_utf8(request, filename);<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (utf8_name != NULL) {<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; request-&gt;datafd = gftp_fd_open (request, utf8_name, flags, 0);<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; g_free(utf8_name);<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; request-&gt;datafd = gftp_fd_open (request, filename, flags, 0);<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (request-&gt;datafd == -1)<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return (GFTP_ERETRYABLE);<br>
+&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp; else<br>
+&nbsp;&nbsp;&nbsp;&nbsp; request-&gt;datafd = fd;<br>
+@@ -157,6 +177,7 @@<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+off_t startsize, off_t totalsize)<br>
+&nbsp;{<br>
+&nbsp;&nbsp; int flags;<br>
++&nbsp; char *utf8_name;<br>
+&nbsp;<br>
+&nbsp;&nbsp; g_return_val_if_fail (request != NULL, GFTP_EFATAL);<br>
+&nbsp;&nbsp; g_return_val_if_fail (request-&gt;protonum == GFTP_LOCAL_NUM, GFTP_EFATAL);<br>
+@@ -171,8 +192,17 @@<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; flags |= O_LARGEFILE;<br>
+&nbsp;#endif<br>
+&nbsp;<br>
+-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ((request-&gt;datafd = gftp_fd_open
+(request, filename, flags, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) ==
+-1)<br>
+-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return (GFTP_ERETRYABLE);<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; utf8_name = _local_force_to_utf8(request, filename);<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (utf8_name != NULL) {<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; request-&gt;datafd =
+gftp_fd_open (request, utf8_name, flags, S_IRUSR | S_IWUSR | S_IRGRP |
+S_IROTH);<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; g_free(utf8_name);<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; request-&gt;datafd =
+gftp_fd_open (request, filename, flags, S_IRUSR | S_IWUSR | S_IRGRP |
+S_IROTH);<br>
++<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (request-&gt;datafd == -1) {<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return (GFTP_ERETRYABLE);<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp; else<br>
+&nbsp;&nbsp;&nbsp;&nbsp; request-&gt;datafd = fd;<br>
+@@ -185,7 +215,7 @@<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gftp_disconnect (request);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return (GFTP_ERETRYABLE);<br>
+&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+-&nbsp;&nbsp;&nbsp; <br>
++<br>
+&nbsp;&nbsp; if (lseek (request-&gt;datafd, startsize, SEEK_SET) == -1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; request-&gt;logging_function (gftp_logging_error, request,<br>
+@@ -229,8 +259,17 @@<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mode_t * mode)<br>
+&nbsp;{<br>
+&nbsp;&nbsp; struct stat st;<br>
++&nbsp; char *utf8_name;<br>
++&nbsp; int rc;<br>
+&nbsp;<br>
+-&nbsp; if (stat (filename, &amp;st) != 0)<br>
++&nbsp; utf8_name = _local_force_to_utf8(request, filename);<br>
++&nbsp; if (utf8_name != NULL) {<br>
++&nbsp;&nbsp;&nbsp; rc = stat (utf8_name, &amp;st);<br>
++&nbsp;&nbsp;&nbsp; g_free(utf8_name);<br>
++&nbsp; }<br>
++&nbsp; else<br>
++&nbsp;&nbsp;&nbsp; rc = stat (filename, &amp;st);<br>
++&nbsp; if (rc != 0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; return (GFTP_ERETRYABLE);<br>
+&nbsp;<br>
+&nbsp;&nbsp; *mode = st.st_mode;<br>
+@@ -275,13 +314,13 @@<br>
+&nbsp;&nbsp; if (stat (fle-&gt;file, &amp;fst) != 0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; return (GFTP_ERETRYABLE);<br>
+&nbsp;<br>
+-&nbsp; if ((user = g_hash_table_lookup (lpd-&gt;userhash, <br>
++&nbsp; if ((user = g_hash_table_lookup (lpd-&gt;userhash,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+GUINT_TO_POINTER(st.st_uid))) != NULL)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; fle-&gt;user = g_strdup (user);<br>
+&nbsp;&nbsp; else<br>
+&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ((pw = getpwuid (st.st_uid)) == NULL)<br>
+-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fle-&gt;user = g_strdup_printf ("%u", st.st_uid); <br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fle-&gt;user = g_strdup_printf ("%u", st.st_uid);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fle-&gt;user = g_strdup (pw-&gt;pw_name);<br>
+&nbsp;<br>
+@@ -289,13 +328,13 @@<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; g_hash_table_insert (lpd-&gt;userhash, GUINT_TO_POINTER (st.st_uid), user);<br>
+&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;<br>
+-&nbsp; if ((group = g_hash_table_lookup (lpd-&gt;grouphash, <br>
++&nbsp; if ((group = g_hash_table_lookup (lpd-&gt;grouphash,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+GUINT_TO_POINTER(st.st_gid))) != NULL)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; fle-&gt;group = g_strdup (group);<br>
+&nbsp;&nbsp; else<br>
+&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ((gr = getgrgid (st.st_gid)) == NULL)<br>
+-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fle-&gt;group = g_strdup_printf ("%u", st.st_gid); <br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fle-&gt;group = g_strdup_printf ("%u", st.st_gid);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fle-&gt;group = g_strdup (gr-&gt;gr_name);<br>
+&nbsp;<br>
+@@ -358,12 +397,21 @@<br>
+&nbsp;}<br>
+&nbsp;<br>
+&nbsp;<br>
+-static off_t <br>
++static off_t<br>
+&nbsp;local_get_file_size (gftp_request * request, const char *filename)<br>
+&nbsp;{<br>
+&nbsp;&nbsp; struct stat st;<br>
++&nbsp; char *utf8_name;<br>
++&nbsp; int rc;<br>
+&nbsp;<br>
+-&nbsp; if (stat (filename, &amp;st) == -1)<br>
++&nbsp; utf8_name = _local_force_to_utf8(request, filename);<br>
++&nbsp; if (utf8_name != NULL) {<br>
++&nbsp;&nbsp;&nbsp; rc = stat (utf8_name, &amp;st);<br>
++&nbsp;&nbsp;&nbsp; g_free(utf8_name);<br>
++&nbsp; }<br>
++&nbsp; else<br>
++&nbsp;&nbsp;&nbsp; rc = stat (filename, &amp;st);<br>
++&nbsp; if (rc != 0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; return (GFTP_ERETRYABLE);<br>
+&nbsp;&nbsp; return (st.st_size);<br>
+&nbsp;}<br>
+@@ -373,24 +421,34 @@<br>
+&nbsp;local_chdir (gftp_request * request, const char *directory)<br>
+&nbsp;{<br>
+&nbsp;&nbsp; char tempstr[255];<br>
++&nbsp; char *utf8_name;<br>
++&nbsp; int need_free;<br>
+&nbsp;<br>
+&nbsp;&nbsp; g_return_val_if_fail (request != NULL, GFTP_EFATAL);<br>
+&nbsp;&nbsp; g_return_val_if_fail (request-&gt;protonum == GFTP_LOCAL_NUM, GFTP_EFATAL);<br>
+&nbsp;&nbsp; g_return_val_if_fail (directory != NULL, GFTP_EFATAL);<br>
+&nbsp;<br>
+-&nbsp; if (chdir (directory) == 0)<br>
++&nbsp; need_free = 0;<br>
++&nbsp; utf8_name = _local_force_to_utf8(request, directory);<br>
++&nbsp; if (utf8_name != NULL)<br>
++&nbsp;&nbsp;&nbsp; need_free = 1;<br>
++&nbsp; else<br>
++&nbsp;&nbsp;&nbsp; utf8_name = directory;<br>
++<br>
++&nbsp; if (chdir (utf8_name) == 0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; request-&gt;logging_function (gftp_logging_misc, request,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+_("Successfully changed local directory to %s\n"),<br>
+-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+directory);<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+utf8_name);<br>
+&nbsp;<br>
+-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (request-&gt;directory != directory)<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (request-&gt;directory != utf8_name)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (getcwd (tempstr, sizeof (tempstr)) == NULL)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+request-&gt;logging_function (gftp_logging_error, request,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+_("Could not get current working directory: %s\n"),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+g_strerror (errno));<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (need_free) g_free(utf8_name);<br>
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return (GFTP_ERETRYABLE);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;<br>
+@@ -399,13 +457,15 @@<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; request-&gt;directory = g_strdup (tempstr);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (need_free) g_free(utf8_name);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return (0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp; else<br>
+&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; request-&gt;logging_function (gftp_logging_error, request,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+_("Could not change local directory to %s: %s\n"),<br>
+-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+directory, g_strerror (errno));<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+utf8_name, g_strerror (errno));<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (need_free) g_free(utf8_name);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return (GFTP_ERETRYABLE);<br>
+&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;}<br>
+@@ -414,11 +474,22 @@<br>
+&nbsp;static int<br>
+&nbsp;local_rmdir (gftp_request * request, const char *directory)<br>
+&nbsp;{<br>
++&nbsp; char *utf8_name;<br>
++&nbsp; int rc;<br>
++<br>
+&nbsp;&nbsp; g_return_val_if_fail (request != NULL, GFTP_EFATAL);<br>
+&nbsp;&nbsp; g_return_val_if_fail (request-&gt;protonum == GFTP_LOCAL_NUM, GFTP_EFATAL);<br>
+&nbsp;&nbsp; g_return_val_if_fail (directory != NULL, GFTP_EFATAL);<br>
+&nbsp;<br>
+-&nbsp; if (rmdir (directory) == 0)<br>
++&nbsp; utf8_name = _local_force_to_utf8(request, directory);<br>
++&nbsp; if (utf8_name != NULL) {<br>
++&nbsp;&nbsp;&nbsp; rc = rmdir (utf8_name);<br>
++&nbsp;&nbsp;&nbsp; g_free(utf8_name);<br>
++&nbsp; }<br>
++&nbsp; else<br>
++&nbsp;&nbsp;&nbsp; rc = rmdir (directory);<br>
++<br>
++&nbsp; if (rc == 0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; request-&gt;logging_function (gftp_logging_misc, request,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+_("Successfully removed %s\n"), directory);<br>
+@@ -437,11 +508,21 @@<br>
+&nbsp;static int<br>
+&nbsp;local_rmfile (gftp_request * request, const char *file)<br>
+&nbsp;{<br>
++&nbsp; char *utf8_name;<br>
++&nbsp; int rc;<br>
++<br>
+&nbsp;&nbsp; g_return_val_if_fail (request != NULL, GFTP_EFATAL);<br>
+&nbsp;&nbsp; g_return_val_if_fail (request-&gt;protonum == GFTP_LOCAL_NUM, GFTP_EFATAL);<br>
+&nbsp;&nbsp; g_return_val_if_fail (file != NULL, GFTP_EFATAL);<br>
+&nbsp;<br>
+-&nbsp; if (unlink (file) == 0)<br>
++&nbsp; utf8_name = _local_force_to_utf8(request, file);<br>
++&nbsp; if (utf8_name != NULL) {<br>
++&nbsp;&nbsp;&nbsp; rc = unlink (utf8_name);<br>
++&nbsp;&nbsp;&nbsp; g_free(utf8_name);<br>
++&nbsp; }<br>
++&nbsp; else<br>
++&nbsp;&nbsp;&nbsp; rc = unlink (file);<br>
++&nbsp; if (rc == 0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; request-&gt;logging_function (gftp_logging_misc, request,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+_("Successfully removed %s\n"), file);<br>
+@@ -460,11 +541,22 @@<br>
+&nbsp;static int<br>
+&nbsp;local_mkdir (gftp_request * request, const char *directory)<br>
+&nbsp;{<br>
++&nbsp; char *utf8_name;<br>
++&nbsp; int rc;<br>
++<br>
+&nbsp;&nbsp; g_return_val_if_fail (request != NULL, GFTP_EFATAL);<br>
+&nbsp;&nbsp; g_return_val_if_fail (request-&gt;protonum == GFTP_LOCAL_NUM, GFTP_EFATAL);<br>
+&nbsp;&nbsp; g_return_val_if_fail (directory != NULL, GFTP_EFATAL);<br>
+&nbsp;<br>
+-&nbsp; if (mkdir (directory, S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH) == 0)<br>
++&nbsp; utf8_name = _local_force_to_utf8(request, directory);<br>
++&nbsp; if (utf8_name != NULL) {<br>
++&nbsp;&nbsp;&nbsp; rc = mkdir (utf8_name, S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);<br>
++&nbsp;&nbsp;&nbsp; g_free(utf8_name);<br>
++&nbsp; }<br>
++&nbsp; else<br>
++&nbsp;&nbsp;&nbsp; rc = mkdir (directory, S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);<br>
++<br>
++&nbsp; if (rc == 0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; request-&gt;logging_function (gftp_logging_misc, request,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+_("Successfully made directory %s\n"),<br>
+@@ -485,12 +577,39 @@<br>
+&nbsp;local_rename (gftp_request * request, const char *oldname,<br>
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; const char *newname)<br>
+&nbsp;{<br>
++&nbsp; char *utf8_oldname, *utf8_newname;<br>
++&nbsp; int rc;<br>
++<br>
+&nbsp;&nbsp; g_return_val_if_fail (request != NULL, GFTP_EFATAL);<br>
+&nbsp;&nbsp; g_return_val_if_fail (request-&gt;protonum == GFTP_LOCAL_NUM, GFTP_EFATAL);<br>
+&nbsp;&nbsp; g_return_val_if_fail (oldname != NULL, GFTP_EFATAL);<br>
+&nbsp;&nbsp; g_return_val_if_fail (newname != NULL, GFTP_EFATAL);<br>
+&nbsp;<br>
+-&nbsp; if (rename (oldname, newname) == 0)<br>
++&nbsp; utf8_oldname = _local_force_to_utf8(request, oldname);<br>
++&nbsp; utf8_newname = _local_force_to_utf8(request, newname);<br>
++<br>
++&nbsp; if (utf8_oldname != NULL) {<br>
++&nbsp;&nbsp;&nbsp; if (utf8_newname != NULL) {<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; rc = rename (utf8_oldname, utf8_newname);<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; g_free(utf8_oldname);<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; g_free(utf8_newname);<br>
++&nbsp;&nbsp;&nbsp; }<br>
++&nbsp;&nbsp;&nbsp; else {<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; rc = rename (utf8_oldname, newname);<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; g_free(utf8_oldname);<br>
++&nbsp;&nbsp;&nbsp; }<br>
++&nbsp; }<br>
++&nbsp; else {<br>
++&nbsp;&nbsp;&nbsp; if (utf8_newname != NULL) {<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; rc = rename (oldname, utf8_newname);<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; g_free(utf8_newname);<br>
++&nbsp;&nbsp;&nbsp; }<br>
++&nbsp;&nbsp;&nbsp; else {<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; rc = rename (oldname, newname);<br>
++&nbsp;&nbsp;&nbsp; }<br>
++&nbsp; }<br>
++<br>
++&nbsp; if (rc == 0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; request-&gt;logging_function (gftp_logging_misc, request,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+_("Successfully renamed %s to %s\n"),<br>
+@@ -510,20 +629,30 @@<br>
+&nbsp;static int<br>
+&nbsp;local_chmod (gftp_request * request, const char *file, mode_t mode)<br>
+&nbsp;{<br>
++&nbsp; char *utf8_name;<br>
++&nbsp; int rc;<br>
++<br>
+&nbsp;&nbsp; g_return_val_if_fail (request != NULL, GFTP_EFATAL);<br>
+&nbsp;&nbsp; g_return_val_if_fail (request-&gt;protonum == GFTP_LOCAL_NUM, GFTP_EFATAL);<br>
+&nbsp;&nbsp; g_return_val_if_fail (file != NULL, GFTP_EFATAL);<br>
+&nbsp;<br>
+-&nbsp; if (chmod (file, mode) == 0) <br>
++&nbsp; utf8_name = _local_force_to_utf8(request, file);<br>
++&nbsp; if (utf8_name != NULL) {<br>
++&nbsp;&nbsp;&nbsp; rc = chmod (utf8_name, mode);<br>
++&nbsp;&nbsp;&nbsp; g_free(utf8_name);<br>
++&nbsp; }<br>
++&nbsp; else<br>
++&nbsp;&nbsp;&nbsp; rc = chmod (file, mode);<br>
++&nbsp; if (rc == 0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; request-&gt;logging_function (gftp_logging_misc, request, <br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; request-&gt;logging_function (gftp_logging_misc, request,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+_("Successfully changed mode of %s to %o\n"),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+file, mode);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return (0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+-&nbsp; else <br>
++&nbsp; else<br>
+&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; request-&gt;logging_function (gftp_logging_error, request, <br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; request-&gt;logging_function (gftp_logging_error, request,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+_("Error: Could not change mode of %s to %o: %s\n"),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+file, mode, g_strerror (errno));<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return (GFTP_ERETRYABLE);<br>
+@@ -536,6 +665,8 @@<br>
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; time_t datetime)<br>
+&nbsp;{<br>
+&nbsp;&nbsp; struct utimbuf time_buf;<br>
++&nbsp; char *utf8_name;<br>
++&nbsp; int rc;<br>
+&nbsp;<br>
+&nbsp;&nbsp; g_return_val_if_fail (request != NULL, GFTP_EFATAL);<br>
+&nbsp;&nbsp; g_return_val_if_fail (request-&gt;protonum == GFTP_LOCAL_NUM, GFTP_EFATAL);<br>
+@@ -543,7 +674,16 @@<br>
+&nbsp;<br>
+&nbsp;&nbsp; time_buf.modtime = datetime;<br>
+&nbsp;&nbsp; time_buf.actime = datetime;<br>
+-&nbsp; return (utime (file, &amp;time_buf) == 0 ? 0 : GFTP_ERETRYABLE);<br>
++<br>
++&nbsp; utf8_name = _local_force_to_utf8(request, file);<br>
++&nbsp; if (utf8_name != NULL) {<br>
++&nbsp;&nbsp;&nbsp; rc = utime (utf8_name, &amp;time_buf);<br>
++&nbsp;&nbsp;&nbsp; g_free(utf8_name);<br>
++&nbsp; }<br>
++&nbsp; else<br>
++&nbsp;&nbsp;&nbsp; rc = utime (file, &amp;time_buf);<br>
++<br>
++&nbsp; return (rc == 0 ? 0 : GFTP_ERETRYABLE);<br>
+&nbsp;}<br>
+&nbsp;<br>
+&nbsp;<br>
+@@ -561,7 +701,7 @@<br>
+&nbsp;}<br>
+&nbsp;<br>
+&nbsp;<br>
+-void <br>
++void<br>
+&nbsp;local_register_module (void)<br>
+&nbsp;{<br>
+&nbsp;}<br>
+diff -Nur gftp-2.0.18/lib/protocols.c gftp-2.0.18.patched/lib/protocols.c<br>
+--- gftp-2.0.18/lib/protocols.c&nbsp;&nbsp;&nbsp; 2005-01-25 10:34:18.000000000 +0800<br>
++++ gftp-2.0.18.patched/lib/protocols.c&nbsp;&nbsp;&nbsp; 2005-02-28 13:51:54.000000000 +0800<br>
+@@ -450,11 +450,16 @@<br>
+&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ret = g_convert_with_iconv (str, -1, request-&gt;iconv, &amp;bread, &amp;bwrite, <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&amp;error);<br>
+-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (ret == NULL)<br>
+-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf (_("Error converting
+string '%s' from character set %s to character set %s: %s\n"),<br>
+-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+str, _("&lt;unknown&gt;"), "UTF-8", error-&gt;message);<br>
+-<br>
+-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return (ret);<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (ret == NULL) {<br>
++//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf (_("Error
+converting string '%s' from character set %s to character set %s:
+%s\n"),<br>
++//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+str, _("&lt;unknown&gt;"), "UTF-8", error-&gt;message);<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; g_iconv_close (request-&gt;iconv);<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; request-&gt;iconv = NULL;<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; request-&gt;iconv_initialized = 0;<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else {<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return (ret);<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;<br>
+&nbsp;&nbsp; gftp_lookup_request_option (request, "remote_charsets", &amp;tempstr);<br>
+@@ -521,11 +526,16 @@<br>
+&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ret = g_convert_with_iconv (str, -1, request-&gt;iconv, &amp;bread, &amp;bwrite, <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&amp;error);<br>
+-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (ret == NULL)<br>
+-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf (_("Error converting
+string '%s' from character set %s to character set %s: %s\n"),<br>
+-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+str, "UTF-8", _("&lt;unknown&gt;"), error-&gt;message);<br>
+-<br>
+-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return (ret);<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (ret == NULL) {<br>
++//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf (_("Error
+converting string '%s' from character set %s to character set %s:
+%s\n"),<br>
++//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+str, "UTF-8", _("&lt;unknown&gt;"), error-&gt;message);<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; g_iconv_close (request-&gt;iconv);<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; request-&gt;iconv = NULL;<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; request-&gt;iconv_initialized = 0;<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else {<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return (ret);<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;<br>
+&nbsp;&nbsp; gftp_lookup_request_option (request, "remote_charsets", &amp;tempstr);<br>
+@@ -597,6 +607,7 @@<br>
+&nbsp;{<br>
+&nbsp;&nbsp; char *slashpos, *newfile;<br>
+&nbsp;&nbsp; int fd, ret;<br>
++&nbsp; int rc;<br>
+&nbsp;<br>
+&nbsp;&nbsp; g_return_val_if_fail (request != NULL, GFTP_EFATAL);<br>
+&nbsp;<br>
+@@ -650,7 +661,10 @@<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; request-&gt;cachefd = -1;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+-&nbsp;&nbsp;&nbsp; } while (ret &gt; 0 &amp;&amp; !gftp_match_filespec (fle-&gt;file, filespec));<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; rc = gftp_match_filespec(fle-&gt;file, filespec);<br>
++&nbsp;&nbsp;&nbsp; if (rc == 0 &amp;&amp; fle-&gt;utf8_file != NULL) <br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; rc = gftp_match_filespec(fle-&gt;utf8_file, filespec);<br>
++&nbsp;&nbsp;&nbsp; } while (ret &gt; 0 &amp;&amp; !rc);<br>
+&nbsp;<br>
+&nbsp;&nbsp; return (ret);<br>
+&nbsp;}<br>
+diff -Nur gftp-2.0.18/src/uicommon/gftpuicallbacks.c gftp-2.0.18.patched/src/uicommon/gftpuicallbacks.c<br>
+--- gftp-2.0.18/src/uicommon/gftpuicallbacks.c&nbsp;&nbsp;&nbsp; 2005-01-04 21:32:16.000000000 +0800<br>
++++ gftp-2.0.18.patched/src/uicommon/gftpuicallbacks.c&nbsp;&nbsp;&nbsp; 2005-02-28 13:52:31.000000000 +0800<br>
+@@ -79,9 +79,20 @@<br>
+&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (cdata-&gt;source_string == NULL)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; matched_filespec = 1;<br>
+-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; matched_filespec = gftp_match_filespec (fle-&gt;file,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cdata-&gt;source_string);<br>
++&nbsp;&nbsp;&nbsp; if (matched_filespec == 0) {<br>
++&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; char *remote_file;<br>
++<br>
++&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; remote_file = gftp_string_to_utf8 (cdata-&gt;request, fle-&gt;file);<br>
++&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; if (remote_file != NULL) {<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+matched_filespec = gftp_match_filespec (remote_file,<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cdata-&gt;source_string);<br>
++&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; g_free(remote_file);<br>
++&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; }<br>
++&nbsp;&nbsp;&nbsp; }<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (got &lt; 0 || strcmp (fle-&gt;file, ".") == 0 || !matched_filespec)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+<br>
+</font>将上述内容保存为/usr/local/gftp.patch，运行如下命令<br>
+msh:/usr/local/gftp-2.0.18 # cat ../gftp.patch | patch -p1  <br>
+<font>最后./configure; make; make install就可以了。<br>
+</font>
+		
+		
+		
+			</div>		
+			<div align="right" style="">
+				<span id="LbPreviousArticle"><a href=-a129036.htm title="同步、异步、阻塞和非阻塞的概念">同步、异步、阻塞和非阻塞的概念</a></span>：【上一篇】<br />
+				<span id="LbNextArticle"><a href=C-C-a129038.htm title="【转载】C/C++ 编译器和调试器以及静态库、动态库使用汇总">【转载】C/C++ 编译器和调试器以及静态库、动态库使用汇总</a></span>：【下一篇】
+			</div>
+		</div>
+	</div>
+	<div class="DIVChannel">
+		<b>【相关文章】</b>
+		<br/>
+		
+				<li><a href=VSFTPD-MYSQL-a129019.htm title="VSFTPD+MYSQL编译安装">VSFTPD+MYSQL编译安装</a></li>
+			
+				<li><a href=FileZilla-FTP-11-a128965.htm title="FileZilla FTP服务器源代码分析11">FileZilla FTP服务器源代码分析11</a></li>
+			
+				<li><a href=suse10-2-a128814.htm title="suse10.2新版开始菜单视频演示">suse10.2新版开始菜单视频演示</a></li>
+			
+				<li><a href=vsftpd-a128802.htm title="vsftpd服务指令大全（英文版）[原创]">vsftpd服务指令大全（英文版）[原创]</a></li>
+			
+				<li><a href=java-FTP-a128622.htm title="java上传FTP文件实例程序">java上传FTP文件实例程序</a></li>
+			
+				<li><a href=FileZilla-FTP-10-a128600.htm title="FileZilla FTP服务器源代码分析10">FileZilla FTP服务器源代码分析10</a></li>
+			
+				<li><a href=WFTPD-server-3-23-(SIZE)-0day-a128436.htm title="WFTPD server 3.23 (SIZE) 0day 攻击程序">WFTPD server 3.23 (SIZE) 0day 攻击程序</a></li>
+			
+				<li><a href=Easy-File-Sharing-FTP-Server-2-0-(PASS)-a128435.htm title="Easy File Sharing FTP Server 2.0 (PASS) 攻击程序">Easy File Sharing FTP Server 2.0 (PASS) 攻击程序</a></li>
+			
+				<li><a href=Mozilla-Firefox-1-5-0-6-(FTP-Request)-a128430.htm title="Mozilla Firefox <= 1.5.0.6 (FTP Request)">Mozilla Firefox <= 1.5.0.6 (FTP Request)</a></li>
+			
+				<li><a href=vsftp-a128377.htm title="安装vsftp- -">安装vsftp- -</a></li>
+			
+		<span id="LbRelatedArticle"></span>
+	</div>
+	<div class="DIVChannel" style="background-color:#FFFFFF;padding:0px 0px 4px 0px;">
+		<div style="padding-left:10px"><b>【相关评论】</b></div>
+			
+			<span id="LbComment">没有相关评论</span>
+			<div class="DIVCommentTop">【发表评论】</div>	
+			<div class="DIVCommentBody">
+				<form method="post" action="ShowArticle.aspx" name="FComment" id="FComment">
+					<input type="hidden" name="ArticleID" value="129037" />
+					姓名：<INPUT type="text" name="UserName" id="UserName" /><br />
+					邮件：<input type="text" name="Email" id="Email" /><br />
+					随机码<span style="color:#FF0000;">*</span>：<input type="text" name="ValidateNumber" id="ValidateNumber" /> <img src="RndImg.aspx"><br />
+					评论<span style="color:#FF0000;">*</span>：<textarea name="Content" cols="40" rows="6"  id="Content"></textarea><br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type=submit name=submit value="发 表" style="height:20px;" onclick="return CheckFComment();"/>
+				</form>
+			</div>
+	</div>
+</div>
+
+
+
+<div><script src="http://www.bibts.com/etj/"></script></div>
+<div class="DIVFooter">
+	|&nbsp;&nbsp;<a href="./">首 页</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="CopyRight.aspx">版权声明</a>&nbsp;&nbsp;|&nbsp;&nbsp;联系我们 <img src=http://www.bibts.com/inc/contact.gif>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="SiteMap.aspx">网站地图</a>&nbsp;&nbsp;|
+	<br>
+	CopyRight &copy; 2004-2006&nbsp;软讯网络&nbsp;All Rigths Reserved.
+</div>
+</body>
+</html>
+
