@@ -1,0 +1,306 @@
+HTTP/1.1 200 OK
+Server: Microsoft-IIS/5.0
+Date: Sun, 20 May 2007 13:24:06 GMT
+X-Powered-By: ASP.NET
+Connection: Keep-Alive
+Content-Length: 14158
+Content-Type: text/html
+Set-Cookie: ASPSESSIONIDCCAQARDR=FIMBGLGBFHIIEBFPKICDHENF; path=/
+Cache-control: private
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>IP地址查询--手机号码查询归属地 | 邮政编码查询 | 长途电话区号 | 身份证号码验证在线查询网</title>
+<meta name="Generator" content="ip,IP查询,IP地址查询,ip138,网址之家">
+<meta name="Author" content="ip138,网址之家">
+<meta name="Keywords" content="ip,IP查询,IP地址查询,ip138,网址之家">
+<meta name="Description" content="ip,IP查询,IP地址查询,ip138,网址之家">
+<script language="javascript">
+<!--
+function checkIP()
+{
+	var ipArray,ip,j;
+	ip = document.ipform.ip.value;
+	
+	if(/[A-Za-z_-]/.test(ip)){
+		if(!/^([\w-]+\.)+((com)|(net)|(org)|(gov\.cn)|(info)|(cc)|(com\.cn)|(net\.cn)|(org\.cn)|(name)|(biz)|(tv)|(cn))$/.test(ip)){
+			alert("不是正确的域名");
+			document.ipform.ip.focus();
+			return false;
+		}
+	}
+	else{
+		ipArray = ip.split(".");
+		j = ipArray.length
+		if(j!=4)
+		{
+			alert("不是正确的IP");
+			document.ipform.ip.focus();
+			return false;
+		}
+
+		for(var i=0;i<4;i++)
+		{
+			if(ipArray[i].length==0 || ipArray[i]>255)
+			{
+				alert("不是正确的IP");
+				document.ipform.ip.focus();
+				return false;
+			}
+		}
+	}
+}
+
+function checkMobile(){
+	var sMobile = document.mobileform.mobile.value
+	if(!(/^1[3|5][0-9]\d{4,8}$/.test(sMobile))){
+		alert("不是完整的11位手机号或者正确的手机号前七位");
+		document.mobileform.mobile.focus();
+		return false;
+	}
+	window.open('', 'mobilewindow', 'height=197,width=350,status=yes,toolbar=no,menubar=no,location=no')
+}
+
+function checkZip(){
+	var sZip = document.zipform.zip.value
+	if(!(/^\d{4,6}$/.test(sZip))){
+		alert("请输入邮政编码前4-6位");
+		return false;
+	}
+	window.open('','searchwindow','height=197,width=400,status=yes,toolbar=no,menubar=no,location=no,resizable=yes,scrollbars=yes')
+}
+
+function checkZone(){
+	var sZone = document.zoneform.zone.value
+	if(!(/^0\d{2,3}$/.test(sZone))){
+		alert("请输入以“0”开头的3位或者4位区号");
+		return false;
+	}
+	window.open('','searchwindow','height=197,width=400,status=yes,toolbar=no,menubar=no,location=no,resizable=yes,scrollbars=yes')
+}
+
+function checkArea2Zip(){
+	var sArea = document.area2zipForm.area.value
+	if(sArea==""){
+		alert("请输入地址");
+		document.area2zipForm.area.focus();
+		return false;
+	}
+	if(sArea.length<2){
+		alert("地址至少要有2个字");
+		document.area2zipForm.area.focus();
+		return false;
+	}
+	window.open('','searchwindow','height=197,width=400,status=yes,toolbar=no,menubar=no,location=no,resizable=yes,scrollbars=yes')
+}
+
+function checkArea2Zone(){
+	var sArea = document.area2zoneForm.area.value
+	if(sArea==""){
+		alert("请输入地址");
+		document.area2zoneForm.area.focus();
+		return false;
+	}
+	if(sArea.length<2){
+		alert("地址至少要有2个字");
+		document.area2zoneForm.area.focus();
+		return false;
+	}
+	window.open('','searchwindow','height=197,width=400,status=yes,toolbar=no,menubar=no,location=no,resizable=yes,scrollbars=yes')
+}
+
+function checkID(){
+	var sID = document.IDform.userid.value
+	if(!(/^\d{15}$|^\d{18}$|^\d{17}x$/.test(sID))){
+		alert("请输入15位或18位身份证号");
+		document.IDform.userid.focus();
+		return false;
+	}
+}
+//-->
+</script>
+
+<style type=text/css>
+p,td {font-size:16px}
+A:link {COLOR: #1c5f82; TEXT-DECORATION: none}
+A:visited {COLOR: #1c5f82; TEXT-DECORATION: none}
+A:hover {COLOR: #cc5533; TEXT-DECORATION: underline}
+.subt {COLOR: #aa3333; FONT-FAMILY: "宋体"; FONT-SIZE: 9pt}
+.tdc {COLOR: #333333; FONT-FAMILY: "宋体"; FONT-SIZE: 9pt}
+.tdc1 {COLOR: #ffffff; FONT-FAMILY: "宋体"; FONT-SIZE: 9pt}
+.tdc2 {COLOR: #008000; FONT-FAMILY: "宋体"; FONT-SIZE: 9pt}
+.bdtj {BACKGROUND: #6699cc; BORDER-BOTTOM: #6699cc 1px solid; BORDER-LEFT: #6699cc 1px solid; BORDER-RIGHT: #6699cc 1px solid; BORDER-TOP: #6699cc 1px solid; COLOR: #ffffff; FONT-SIZE: 9pt; HEIGHT: 18px}
+BODY {SCROLLBAR-HIGHLIGHT-COLOR: #f7f7f7; SCROLLBAR-SHADOW-COLOR: #f7f7f7; SCROLLBAR-ARROW-COLOR: #EFF1F3; SCROLLBAR-TRACK-COLOR: #EFF1F3; SCROLLBAR-BASE-COLOR: #f7f7f7; text-align:center}
+</style>
+</head>
+<body>
+<div align="center"><center>
+<table cellSpacing="0" cellPadding="0" width="780" align="center" border="0">
+  <tr vAlign="bottom">
+    <td align="left"><b>www.ip138.com 查询网</b></td>
+    <td align="middle"></td>
+    <td align="right"><strong>手机上网查询:wap.ip138.com</strong></td>
+  </tr>
+  <tr vAlign="top" align="left">
+    <td colSpan="3"><hr width="100%" SIZE="1">
+    </td>
+  </tr>
+</table>
+</center></div>
+<div align="center"><center>
+<table border="0" cellpadding="0" cellspacing="0" width="677" height="22">
+   <tr>
+    <td align="middle" width="169" height="15"><strong><font color="#008000">→</font></strong><a
+    href="http://qq.ip138.com/weather/" target="_blank">天气预报-预报五天</a></td>
+    <td align="middle" width="169" height="15"><strong><font color="#008000">→</font></strong><a
+    href="http://qq.ip138.com/train/" target="_blank">国内列车时刻表查询</a></td>
+    <td align="middle" width="169" height="15"><strong><font color="#008000">→</font></strong><a
+    href="http://www.ip138.com/carlist.htm" target="_blank">全国各地车牌查询表</a></td>
+    <td align="middle" width="170" height="15"><strong><font color="#008000">→</font></strong><a
+    href="http://qq.ip138.com/day/" target="_blank">阴阳转换万年历</a>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="middle" width="169" height="10"><strong><font color="#008000">→</font></strong><a
+    href="http://www.ip138.com/gb.htm" target="_blank">汉字简体繁体转换</a></td>
+    <td align="middle" width="169" height="10"><strong><font color="#008000">→</font></strong><a
+    href="http://www.ip138.com/jb.htm" target="_blank">国内国际机票查询</a></td>
+    <td align="middle" width="169" height="10"><strong><font color="#008000">→</font></strong><a
+    href="http://www.3533.com/phone/" target="_blank">手机型号大全查询</a></td>
+    <td align="middle" width="170" height="10"><strong><font color="#008000">→</font></strong><a
+    href="http://qq.ip138.com/wb/wb.asp" target="_blank">五笔编码拼音查询</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="169" height="8"><strong><font color="#008000">→</font></strong><a
+    href="http://qq.ip138.com/tran.htm" target="_blank">在线翻译</a></td>
+    <td align="middle" width="169" height="8"><strong><font color="#008000">→</font></strong><a
+    href="http://qq.ip138.com/hl.asp" target="_blank">货币汇率兑换</a></td>
+    <td align="middle" width="169" height="8"><strong><font color="#008000">→</font></strong><a
+    href="http://qq.ip138.com/converter.htm" target="_blank">在线度衡量转换器</a></td>
+    <td align="middle" width="170" height="8"><strong><font color="#008000">→</font></strong><a
+    href="http://qq.ip138.com/zt.htm" target="_blank">论坛转贴工具</a></td>
+  </tr>
+</table>
+</center></div>
+<p>&nbsp;</p>
+<table width="80%"  border="0" align="center" cellpadding="0" cellspacing="0">
+	<tr><td align="center"><h3>www.ip138.com IP查询(搜索IP地址的地理位置)</h3></td></tr>
+	<tr>
+		<td height="30" align="center" valign="top">您的IP地址是：221.216.5.247</td>
+	</tr>
+	<tr>
+	</tr>
+	<FORM METHOD=POST ACTION="ips8.asp" target="_blank" name="ipform" onsubmit="return checkIP();">
+	<tr>
+		<td align="center"><div align="center">
+			<p>在下面输入框中输入您要查询的IP地址或者域名，点击查询按钮即可查询该IP所属的区域。</p>
+			<p>IP地址或者域名：<input type="text" name="ip" size="16"> <input type="submit" value="查询"><INPUT TYPE="hidden" name="action" value="2"></p>
+		</div></td>
+	</tr>
+	</FORM>
+</table>	
+
+<div align="center"><center>
+<table>
+	<tr><td align="center">ip138专业7*24小时为您服务</td></tr>
+	<tr><td align="center"><small>注:本站的IP数据库为最新的数据库,每10天自动更新一次</small></td></tr>
+	<tr><td align="center"><small></small><a href="iplink.htm" target="_blank">欢迎各网站链接本站IP数据库,获取代码按此</a><small></small></td></tr>
+</table>
+</center></div>
+<p align="center"><small>如发现小部分IP查询结果不正确请到官方网站<a href="http://www.apnic.net" target="_blank">http://www.apnic.net</a>查询,以apnic为准。</small></p>
+
+<p align="center"><a href="http://www.ip138.com" target="_blank">IP查询、手机号码归属地、邮政编码、长途电话区号、身份证号码验证专业在线查询</a></font></p>
+<div align="center"><center>
+<table width="561">
+	<tr>
+		<td width="140" align="center"><font color="#FF0000">→</font><a href="http://game.3533.com/gamesclass/47-0-1.htm" target="_blank">诺基亚手机游戏</a></td>
+		<td width="140" align="center"><font color="#FF0000">→</font><a href="http://game.3533.com/gamesclass/60-0-1.htm" target="_blank">索爱手机游戏</a></td>
+		<td width="157" align="center"><font color="#FF0000">→</font><a href="http://game.3533.com/gamesclass/45-0-1.htm" target="_blank">摩托罗拉手机游戏</a></td>
+		<td width="124" align="center"><font color="#FF0000">→</font><a href="http://game.3533.com/gamesclass/52-0-1.htm" target="_blank">三星手机游戏</a></td>
+	</tr>
+</table>
+</center></div>
+<br/>
+<div align="center"><center>
+<table border="1" borderColor="#6699CC" cellSpacing="0" height="1" width="61%" align="center" cellpadding="0">
+	<tr><td class="p2" height="-2" vAlign="top" width="99%" bgcolor="#6699CC"><p align="center"><font color="#FFFFFF"><strong>手机号码所在地区强力查询</strong></font></td></tr>
+	<tr><td class="p2" height="12" vAlign="top" width="99%"><p align="center">输入手机号即可知道用户所在的地区</td></tr>
+	<tr>
+		<td class="p2" height="15" vAlign="top" width="99%"><form action="http://www.ip138.com:8080/search.asp" method="post" onsubmit="return checkMobile();" target="mobilewindow" name="mobileform">
+			<input type="hidden" name="action" value="mobile"><div align="center"><center><p>&nbsp;&nbsp;手机号码（段）<input class="TextBoxStyle" maxLength="11" name="mobile" size="15"> <input class="ButtonStyle" type="submit" value="查询"></p>
+			</center></div>
+		</form>
+		</td>
+	</tr>
+</table>
+</center></div>
+<p align="center"><a href="http://www.ip138.com/sjlink.htm" target="_blank">欢迎各网站免费链接本站手机号码查询系统,获取代码按此</a></p>
+<p align="center"><a href="http://www.3533.com/phone" target="_blank"><font color="#008000">手机大全查询.手机型号查询,手机报价查询.购机指南</font></a></p>
+<br>
+<center>
+<table border=1 borderColor=#3366cc cellPadding=4 style="BORDER-COLLAPSE: collapse" width=520>
+	<tr>
+		<td align=middle bgColor=#6699cc class=tdc1 colSpan=4 height=24>国内邮政编码和长途电话区号查询</td>
+	</tr>
+	<tr bgColor=#eff1f3 align=middle>
+	<form action="http://www.ip138.com/post/search.asp" method=post name="area2zipForm" onsubmit="return checkArea2Zip()" target="searchwindow">
+		<td width=80 class=tdc>地名查询邮编</td>
+		<td class=tdc><input name="action" type="hidden" value="area2zip"><input class=tdc name="area" size=16>&nbsp;<input class=bdtj name=B1 type=submit value="查 询">
+		</td>
+	</form>
+	<form action="http://www.ip138.com/post/search.asp" method=post name="zipform" onsubmit="return checkZip();" target="searchwindow">
+		<td width=80 class=tdc>邮编查询地名</td>
+		<td class=tdc><INPUT name="action" type="hidden" value="zip2area"><INPUT class=tdc name="zip" size=10>&nbsp;<INPUT class=bdtj name=B1 type=submit value="查 询">
+		</td>
+	</form>
+	</tr>
+	<tr bgColor=#eff1f3 align=middle>
+	<form action="http://www.ip138.com/post/search.asp" method=post name="area2zoneForm" onsubmit="return checkArea2Zone();" target="searchwindow">
+		<td class=tdc>地名查询区号</td>
+		<td class=tdc><INPUT name="action" type="hidden" value="area2zone"><INPUT class=tdc name="area" size=16>&nbsp;<INPUT class=bdtj name=B1 type=submit value="查 询"></td>
+	</form>
+	<form action="http://www.ip138.com/post/search.asp" method=post name="zoneform" onsubmit="return checkZone();" target="searchwindow">
+		<td class=tdc>区号查询地名</td>
+		<td class=tdc><INPUT name="action" type="hidden" value="zone2area"><INPUT class=tdc name="zone" size=10>&nbsp;<INPUT class=bdtj name=B1 type=submit value="查 询"></td>
+	</form>
+	</tr>
+</table>
+<strong><a href="http://www.ip138.com/post/postal22/index.html" target="_blank"><font color="#008000">
+<p align="center">→邮编及区号详细列表式查询</font></a><br>
+<a href="http://www.ip138.com/post/yzbm/yzbm.htm" target="_blank"><font color="#008000">→ 邮编及区号按地图查询</font></a></p></strong> 
+<br>
+<center>
+<table border=1 borderColor=#3366cc cellPadding=4 style="BORDER-COLLAPSE: collapse" width=520>
+	<tr>
+		<td align=middle bgColor=#6699cc class=tdc1 colSpan=2 height=24>
+		国内身份证号码验证查询&nbsp(<a href="http://qq.ip138.com/idsearch/" target="_blank">高级功能按此</a>);
+		</td>
+	</tr>
+	<tr bgColor=#eff1f3 align=middle>
+	<FORM action="http://qq.ip138.com/idsearch//index.asp" target="_blank" method=post name="IDform" onsubmit="return checkID();">
+		<td width=160 class=tdc>请输入15或18位身份证号</td>
+		<td class=tdc><INPUT name="action" type="hidden" value="idcard">
+		<INPUT class=tdc name="userid" value="">&nbsp;<INPUT class=bdtj name=B1 type=submit value="查 询">
+		</td>
+	</FORM>
+	</tr>
+</table>
+<br>
+<br>
+<div align="center"><center>
+<table height="23" borderColorDark="#ffffff" width="635" borderColorLight="#008000" border="1">
+	<tr>
+		<td width="813" height="23"><p align="center"><strong><font color="#008000">公益广告</font></strong>:<a href="http://www.cydf.org.cn/" target="_blank">中国青少年发展基金会</a> &nbsp; <a href="http://www.chinacharity.cn/" target="_blank">中华慈善总会</a><strong> &nbsp; </strong><a href="http://www.maxthon.com/" target="_blank">傲游浏览器</a>&nbsp; <a href="http://www.morequick.com/indexgb.htm" target="_blank">GreenBrowser浏览器</a></td>
+	</tr>
+</table>
+</center></div>
+<br>
+<br>
+<p align="center"></a>联系我们.请<a href="mail.htm" target="_blank">发email</a>.或给<a href="http://qq.3533.com:8080/book.asp?siteid=7" target="_blank">我们留言</a>谢谢!</p>
+<p align="center"><font color="#008000">声明:本站是非盈利的为网民提供查询的网站.不放任何广告,请不要写信来本站投广告,谢谢合作</font></p>
+<p align="center"><a href="http://www.miibeian.gov.cn/" target="_blank">粤ICP备05004654号</a></p>
+
+</body>
+</html>
