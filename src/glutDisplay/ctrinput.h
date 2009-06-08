@@ -3,8 +3,8 @@
 #ifndef INLINE
 #define INLINE // inline 
 #endif
-#include "Rect.h"
-class ctrInput: public Rect
+#include "Widget.h"
+class ctrInput: public Widget
 {
 public:
 ctrInput();

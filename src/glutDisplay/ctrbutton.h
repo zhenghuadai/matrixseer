@@ -3,8 +3,8 @@
 #ifndef CTRBINLINE
 #define CTRBINLINE // inline 
 #endif
-#include "Rect.h"
-class ctrButton: public Rect
+#include "Widget.h"
+class ctrButton: public Widget
 {
 public:
  ctrButton();
