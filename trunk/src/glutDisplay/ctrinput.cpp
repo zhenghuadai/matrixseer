@@ -24,7 +24,7 @@ void ctrInput::reset()
 	pvalue = 0;
 	//sprintf(pvalue,"%s","");
 }
-ctrInput::ctrInput(int sdx,int sdy):Rect(sdx,sdy)
+ctrInput::ctrInput(int sdx,int sdy):Widget(sdx,sdy)
 {
 //	dx=sdx;
 //	dy=sdy;
@@ -40,7 +40,7 @@ ctrInput::ctrInput(int sdx,int sdy):Rect(sdx,sdy)
 	//sprintf(pvalue,"%s","");
 	printf("dx:%d\n",_w);
 }
-ctrInput::ctrInput(int sx,int sy,int sz):Rect(sx,sy,sz)
+ctrInput::ctrInput(int sx,int sy,int sz):Widget(sx,sy,sz)
 {
 	reset();
 /*
@@ -51,7 +51,7 @@ ctrInput::ctrInput(int sx,int sy,int sz):Rect(sx,sy,sz)
 	ctrInput(10,20);
 }
 
-ctrInput::ctrInput(int sx,int sy,int sz,char *s):Rect(sx,sy,sz)
+ctrInput::ctrInput(int sx,int sy,int sz,char *s):Widget(sx,sy,sz)
 {
 /*
 	x=sx;
@@ -61,7 +61,7 @@ ctrInput::ctrInput(int sx,int sy,int sz,char *s):Rect(sx,sy,sz)
 	ctrInput(10,20);
 	sprintf(pvalue,"%s",s);
 }
-ctrInput::ctrInput(int sx,int sy,int sz,int sdx,int sdy):Rect(sx,sy,sz,sdx,sdy)
+ctrInput::ctrInput(int sx,int sy,int sz,int sdx,int sdy):Widget(sx,sy,sz,sdx,sdy)
 {
 	reset();
 /*

@@ -4,17 +4,17 @@
 #include "stdio.h"
 #include "string.h"
 #include "stdlib.h"
-ctrButton::ctrButton():Rect()
+ctrButton::ctrButton():Widget()
 {
 }
-ctrButton::ctrButton(int x,int y,int z):Rect(x,y,z)
+ctrButton::ctrButton(int x,int y,int z):Widget(x,y,z)
 {
 }
-ctrButton::ctrButton(int w,int h):Rect(w,h)
+ctrButton::ctrButton(int w,int h):Widget(w,h)
 {
     curc=0;
 }
-ctrButton::ctrButton(int w,int h,char *pstr):Rect(w,h)
+ctrButton::ctrButton(int w,int h,char *pstr):Widget(w,h)
 {
     pvalue=pstr;
     curc = strlen(pvalue);
