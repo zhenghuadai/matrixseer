@@ -5,8 +5,8 @@
 #endif
 #include <stdlib.h>
 #include <stdio.h>
-#include <FL/Fl.H>
 #include "postionFlag.h"
+#include "Group.h"
 //#define divBOX NO_BOX
 //#define divBOX BORDER_FRAME
 #define divBOX ENGRAVED_BOX
