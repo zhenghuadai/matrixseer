@@ -3,6 +3,7 @@
 #include "Rect.h"
 class Widget: public Rect
 {
+public:
 	Widget(){};
 	Widget(int x,int y,int z):Rect(x,y,z){};
 	Widget(int dx,int dy):Rect(dx,dy){};

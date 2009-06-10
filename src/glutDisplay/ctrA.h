@@ -6,8 +6,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "dmGlobal.h"
-//#define BOX_BODER_SHAPE FLAT_BOX
-//#define BOX_BODER_SHAPE NO_BOX
 class ctrA : public Widget {
 	int handle(int);
 	public:
