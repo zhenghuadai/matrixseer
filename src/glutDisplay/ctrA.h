@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "dmGlobal.h"
+#include "Box.h"
 class ctrA : public Widget {
 	int handle(int);
 	public:

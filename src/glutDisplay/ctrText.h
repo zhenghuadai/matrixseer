@@ -5,8 +5,9 @@
 #endif
 #include <stdlib.h>
 #include <stdio.h>
-#include "cssBox.h"
+//#include "cssBox.h"
 #include "display.h"
+#include "Output.h"
 class ctrText : public Output {
     public:
     int startx;

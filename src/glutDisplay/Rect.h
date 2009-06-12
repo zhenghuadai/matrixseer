@@ -23,6 +23,7 @@ class Rect {
 		int w(){return _w;}
 		int h(){return _h;}
 		int d(){return _d;}
+		void position(int x, int y) {_x=x; _y=y;}
 		int inArea(int ptx,int pty, int ptz );
 		RectINLINE void getFocus();
 		RectINLINE void loseFocus();
