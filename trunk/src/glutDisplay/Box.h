@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  Group.h
+ *       Filename:  Box.h
  *
  *    Description:  
  *
  *        Version:  1.0
- *        Created:  06/09/2009 11:46:59 AM
+ *        Created:  06/12/2009 12:49:00 PM
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -15,16 +15,14 @@
  *
  * =====================================================================================
  */
-#ifndef __GROUP__HEADER__
-#define __GROUP__HEADER__
 #include <stdio.h>
 #include <stdlib.h>
-#include "Widget.h"
-class Group : public Widget
-{
-	public:
-	Group(int x, int y, int z, int w, int h):Widget(x,y,z,w,h){}
-	Group(int x, int y, int w, int h, const char* l):Widget(x,y,w,h,l){}
 
+#ifndef  BOX_HEADER__INC
+#define  BOX_HEADER__INC
+#define FLAT_BOX 1
+#define CSS_BOX 2
+#define ENGRAVED_BOX 2
+class Box {
 };
-#endif
+#endif   /* ----- #ifndef BOX_HEADER__INC  ----- */

@@ -4,6 +4,7 @@ CFLAG	= -DXP_UNIX -g -DDZHP
 LIBPATH	= ../../lib/
 BINPATH	= ../../bin/
 INCLUDEPATH = -I../../include/ -I./  -I../ -I../htmlparser/ -I../js/include/ -I../network/ -I../js
+DMDISPLAY =glutDisplay
 XLIB	= -lGL -lglut
 TestEXEC= testhttpsocket testsmtpsocket testfont
 EXEC	=
@@ -42,7 +43,7 @@ lib3Dsmtp.a: smtpsocket.o
 lib3Dfont.a: ${FONTOBJ}
 	ar ${ARFLAG} ${LIBPATH}$@ $^
 ${LIBPATH}libhtml.a:
-	cd ../htmlparser;make
+	cd ../htmlparser; DMDISPLAY=${DMDISPLAY} make
 %.o:%.c
 	${CC}  ${CFLAG}  ${INCLUDEPATH} -c $<
 %.o:%.cpp

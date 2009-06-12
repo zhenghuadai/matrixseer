@@ -5,10 +5,10 @@
 #endif
 #include <stdlib.h>
 #include <stdio.h>
-#include "cssBox.h"
-using namespace fltk;
+//#include "cssBox.h"
 #include "display.h"
 #include "postionFlag.h"
+#include "Group.h"
 class ctrP : public Group {
     //public:
     //int PostionFlag;

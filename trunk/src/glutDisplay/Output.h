@@ -15,16 +15,22 @@
  *
  * =====================================================================================
  */
-#ifndef __GROUP__HEADER__
-#define __GROUP__HEADER__
+#ifndef __OUTPUT__HEADER__
+#define __OUTPUT__HEADER__
 #include <stdio.h>
 #include <stdlib.h>
 #include "Widget.h"
-class Group : public Widget
+#define TIMES 1
+class Output: public Widget
 {
 	public:
-	Group(int x, int y, int z, int w, int h):Widget(x,y,z,w,h){}
-	Group(int x, int y, int w, int h, const char* l):Widget(x,y,w,h,l){}
+	Output(int x, int y, int z, int w, int h):Widget(x,y,z,w,h){}
+	Output(int x, int y, int w, int h, const char* l):Widget(x,y,w,h,l){}
 
+	void type(int t){}
+	void textfont(int f){}
+	void textsize(int f){}
+	char* value() {return NULL;}
+	void value(const char* l){}
 };
 #endif
