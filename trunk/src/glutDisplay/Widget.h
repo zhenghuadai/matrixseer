@@ -12,5 +12,9 @@ public:
 	Widget(int x,int y,int dx,int dy , const char* l):Rect(x,y,0,dx,dy){};
 	void box(Box* b){}
 	void box(int b){}
+
+
+	void show();
+	void redraw();
 };
 #endif

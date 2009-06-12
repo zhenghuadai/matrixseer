@@ -17,4 +17,22 @@ int copyBackToFrt(int stx,int sty,int dw,int dh,int destx,int dexty);
 //int copyToCurTexture(int stx,int sty,int dx,int dy,int ssx,int ssy);
 void preRedraw();
 void sufRedraw();
+
+#define FirstLineIndent 20
+void pushRect();
+void popRect();
+void getRect(int*);
+void setRect(int,int,int,int);
+void getCurrentRasterPos(int *pos);
+void forwardx(int x); 
+void MoveTo2(int ,int);
+void setStartPos(int x,int y);
+void moveToNextLine();
+void moveToNextLine(int dy);
+void pushStartPos();
+void popStartPos();
+int  getRectW();
+int  getRectH();
+int putStrScr(const char *content,int x,int y,int w,int h,int offsetx);
+#define GM_BLACK 0
 #endif
