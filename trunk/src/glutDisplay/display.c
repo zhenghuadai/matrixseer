@@ -3,53 +3,223 @@
 #include <GL/glut.h>
 #include <string.h>
 #include <stdarg.h>
-#include "mtype.h"
 #include "font.h"
 #include "bmp.h"
 #include "html.h"
 #include "display.h"
 #include "app.h"
+class dmRect2D
+{
+    public:
+    int x;
+    int y;
+    int w;
+    int h;
+    public:
+    dmRect2D(){}
+    private:
+    void    setUndef(){x=y=w=h=-1;}
+
+};
+class dmRect 
+{
+    public:
+    int x;
+    int y;
+    int z;
+    int a;
+    int w;
+    int h;
+    int d;
+    public: 
+    dmRect(){setUndef();}
+    private:
+    void    setUndef(){x=y=z=a=w=h=d=-1;}
+};
+/********************************
+ *0:x;
+ *1:y;
+ *2:z;
+ *3:
+ *4:W
+ *5:H
+ *6:D
+ * *******************************/
+
+#if 0
+#define curRectX curStartPos[curWin][0]
+#define curRectY curStartPos[curWin][1]
+#define curRectZ curStartPos[curWin][2]
+#define curRectA curStartPos[curWin][3]
+#define curRectW curStartPos[curWin][4]
+#define curRectH curStartPos[curWin][5]
+#define curRectD curStartPos[curWin][6]
+#define  stackStartPosX stackStartPos[topStartPos][0] 
+#define  stackStartPosY stackStartPos[topStartPos][1] 
+#define  stackStartPosZ stackStartPos[topStartPos][2] 
+#define  stackStartPosA stackStartPos[topStartPos][3]
+#define  stackStartPosW stackStartPos[topStartPos][4]
+#define  stackStartPosH stackStartPos[topStartPos][5]
+#define  stackStartPosD stackStartPos[topStartPos][6]
+#else
+#define curRectX curStartPos[curWin].x
+#define curRectY curStartPos[curWin].y
+#define curRectZ curStartPos[curWin].z
+#define curRectA curStartPos[curWin].a
+#define curRectW curStartPos[curWin].w
+#define curRectH curStartPos[curWin].h
+#define curRectD curStartPos[curWin].d
+#define  stackStartPosX stackStartPos[topStartPos].x  
+#define  stackStartPosY stackStartPos[topStartPos].y
+#define  stackStartPosZ stackStartPos[topStartPos].z
+#define  stackStartPosA stackStartPos[topStartPos].a
+#define  stackStartPosW stackStartPos[topStartPos].w
+#define  stackStartPosH stackStartPos[topStartPos].h
+#define  stackStartPosD stackStartPos[topStartPos].d
+#define curRect curStartPos[curWin]
+#define stackTopRect stackStartPos[topStartPos]  
+#endif
+#define curRasterPosX curRasterPos[curWin][0]
+#define curRasterPosY curRasterPos[curWin][1]
+#define curRasterPosZ curRasterPos[curWin][2]
+
+#define curOffsetX ((curRasterPosX) - (curRectX))
+extern int charWidth;
+extern int mDC_w;
+extern int mDC_h;
+int rowHeight = 20;
+
+static int2 fontSize={10,20};
 static int curRasterPos[10][4]={0};
-static int curStartPos[10][4]={0};
+static dmRect curStartPos[10];
 static int curWin=0;
+static int2 cWH;
+static dmRect stackStartPos[20];
+static int topStartPos = -1;
+
 static int Tex_Win_h=0;
 static int Tex_Win_w=0;
-static int2 cWH;
-int rowHeight = 20;
-static int2 fontSize={10,20};
-static int stackStartPos[20][4];
-static int topStartPos = -1;
-extern int charWidth;
+
+
+void resetDisplay()
+{
+    curRasterPosX = 0;
+    curRasterPosY = 10;
+}
+
+void initDisplay()
+{
+    curRectX = 0;
+    curRectY = 10;
+    curRectZ = 0;
+    curRectA = 0;
+    curRectW = mDC_w;
+    curRectH = mDC_h;
+}
+
 void pushStartPos()
 {
     topStartPos ++;
     if(topStartPos >=20)return;
-    stackStartPos[topStartPos][0] = curStartPos[curWin][0];
-    stackStartPos[topStartPos][1] = curStartPos[curWin][1];
-    stackStartPos[topStartPos][2] = curStartPos[curWin][2];
-    stackStartPos[topStartPos][3] = curStartPos[curWin][3];
+    stackStartPosX = curRectX;
+    stackStartPosY = curRectY;
+    stackStartPosZ = curRectZ;
+    stackStartPosA = curRectA;
 }
 
 void popStartPos()
 {
     if(topStartPos <0) return ;
-    curStartPos[curWin][0] = stackStartPos[topStartPos][0] ;
-    curStartPos[curWin][1] = stackStartPos[topStartPos][1] ;
-    curStartPos[curWin][2] = stackStartPos[topStartPos][2] ;
-    curStartPos[curWin][3] = stackStartPos[topStartPos][3] ;
+    curRectX = stackStartPosX ;
+    curRectY = stackStartPosY ;
+    curRectZ = stackStartPosZ ;
+    curRectA = stackStartPosA ;
     topStartPos --;
 }
+
+void printRect()
+{
+    printf("CurRECT\nx:%d; y:%d z:%d, w:%d, h:%d, d:%d\n",
+            curRectX,
+            curRectY,
+            curRectZ,
+            curRectW,
+            curRectH,
+            curRectD);
+}
+
+void pushRect()
+{
+    topStartPos ++;
+    if(topStartPos >=20)return;
+    stackTopRect = curRect; 
+}
+
+void popRect()
+{
+    if(topStartPos <0) return ;
+    curRect = stackTopRect;
+    topStartPos --;
+}
+
+void getRect(int *rect)
+{
+    //rect[0] = curRectX;
+    //rect[1] = curRectY;
+    //rect[2] = curRectZ;
+    //rect[3] = curRectA;
+    //rect[4] = curRectW;
+    //rect[5] = curRectH;
+    *(dmRect*)rect = curRect;
+}
+int getRectW()
+{
+    return curRectW;
+}
+int getRectH()
+{
+    return curRectH;
+}
+void setRect(int x,int y,int w,int h)
+{
+    curRectX = x;
+    curRectY = y;
+    curRectW = w;
+    curRectH = h;
+
+}
+
+//
+//void pushStartPos()
+//{
+//    topStartPos ++;
+//    if(topStartPos >=20)return;
+//    stackStartPos[topStartPos][0] = curStartPos[curWin][0];
+//    stackStartPos[topStartPos][1] = curStartPos[curWin][1];
+//    stackStartPos[topStartPos][2] = curStartPos[curWin][2];
+//    stackStartPos[topStartPos][3] = curStartPos[curWin][3];
+//}
+//
+//void popStartPos()
+//{
+//    if(topStartPos <0) return ;
+//    curStartPos[curWin][0] = stackStartPos[topStartPos][0] ;
+//    curStartPos[curWin][1] = stackStartPos[topStartPos][1] ;
+//    curStartPos[curWin][2] = stackStartPos[topStartPos][2] ;
+//    curStartPos[curWin][3] = stackStartPos[topStartPos][3] ;
+//    topStartPos --;
+//}
 void setStartPos(int x,int y,int z)
 {
-    curStartPos[curWin][0]=x;
-    curStartPos[curWin][1]=y;
-    curStartPos[curWin][2]=z;
+    curRectX=x;
+    curRectY=y;
+    curRectZ=z;
 }
 
 void setStartPos(int x,int y)
 {
-    curStartPos[curWin][0]=x;
-    curStartPos[curWin][1]=y;
+    curRectX=x;
+    curRectY=y;
 }
 
 inline int2 getWH_Chars(int w,int h,int id)
@@ -64,7 +234,8 @@ void MoveToxy(int x,int y)
 {
     glRasterPos2i(x,y);
 }
-int getCurrentRasterPos(int *pos)
+
+void getCurrentRasterPos(int *pos)
 {
     glGetIntegerv(GL_CURRENT_RASTER_POSITION,pos);
 }
@@ -72,31 +243,31 @@ int getCurrentRasterPos(int *pos)
 void moveToNextLine(int dy)
 {
     glGetIntegerv(GL_CURRENT_RASTER_POSITION,curRasterPos[curWin]);
-    curRasterPos[curWin][1]-= dy;//rowHeight;
-    curRasterPos[curWin][0] = curStartPos[curWin][0];
-    MoveTo2(curRasterPos[curWin][0],curRasterPos[curWin][1]);
+    curRasterPosY-= dy;//rowHeight;
+    curRasterPosX = curRectX;
+    MoveTo2(curRasterPosX,curRasterPosY);
 }
 
 void moveToNextLine()
 {
     glGetIntegerv(GL_CURRENT_RASTER_POSITION,curRasterPos[curWin]);
-    curRasterPos[curWin][1]-= rowHeight;
-    curRasterPos[curWin][0] = curStartPos[curWin][0];
-    MoveTo2(curRasterPos[curWin][0],curRasterPos[curWin][1]);
+    curRasterPosY-= rowHeight;
+    curRasterPosX = curRectX;
+    MoveTo2(curRasterPosX,curRasterPosY);
 }
 
 void goDown(int y)
 {
     glGetIntegerv(GL_CURRENT_RASTER_POSITION,curRasterPos[curWin]);
-    curRasterPos[curWin][1]-= y;
-    MoveTo2(curRasterPos[curWin][0],curRasterPos[curWin][1]);
+    curRasterPosY-= y;
+    MoveTo2(curRasterPosX,curRasterPosY);
 }
 
 void forward0(int x,int y)
 {
-    curRasterPos[curWin][0] += x;
-    curRasterPos[curWin][1] += y;
-    MoveTo2(curRasterPos[curWin][0],curRasterPos[curWin][1]);
+    curRasterPosX += x;
+    curRasterPosY += y;
+    MoveTo2(curRasterPosX,curRasterPosY);
 }
 
 void drawLine(double x,double y,double z,double x2,double y2,double z2)
@@ -201,9 +372,9 @@ void drawInput2d(double x,double y,double z,double dx,double dy)
    void drawInput(int dx,int dy)
    {
    glGetIntegerv(GL_CURRENT_RASTER_POSITION,curRasterPos[curWin]);
-   drawInput2d(curRasterPos[curWin][0],curRasterPos[curWin][1]+20,0,dx,dy);
-   curRasterPos[curWin][0] += (dx + 1);
-   MoveTo2(curRasterPos[curWin][0],curRasterPos[curWin][1]);
+   drawInput2d(curRasterPosX,curRasterPosY+20,0,dx,dy);
+   curRasterPosX += (dx + 1);
+   MoveTo2(curRasterPosX,curRasterPosY);
    }
    */
 int putStrScr(char * content,int width,int height)
@@ -251,23 +422,23 @@ int putStrScr(char *content,int len)
     int2 tmpcWH;	
     if((!content)||(! *content))return 0;
     glGetIntegerv(GL_CURRENT_RASTER_POSITION,curRasterPos[curWin]);
-    //	printf("%d,%d\n",curRasterPos[curWin][0],curRasterPos[curWin][1]);
-    tmpcWH=getWH_Chars(Tex_Win_w-curRasterPos[curWin][0],Tex_Win_h,3);
+    //	printf("%d,%d\n",curRasterPosX,curRasterPosY);
+    tmpcWH=getWH_Chars(Tex_Win_w-curRasterPosX,Tex_Win_h,3);
     npos=getEnterPos(pstart,tmpcWH.w);
     npos = npos < len ? npos:len;
     drawChars(pstart,npos);
     pstart+=npos;
     if(pstart == pend)return 1;
     if((*pstart=='\n')&&(! (*(pstart+1)))){
-        curRasterPos[curWin][1]-= rowHeight;
-        MoveTo2(20,curRasterPos[curWin][1]);
+        curRasterPosY-= rowHeight;
+        MoveTo2(20,curRasterPosY);
         return 1; 
     }
 
     while((*pstart) &&(pstart < pend))
     {
-        curRasterPos[curWin][1]-= rowHeight;
-        MoveTo2(20,curRasterPos[curWin][1]);
+        curRasterPosY-= rowHeight;
+        MoveTo2(20,curRasterPosY);
         npos=getEnterPos(pstart,cWH.w);
         npos = npos < len ? npos:len;
         drawChars(pstart,npos);
@@ -293,21 +464,21 @@ int putStrScr(char *content)
     int2 tmpcWH;	
     if((!content)||(! *content))return 0;
     glGetIntegerv(GL_CURRENT_RASTER_POSITION,curRasterPos[curWin]);
-    //	printf("%d,%d\n",curRasterPos[curWin][0],curRasterPos[curWin][1]);
-    tmpcWH=getWH_Chars(Tex_Win_w-curRasterPos[curWin][0],Tex_Win_h,3);
+    //	printf("%d,%d\n",curRasterPosX,curRasterPosY);
+    tmpcWH=getWH_Chars(Tex_Win_w-curRasterPosX,Tex_Win_h,3);
     npos=getEnterPos(pstart,tmpcWH.w);
     drawChars(pstart,npos);
     pstart += npos;
     if((*pstart=='\n')&&(! (*(pstart+1)))){
-        curRasterPos[curWin][1]-= rowHeight;
-        MoveTo2(20,curRasterPos[curWin][1]);
+        curRasterPosY-= rowHeight;
+        MoveTo2(20,curRasterPosY);
         return 1; 
     }
 
     while(*pstart)
     {
-        curRasterPos[curWin][1]-= rowHeight;
-        MoveTo2(20,curRasterPos[curWin][1]);
+        curRasterPosY-= rowHeight;
+        MoveTo2(20,curRasterPosY);
         npos=getEnterPos(pstart,cWH.w);
         drawChars(pstart,npos);
         pstart+=npos;

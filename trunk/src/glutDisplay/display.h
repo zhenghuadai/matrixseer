@@ -1,10 +1,11 @@
-#ifndef MDISPLAY
-#define MDISPLAY
+#ifndef _MDISPLAY_HEADER__
+#define _MDISPLAY_HEADER__
 #define CUBICARCMODE 0 
 #define CUBICMODE 1
 #define ARCMODE   2
 #define PLAINMODE 3
 #include <GL/gl.h>
+
 void drawToTexture2(GLuint tex,int Sx,int Sy,int Ex,int Ey,char *str);
 void drawInput2d(double x,double y,double z,double dx,double dy);
 void drawButton2d(double x,double y,double z,double dx,double dy);
