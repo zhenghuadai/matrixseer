@@ -2,8 +2,9 @@ CC= g++
 CFLAG= -g  -DXP_UNIX -g -DDZHP -DDEB -DDZHDEB  
 LIBPATH=../../lib/
 BINPATH=../../bin/
-INCLUDEPATH= /home/dzh/include/js/ 
-DISPLAYPATH= ../fltkDisplay
+INCLUDEPATH= -I../js/include -I../../include
+DMDISPLAY ?=glutDisplay
+DISPLAYPATH= ../${DMDISPLAY}
 OBJ    = html.o tagfunc.o stack.o createtree.o attrfunc.o cssfunc.o htmltree.o
 all:${LIBPATH} libhtml
 
@@ -18,7 +19,7 @@ html: htmlmain.o  ${OBJ}
 #	${CC} ${CFLAG} -o ${BINPATH}$@ ${LIBPATH}libhtml.a  -L../../lib $<
 createtree.cpp:${DISPLAYPATH}/ctrP.h
 %.o:%.cpp
-	${CC} ${CFLAG} -I./ -I../ -I${INCLUDEPATH} -I../fltkDisplay  -I../js  -c $<
+	${CC} ${CFLAG} -I./ -I../ ${INCLUDEPATH} -I${DISPLAYPATH}  -I../js  -c $<
 libhtml.a: html.o tagfunc.o stack.o
 	ar cqs  ${LIBPATH}$@ $^
 ${LIBPATH}:

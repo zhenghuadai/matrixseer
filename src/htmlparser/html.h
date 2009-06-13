@@ -1,6 +1,7 @@
 #ifndef HTMLHEAD_H
 #define HTMLHEAD_H
 #include <stdio.h>
+#include "dmtype.h"
 #include "stack.h"
 #include "debprintf.h"
 #include "token.h"

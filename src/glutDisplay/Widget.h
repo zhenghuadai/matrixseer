@@ -14,7 +14,11 @@ public:
 	void box(int b){}
 
 
-	void show();
-	void redraw();
+	void show(){};
+	void redraw(){};
+    void begin(){};
+    void end(){};
+    void color(int){};
+    void labelcolor(int){};
 };
 #endif
