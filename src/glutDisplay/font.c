@@ -1,9 +1,14 @@
+#ifndef __FONT_HEADER__
+#define __FONT_HEADER__
 #include <GL/glut.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include "glutbitmap.h"
 #include "font.h"
+#include "dmtype.h"
+extern void getCurrentRasterPos(int *pos);
+extern int getCurRectW();
 #define UPPERFONT 0
 BitmapFontPtr curFont = 0;
 int charWidth = 10;
@@ -307,6 +312,13 @@ void defaultfont(void)
 //   setRasterFont(MGLUT_BITMAP_TIMES_ROMAN_10);
    setmyFont();
 }
+
+
+void setdefaultfont(void)
+{
+defaultfont();
+}
+
 INLINE int getCharWidth(char c)
 {
     if(c < 32) return 0;
@@ -314,6 +326,17 @@ INLINE int getCharWidth(char c)
    // printf("(%d,%f)",c,(curFont ->ch[c- curFont->first] -> advance));
   return int (curFont ->ch[c- curFont->first] -> advance);  
 }
+
+int2 getstrWH(char *str,int width)
+{
+}
+
+int2 getstrWH(char *str)
+{
+    int width = getCurRectW();//mDC_w;
+    return getstrWH(str,width);
+}
+
 BitmapFontPtr selectfontfromid(void * id)
 {
    glShadeModel (GL_FLAT);
@@ -419,3 +442,4 @@ int getEnterPos3(char * str,int n,int *pos)
 	if(i==n)return 1;
 	return 0;
 }
+#endif

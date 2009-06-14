@@ -37,10 +37,10 @@ class ctrA : public Widget {
 	void setxyz(){
 		int pos[4];
 		extern void getCurrentRasterPos(int *pos);
-		extern void forwardx(int x); 
+		//extern void forwardx(int x); 
 		getCurrentRasterPos(pos);
 		position(pos[0],pos[1]);
-		forwardx(w());
+		//forwardx(w());
 	}
 };
 

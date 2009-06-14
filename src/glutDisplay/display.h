@@ -34,6 +34,7 @@ void pushStartPos();
 void popStartPos();
 int  getRectW();
 int  getRectH();
+int getCurRectW();
 int putStrScr(const char *content,int x,int y,int w,int h,int offsetx);
 #define GM_BLACK 0
 #endif

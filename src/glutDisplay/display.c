@@ -85,8 +85,8 @@ class dmRect
 
 #define curOffsetX ((curRasterPosX) - (curRectX))
 extern int charWidth;
-extern int mDC_w;
-extern int mDC_h;
+int mDC_w;
+int mDC_h;
 int rowHeight = 20;
 
 static int2 fontSize={10,20};
@@ -240,6 +240,11 @@ void getCurrentRasterPos(int *pos)
     glGetIntegerv(GL_CURRENT_RASTER_POSITION,pos);
 }
 
+int getCurRectW()
+{
+    return curRectW; 
+}
+
 void moveToNextLine(int dy)
 {
     glGetIntegerv(GL_CURRENT_RASTER_POSITION,curRasterPos[curWin]);
@@ -287,6 +292,10 @@ void drawLine(double x,double y,double x2,double y2)
     glEnd();
 }
 
+void drawLine( int x, int y, int z, int x2, int y2, int z2)
+{
+}
+
 void drawFrame(double x,double y,double z,double dx,double dy)
 {
     //   GLfloat oldcolor[4];
@@ -300,6 +309,12 @@ void drawFrame(double x,double y,double z,double dx,double dy)
     glVertex3d(x,y,z);
     glEnd();
 }
+
+void drawFrame(int x, int y, int z, int dx, int dy)
+{
+    
+}
+
 void drawButton2dframe(double x,double y,double z,double dx,double dy)
 {
     GLfloat oldcolor[4];
@@ -735,3 +750,14 @@ int copyToCurTexture(int tx,int ty,int dsx,int dsy,int sw,int sh)
    }
    }
    */
+
+int  getColor()
+{
+    //return fl_color();
+}
+int setColor(int color)
+{
+    //int old = fl_color();
+    //fl_color(color);
+    //return old;
+}
