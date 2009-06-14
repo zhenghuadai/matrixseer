@@ -13,7 +13,19 @@
 #include <FL/Box.H>
 #include <FL/Input.H>
 */
-#include "common.h"
+#include <fltk/run.h>
+#include <fltk/Window.h>
+#include <fltk/Input.h>
+#include <fltk/FloatInput.h>
+#include <fltk/IntInput.h>
+#include <fltk/SecretInput.h>
+#include <fltk/WordwrapInput.h>
+#include <fltk/TextEditor.h>
+#include <fltk/Button.h>
+#include <fltk/ToggleButton.h>
+#include <fltk/show_colormap.h>
+
+//#include "common.h"
 using namespace fltk;
 
 class ctrInput : public Input {
