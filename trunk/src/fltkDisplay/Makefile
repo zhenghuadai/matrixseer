@@ -6,6 +6,7 @@ BINPATH	= ../../bin/
 INCLUDEPATH = -I../../include/ -I./  -I../ -I../htmlparser/ -I../js/include/ -I../network/ -I../js -I../multimedia/
 XLIB	=   -lfltk2 -lXext -lX11 -lXi
 TestEXEC= testhttpsocket testsmtpsocket testfont
+DMDISPLAY =fltkDisplay
 EXEC	=
 LIBOBJ  = lib3Dhttp.so lib3Dsmtp.so lib3Dfont.so
 LIBA    = lib3Dhttp.a lib3Dsmtp.a lib3Dfont.a libjs.a
@@ -39,7 +40,7 @@ lib3Dsmtp.a: smtpsocket.o
 lib3Dfont.a: ${FONTOBJ}
 	ar ${ARFLAG} ${LIBPATH}$@ $^
 ${LIBPATH}libhtml.a:
-	cd ../htmlparser;make
+	cd ../htmlparser; DMDISPLAY=${DMDISPLAY} make
 %.o:%.c
 	${CC}  ${CFLAG}  ${INCLUDEPATH} -c $<
 %.o:%.cpp
