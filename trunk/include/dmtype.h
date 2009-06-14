@@ -1,5 +1,5 @@
-#ifndef DMTYPE_
-#define DMTYPE_
+#ifndef DMTYPE_HEADER__
+#define DMTYPE_HEADER__
 typedef union{
     struct{
         int x;
