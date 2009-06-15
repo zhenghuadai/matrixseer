@@ -1,20 +1,10 @@
-CC	= g++
-CPP	= g++
-CFLAG	= -DXP_UNIX -g -DDZHP -DdownLoaderTest -DLINUX 
-CDEBFLAG=-DDEB 
-LIBPATH	= ../../lib/
-BINPATH	= ../../bin/
-INCLUDEPATH = -I../../include/ -I./  -I../ -I../htmlparser/ #-I/home/dzh/include/js/
-XLIB	= -lGL -lglut
-TestEXEC= testhttpsocket testsmtpsocket testfont
-EXEC	=
-LIBOBJ  = lib3Dhttp.so lib3Dsmtp.so lib3Dfont.so
-LIBA    = lib3Dhttp.a lib3Dsmtp.a lib3Dfont.a #libjs.a
-SORDLIB = -WI,-Bdynamic #static
-ARFLAG  = cqs
+LIBOBJ  = lib3Dhttp.so lib3Dsmtp.so #lib3Dfont.so
+LIBA    = lib3Dhttp.a lib3Dsmtp.a #lib3Dfont.a 
+TOPDIR=../../
+include ../../include/makefile.inc 
+
 
 all: liba 
-# ${OBJECTS}  
 sendip:sendip.o
 	${CC} ${CFLAG} ${CDEBFLAG} -o ${BINPATH}$@ -L${LIBPATH} ${SORDLIB} -l3Dhttp -l3Dsmtp -lpthread $^
 testhttpsocket:testhttpsocket.o
@@ -23,6 +13,7 @@ testsmtpsocket:testsmtpsocket.o
 	${CC} ${CFLAG}  ${CDEBFLAG}  -o ${BINPATH}$@ -L${LIBPATH}  ${SORDLIB} -l3Dsmtp $^
 testfont:testfont.o
 	${CC} ${CFLAG}  -o ${BINPATH}$@  ${SORDLIB} -l3Dfont -L${LIBPATH} -WI,-Bdynamic ${XLIB} $^
+
 lib:libso liba
 liba: ${LIBA}
 libso:${LIBOBJ} 
@@ -40,13 +31,15 @@ lib3Dfont.a: ${FONTOBJ}
 	ar ${ARFLAG} ${LIBPATH}$@ $^
 
 downer:webpage.o httpsocket.o smthBBS.o
-	${CPP} -o $@ $^ -lpthread
+	${CXX} -o $@ $^ -lpthread
 mailclient:mailclient.o mail_t.o mailclientmain.o
-	${CPP} -o $@ $^ -I.. 
-%.o:%.c
-	${CC}  ${CFLAG}  ${INCLUDEPATH} -c $<
-%.o:%.cpp
-	${CPP}  ${CFLAG}  ${INCLUDEPATH} -c $<
+	${CXX} -o $@ $^ -I.. 
+httpsocket.o:httpsocket.cpp 
+	g++ -c ${MARC} -fPIC -I../../include $<
+smtpsocket.o:smtpsocket.cpp
+	g++ -c ${MARC} -fPIC -I../../include $<
+	
+include ../../include/rules.mk	
 install:
 	if ! test  -f /usr/local/lib3Dhttp.so; then  \
 	ln -s ${LIBPATH}httpsocket.so /usr/local/lib3Dhttp.so; \
