@@ -1,0 +1,16 @@
+CC	= g++
+CPP	= g++
+CFLAG = -g  -DXP_UNIX -g -DDZHP -DDEB -DDZHDEB  
+LIBPATH	= ${TOPDIR}/lib/
+BINPATH	= ${TOPDIR}/bin/
+DISPLAYPATH = ${TOPDIR}/src/${DMDISPLAY}/
+PARSERPATH= ${TOPDIR}/src/htmlparser/
+JSPATH  = ${TOPDIR}/src/js/
+NETWORKPATH= ${TOPDIR}/src/network/
+INCLUDEPATH += -I${TOPDIR}/include/  -I${PARSERPATH} -I${JSPATH}/include -I${NETWORKPATH} -I${JSPATH} -I${JSPATH}/include  -I${DISPLAYPATH}
+XLIB	= -lGL -lglut
+EXEC	=
+LIBOBJ  = lib3Dhttp.so lib3Dsmtp.so lib3Dfont.so
+LIBA    = lib3Dhttp.a lib3Dsmtp.a lib3Dfont.a libjs.a
+SORDLIB = -WI,-Bdynamic #static
+ARFLAG  = cqs

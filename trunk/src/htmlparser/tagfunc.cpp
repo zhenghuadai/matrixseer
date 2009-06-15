@@ -507,7 +507,7 @@ OP(inputfunc)
     OP( brfunc)
     {
         if(htnode -> value) 
-            moveToNextLine((int) htnode -> value );
+            moveToNextLine((int)(long) htnode -> value );
         else
             moveToNextLine();
 
