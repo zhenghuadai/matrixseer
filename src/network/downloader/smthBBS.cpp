@@ -20,6 +20,7 @@
 #include <string.h>
 char *smthGetContentFromsTx(char *sTx,int lenSource)
 {
+    if(sTx == NULL) return NULL;
     if(lenSource == 0) lenSource = strlen(sTx);
     char * tmp=(char*)malloc(lenSource*sizeof(char));
 	char *p=sTx;
