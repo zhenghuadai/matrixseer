@@ -1,8 +1,14 @@
-CC	= gcc
+CC  = g++
 CXX = g++
 CPP	= g++
 LINK= g++
+arch=$(shell uname -m)
+ifeq "$(arch)" "x86_64"
 MARC ?= -m32 
+else 
+MARC ?=  
+endif
+
 CFLAG = -g  -DXP_UNIX -g -DDZHP -DDEB -DDZHDEB  ${MARC}
 LIBPATH	= ${TOPDIR}/lib/
 BINPATH	= ${TOPDIR}/bin/
