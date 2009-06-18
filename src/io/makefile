@@ -1,4 +1,4 @@
-iofile.o:iofile.c
-	g++ -c iofile.c
-clean:
-	rm -f *.o
+TOPDIR= ../../
+include ../../include/makefile.inc 
+iofile.o:
+include ../../include/rules.mk

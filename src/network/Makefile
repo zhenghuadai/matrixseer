@@ -19,13 +19,13 @@ liba: ${LIBA}
 libso:${LIBOBJ} 
 lib3Dhttp.so: httpsocket.o
 	${CC} ${CFLAG}  -shared -Wl,-soname,$@ -o ${LIBPATH}$@ $^
-lib3Dsmtp.so: smtpsocket.o readFile.o
+lib3Dsmtp.so: smtpsocket.o ../io/iofile.o #readFile.o
 	${CC} ${CFLAG}  -shared -Wl,-soname,$@ -o ${LIBPATH}$@ $^
 lib3Dfont.so: ${FONTOBJ}
 	${CC}  ${CFLAG} -shared -Wl,-soname,$@ -o ${LIBPATH}$@ $^
 lib3Dhttp.a : httpsocket.o
 	ar ${ARFLAG} ${LIBPATH}$@ $< 
-lib3Dsmtp.a: smtpsocket.o readFile.o
+lib3Dsmtp.a: smtpsocket.o  ../io/iofile.o #readFile.o
 	ar ${ARFLAG} ${LIBPATH}$@ $^
 lib3Dfont.a: ${FONTOBJ}
 	ar ${ARFLAG} ${LIBPATH}$@ $^

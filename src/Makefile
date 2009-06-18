@@ -1,9 +1,9 @@
 all:
-	cd network;make
 	cd js;make
 	cd io;make
+	cd network;make
 	cd multimedia;make
-	cd fltkDisplay; make
+	cd glutDisplay; make
 clean:
 	cd network;make clean
 	cd js;make clean

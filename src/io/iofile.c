@@ -11,6 +11,33 @@ int isfile(char *fn)
     i = access(fn,F_OK) ;
     return !i;
 }
+
+char * readFile(char *fn,int *fsize)
+{
+    FILE* fp;
+    char c;
+    char *content ;
+    int size=-1;
+#ifdef LINUX
+    struct stat fsc;
+    fsc.st_size = -1;
+    stat(fn, &fsc);
+    *fsize = size = fsc.st_size;
+    printf("size:%d\n",size);
+#endif
+    if(size<=0) {
+        //printf("size err\n");
+        return NULL;
+    }
+    content = new char[size+1];
+    fp = fopen(fn,"r");
+    fread(content,1,size,fp);
+    fclose(fp);
+    content[size] = 0;
+    return content;
+
+}
+
 char * getsfromfile(char *fn)
 {
     FILE * fp;
@@ -28,6 +55,7 @@ char * getsfromfile(char *fn)
     fread(rbuf,1,filesize,fp);
     return rbuf;
 }
+
 int is_fileexist(char *comm)
 {
   char *path,*p;
