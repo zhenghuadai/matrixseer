@@ -1,6 +1,8 @@
 %.o:%.c
-	${CC}  ${CFLAG}  ${INCLUDEPATH} -c $<
+	${CC} ${MARC}  ${CFLAG}  ${INCLUDEPATH} -c $<
 %.o:%.cpp
-	${CXX}  ${CFLAG}  ${INCLUDEPATH} -c $<
+	${CXX} ${MARC}  ${CFLAG}  ${INCLUDEPATH} -c $<
 ${LIBPATH}:
 	mkdir -p $@
+clean:
+	rm -rf *.o
