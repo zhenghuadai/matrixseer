@@ -30,10 +30,6 @@ lib3Dsmtp.a: smtpsocket.o  ../io/iofile.o #readFile.o
 lib3Dfont.a: ${FONTOBJ}
 	ar ${ARFLAG} ${LIBPATH}$@ $^
 
-downer:webpage.o httpsocket.o smthBBS.o
-	${CXX} -o $@ $^ -lpthread
-mailclient:mailclient.o mail_t.o mailclientmain.o
-	${CXX} -o $@ $^ -I.. 
 httpsocket.o:httpsocket.cpp 
 	g++ -c ${MARC} -fPIC -I../../include $<
 smtpsocket.o:smtpsocket.cpp
