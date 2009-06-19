@@ -4,9 +4,7 @@ TOPDIR=../../../
 include ${TOPDIR}include/makefile.inc 
 
 mailclient:mailclient.o mail_t.o mailclientmain.o
-	${CXX} -o $@ $^ -I.. 
-downer:webpage.o httpsocket.o smthBBS.o
-	${CXX} -o $@ $^ -lpthread
+	${CXX} ${MARC} -o $@ $^ -I.. 
 	
 include ${TOPDIR}include/rules.mk	
 
