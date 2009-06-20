@@ -8,7 +8,7 @@ OBJECTS = display.o ../multimedia/bmp.o ../network/httpsocket.o ../network/smtps
 	cd ../network;make
 	cd ../js;make
 	cd ../io;make
-	${CPP} ${MARC} ${CFLAG} -o ${BINPATH}$@   ${XLIB} $^ -lpthread
+	${CXX} ${MARC} ${CFLAG} -o ${BINPATH}$@   ${LIB} ${XLIB} $^ -lpthread
 testfont:testfont.o
 	${CC} ${CFLAG}  -o ${BINPATH}$@  ${SORDLIB} -l3Dfont -L${LIBPATH} -WI,-Bdynamic ${XLIB} $^
 lib3Dfont.a: ${FONTOBJ}

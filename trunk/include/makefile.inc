@@ -18,8 +18,9 @@ JSPATH  = ${TOPDIR}/src/js/
 NETWORKPATH= ${TOPDIR}/src/network/
 IOPATH = ${TOPDIR}/src/io
 INCLUDEPATH += -I${TOPDIR}/include/  -I${PARSERPATH} -I${JSPATH}/include -I${NETWORKPATH} -I${JSPATH} -I${JSPATH}/include  -I${DISPLAYPATH} -I${IOPATH}
+
 XLIB	= -lGL -lglut
 LIBOBJ  ?= lib3Dhttp.so lib3Dsmtp.so lib3Dfont.so
-LIBA    ?= lib3Dhttp.a lib3Dsmtp.a lib3Dfont.a libjs.a
+LIB    ?= -L${LIBPATH} -l3Dhttp -l3Dsmtp #lib3Dfont.a libjs.a
 SORDLIB = -WI,-Bdynamic #static
 ARFLAG  = cqs
