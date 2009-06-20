@@ -1,18 +1,21 @@
-CC	= g++
-CPP	= g++
-CFLAG	= -DXP_UNIX -g -DDZHP 
-LIBPATH	= ../../lib/
-BINPATH	= ../../bin/
-INCLUDEPATH = -I../../include/ -I./  -I../ -I../htmlparser/ -I../js/include/ -I../network/ -I../js -I../multimedia/
+TOPDIR=../../
+include ${TOPDIR}/include/makefile.inc
+#CC	= g++
+#CPP	= g++
+#CFLAG	= -DXP_UNIX -g -DDZHP 
+#LIBPATH	= ../../lib/
+#BINPATH	= ../../bin/
+#INCLUDEPATH = -I../../include/ -I./  -I../ -I../htmlparser/ -I../js/include/ -I../network/ -I../js -I../multimedia/
 XLIB	=   -lfltk2 -lXext -lX11 -lXi
-TestEXEC= testhttpsocket testsmtpsocket testfont
+#TestEXEC= testhttpsocket testsmtpsocket testfont
 DMDISPLAY =fltkDisplay
-EXEC	=
-LIBOBJ  = lib3Dhttp.so lib3Dsmtp.so lib3Dfont.so
-LIBA    = lib3Dhttp.a lib3Dsmtp.a lib3Dfont.a libjs.a
-SORDLIB = -WI,-Bdynamic #static
-ARFLAG  = cqs
-OBJECTS = display.o  ../network/httpsocket.o ../network/smtpsocket.o  ${FONTOBJ} ctrinput.o  ctrbutton.o ../io/iofile.o ../js/JSDocument.o mainWindow.o font.o ../multimedia/bmp.o ctrA.o ctrP.o ctrDiv.o cssBox.o ctrScroll.o ctrText.o ../network/readFile.o 
+#EXEC	=
+#LIBOBJ  = lib3Dhttp.so lib3Dsmtp.so lib3Dfont.so
+#LIBA    = lib3Dhttp.a lib3Dsmtp.a lib3Dfont.a libjs.a
+#SORDLIB = -WI,-Bdynamic #static
+#ARFLAG  = cqs
+
+OBJECTS = display.o  ../network/httpsocket.o ../network/smtpsocket.o  ${FONTOBJ} ctrinput.o  ctrbutton.o ../io/iofile.o ../js/JSDocument.o mainWindow.o font.o ../multimedia/bmp.o ctrA.o ctrP.o ctrDiv.o cssBox.o ctrScroll.o ctrText.o #../network/readFile.o 
 
 3DIE:3DIE.o ${OBJECTS}  ${LIBPATH}libhtml.a ../js/libjs.a
 	${CPP} ${CFLAG} -o ${BINPATH}$@ $^  ${XLIB}  -lpthread
@@ -41,10 +44,11 @@ lib3Dfont.a: ${FONTOBJ}
 	ar ${ARFLAG} ${LIBPATH}$@ $^
 ${LIBPATH}libhtml.a:
 	cd ../htmlparser; DMDISPLAY=${DMDISPLAY} make
-%.o:%.c
-	${CC}  ${CFLAG}  ${INCLUDEPATH} -c $<
-%.o:%.cpp
-	${CPP}  ${CFLAG}  ${INCLUDEPATH} -c $<
+include ${TOPDIR}/include/rules.mk	
+#%.o:%.c
+#	${CC}  ${CFLAG}  ${INCLUDEPATH} -c $<
+#%.o:%.cpp
+#	${CPP}  ${CFLAG}  ${INCLUDEPATH} -c $<
 ctrP.o: ctrP.h	ctrP.cpp
 ctrDiv.o: ctrDiv.h	ctrDiv.cpp
 install:
