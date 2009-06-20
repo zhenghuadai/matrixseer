@@ -23,5 +23,5 @@ libhtml.a: html.o tagfunc.o stack.o
 	ar cqs  ${LIBPATH}$@ $^
 include ../../include/rules.mk	
 clean:
-	rm -f ${BINPATH}html
+	rm -f ${LIBPATH}libhtml.a
 	rm -f *.o

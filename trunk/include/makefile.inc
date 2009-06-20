@@ -17,7 +17,8 @@ PARSERPATH= ${TOPDIR}/src/htmlparser/
 JSPATH  = ${TOPDIR}/src/js/
 NETWORKPATH= ${TOPDIR}/src/network/
 IOPATH = ${TOPDIR}/src/io
-INCLUDEPATH += -I${TOPDIR}/include/  -I${PARSERPATH} -I${JSPATH}/include -I${NETWORKPATH} -I${JSPATH} -I${JSPATH}/include  -I${DISPLAYPATH} -I${IOPATH}
+MEDIAPATH=${TOPDIR}/src/multimedia
+INCLUDEPATH += -I${TOPDIR}/include/  -I${PARSERPATH} -I${JSPATH}/include -I${NETWORKPATH} -I${JSPATH} -I${JSPATH}/include  -I${DISPLAYPATH} -I${IOPATH} -I${MEDIAPATH}
 
 XLIB	= -lGL -lglut
 LIBOBJ  ?= lib3Dhttp.so lib3Dsmtp.so lib3Dfont.so
