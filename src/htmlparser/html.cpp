@@ -539,7 +539,8 @@ scanValue:
 void htmlparser::visitHtmlNode(pHtmlNode root)
 {
     int tag = root -> tagid;
-    (this ->* tagfunc[tag])(root );
+	Widget* o = (Widget*) root->obj;
+    //(this ->* tagfunc[tag])(root );
 
     //    if((root -> value) ||(tag == BRID) )	(this ->* tagfunc[tag])(root );
     //  if( tag == INPUTID) (this ->* tagfunc[tag])(root);
@@ -553,7 +554,7 @@ void htmlparser::rendernode(pHtmlNode root)
 {
     visitHtmlNode(root);
     if(root->child)	rendernode(root->child);
-    if(root-> wife) 	(this ->* tagfunc[root->wife])(root );
+    if(root-> wife) { /*	(this ->* tagfunc[root->wife])(root )*/};
     if(root->sib)   rendernode(root->sib);
 
 }
