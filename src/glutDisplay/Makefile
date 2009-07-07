@@ -3,7 +3,7 @@ DMDISPLAY =glutDisplay
 EXEC	=
 include ../../include/makefile.inc 
 FONTOBJ = font.o glut_tr10.o glut_tr24.o glut_hel10.o   glut_hel12.o   glut_hel18.o   glut_mroman.o  glut_roman.o ../js/JSDocument.o
-OBJECTS = display.o ../multimedia/bmp.o ../network/httpsocket.o ../network/smtpsocket.o  ${FONTOBJ} ctrinput.o Rect.o Cube.o ctrbutton.o ../io/iofile.o 
+OBJECTS = display.o ../multimedia/bmp.o ../network/httpsocket.o ../network/smtpsocket.o  ${FONTOBJ} ctrinput.o Rect.o Cube.o ctrbutton.o ../io/iofile.o displayDraw.o 
 3DIE:3DIE.o ${OBJECTS}  ${LIBPATH}libhtml.a ../js/libjs.a
 	cd ../network;make
 	cd ../js;make
