@@ -16,6 +16,9 @@
 #	rm -f *.o 
 
 TOPDIR= ../../
+PROJ=js
+SRCS=JSDocument.cpp
+#TARGET= JSDocument.o
 include ../../include/makefile.inc 
-JSDocument.o:
+#JSDocument.o:
 include ../../include/rules.mk

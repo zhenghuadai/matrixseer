@@ -11,5 +11,6 @@ clean:
 	cd multimedia;make clean
 	cd htmlparser; make clean
 	cd fltkDisplay; make clean
+	cd glutDisplay; make clean
 
 
