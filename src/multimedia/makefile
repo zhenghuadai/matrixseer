@@ -1,5 +1,6 @@
 #bmp.o:bmp.c
 TOPDIR= ../../
+PROJ=multimedia
+SRCS=bmp.cpp
 include ../../include/makefile.inc 
-bmp.o:
 include ../../include/rules.mk

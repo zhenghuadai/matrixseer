@@ -28,8 +28,11 @@ IOPATH 		= ${TOPDIR}/src/io
 MEDIAPATH 	=${TOPDIR}/src/multimedia
 
 DISPLAY_OUT_DIR=${TOPDIR}/builds/glutdisplay/dbg 
-MULTIMEDIA_OUT_DIR=
+MULTIMEDIA_OUT_DIR=${TOPDIR}/builds/multimedia/dbg
 NET_OUT_DIR=${TOPDIR}/builds/network/dbg
+IO_OUT_DIR=${TOPDIR}/builds/io/dbg
+JS_OUT_DIR=${TOPDIR}/builds/js/dbg
+
 INCLUDEPATH += -I${TOPDIR}/include/  -I${PARSERPATH} -I${JSPATH}/include -I${NETWORKPATH} -I${JSPATH} -I${JSPATH}/include  -I${DISPLAYPATH} -I${IOPATH} -I${MEDIAPATH}
 
 #set source file 
@@ -47,7 +50,9 @@ SORDLIB = -WI,-Bdynamic #static
 ARFLAG  = cqs
 
 
-
+#set clean
+TARGET ?=${OBJS}
+CLEAN_OBJS ?=${TARGET}
 
 
 #make entry
