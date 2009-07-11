@@ -11,7 +11,7 @@ class ctrA : public Widget {
 	int handle(int);
 	public:
 	int pushed ;
-	void draw();
+	void draw(){};
 	ctrA(Box* b,int w,int h,const char *l)
 		: Widget(0,0,w,h,l) 
 	{box(b);pushed = 0;};

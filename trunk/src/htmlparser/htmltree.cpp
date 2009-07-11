@@ -90,7 +90,7 @@ HtmlTdNode::HtmlTdNode(pHtmlNode pHtp, dmToken* t)
     //
     this->attr = tdattr;
     pHtp ->addChild(this); 
-    printf(" td align :%d\n",tdattr->align);
+    debprintf(" td align :%d\n",tdattr->align);
     tdattr -> colID = trattr -> cols;
     tdattr -> colsMaxW =(int *)&( trattr -> colsMaxW[trattr -> cols]);
 #ifdef DZHDEB 
@@ -230,7 +230,7 @@ void HtmlTableNode:: endParse()
     getRect(pos);
     debprintf("\ntableSize: rows %d x cols %d\n",tableattr->rows,tableattr->cols);
     debprintf("table width = %d\%",tableattr -> w );
-    printf("rect :%d %d %d %d \n",pos[0],pos[1],pos[4],pos[5]);
+    debprintf("rect :%d %d %d %d \n",pos[0],pos[1],pos[4],pos[5]);
     //upadte the width
     gridPos_t *src = tableattr -> colsW; 
 
@@ -549,7 +549,7 @@ HtmlCenterNode::HtmlCenterNode(pHtmlNode pHtp, dmToken* t)
     pctrDiv = new ctrDiv(x,y,0,0,0);
     pHtc -> obj = (void*) pctrDiv;
     attrBase_t* pattr =(attrBase_t*)  pHtc -> attr;
-    printf("center curW:%d\n",pattr->curW);
+    debprintf("center curW:%d\n",pattr->curW);
     pctrDiv -> begin();
 }
 
@@ -569,7 +569,7 @@ void HtmlCenterNode:: endParse()
     getRect(pos);
     int x;
     x = (pos[4] - w )/2;
-    printf("centerX:%d,%d\n",pos[4],w);
+    debprintf("centerX:%d,%d\n",pos[4],w);
     pctrDiv -> setx(x);
     pctrDiv -> setWH(w,h);
     updateParentHtmlNode(pHtp,pHtc);

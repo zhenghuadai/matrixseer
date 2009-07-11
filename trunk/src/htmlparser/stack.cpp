@@ -64,7 +64,7 @@ void __stack::_printstack()
 {
     int i;
     for(i=0;i<=_tagtop;i++)
-        printf("%d ",_3dhstack[i] -> tagid);
+        debprintf("%d ",_3dhstack[i] -> tagid);
 }
 pHtmlNode __stack::createHtmlNode(int id)
 {

@@ -106,7 +106,7 @@ void findHash()
         char c4 = pcur[len-2] -'a';
         char c5 = pcur[2] -'a';
         unsigned char c = (c1 << 4)  ^ (( (~c2 << 3) ^(c3<<1) ^(~c4)) );
-        printf("%3d,%s\n",c,pcur);
+        debprintf("%3d,%s\n",c,pcur);
     }
 }
 int parseCss(char *attrstr,void ** pobj)
@@ -533,12 +533,12 @@ cssAttr_t* getcssFromID(char * ID,char *tag =NULL)
         strcpy(buf,tag);
         strcat(buf,ID);
     }
-    printf("look at %s",buf);
+    debprintf("look at %s",buf);
     for(i =0;i<cssIDs;i++){
         pcssID = &cssID[i];
-        printf("search(%s)   ",pcssID -> name);
+        debprintf("search(%s)   ",pcssID -> name);
         if((strcmp(ID,pcssID-> name)== 0) || (strcmp(buf,pcssID-> name)== 0)) {
-            printf("find %d \n",i);
+            debprintf("find %d \n",i);
             return ( (cssAttr_t*)&(pcssID -> len));        
         }
     }
@@ -554,12 +554,12 @@ cssAttr_t* getcssFromClass(char * ID,char *tag =NULL)
         strcpy(buf,tag);
         strcat(buf,ID);
     }
-    printf("look at %s",buf);
+    debprintf("look at %s",buf);
     for(i =0;i<cssClasss;i++){
         pcssID = &cssClass[i];
-        printf("search(%s)   ",pcssID -> name);
+        debprintf("search(%s)   ",pcssID -> name);
         if((strcmp(ID,pcssID-> name)== 0) || (strcmp(buf,pcssID-> name)== 0)) {
-            printf("find %d \n",i);
+            debprintf("find %d \n",i);
             return ( (cssAttr_t*)&(pcssID -> len));        
         }
     }

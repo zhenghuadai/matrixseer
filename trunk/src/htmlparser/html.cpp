@@ -6,7 +6,6 @@
 #include "tagattr.h"
 #include "html.h"
 #include "math.h"
-#define DEB
 static char *alltag[]=INITTAG;
 static char *allattr[]=INITATTR;
 #define CALLFUNC(tag)
@@ -23,7 +22,7 @@ htmlparser::htmlparser()
     initialFunc();
     phead = 0;
     tagbufp = (char *)malloc(1024);
-    printf("class func size:%d",sizeof(tagfunc_t));
+    debprintf("class func size:%d",sizeof(tagfunc_t));
 }
 htmlparser::~htmlparser()
 {
@@ -144,9 +143,9 @@ void htmlparser::_printstack()
 {
     int i;
     for(i=0;i<=_tagtop;i++)
-        printf("%d ",_3dhstack[i] -> tagid);
+        debprintf("%d ",_3dhstack[i] -> tagid);
     for(i=0;i<=_tagtop;i++)
-        printf(" %s ",gettagstrfromid(_3dhstack[i] -> tagid));
+        debprintf(" %s ",gettagstrfromid(_3dhstack[i] -> tagid));
 }
 
 char * htmlparser::gettagstr(char **pos)

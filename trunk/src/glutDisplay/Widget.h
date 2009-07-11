@@ -20,6 +20,6 @@ public:
     void end(){};
     void color(int){};
     void labelcolor(int){};
-	virtual	void paint(){};
+	virtual	void draw(){};
 };
 #endif
