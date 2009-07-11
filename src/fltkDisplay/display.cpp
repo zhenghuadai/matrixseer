@@ -147,7 +147,7 @@ void popStartPos()
 
 void printRect()
 {
-    printf("CurRECT\nx:%d; y:%d z:%d, w:%d, h:%d, d:%d\n",
+    debprintf("CurRECT\nx:%d; y:%d z:%d, w:%d, h:%d, d:%d\n",
             curRectX,
             curRectY,
             curRectZ,

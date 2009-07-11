@@ -16,7 +16,8 @@ OUT_DIR 	= ${TOPDIR}/builds/${PROJ}
 DBG_DIR 	= ${OUT_DIR}/dbg
 OPT_DIR 	= ${OUT_DIR}/opt
 OBJ_DIR     = ${DBG_DIR}
-CFLAG  		= -g  -DXP_UNIX -g -DDZHP -DDEB -DDZHDEB  ${MARC}
+CFLAG  		= -g  -DXP_UNIX -DDZHP ${MARC} ${MY_FLAG} 
+#CFLAG       += -DDEB -DDZHDEB  
 LIBPATH		= ${TOPDIR}/lib/
 BINPATH		= ${TOPDIR}/bin/
 

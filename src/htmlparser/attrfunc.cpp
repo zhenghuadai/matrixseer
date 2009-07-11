@@ -131,7 +131,7 @@ int htmlparser::tableAttrFunc(char *attrstr,void ** pobj)
                     p_tableattr -> align = ALIGNLEFT;
                 else if(buf[0] == 'c') 
                     p_tableattr -> align = ALIGNCENTER;
-                printf("table align:%s\n",buf); 
+                debprintf("table align:%s\n",buf); 
                 break;
             default: getValue;
                      break;
@@ -160,7 +160,7 @@ int htmlparser::tdAttrFunc(char *attrstr,void ** pobj)
             case 0:
                 getValue;
                 if(buf[0] == 'r') p_tdattr -> align = ALIGNRIGHT;
-                printf("$$%s$$",buf);
+                debprintf("$$%s$$",buf);
                 break;
             case 1:
                 getValue;
@@ -201,13 +201,13 @@ int htmlparser::GeneralAttr(char *attrstr,void ** pobj)
     char * pcur = attrstr;
     char buf[1024];
     int i;
-    printf("in attr\n");
+    debprintf("in attr\n");
     if(attrstr ==NULL) return 1;
     while(*pcur)
     {
         getTag;
-        printf("{%s}\n",pcur);
-        printf("tag[%s=",buf);
+        debprintf("{%s}\n",pcur);
+        debprintf("tag[%s=",buf);
         switch(tag){
             case 0:
                 getValue;
@@ -227,7 +227,7 @@ int htmlparser::GeneralAttr(char *attrstr,void ** pobj)
                 getValue;
                 break;
         }
-        printf("=%s\n",buf);
+        debprintf("=%s\n",buf);
     }
 
     return 0;

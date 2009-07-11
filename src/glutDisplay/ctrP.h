@@ -19,7 +19,7 @@ class ctrP : public Group {
     void initP(){PostionFlag = 0;box(CSS_BOX/*BORDER_FRAME*/);};
     public:
     int pushed ;
-    void draw();
+    void draw(){};
     //  ctrP():Box(0,0,0,0,""){};
     ctrP(int x,int y,int flag)
     : Group(x,y,0,0,(const char *)0) 

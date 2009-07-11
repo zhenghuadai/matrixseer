@@ -1,14 +1,6 @@
 TOPDIR = ../..
 PROJ=htmlparser
-#CC= g++
-#CPP= g++
-#CFLAG= -g  -DXP_UNIX -g -DDZHP -DDEB -DDZHDEB  
-#LIBPATH=../../lib/
-#BINPATH=../../bin/
 DMDISPLAY ?=glutDisplay
-#DISPLAYPATH= ../${DMDISPLAY}
-#INCLUDEPATH= -I../js/include -I../../include -I${DISPLAYPATH} -I../ -I./ -I../js/
-#OBJ    = html.o tagfunc.o stack.o createtree.o attrfunc.o cssfunc.o htmltree.o
 SRCS = html.cpp tagfunc.cpp stack.cpp createtree.cpp attrfunc.cpp cssfunc.cpp htmltree.cpp
 TARGET=libhtml
 CLEAN_OBJS= ${LIBPATH}libhtml.a

@@ -190,7 +190,7 @@ int htmlparser::ctTextFunc(pHtmlNode pHtp,char * htdoc)
     //wh.x = wh.x +5;
     ctrwh.x = wh.x + 0;
     ctrText * pctrText = new ctrText(x,y,ctrwh.x,(wh.y)*rowHeight + rowHeight/2,htdoc);
-    printf("%d %d\n",wh.x,wh.y);
+    debprintf("%d %d\n",wh.x,wh.y);
     //ctrText * pctrText = new ctrText(10,10,100,100,"the text");
     debprintf("Text size:%d %d %d %d %s\n",0,0,ctrwh.x,wh.y * rowHeight,htdoc);
     pHtc -> obj = (void*) pctrText;
