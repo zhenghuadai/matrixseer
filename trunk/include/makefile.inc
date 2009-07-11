@@ -43,7 +43,7 @@ OBJS = ${DBG_OBJS}
 
 
 #set lib
-XLIB	= -lGL -lglut
+XLIB	+= -lGL -lglut
 LIBOBJ  ?= lib3Dhttp.so lib3Dsmtp.so lib3Dfont.so
 LIB    ?= -L${LIBPATH} -l3Dhttp -l3Dsmtp #lib3Dfont.a libjs.a
 SORDLIB = -WI,-Bdynamic #static
