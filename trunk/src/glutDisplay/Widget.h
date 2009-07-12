@@ -20,6 +20,6 @@ public:
     void end(){};
     void color(int){};
     void labelcolor(int){};
-	virtual	void draw(){};
+	virtual	void draw(){ printf("Widget draw\n");};
 };
 #endif
