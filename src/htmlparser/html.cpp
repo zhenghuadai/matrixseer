@@ -539,6 +539,9 @@ void htmlparser::visitHtmlNode(pHtmlNode root)
 {
     int tag = root -> tagid;
 	Widget* o = (Widget*) root->obj;
+    if( o == NULL) return ;
+    if(o -> _vptr == (void*)0x1) return ;
+    o -> draw();
     //(this ->* tagfunc[tag])(root );
 
     //    if((root -> value) ||(tag == BRID) )	(this ->* tagfunc[tag])(root );

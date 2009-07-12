@@ -10,6 +10,7 @@
 #include "string"
 #include "dmfile.h"
 #include "font.h"
+#include "debprintf.h"
 using namespace std;
 char * httpcont=0;
 int Win_w=1024;
@@ -402,7 +403,7 @@ int testJS()
     {
         str = JS_ValueToString(cx,retval);
         char *s =JS_GetStringBytes(str);
-        printf("result:%s\n",s);
+        debprintf("result:%s\n",s);
     }
 }
 int main(int argc, char** argv)
@@ -410,7 +411,7 @@ int main(int argc, char** argv)
     int ret;
     ret =   initJS();
     if(ret){
-        printf("error");
+        debprintf("error");
         exit(0);
     }
     testJS();

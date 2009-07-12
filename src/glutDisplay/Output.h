@@ -23,14 +23,17 @@
 #define TIMES 1
 class Output: public Widget
 {
-	public:
-	Output(int x, int y, int z, int w, int h):Widget(x,y,z,w,h){}
-	Output(int x, int y, int w, int h, const char* l):Widget(x,y,w,h,l){}
+    private:
+        char* text;
+    public:
+        Output(int x, int y, int z, int w, int h):Widget(x,y,z,w,h),text(0){}
+        Output(int x, int y, int w, int h, const char* l):Widget(x,y,w,h,l),text(0){}
 
-	void type(int t){}
-	void textfont(int f){}
-	void textsize(int f){}
-	char* value() {return NULL;}
-	void value(const char* l){}
+        void type(int t){}
+        void textfont(int f){}
+        void textsize(int f){}
+        char* value() {return text;}
+        void value(const char* l){text = (char*)l;}
+        virtual void draw(){  printf("%s\n",text);}
 };
 #endif

@@ -244,10 +244,10 @@ inline void  updateParentHtmlNode(pHtmlNode pHtp, pHtmlNode pHtc)
     {
         attrBase_t *pAttrp = getAttrBaseP(pHtp);
         attrBase_t *pAttrc = getAttrBaseP(pHtc);
-        printf("%d",pAttrp->curW);
+        debprintf("%d",pAttrp->curW);
         pAttrp -> curW += pAttrc ->w;
         if(pAttrc -> h > pAttrp -> curH) pAttrp -> curH = pAttrc -> h;
-        printf("+%d = %d \n",pAttrc->w,pAttrp->curW);
+        debprintf("+%d = %d \n",pAttrc->w,pAttrp->curW);
     }
 }
 
