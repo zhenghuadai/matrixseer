@@ -329,6 +329,50 @@ INLINE int getCharWidth(char c)
 
 int2 getstrWH(char *str,int width)
 {
+    int2 wh;
+    wh.x=wh.y=0;
+    if (!curFont) return wh;
+    //width -=10;
+    if(width <=0) return wh;
+    char * strE = str;
+    //XCharStruct* p = fl_xfont->per_char;
+    //if (!p) {
+    //    wh.y=(strlen(str)* fl_xfont->min_bounds.width -1) /width + 1;
+    //    if(wh.y==1) wh.x = (strlen(str)* fl_xfont->min_bounds.width -1);
+    //    else wh.x = width;
+    //    return wh; 
+    //}
+    //int a = fl_xfont->min_char_or_byte2;
+    //int b = fl_xfont->max_char_or_byte2 - a;
+    int w = 0;
+    while ((*strE)) {
+        if(*strE =='\n'){
+            wh.y += ((w-1)/width +1);
+            if(w>width) wh.x =w;
+            else{
+                if(wh.x<(w+FirstLineIndent))wh.x =w+FirstLineIndent;
+            }
+            w = 0;
+            strE++;
+            continue;
+        }
+        //int x = *(uchar*)strE++ - a;
+        //if (x >= 0 && x <= b) w += (p[x].width);
+        //else w += fl_xfont->min_bounds.width;
+        //printf("[%d %c %d]\n",w,*(strE-1),p[x].width);
+        w += getCharWidth(*strE);
+    }
+    //w -= (1*(strE -str)/8); // correct the width;
+    wh.y += (w-1)/width +1;
+    if(w > width) wh.x =width;
+    else{
+        if(wh.x<w+FirstLineIndent)wh.x =w+FirstLineIndent;
+    }
+    //if(wh.x>width) wh.x = width;
+    //if(wh.x<4) wh.x =4;
+    //    printf("[%d %d %s %d %d]\n",wh.x,wh.y,str,width,w);
+    return wh;
+
 }
 
 int2 getstrWH(char *str)
@@ -339,107 +383,107 @@ int2 getstrWH(char *str)
 
 BitmapFontPtr selectfontfromid(void * id)
 {
-   glShadeModel (GL_FLAT);
-   initFontList();//GLUT_BITMAP_TIMES_ROMAN_10);
-   setRasterFont(id);
-/*
-	return (__glutFont((void*)id));
-	switch(id)
-	{
-	case UPPERFONT:
-		setRasterFont(letters);
-		break;
-	}
-*
-*/
-	return NULL;
+    glShadeModel (GL_FLAT);
+    initFontList();//GLUT_BITMAP_TIMES_ROMAN_10);
+    setRasterFont(id);
+    /*
+       return (__glutFont((void*)id));
+       switch(id)
+       {
+       case UPPERFONT:
+       setRasterFont(letters);
+       break;
+       }
+     *
+     */
+    return NULL;
 }
 /*
-inline void MoveTo2(int x, int y)
-{
-	glRasterPos2i(x,y);
-}
-inline void MoveTo3(int x, int y,int z)
-{
-	glRasterPos3i(x,y,z);
-}
-*/
+   inline void MoveTo2(int x, int y)
+   {
+   glRasterPos2i(x,y);
+   }
+   inline void MoveTo3(int x, int y,int z)
+   {
+   glRasterPos3i(x,y,z);
+   }
+   */
 void drawChars(char *s,int len)
 {
-   glPushAttrib (GL_LIST_BIT);
-   glListBase(fontOffset);
-   glCallLists(len, GL_UNSIGNED_BYTE, (GLubyte *) s);
-   glPopAttrib ();
+    glPushAttrib (GL_LIST_BIT);
+    glListBase(fontOffset);
+    glCallLists(len, GL_UNSIGNED_BYTE, (GLubyte *) s);
+    glPopAttrib ();
 }
 
 void drawString(char *s)
 {
-   glPushAttrib (GL_LIST_BIT);
-   glListBase(fontOffset);
-   glCallLists(strlen(s), GL_UNSIGNED_BYTE, (GLubyte *) s);
-   glPopAttrib ();
+    glPushAttrib (GL_LIST_BIT);
+    glListBase(fontOffset);
+    glCallLists(strlen(s), GL_UNSIGNED_BYTE, (GLubyte *) s);
+    glPopAttrib ();
 }
 void drawCharsxy(int x,int y,char *s,int len)
 {
-   glRasterPos2i(x,y);
-   glPushAttrib (GL_LIST_BIT);
-   glListBase(fontOffset);
-   glCallLists(len, GL_UNSIGNED_BYTE, (GLubyte *) s);
-   glPopAttrib ();
+    glRasterPos2i(x,y);
+    glPushAttrib (GL_LIST_BIT);
+    glListBase(fontOffset);
+    glCallLists(len, GL_UNSIGNED_BYTE, (GLubyte *) s);
+    glPopAttrib ();
 }
 
 void drawStringxy(int x,int y,char *s)
 {
-   glRasterPos2i(x,y);
-   glPushAttrib (GL_LIST_BIT);
-   glListBase(fontOffset);
-   glCallLists(strlen(s), GL_UNSIGNED_BYTE, (GLubyte *) s);
-   glPopAttrib ();
+    glRasterPos2i(x,y);
+    glPushAttrib (GL_LIST_BIT);
+    glListBase(fontOffset);
+    glCallLists(strlen(s), GL_UNSIGNED_BYTE, (GLubyte *) s);
+    glPopAttrib ();
 }
 void drawCharsxyz(int x,int y,int z,char *s,int len)
 {
-   glRasterPos3i(x,y,z);
-   glPushAttrib (GL_LIST_BIT);
-   glListBase(fontOffset);
-   glCallLists(len, GL_UNSIGNED_BYTE, (GLubyte *) s);
-   glPopAttrib ();
+    glRasterPos3i(x,y,z);
+    glPushAttrib (GL_LIST_BIT);
+    glListBase(fontOffset);
+    glCallLists(len, GL_UNSIGNED_BYTE, (GLubyte *) s);
+    glPopAttrib ();
 }
 
 void drawStringxyz(int x,int y,int z,char *s)
 {
-   glRasterPos3i(x,y,z);
-   glPushAttrib (GL_LIST_BIT);
-   glListBase(fontOffset);
-   glCallLists(strlen(s), GL_UNSIGNED_BYTE, (GLubyte *) s);
-   glPopAttrib ();
+    glRasterPos3i(x,y,z);
+    glPushAttrib (GL_LIST_BIT);
+    glListBase(fontOffset);
+    glCallLists(strlen(s), GL_UNSIGNED_BYTE, (GLubyte *) s);
+    glPopAttrib ();
 }
 int getEnterPos(char * str,int n)
-/*when return, str[i]==0 or str[i]=='\n' or i==n
- *
- */
+    /*when return, str[i]==0 or str[i]=='\n' or i==n
+     *
+     */
 {
-	int i=0;
-	while((str[i])&&(i<n)&&(str[i] != '\n')) i++;
-	return i;
+    int i=0;
+    while((str[i])&&(i<n)&&(str[i] != '\n')) i++;
+    return i;
 
 }
 int getEnterPos_non(char * str,int n)
-/*when return, str[i]==0  or i==n
- *
- */
+    /*when return, str[i]==0  or i==n
+     *
+     */
 {
-	int i=0;
-	while((str[i])&&(i<n)) i++;
-	return i;
+    int i=0;
+    while((str[i])&&(i<n)) i++;
+    return i;
 
 }
 int getEnterPos3(char * str,int n,int *pos)
 {
-	int i=0;
-	while((str[i])&&(i<n)&&(str[i] != '\n')) i++;
-	*pos=i;
-	if(!str[i])return -1;
-	if(i==n)return 1;
-	return 0;
+    int i=0;
+    while((str[i])&&(i<n)&&(str[i] != '\n')) i++;
+    *pos=i;
+    if(!str[i])return -1;
+    if(i==n)return 1;
+    return 0;
 }
 #endif
