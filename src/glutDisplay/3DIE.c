@@ -96,7 +96,7 @@ void setLight0()
     glLightfv(GL_LIGHT0,GL_DIFFUSE,l_color);
 }
 
-#define turnOnLight0 { \
+#define turnOnLight0() { \
     glEnable(GL_LIGHTING);\
     glEnable(GL_LIGHT0);\
 }
@@ -191,7 +191,7 @@ void MtrxArc(float zoff)
 void display(void)
 {
     //setLight0();
-    turnOnLight0;
+    turnOnLight0();
     glColor4fv(globalColor);
     /*
     //glReadPixels(0,0,TEXW,TEXH,GL_RGBA,GL_UNSIGNED_BYTE,httptex1);

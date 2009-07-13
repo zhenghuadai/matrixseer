@@ -32,6 +32,8 @@ int topStartPos = -1;
 int Tex_Win_h=0;
 int Tex_Win_w=0;
 
+extern int Win_w;
+extern int Win_h;
 
 void resetDisplay()
 {
@@ -45,6 +47,8 @@ void initDisplay()
     curRectY = 10;
     curRectZ = 0;
     curRectA = 0;
+    mDC_w = Win_w;
+    mDC_h = Win_h;
     curRectW = mDC_w;
     curRectH = mDC_h;
 }

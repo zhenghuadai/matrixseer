@@ -35,6 +35,8 @@ BitmapFontPtr selectfontfromid(void * id);
 #ifndef INLINE
 #define INLINE //inline
 #endif
+
+#define FirstLineIndent 20
 INLINE void MoveTo3(int x, int y,int z);
 void drawChars(char *s,int len);
 void drawString(char *s);
