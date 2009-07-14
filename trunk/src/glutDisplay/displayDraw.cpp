@@ -253,6 +253,49 @@ int putStrScr(char *content)
 	}
 	return 1;
 }
+
+int putStrScr(int x, int y, int z, char *content)
+	/*start from current pos
+	 *
+	 *
+	 *
+	 */
+{
+	int i=0,j=0;
+	char *pstart=content;
+	int npos;
+	int2 tmpcWH;	
+
+
+
+
+	if((!content)||(! *content))return 0;
+    MoveTo2(x,y);
+	tmpcWH=getWH_Chars(Tex_Win_w-x ,Tex_Win_h,3);
+	npos=getEnterPos(pstart,tmpcWH.w);
+	drawChars(pstart,npos);
+	pstart += npos;
+	if((*pstart=='\n')&&(! (*(pstart+1)))){
+		curRasterPosY-= rowHeight;
+		MoveTo2(20,curRasterPosY);
+		return 1; 
+	}
+
+	while(*pstart)
+	{
+		curRasterPosY-= rowHeight;
+		MoveTo2(20,curRasterPosY);
+		npos=getEnterPos(pstart,cWH.w);
+		drawChars(pstart,npos);
+		pstart+=npos;
+		if(*pstart=='\n'){
+			pstart++;
+		}
+	}
+	return 1;
+}
+
+
 void drawButton(int dx,int dy,char * s)
 {
 	int startPos[4];

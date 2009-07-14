@@ -36,6 +36,6 @@ class Output: public Widget
         void textsize(int f){}
         char* value() {return text;}
         void value(const char* l){text = (char*)l;}
-        virtual void draw(){  putStrScr(text);printf("%s\n",text);}
+        virtual void draw(){  putStrScr(x(),y(),z(),text);printf("<%d %d %d> <%s>\n",x(),y(),z(),text);}
 };
 #endif
