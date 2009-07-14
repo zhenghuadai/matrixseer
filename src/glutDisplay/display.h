@@ -6,6 +6,7 @@
 #define PLAINMODE 3
 #include <GL/gl.h>
 #include "dmtype.h"
+#include "font.h"
 class dmRect2D
 {
     public:

@@ -21,6 +21,8 @@
 #include <stdlib.h>
 #include "Widget.h"
 #define TIMES 1
+#include "display.h"
+
 class Output: public Widget
 {
     private:
@@ -34,6 +36,6 @@ class Output: public Widget
         void textsize(int f){}
         char* value() {return text;}
         void value(const char* l){text = (char*)l;}
-        virtual void draw(){  printf("%s\n",text);}
+        virtual void draw(){  putStrScr(text);printf("%s\n",text);}
 };
 #endif
