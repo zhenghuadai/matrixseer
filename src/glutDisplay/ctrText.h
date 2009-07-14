@@ -11,7 +11,6 @@
 class ctrText : public Output {
     public:
     int startx;
-    virtual void draw(){printf("%s\n", value());};
     ctrText(int w,int h,const char *l)
     : Output(0,0,w,h,0)
     {type(5);textfont(TIMES);textsize(14);value(l);}

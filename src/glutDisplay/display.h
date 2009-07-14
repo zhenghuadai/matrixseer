@@ -64,6 +64,7 @@ void drawButton2d(double x,double y,double z,double dx,double dy);
 void drawButton2dframe(double x,double y,double z,double dx,double dy);
 int putStrScr(char *content);
 int putStrScr(char *content,int len);
+int putStrScr(int x, int y, int z, char *content);
 void drawCube6(double xleft,double xright,double ybottom,double ytop,double zfront,double zback);
 int copyToCurTexture(int tx,int ty,int dsx,int dsy,int sw,int sh);
 int copyBackToFrt(int stx,int sty,int dw,int dh,int destx,int dexty);
