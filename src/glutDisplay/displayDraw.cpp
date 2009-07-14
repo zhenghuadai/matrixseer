@@ -360,6 +360,8 @@ void drawScrToTexture(GLuint tex,int Sx,int Sy,int Ex,int Ey)
 }
 void drawToTexture2(GLuint tex,int Sx,int Sy,int Ex,int Ey,char *str)
 {
+	void initDisplay();
+	initDisplay();
 	preDrawToTexture(tex,Sx,Sy,Ex,Ey);
 	//	putStrScr(str,Ex-Sx,Ey-Sy);
 	//	putStrScr("i love you",Ex-Sx,Ey-Sy);

@@ -265,7 +265,7 @@ int2 getstrWH(char *str,int width)
 	//int a = fl_xfont->min_char_or_byte2;
 	//int b = fl_xfont->max_char_or_byte2 - a;
 	int w = 0;
-	while ((*strE)) {
+	while (*strE) {
 		if(*strE =='\n'){
 			wh.y += ((w-1)/width +1);
 			if(w>width) wh.x =w;
@@ -281,6 +281,7 @@ int2 getstrWH(char *str,int width)
 		//else w += fl_xfont->min_bounds.width;
 		//printf("[%d %c %d]\n",w,*(strE-1),p[x].width);
 		w += getCharWidth(*strE);
+		strE++;
 	}
 	//w -= (1*(strE -str)/8); // correct the width;
 	wh.y += (w-1)/width +1;
