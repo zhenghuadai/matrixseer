@@ -15,6 +15,7 @@ endif
 OUT_DIR 	= ${TOPDIR}/builds/${PROJ}
 DBG_DIR 	= ${OUT_DIR}/dbg
 OPT_DIR 	= ${OUT_DIR}/opt
+DEP_DIR 	= ${OUT_DIR}/.dep
 OBJ_DIR     = ${DBG_DIR}
 CFLAG  		= -g  -DXP_UNIX -DDZHP ${MARC} ${MY_FLAG} 
 #CFLAG       += -DDEB -DDZHDEB  
@@ -37,23 +38,24 @@ JS_OUT_DIR=${TOPDIR}/builds/js/dbg
 INCLUDEPATH += -I${TOPDIR}/include/  -I${PARSERPATH} -I${JSPATH}/include -I${NETWORKPATH} -I${JSPATH} -I${JSPATH}/include  -I${DISPLAYPATH} -I${IOPATH} -I${MEDIAPATH}
 
 #set source file 
-C_SRCS  = $(SRCS:%.cpp=%.c)
+C_SRCS  	= $(SRCS:%.cpp=%.c)
+DEP_FILES 	= $(C_SRCS:%.c=$(DEP_DIR)/%.dep)	
 DBG_OBJS    = $(C_SRCS:%.c=$(DBG_DIR)/%.o)
 OPT_OBJS    = $(C_SRCS:%.c=$(OPT_DIR)/%.o)
-OBJS = ${DBG_OBJS}
+OBJS 		= ${DBG_OBJS}
 
 
 #set lib
 XLIB	+= -lGL -lglut
 LIBOBJ  ?= lib3Dhttp.so lib3Dsmtp.so lib3Dfont.so
-LIB    ?= -L${LIBPATH} -l3Dhttp -l3Dsmtp #lib3Dfont.a libjs.a
+LIB     ?= -L${LIBPATH} -l3Dhttp -l3Dsmtp #lib3Dfont.a libjs.a
 SORDLIB = -WI,-Bdynamic #static
 ARFLAG  = cqs
 
 
 #set clean
-TARGET ?=${OBJS}
-CLEAN_OBJS ?=${TARGET}
+TARGET 		?=${OBJS}
+CLEAN_OBJS 	?=${TARGET}
 
 
 #make entry
