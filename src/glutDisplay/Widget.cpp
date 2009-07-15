@@ -44,6 +44,7 @@ void Widget::setNext(Widget* o)
 void Widget::addFirstChild(Widget* child_)
 {
 	this-> mChild = child_;
-	mChild -> setNext( mChild);
+    mChild -> mNext = NULL;
+    mChild -> mPrevious = mChild;
 	child_->mParent = this;
 }

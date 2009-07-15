@@ -37,27 +37,26 @@ class HtmlNode{
         void * obj;
         int wife;
         HtmlNode * child;
-        HtmlNode * sib;
-        HtmlNode * lastsib;
+        HtmlNode * mPrevious;
+        HtmlNode * mNext;
         HtmlNode * parent;
+    public:
+        HtmlNode():child(NULL),mPrevious(NULL),mNext(NULL),parent(NULL){}
     private:
+        void setNext(HtmlNode* o){
+            this -> mNext = o;
+            o -> mPrevious = this;
+        }
+
         void appandChild(HtmlNode* child_){
-            HtmlNode* sil1st=child;
-            if(sil1st->sib){
-            // 
-                sil1st->lastsib->sib = child_;
-                sil1st->lastsib = child_;
-            }
-            else{
-            // the first sib
-                sil1st->sib=child_;
-                sil1st->lastsib=child_;
-            }
+            HtmlNode* lastSib = child->mPrevious;
+            lastSib -> setNext(child_);
+            child -> mPrevious = child_;
+            child_ -> mNext = 0;
+
             child_->parent = this;
         }
-        void addFirstChild(HtmlNode* child_){ child = child_; child_->parent = this;}
-    public:
-        HtmlNode():child(NULL),sib(NULL),lastsib(NULL),parent(NULL){}
+        void addFirstChild(HtmlNode* child_){ child = child_; child_->parent = this; child_->mPrevious= child_;}
     public:
         void addChild(HtmlNode* child_){
             if(child) {
@@ -68,9 +67,9 @@ class HtmlNode{
         }
         // the follow is for parsing
     public:
-		void createObject(){
-			createRenderObject();
-		}
+        void createObject(){
+            createRenderObject();
+        }
     public:
         virtual void endParse() = 0;
         virtual void processValue(dmToken*) = 0;
@@ -80,40 +79,40 @@ class HtmlNode{
 typedef HtmlNode* pHtmlNode;
 
 #define declareHtmlNode(className) \
-class className:public HtmlNode\
+    class className:public HtmlNode\
 {\
     public: \
-        className(pHtmlNode pHtp, dmToken* t);\
+            className(pHtmlNode pHtp, dmToken* t);\
     public:\
-        virtual void   endParse();\
-        virtual void   processValue(dmToken * t);\
-        virtual void createRenderObject();\
+           virtual void   endParse();\
+    virtual void   processValue(dmToken * t);\
+    virtual void createRenderObject();\
     public:\
 };
 #define declareHtmlUnaryNode(className) \
-class className:public HtmlNode\
+    class className:public HtmlNode\
 {\
     public: \
-        className(pHtmlNode pHtp, dmToken* t);\
+            className(pHtmlNode pHtp, dmToken* t);\
     public:\
-        virtual void   endParse(){};\
-        virtual void   processValue(dmToken * t){};\
-        virtual void createRenderObject();\
+           virtual void   endParse(){};\
+    virtual void   processValue(dmToken * t){};\
+    virtual void createRenderObject();\
     public:\
 };
 
 /* example
-class HtmlUlNode:public HtmlNode
-{
-    public: 
-        HtmlUlNode(pHtmlNode pHtp, dmToken* t);
-    public:
-        void   endParse();
-        void   processValue(dmToken * t);
-    public:
-        void createObject();
-};
-*/
+   class HtmlUlNode:public HtmlNode
+   {
+   public: 
+   HtmlUlNode(pHtmlNode pHtp, dmToken* t);
+   public:
+   void   endParse();
+   void   processValue(dmToken * t);
+   public:
+   void createObject();
+   };
+   */
 declareHtmlNode(HtmlUlNode);
 declareHtmlNode(HtmlTableNode);
 declareHtmlNode(HtmlTrNode);
