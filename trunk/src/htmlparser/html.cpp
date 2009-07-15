@@ -37,7 +37,7 @@ int htmlparser::releaseNode(pHtmlNode root)
 int htmlparser::releaseTree(pHtmlNode root)
 {
     if( root -> child) releaseTree(root -> child);
-    if( root -> sib)   releaseTree(root -> sib);
+    if( root -> mNext)   releaseTree(root -> mNext);
     releaseNode(root);
 }
 int htmlparser::destroy()
@@ -541,7 +541,9 @@ void htmlparser::visitHtmlNode(pHtmlNode root)
     int tag = root -> tagid;
 	Widget* o = (Widget*) root->obj;
     if( o == NULL) return ;
+#if NEED_RENDER != n
     if(o -> _vptr == (void*)0x1) return ;
+#endif
 
     o -> draw();
     //(this ->* tagfunc[tag])(root );
@@ -559,7 +561,7 @@ void htmlparser::rendernode(pHtmlNode root)
     visitHtmlNode(root);
     if(root->child)	rendernode(root->child);
     if(root-> wife) { /*	(this ->* tagfunc[root->wife])(root )*/};
-    if(root->sib)   rendernode(root->sib);
+    if(root->mNext)   rendernode(root->mNext);
 
 }
 void htmlparser::renderhtml()

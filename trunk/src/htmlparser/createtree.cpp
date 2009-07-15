@@ -70,10 +70,10 @@ void resetTablePos(pHtmlNode tableP)
             }
             pctrTD -> setxyz(x,y,0);
             //pctrTD -> setx(x);
-            pHtd = pHtd -> sib;
+            pHtd = pHtd -> mNext;
             j++;
         }
-        pHtr = pHtr -> sib;
+        pHtr = pHtr -> mNext;
         pctrTR -> end();
         i++;
     }

@@ -5,6 +5,10 @@ SRCS = html.cpp tagfunc.cpp stack.cpp createtree.cpp attrfunc.cpp cssfunc.cpp ht
 TARGET=libhtml
 CLEAN_OBJS= ${LIBPATH}libhtml.a
 
+ifeq "$(DMDISPLAY)" "glutDisplay"
+MY_FLAG= -DNEED_RENDER=n
+endif
+
 include ../../include/makefile.inc 
 
 #all:${LIBPATH} init_dbg libhtml 
