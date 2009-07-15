@@ -18,7 +18,7 @@ OPT_DIR 	= ${OUT_DIR}/opt
 DEP_DIR 	= ${OUT_DIR}/.dep
 OBJ_DIR     = ${DBG_DIR}
 CFLAG  		= -g  -DXP_UNIX -DDZHP ${MARC} ${MY_FLAG} 
-#CFLAG       += -DDEB -DDZHDEB  
+CFLAG       += -DDEB -DDZHDEB  
 LIBPATH		= ${TOPDIR}/lib/
 BINPATH		= ${TOPDIR}/bin/
 
