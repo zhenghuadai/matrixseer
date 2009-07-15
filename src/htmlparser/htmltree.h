@@ -68,8 +68,13 @@ class HtmlNode{
         }
         // the follow is for parsing
     public:
+		void createObject(){
+			createRenderObject();
+		}
+    public:
         virtual void endParse() = 0;
         virtual void processValue(dmToken*) = 0;
+        virtual void createRenderObject() = 0;
 };
 
 typedef HtmlNode* pHtmlNode;
@@ -80,10 +85,10 @@ class className:public HtmlNode\
     public: \
         className(pHtmlNode pHtp, dmToken* t);\
     public:\
-        void   endParse();\
-        void   processValue(dmToken * t);\
+        virtual void   endParse();\
+        virtual void   processValue(dmToken * t);\
+        virtual void createRenderObject();\
     public:\
-        void createObject();\
 };
 #define declareHtmlUnaryNode(className) \
 class className:public HtmlNode\
@@ -91,10 +96,10 @@ class className:public HtmlNode\
     public: \
         className(pHtmlNode pHtp, dmToken* t);\
     public:\
-        void   endParse(){};\
-        void   processValue(dmToken * t){};\
+        virtual void   endParse(){};\
+        virtual void   processValue(dmToken * t){};\
+        virtual void createRenderObject();\
     public:\
-        void createObject();\
 };
 
 /* example

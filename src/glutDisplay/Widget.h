@@ -4,6 +4,11 @@
 #include "Box.h"
 class Widget: public Cube
 {
+private:
+	Widget* _parent;
+	Widget* next;
+	Widget* previous;
+	Widget* child;
 public:
 	Widget(){};
 	Widget(int x,int y,int z):Cube(x,y,z){};

@@ -43,12 +43,7 @@ HtmlUlNode:: HtmlUlNode(pHtmlNode pHtp, dmToken* t)
     /*attr = new attrBase_t();*/
 
     pHtp ->addChild(this);
-    int x, y;
-    attrBase_t *pAttrp = (attrBase_t*) getAttrBaseP(pHtp);
-    GetCurXYFromPattr(x,y,pAttrp);
-    ctrP * pctrP = new ctrP(x,y ,0);
-    obj = (void*) pctrP;
-    pctrP -> begin();
+	createObject();
 }
 
 void HtmlUlNode:: endParse()
@@ -73,13 +68,22 @@ void  HtmlUlNode::processValue(dmToken * t)
 {
 }
 
+void  HtmlUlNode::createRenderObject()
+{
+    int x, y;
+    attrBase_t *pAttrp = (attrBase_t*) getAttrBaseP(parent);
+    GetCurXYFromPattr(x,y,pAttrp);
+    ctrP * pctrP = new ctrP(x,y ,0);
+    obj = (void*) pctrP;
+    pctrP -> begin();
+}
+
 /*******************************************************************
  *
  *
  * ****************************************************************/
 HtmlTdNode::HtmlTdNode(pHtmlNode pHtp, dmToken* t)
 {
-    int x, y;
     //this -> tagid = TDID;
     this -> tagid = t->tagid;//TDID;
     trattr_t *trattr =(trattr_t*) getAttrBaseP(pHtp);
@@ -97,12 +101,7 @@ HtmlTdNode::HtmlTdNode(pHtmlNode pHtp, dmToken* t)
     char *ttt = (char *)malloc(20);
     sprintf(ttt,"td%d.%d",trattr->rowID,tdattr -> colID);
 #endif
-    GetCurXYFromPhtmlNode( x,y, pHtp);
-    ctrDiv * pctrDiv = new ctrDiv(x,y,1,1,0);
-    debprintf("td size: %d %d %d %d\n",x,y,10 ,10);
-    this -> obj = (void*) pctrDiv;
-    pctrDiv -> color(10);
-    pctrDiv -> begin();
+	createObject();
 }
 
 void HtmlTdNode:: endParse()
@@ -136,13 +135,23 @@ void  HtmlTdNode::processValue(dmToken * t)
 {
 }
 
+void  HtmlTdNode::createRenderObject()
+{
+    int x, y;
+    GetCurXYFromPhtmlNode( x,y, parent);
+    ctrDiv * pctrDiv = new ctrDiv(x,y,1,1,0);
+    debprintf("td size: %d %d %d %d\n",x,y,10 ,10);
+    this -> obj = (void*) pctrDiv;
+    pctrDiv -> color(10);
+    pctrDiv -> begin();
+}
+
 /*******************************************************************
  *
  *
  * ****************************************************************/
 HtmlTrNode::HtmlTrNode(pHtmlNode pHtp, dmToken* t)
 {
-    int x,y;
     tagid = t -> tagid;
     pHtmlNode tableNodep = pHtp;//curHtml->_3dhtop();
     tableattr_t * tableattr = (tableattr_t*)getAttrBaseP(tableNodep);
@@ -157,13 +166,8 @@ HtmlTrNode::HtmlTrNode(pHtmlNode pHtp, dmToken* t)
 #ifdef DZHDEB 
     char *ttt = (char *)malloc(220);
 #endif
-    GetCurXYFromPhtmlNode( x,y, tableNodep);
-    ctrDiv * pctrDiv = new ctrDiv(x,y,10,10,0);
-    this -> obj = (void*) pctrDiv;
-    debprintf("tr size: %d %d %d %d\n",x,y,10 ,10);
-    pctrDiv -> begin();
-    pctrDiv -> color(10);
 
+	createObject();
 }
 
 void HtmlTrNode:: endParse()
@@ -193,6 +197,18 @@ void  HtmlTrNode::processValue(dmToken * t)
 {
 }
 
+void  HtmlTrNode::createRenderObject()
+{
+    int x,y;
+    GetCurXYFromPhtmlNode( x,y, parent);
+    ctrDiv * pctrDiv = new ctrDiv(x,y,10,10,0);
+    this -> obj = (void*) pctrDiv;
+    debprintf("tr size: %d %d %d %d\n",x,y,10 ,10);
+    pctrDiv -> begin();
+    pctrDiv -> color(10);
+
+}
+
 
 /*******************************************************************
  *
@@ -200,20 +216,13 @@ void  HtmlTrNode::processValue(dmToken * t)
  * ****************************************************************/
 HtmlTableNode::HtmlTableNode(pHtmlNode pHtp, dmToken* t)
 {
-    int x,y;
     tagid = t-> tagid;
     tableattr_t *tableattr;
     htmlparser::tableAttrFunc(t->attrib,(void**)&tableattr);
     this->attr = tableattr;
     pHtp ->addChild(this); 
-    GetCurXYFromPhtmlNode( x,y, pHtp);
-    ctrDiv * pctrDiv = new ctrDiv(x,y,1,1,0);
-    debprintf("Table Size:%d %d %d %d\n",x,y,1,1);
-    this -> obj = (void*) pctrDiv;
-    //pctrDiv -> color(tableattr -> bgcolor);
-    pctrDiv -> color(10);
-    pctrDiv -> begin();
-
+	createObject();
+    
 }
 
 void HtmlTableNode:: endParse()
@@ -285,6 +294,18 @@ void  HtmlTableNode::processValue(dmToken * t)
 {
 }
 
+void  HtmlTableNode::createRenderObject()
+{
+    int x,y;
+	GetCurXYFromPhtmlNode( x,y, parent);
+    ctrDiv * pctrDiv = new ctrDiv(x,y,1,1,0);
+    debprintf("Table Size:%d %d %d %d\n",x,y,1,1);
+    this -> obj = (void*) pctrDiv;
+    //pctrDiv -> color(tableattr -> bgcolor);
+    pctrDiv -> color(10);
+    pctrDiv -> begin();
+
+}
 
 /*******************************************************************
  *
@@ -301,33 +322,7 @@ HtmlDivNode::HtmlDivNode(pHtmlNode pHtp, dmToken* t)
     pHtmlNode pHtc = this; 
     pHtp ->addChild(this);
     //HNinsert(pHtp,pHtc);
-    int x,y,h,w;
-    int pos[8];
-    void setdefaultfont(void);
-    setdefaultfont();
-    ctrDiv * pctrDiv;
-    getRect(pos);
-    if(p_divattr -> startx ==2){
-        x = pos[0]; y= pos[1]; w= pos[4]/2; h =pos[5];   
-        pctrDiv = new ctrDiv(x,y,w,h,0);
-        pctrDiv -> setFixWH();
-    }
-    else if(p_divattr -> startx ==1){
-        x = pos[4]/2; y= pos[1]; w= pos[4]/2; h =pos[5];   
-        pctrDiv = new ctrDiv(x,y,w,h,0);
-        pctrDiv -> setFixWH();
-    }
-    else{
-        GetCurXYFromPhtmlNode(x,y,pHtp);
-        pctrDiv = new ctrDiv(x,y,0,0,0);
-        w = pos[4];
-        h = pos[5];
-    }
-    debprintf("DIV:%d %d %d %d \n",x,y,w,h);
-    pHtc -> obj = (void*) pctrDiv;
-    pctrDiv -> begin();
-    pushRect();
-    setRect(x,y,w,h);
+	createObject();
 }
 
 void HtmlDivNode:: endParse()
@@ -359,6 +354,39 @@ void  HtmlDivNode::processValue(dmToken * t)
 {
 }
 
+void  HtmlDivNode::createRenderObject()
+{
+	int x,y,h,w;
+	int pos[8];
+	void setdefaultfont(void);
+	setdefaultfont();
+	ctrDiv * pctrDiv;
+	getRect(pos);
+	divattr_t *p_divattr= (divattr_t*) this -> attr;
+	if(p_divattr -> startx ==2){
+		x = pos[0]; y= pos[1]; w= pos[4]/2; h =pos[5];   
+		pctrDiv = new ctrDiv(x,y,w,h,0);
+		pctrDiv -> setFixWH();
+	}
+	else if(p_divattr -> startx ==1){
+		x = pos[4]/2; y= pos[1]; w= pos[4]/2; h =pos[5];   
+		pctrDiv = new ctrDiv(x,y,w,h,0);
+		pctrDiv -> setFixWH();
+	}
+	else{
+		GetCurXYFromPhtmlNode(x,y, parent);
+		pctrDiv = new ctrDiv(x,y,0,0,0);
+		w = pos[4];
+		h = pos[5];
+	}
+	debprintf("DIV:%d %d %d %d \n",x,y,w,h);
+	this-> obj = (void*) pctrDiv;
+	pctrDiv -> begin();
+	pushRect();
+	setRect(x,y,w,h);
+
+}
+
 
 /*******************************************************************
  *
@@ -372,69 +400,75 @@ extern cssAttr_t* getcssFromClass(char*  ,char* tag=NULL );
 
 HtmlPNode::HtmlPNode(pHtmlNode pHtp, dmToken* t)
 {
-    tagid = t-> tagid;
-    pHtp ->addChild(this);
-    pHtmlNode pHtc = this; 
+	tagid = t-> tagid;
+	pHtp ->addChild(this);
+	pHtmlNode pHtc = this; 
 
-    int x=0,y=0;
-    pTAGattr_t *p_pattr;
-    htmlparser::pAttr(value,(void**)&p_pattr);
-    this -> attr = p_pattr;
-    debprintf("[%s]  \n",p_pattr->p_id);
-    cssAttr_t * pcss = NULL;
-    if(p_pattr ->p_id) {
-        pcss = getcssFromID(p_pattr -> p_id);
-    }
-    if(p_pattr ->p_class) {
-        pcss = getcssFromClass(p_pattr -> p_class,"p.");
-    }
-    attrBase_t *pAttrp = (attrBase_t*) getAttrBaseP(pHtp);
-    GetCurXYFromPattr(x,y,pAttrp);
-    ctrP * pctrP = new ctrP(x,y ,0);
-    //ctrP * pctrP = new ctrP(20,20 ,200,200,"ctrP");
-    if(pcss){
-        /*
-           debprintf("%d %d %s\n",pcss -> len,pcss->value[0].id,pcss->value[1].value);
-           debprintf("{%d %d}\n",atoi(pcss->value[1].value),atoi(pcss->value[2].value));
-           x = atoi(pcss->value[1].value);
-           y = atoi(pcss->value[2].value);
-           pctrP -> setFixXY(x,y);
-           */
-        setCSS(pctrP,pcss);
-        //pushRect();
-        //setRect(pctrP->x(),pctrP->y(),getRectW() - pctrP->x(),getRectH());
+	pTAGattr_t *p_pattr;
+	htmlparser::pAttr(value,(void**)&p_pattr);
+	this -> attr = p_pattr;
+	debprintf("[%s]  \n",p_pattr->p_id);
+	cssAttr_t * pcss = NULL;
+	if(p_pattr ->p_id) {
+		pcss = getcssFromID(p_pattr -> p_id);
+	}
+	if(p_pattr ->p_class) {
+		pcss = getcssFromClass(p_pattr -> p_class,"p.");
+	}
+	createObject();
+	ctrP* pctrP = (ctrP*)this-> obj ;
+		if(pcss){
+		/*
+		   debprintf("%d %d %s\n",pcss -> len,pcss->value[0].id,pcss->value[1].value);
+		   debprintf("{%d %d}\n",atoi(pcss->value[1].value),atoi(pcss->value[2].value));
+		   x = atoi(pcss->value[1].value);
+		   y = atoi(pcss->value[2].value);
+		   pctrP -> setFixXY(x,y);
+		   */
+		setCSS(pctrP,pcss);
+		//pushRect();
+		//setRect(pctrP->x(),pctrP->y(),getRectW() - pctrP->x(),getRectH());
 
-    }
-    debprintf("1 ctrP %d %d x:%d y:%d \n",x,y,pctrP->x(),pctrP->y());
-    pHtc -> obj = (void*) pctrP;
-    pctrP -> begin();
+	}
 }
 
 void HtmlPNode:: endParse()
 {
-    pHtmlNode pHtc = this; 
-    pHtmlNode pHtp = this -> parent; 
-    pHtc -> wife = tagid;
-    pTAGattr_t *paattr = (pTAGattr_t*) pHtc ->attr;
-    updateSelfAttrEnter(paattr);
-    paattr->w += 10;
-    paattr->h += 10;
+	pHtmlNode pHtc = this; 
+	pHtmlNode pHtp = this -> parent; 
+	pHtc -> wife = tagid;
+	pTAGattr_t *paattr = (pTAGattr_t*) pHtc ->attr;
+	updateSelfAttrEnter(paattr);
+	paattr->w += 10;
+	paattr->h += 10;
 
-    ctrP* pctrP=(ctrP*) (pHtc -> obj );
-    //if(pctrP -> PostionFlag) popRect();
-    pctrP -> size(paattr->w  ,paattr->h);
-    debprintf("ctrP x:%d y:%d w:%d h:%d\n",pctrP->x(),pctrP->y(),paattr -> w , paattr->h);
-    pctrP -> labelcolor(216);
-    //  pctrP -> hide();
-    pctrP -> end();
-    pHtc -> wife = tagid;
-    //HNinsert(pHtp,pHtc);
-    updateParentHtmlNode(pHtp,pHtc);
-    enterHtmlNode(pHtp);
+	ctrP* pctrP=(ctrP*) (pHtc -> obj );
+	//if(pctrP -> PostionFlag) popRect();
+	pctrP -> size(paattr->w  ,paattr->h);
+	debprintf("ctrP x:%d y:%d w:%d h:%d\n",pctrP->x(),pctrP->y(),paattr -> w , paattr->h);
+	pctrP -> labelcolor(216);
+	//  pctrP -> hide();
+	pctrP -> end();
+	pHtc -> wife = tagid;
+	//HNinsert(pHtp,pHtc);
+	updateParentHtmlNode(pHtp,pHtc);
+	enterHtmlNode(pHtp);
 }
 
 void  HtmlPNode::processValue(dmToken * t)
 {
+}
+
+void  HtmlPNode::createRenderObject()
+{
+	int x=0,y=0;
+	attrBase_t *pAttrp = (attrBase_t*) getAttrBaseP(parent);
+	GetCurXYFromPattr(x,y,pAttrp);
+	ctrP * pctrP = new ctrP(x,y ,0);
+	debprintf("1 ctrP %d %d x:%d y:%d \n",x,y,pctrP->x(),pctrP->y());
+	this -> obj = (void*) pctrP;
+	pctrP -> begin();
+
 }
 
 
@@ -444,45 +478,51 @@ void  HtmlPNode::processValue(dmToken * t)
  * ****************************************************************/
 HtmlANode::HtmlANode(pHtmlNode pHtp, dmToken* t)
 {
-    tagid = t-> tagid;
-    pHtp ->addChild(this);
-    pHtmlNode pHtc = this; 
+	tagid = t-> tagid;
+	pHtp ->addChild(this);
+	pHtmlNode pHtc = this; 
 
-    aattr_t *p_aattr;
-    htmlparser::aAttr(t->attrib,(void**)&p_aattr);
-    debprintf(" afunc href:%s\n",p_aattr ->href);
-    this -> attr = p_aattr;
-    int x=0,y=0;
-    attrBase_t *pAttrp = (attrBase_t*) getAttrBaseP(pHtp);
-    GetCurXYFromPattr(x,y,pAttrp);
-    ctrP * pctrP = new ctrP(x,y ,0);
-    pHtc -> obj = (void*) pctrP;
-    pctrP -> begin();
+	aattr_t *p_aattr;
+	htmlparser::aAttr(t->attrib,(void**)&p_aattr);
+	debprintf(" afunc href:%s\n",p_aattr ->href);
+	this -> attr = p_aattr;
+	createObject();
 }
 
 void HtmlANode:: endParse()
 {
-    pHtmlNode pHtc = this; 
-    pHtmlNode pHtp = this -> parent; 
-    pHtc -> wife = tagid;
+	pHtmlNode pHtc = this; 
+	pHtmlNode pHtp = this -> parent; 
+	pHtc -> wife = tagid;
 
-    pTAGattr_t *paattr = (pTAGattr_t*) pHtc ->attr;
-    updateSelfAttrEnter(paattr);
-    paattr->w += 10;
-    paattr->h += 10;
+	pTAGattr_t *paattr = (pTAGattr_t*) pHtc ->attr;
+	updateSelfAttrEnter(paattr);
+	paattr->w += 10;
+	paattr->h += 10;
 
-    ctrP* pctrP=(ctrP*) (pHtc -> obj );
-    pctrP -> size(paattr->w  ,paattr->h);
-    debprintf("ctrP x:%d y:%d w:%d h:%d\n",pctrP->x(),pctrP->y(),paattr -> w , paattr->h);
-    pctrP -> labelcolor(216);
-    pctrP -> end();
-    updateParentHtmlNode(pHtp,pHtc);
-    enterHtmlNode(pHtp);
+	ctrP* pctrP=(ctrP*) (pHtc -> obj );
+	pctrP -> size(paattr->w  ,paattr->h);
+	debprintf("ctrP x:%d y:%d w:%d h:%d\n",pctrP->x(),pctrP->y(),paattr -> w , paattr->h);
+	pctrP -> labelcolor(216);
+	pctrP -> end();
+	updateParentHtmlNode(pHtp,pHtc);
+	enterHtmlNode(pHtp);
 
 }
 
 void  HtmlANode::processValue(dmToken * t)
 {
+}
+
+void  HtmlANode::createRenderObject()
+{
+	int x=0,y=0;
+	attrBase_t *pAttrp = (attrBase_t*) getAttrBaseP(parent);
+	GetCurXYFromPattr(x,y,pAttrp);
+	ctrP * pctrP = new ctrP(x,y ,0);
+	this -> obj = (void*) pctrP;
+	pctrP -> begin();
+
 }
 
 
@@ -492,42 +532,46 @@ void  HtmlANode::processValue(dmToken * t)
  * ****************************************************************/
 HtmlSimpleANode::HtmlSimpleANode(pHtmlNode pHtp, dmToken* t)
 {
-    tagid = t-> tagid;
-    pHtp ->addChild(this);
-    pHtmlNode pHtc = this; 
+	tagid = t-> tagid;
+	pHtp ->addChild(this);
+	pHtmlNode pHtc = this; 
 
-    {
-        aattr_t *p_aattr;
-        htmlparser::aAttr(t->attrib,(void**)&p_aattr);
-        debprintf(" afunc href:%s\n",p_aattr ->href);
-        this -> attr = p_aattr;
-    }
-    {
-        pHtc->value=t->value;
-        int2 wh = getstrWH(value);
-        updateCurWH(pHtc,wh.x,rowHeight);
-    }
-    {
-        aattr_t *paattr = (aattr_t*) getAttrBaseP(pHtc);
-        attrBase_t *pobjP = (attrBase_t *) getAttrBaseP(pHtp);
-        updateSelfAttrEnter(paattr);
-        ctrA * pctrA = new ctrA(pobjP->curW,pobjP->h,paattr->w,paattr->h ,pHtc ->value);
-        updateParentHtmlNode(pHtp,pHtc);
-        debprintf("A:%d %d \n",pobjP->curW,pobjP->h);
-        void setdefaultfont(void);
-        pctrA -> labelcolor(216);
-        pHtc -> obj = (void*) pctrA;
-        setdefaultfont();
-    }
+	{
+		aattr_t *p_aattr;
+		htmlparser::aAttr(t->attrib,(void**)&p_aattr);
+		debprintf(" afunc href:%s\n",p_aattr ->href);
+		this -> attr = p_aattr;
+	}
+	{
+		pHtc->value=t->value;
+		int2 wh = getstrWH(value);
+		updateCurWH(pHtc,wh.x,rowHeight);
+	}
+	createObject();
+	
 }
 
 void HtmlSimpleANode:: endParse()
 {
-    return ;
+	return ;
 }
 
 void  HtmlSimpleANode::processValue(dmToken * t)
 {
+}
+
+void  HtmlSimpleANode::createRenderObject()
+{
+	aattr_t *paattr = (aattr_t*) getAttrBaseP(this);
+	attrBase_t *pobjP = (attrBase_t *) getAttrBaseP(parent);
+	updateSelfAttrEnter(paattr);
+	ctrA * pctrA = new ctrA(pobjP->curW,pobjP->h,paattr->w,paattr->h ,this->value);
+	updateParentHtmlNode(parent,this);
+	debprintf("A:%d %d \n",pobjP->curW,pobjP->h);
+	void setdefaultfont(void);
+	pctrA -> labelcolor(216);
+	this -> obj = (void*) pctrA;
+	setdefaultfont();
 }
 
 
@@ -537,47 +581,53 @@ void  HtmlSimpleANode::processValue(dmToken * t)
  * ****************************************************************/
 HtmlCenterNode::HtmlCenterNode(pHtmlNode pHtp, dmToken* t)
 {
-    tagid = t-> tagid;
-    pHtp ->addChild(this);
-    pHtmlNode pHtc = this; 
+	tagid = t-> tagid;
+	pHtp ->addChild(this);
+	pHtmlNode pHtc = this; 
 
-    int x,y;
-    this ->attr = (void *) malloc(sizeof(attrBase_t));    //tmp->attr.value=value;
-    memset(attr,0,sizeof(attrBase_t));
-    GetCurXYFromPhtmlNode(x,y,pHtp);
-    ctrDiv * pctrDiv;
-    pctrDiv = new ctrDiv(x,y,0,0,0);
-    pHtc -> obj = (void*) pctrDiv;
-    attrBase_t* pattr =(attrBase_t*)  pHtc -> attr;
-    debprintf("center curW:%d\n",pattr->curW);
-    pctrDiv -> begin();
-}
+	this ->attr = (void *) malloc(sizeof(attrBase_t));    //tmp->attr.value=value;
+	memset(attr,0,sizeof(attrBase_t));
+	createObject();
+	}
 
 void HtmlCenterNode:: endParse()
 {
-    pHtmlNode pHtc = this; 
-    pHtmlNode pHtp = this -> parent; 
-    pHtc -> wife = tagid;
+	pHtmlNode pHtc = this; 
+	pHtmlNode pHtp = this -> parent; 
+	pHtc -> wife = tagid;
 
-    pTAGattr_t *paattr = (pTAGattr_t*) pHtc ->attr;
-    updateSelfAttrEnter(paattr);
-    int w,h;
-    ctrDiv* pctrDiv=(ctrDiv*) (pHtc -> obj );
-    GetCurWHFromhtmlNode(w,h,pHtc);
-    pctrDiv -> end();
-    int pos[8];
-    getRect(pos);
-    int x;
-    x = (pos[4] - w )/2;
-    debprintf("centerX:%d,%d\n",pos[4],w);
-    pctrDiv -> setx(x);
-    pctrDiv -> setWH(w,h);
-    updateParentHtmlNode(pHtp,pHtc);
-    return ;
+	pTAGattr_t *paattr = (pTAGattr_t*) pHtc ->attr;
+	updateSelfAttrEnter(paattr);
+	int w,h;
+	ctrDiv* pctrDiv=(ctrDiv*) (pHtc -> obj );
+	GetCurWHFromhtmlNode(w,h,pHtc);
+	pctrDiv -> end();
+	int pos[8];
+	getRect(pos);
+	int x;
+	x = (pos[4] - w )/2;
+	debprintf("centerX:%d,%d\n",pos[4],w);
+	pctrDiv -> setx(x);
+	pctrDiv -> setWH(w,h);
+	updateParentHtmlNode(pHtp,pHtc);
+	return ;
 }
 
 void  HtmlCenterNode::processValue(dmToken * t)
 {
+}
+
+void  HtmlCenterNode::createRenderObject()
+{
+	int x,y;
+	GetCurXYFromPhtmlNode(x,y,parent);
+	ctrDiv * pctrDiv;
+	pctrDiv = new ctrDiv(x,y,0,0,0);
+	this -> obj = (void*) pctrDiv;
+	attrBase_t* pattr =(attrBase_t*)  this-> attr;
+	debprintf("center curW:%d\n",pattr->curW);
+	pctrDiv -> begin();
+
 }
 
 /*******************************************************************
@@ -586,38 +636,46 @@ void  HtmlCenterNode::processValue(dmToken * t)
  * ****************************************************************/
 HtmlInputNode::HtmlInputNode(pHtmlNode pHtp, dmToken* t)
 {
-    tagid = t-> tagid;
-    pHtp ->addChild(this);
-    pHtmlNode pHtc = this; 
+	tagid = t-> tagid;
+	pHtp ->addChild(this);
+	pHtmlNode pHtc = this; 
 
-    inputattr_t *p_inputattr;
-    htmlparser::InputAttr(t->attrib,(void**)&p_inputattr);
-    this->attr = p_inputattr;
-    int x,y;
-    GetCurXYFromPhtmlNode(x,y,pHtp);
+	inputattr_t *p_inputattr;
+	htmlparser::InputAttr(t->attrib,(void**)&p_inputattr);
+	this->attr = p_inputattr;
+	createObject();
+	updateParentHtmlNode(pHtp,pHtc);
+}
+
+void  HtmlInputNode::createRenderObject()
+{
+	int x,y;
+	inputattr_t *p_inputattr=(inputattr_t*) this ->attr;
+	GetCurXYFromPhtmlNode(x,y,parent);
 #ifndef __HTMLMAIN 
-    switch(p_inputattr -> type)
-    {
-        case INPUTINPUT:
-            {
-                if(! (p_inputattr->w)) p_inputattr->w = 200;
-                if(! (p_inputattr->h)) p_inputattr->h = 22;
-                ctrInput * pctrInput0 = new ctrInput(x,y,200,22,0);
-                pHtc -> obj = (void *) pctrInput0;
-            }
-            break;
-        case INPUTBUTTON:
-            {
-                char * pbvalue =strdup(p_inputattr -> value);// (char *)malloc(sizeof(pstr)+1);
-                if(! (p_inputattr->w)) p_inputattr->w = 100;
-                if(! (p_inputattr->h)) p_inputattr->h = 22;
-                ctrButton *pctrButton0 = new ctrButton(x,y,100,20,pbvalue);
-                pHtc ->obj = (void *) pctrButton0;
-            }
-            break;
-    }
+	switch(p_inputattr -> type)
+	{
+		case INPUTINPUT:
+			{
+				if(! (p_inputattr->w)) p_inputattr->w = 200;
+				if(! (p_inputattr->h)) p_inputattr->h = 22;
+				ctrInput * pctrInput0 = new ctrInput(x,y,200,22,0);
+				this-> obj = (void *) pctrInput0;
+			}
+			break;
+		case INPUTBUTTON:
+			{
+				char * pbvalue =strdup(p_inputattr -> value);// (char *)malloc(sizeof(pstr)+1);
+				if(! (p_inputattr->w)) p_inputattr->w = 100;
+				if(! (p_inputattr->h)) p_inputattr->h = 22;
+				ctrButton *pctrButton0 = new ctrButton(x,y,100,20,pbvalue);
+				this->obj = (void *) pctrButton0;
+			}
+			break;
+	}
 #endif
-    updateParentHtmlNode(pHtp,pHtc);
+
+
 }
 
 /*******************************************************************
@@ -626,18 +684,22 @@ HtmlInputNode::HtmlInputNode(pHtmlNode pHtp, dmToken* t)
  * ****************************************************************/
 HtmlImgNode::HtmlImgNode(pHtmlNode pHtp, dmToken* t)
 {
-    tagid = t-> tagid;
-    pHtp ->addChild(this);
-    pHtmlNode pHtc = this; 
+	tagid = t-> tagid;
+	pHtp ->addChild(this);
+	pHtmlNode pHtc = this; 
 
-    imgattr_t* p_imgattr;//=(imgattr_t*)malloc(sizeof(imgattr_t));
-    htmlparser:: ImgAttr(t->attrib,(void**)&p_imgattr);
-    if((p_imgattr -> w ==0) || (p_imgattr ==0)){
-        p_imgattr -> w = 100;
-        p_imgattr -> h = 100;
-    }
-    this -> attr = p_imgattr;
-    updateParentHtmlNode(pHtp,pHtc);
+	imgattr_t* p_imgattr;//=(imgattr_t*)malloc(sizeof(imgattr_t));
+	htmlparser:: ImgAttr(t->attrib,(void**)&p_imgattr);
+	if((p_imgattr -> w ==0) || (p_imgattr ==0)){
+		p_imgattr -> w = 100;
+		p_imgattr -> h = 100;
+	}
+	this -> attr = p_imgattr;
+	updateParentHtmlNode(pHtp,pHtc);
+}
+
+void  HtmlImgNode::createRenderObject()
+{
 }
 
 /*******************************************************************
@@ -646,12 +708,16 @@ HtmlImgNode::HtmlImgNode(pHtmlNode pHtp, dmToken* t)
  * ****************************************************************/
 HtmlBrNode::HtmlBrNode(pHtmlNode pHtp, dmToken* t)
 {
-    tagid = t-> tagid;
-    pHtp ->addChild(this);
-    pHtmlNode pHtc = this; 
-    if( pHtp -> attr){
-        attrBase_t *pAttrp = (attrBase_t *) getAttrBaseP(pHtp);
-        enterAttr(pAttrp);
-    }
+	tagid = t-> tagid;
+	pHtp ->addChild(this);
+	pHtmlNode pHtc = this; 
+	if( pHtp -> attr){
+		attrBase_t *pAttrp = (attrBase_t *) getAttrBaseP(pHtp);
+		enterAttr(pAttrp);
+	}
 
 }
+void  HtmlBrNode::createRenderObject()
+{
+}
+
