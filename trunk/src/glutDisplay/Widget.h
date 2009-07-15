@@ -5,10 +5,10 @@
 class Widget: public Cube
 {
 private:
-	Widget* _parent;
-	Widget* next;
-	Widget* previous;
-	Widget* child;
+	Widget* mParent;
+	Widget* mNext;
+	Widget* mPrevious;
+	Widget* mChild;
 public:
 	Widget(){};
 	Widget(int x,int y,int z):Cube(x,y,z){};
@@ -26,5 +26,10 @@ public:
     void color(int){};
     void labelcolor(int){};
 	virtual	void draw(){ printf("Widget draw\n");};
+	void addChild(Widget*);
+private:
+	void setNext(Widget* o);
+	void appandChild(Widget* child_);
+	void addFirstChild(Widget* child_);
 };
 #endif
