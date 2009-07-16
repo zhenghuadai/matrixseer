@@ -541,7 +541,7 @@ void htmlparser::visitHtmlNode(pHtmlNode root)
     int tag = root -> tagid;
 	Widget* o = (Widget*) root->obj;
     if( o == NULL) return ;
-#if NEED_RENDER != n
+#if NEED_RENDER == 1
     if(o -> _vptr == (void*)0x1) return ;
 #endif
 
