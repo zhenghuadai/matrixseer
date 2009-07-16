@@ -22,9 +22,16 @@
 #include "Widget.h"
 class Group : public Widget
 {
+	private:
+		Widget* mChild;
 	public:
-	Group(int x, int y, int z, int w, int h):Widget(x,y,z,w,h){}
-	Group(int x, int y, int w, int h, const char* l):Widget(x,y,w,h,l){}
+		Group(int x, int y, int z, int w, int h):Widget(x,y,z,w,h){}
+		Group(int x, int y, int w, int h, const char* l):Widget(x,y,w,h,l){}
+	public:
+		void addChild(Widget*);
+	private:
+		void appandChild(Widget* child_);
+		void addFirstChild(Widget* child_);
 
 };
 #endif
