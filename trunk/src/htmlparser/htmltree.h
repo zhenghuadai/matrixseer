@@ -41,7 +41,7 @@ class HtmlNode{
         HtmlNode * mNext;
         HtmlNode * parent;
     public:
-        HtmlNode():child(NULL),mPrevious(NULL),mNext(NULL),parent(NULL){}
+        HtmlNode():obj(NULL),child(NULL),mPrevious(NULL),mNext(NULL),parent(NULL){}
     private:
         void setNext(HtmlNode* o){
             this -> mNext = o;
@@ -71,8 +71,10 @@ class HtmlNode{
 		Widget* getRenderObject(){ return (Widget*) obj;}
 		void createObject(){
 			createRenderObject();
-#if NEED_RENDER == y
-			if(parent)
+            if(getRenderObject() -> _vptr == (void*) 0x1)
+                printf("err");
+#if NEED_RENDER == 1
+			if((parent) && ( parent -> getRenderObject()))
 				parent -> getRenderObject() -> addChild( getRenderObject());
 #endif
 		}

@@ -25,8 +25,8 @@ class Group : public Widget
 	private:
 		Widget* mChild;
 	public:
-		Group(int x, int y, int z, int w, int h):Widget(x,y,z,w,h){}
-		Group(int x, int y, int w, int h, const char* l):Widget(x,y,w,h,l){}
+		Group(int x, int y, int z, int w, int h):Widget(x,y,z,w,h),mChild(NULL){}
+		Group(int x, int y, int w, int h, const char* l):Widget(x,y,w,h,l),mChild(NULL){}
 	public:
 		virtual void addChild(Widget*);
 	private:

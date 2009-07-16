@@ -10,11 +10,11 @@ protected:
 	Widget* mNext;
 	Widget* mPrevious;
 public:
-	Widget(){};
-	Widget(int x,int y,int z):Cube(x,y,z){};
-	Widget(int dx,int dy):Cube(dx,dy){};
-	Widget(int x,int y,int z,int dx,int dy):Cube(x,y,z,dx,dy){};
-	Widget(int x,int y,int dx,int dy , const char* l):Cube(x,y,0,dx,dy){};
+	Widget(){init();};
+	Widget(int x,int y,int z):Cube(x,y,z){init();};
+	Widget(int dx,int dy):Cube(dx,dy){init();};
+	Widget(int x,int y,int z,int dx,int dy):Cube(x,y,z,dx,dy){init();};
+	Widget(int x,int y,int dx,int dy , const char* l):Cube(x,y,0,dx,dy){init();};
 	void box(Box* b){}
 	void box(int b){}
 
@@ -30,5 +30,6 @@ public:
 	virtual	void draw(){ printf("Widget draw\n");};
 	virtual void addChild(Widget*){};
 private:
+    void init(){mParent = mNext = mPrevious = NULL;}
 };
 #endif
