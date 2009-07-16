@@ -7,6 +7,8 @@ CLEAN_OBJS= ${LIBPATH}libhtml.a
 
 ifeq "$(DMDISPLAY)" "glutDisplay"
 MY_FLAG= -DNEED_RENDER=n
+else
+MY_FLAG= -DNEED_RENDER=y
 endif
 
 include ../../include/makefile.inc 

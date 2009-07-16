@@ -25,9 +25,10 @@ public:
     void end(){};
     void color(int){};
     void labelcolor(int){};
-	virtual	void draw(){ printf("Widget draw\n");};
 	void setParent(Widget* o){ mParent = o;}
 	void setNext(Widget* o);
+	virtual	void draw(){ printf("Widget draw\n");};
+	virtual void addChild(Widget*){};
 private:
 };
 #endif

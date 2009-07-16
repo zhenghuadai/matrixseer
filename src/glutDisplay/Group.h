@@ -28,7 +28,7 @@ class Group : public Widget
 		Group(int x, int y, int z, int w, int h):Widget(x,y,z,w,h){}
 		Group(int x, int y, int w, int h, const char* l):Widget(x,y,w,h,l){}
 	public:
-		void addChild(Widget*);
+		virtual void addChild(Widget*);
 	private:
 		void appandChild(Widget* child_);
 		void addFirstChild(Widget* child_);
