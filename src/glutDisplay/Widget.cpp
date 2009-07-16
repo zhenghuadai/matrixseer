@@ -21,7 +21,8 @@
 void Widget::setNext(Widget* o)
 {
 	this -> mNext = o;
-	o -> mPrevious = this;
+	if(o)
+		o -> mPrevious = this;
 }
 
 

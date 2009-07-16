@@ -32,7 +32,9 @@ void Group::appandChild(Widget* child_)
 {
 	Widget* lastSib = mChild->mPrevious;
 	lastSib -> setNext(child_);
-	child_  -> setNext(mChild);
+	//child_  -> setNext(mChild);
+	child_ ->mNext = 0;
+	mChild -> mPrevious = child_;
 	child_->setParent(mParent) ;	
 }
 
