@@ -45,31 +45,32 @@ class HtmlNode{
     private:
         void setNext(HtmlNode* o){
             this -> mNext = o;
-            o -> mPrevious = this;
-        }
+			if(o)
+				o -> mPrevious = this;
+		}
 
-        void appandChild(HtmlNode* child_){
-            HtmlNode* lastSib = child->mPrevious;
-            lastSib -> setNext(child_);
-            child -> mPrevious = child_;
-            child_ -> mNext = 0;
+		void appandChild(HtmlNode* child_){
+			HtmlNode* lastSib = child->mPrevious;
+			lastSib -> setNext(child_);
+			child -> mPrevious = child_;
+			child_ -> mNext = 0;
 
-            child_->parent = this;
-        }
-        void addFirstChild(HtmlNode* child_){ child = child_; child_->parent = this; child_->mPrevious= child_;}
-    public:
-        void addChild(HtmlNode* child_){
-            if(child) {
-                appandChild(child_);
-            }else{
-                addFirstChild(child_);
-            }
-        }
-        // the follow is for parsing
-    public:
+			child_->parent = this;
+		}
+		void addFirstChild(HtmlNode* child_){ child = child_; child_->parent = this; child_->mPrevious= child_;}
+	public:
+		void addChild(HtmlNode* child_){
+			if(child) {
+				appandChild(child_);
+			}else{
+				addFirstChild(child_);
+			}
+		}
+		// the follow is for parsing
+	public:
 		Widget* getRenderObject(){ return (Widget*) obj;}
-        void createObject(){
-            createRenderObject();
+		void createObject(){
+			createRenderObject();
 #if NEED_RENDER == y
 			if(parent)
 				parent -> getRenderObject() -> addChild( getRenderObject());
