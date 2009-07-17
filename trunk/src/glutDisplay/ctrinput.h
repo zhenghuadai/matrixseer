@@ -16,7 +16,7 @@ ctrInput(int sx,int sy,int sz,char * s);
 void reset();
 //void setxyz(int sx,int sy,int sz,int sdx,int sdy);
 int appandchar(char c);
-void draw();
+virtual void draw();
 void redraw();
 //INLINE int inArea(int ptx,int pty, int ptz );
 //INLINE void getFocus();

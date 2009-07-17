@@ -2,6 +2,7 @@
 #define __WIDGET_HEADER__
 #include "Cube.h"
 #include "Box.h"
+#include "dmtype.h"
 class Widget: public Cube
 {
 friend class Group;
@@ -27,8 +28,17 @@ public:
     void labelcolor(int){};
 	void setParent(Widget* o){ mParent = o;}
 	void setNext(Widget* o);
+	Widget* parent(){return mParent;}
+	void parent(Widget* o) { mParent = o;}
+	Widget* next() { return mNext;}
+	void next(Widget* o){ mNext = o;}
 	virtual	void draw(){ printf("Widget draw\n");};
 	virtual void addChild(Widget*){};
+	int getSx();
+	int getSy();
+	int getSz();
+	int3 getSxyz();
+	void getSxyz(int& sx, int& sy, int& sz);
 private:
     void init(){mParent = mNext = mPrevious = NULL;}
 };
