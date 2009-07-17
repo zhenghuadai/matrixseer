@@ -25,4 +25,53 @@ void Widget::setNext(Widget* o)
 		o -> mPrevious = this;
 }
 
+int Widget::getSx()
+{
+	int ax=x();
+	Widget* p = mParent;
+	while(p){
+		ax += p -> x();
+		p = p -> parent();
+	}
+	return ax;
+}
 
+int Widget::getSy()
+{
+	int ay=y();
+	Widget* p = mParent;
+	while(p){
+		ay += p -> y();
+		p = p -> parent();
+	}
+	return ay;
+}
+
+
+int Widget::getSz()
+{
+	int az=z();
+	Widget* p = mParent;
+	while(p){
+		az += p -> z();
+		p = p -> parent();
+	}
+	return az;
+}
+
+
+void Widget::getSxyz(int& sx, int& sy, int& sz)
+{
+	int ax=x(), ay=y(), az=z();
+	Widget* p = mParent;
+	while(p){
+		ax += p -> x();
+		ay += p -> y();
+		az += p -> z();
+		p = p -> parent();
+	}
+	sx = ax;
+	sy = ay;
+	sz = az;
+	printf("{%d %d %d}\n",sx,sy, sz);
+}
