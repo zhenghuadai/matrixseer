@@ -1,8 +1,5 @@
 #ifndef CTRDIV_HEADER
 #define CTRDIV_HEADER
-#ifndef INLINE
-#define INLINE // inline 
-#endif
 #include <stdlib.h>
 #include <stdio.h>
 #include "postionFlag.h"
@@ -14,7 +11,7 @@ class ctrDiv : public Group {
 	declarePFlag;
 	int handle(int);
 	int pos[4];
-	public:
+public:
 	int pushed ;
 	ctrDiv(Box *b,int w,int h,const char *l)
 		: Group(0,0,w,h,l) {box(b);pushed = 0;};
@@ -25,12 +22,9 @@ class ctrDiv : public Group {
 		: Group(x,y,w,h,l) {box(divBOX/*FL_SHADOW_FRAME*/);pushed = 0;setZeroPFlag();}
 	ctrDiv(Box* b,int x,int y,int w,int h,const char *l)
 		: Group(x,y,w,h,l) {}
-	void setxyz(int x,int y, int z=0){position(x,y);}
-	void setx(int x0){x(x0);}
-	void sety(int y0){y(y0);}
-	void setWH(int w0,int h0){w(w0);h(h0);}
-	void size(int w0,int h0){w(w0);h(h0);}
 	posFlagFunc;
+	void setxyz(int x,int y, int z){position(x,y); }
+	/*
 	void setxyz(){
 		extern void getCurrentRasterPos(int *pos);
 		extern void forwardx(int x); 
@@ -40,6 +34,7 @@ class ctrDiv : public Group {
 #endif
 		position(pos[0],pos[1]);
 	}
+	*/
 	void EndP(){
 		extern void MoveTo2(int ,int);
 		MoveTo2(x()+w(),y()+h());

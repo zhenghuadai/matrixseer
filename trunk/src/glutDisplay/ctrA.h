@@ -33,7 +33,8 @@ class ctrA : public Widget {
 	ctrA(Box* b,int x,int y,int w,int h,const char *l)
 		: Widget(x,y,w,h,l) 
 	{}
-	void setxyz(int x,int y, int z=0){position(x,y);}
+//	void setxyz(int x,int y, int z=0){position(x,y);}
+/*
 	void setxyz(){
 		int pos[4];
 		extern void getCurrentRasterPos(int *pos);
@@ -42,6 +43,7 @@ class ctrA : public Widget {
 		position(pos[0],pos[1]);
 		//forwardx(w());
 	}
+	*/
 };
 
 #endif

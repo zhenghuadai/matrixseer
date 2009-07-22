@@ -37,8 +37,6 @@ class ctrP : public Group {
     : Group(x,y,w,h,l) {}
     ctrP(Box* b,int x,int y,int w,int h,const char *l)
         : Group(x,y,w,h,l) {}
-    void size(int w0,int h0){w(w0);h(h0);}
-    void setxyz(int x,int y, int z=0){position(x,y);}
     posFlagFunc
     /*
     void setPostionFlag(int flag){PostionFlag = flag;    }
