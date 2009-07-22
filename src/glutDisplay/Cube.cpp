@@ -35,12 +35,6 @@ void Cube::setxyz()
     _y=curRasterPos[1]-2;
     _z=curRasterPos[2];
 }
-void Cube::setxyz(int x,int y,int z)
-{
-    _x=x;
-    _y=y;
-    _z=z;
-}
 CubeINLINE void Cube::getFocus()
 {
     focus = 1;
