@@ -18,6 +18,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Widget.h"
+#include "display.h"
 void Widget::setNext(Widget* o)
 {
 	this -> mNext = o;
@@ -71,7 +72,7 @@ void Widget::getSxyz(int& sx, int& sy, int& sz)
 		p = p -> parent();
 	}
 	sx = ax;
-	sy = ay;
+	sy = getWinh() - ay;
 	sz = az;
 	printf("{%d %d %d}\n",sx,sy, sz);
 }
