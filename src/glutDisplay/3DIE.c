@@ -433,3 +433,13 @@ int main(int argc, char** argv)
     return 0;
 }
 
+
+int getWinw()
+{
+    return Win_w;
+}
+
+int getWinh()
+{
+    return Win_h;
+}
