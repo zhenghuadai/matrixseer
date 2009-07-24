@@ -32,6 +32,9 @@ class htmlparser:public __stack
 		void printNode(pHtmlNode);
 		void printTree(pHtmlNode);
 		void printTree();
+		void checkNode(pHtmlNode);
+		void checkTree(pHtmlNode);
+		void checkTree();
     private:
         char * tagbufp;
         tagfunc_t tagfunc[100];

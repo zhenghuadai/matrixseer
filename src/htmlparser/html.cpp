@@ -594,6 +594,31 @@ void htmlparser::printTree()
 	if(phead)   printTree(phead);	
 }
 
+
+void htmlparser::checkNode(pHtmlNode root)
+{
+	if( root -> parent()){
+		Widget* objc = (Widget*)root -> obj;
+		Widget* objp = (Widget*) root -> parent() -> obj;
+		if( objc -> parent() != objp) {
+			printf("obj parent not match:%0x != %0x\n", objc, objp);
+		}
+	}
+}
+
+void htmlparser::checkTree(pHtmlNode root)
+{
+	checkNode(root);
+	if(root->child)	checkNode(root->child);
+	if(root->mNext) checkNode(root->mNext);
+}
+
+void htmlparser::checkTree()
+{
+	if(phead)   checkTree(phead);	
+}
+
+
 void htmlparser::renderhtml()
 {
 	if(phead)   rendernode(phead);	
