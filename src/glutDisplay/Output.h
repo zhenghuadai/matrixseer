@@ -28,7 +28,7 @@ class Output: public Widget
     private:
         char* text;
     public:
-        Output(int x, int y, int z, int w, int h):Widget(x,y,z,w,h,0),text(0){}
+        Output(int x, int y, int z, int w, int h ,const char*l):Widget(x,y,z,w,h,l),text(0){}
         Output(int x, int y, int w, int h, const char* l):Widget(x,y,w,h,l),text(0){}
 
         void type(int t){}
