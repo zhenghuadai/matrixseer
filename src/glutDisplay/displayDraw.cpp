@@ -271,8 +271,10 @@ int putStrScr(int x, int y, int z, char *content)
 
 	if((!content)||(! *content))return 0;
     MoveTo2(x,y);
+	glGetIntegerv(GL_CURRENT_RASTER_POSITION,(GLint*)&curRasterPos[curWin]);
 	tmpcWH=getWH_Chars(Tex_Win_w-x ,Tex_Win_h,3);
 	npos=getEnterPos(pstart,tmpcWH.w);
+	printf("char num:%d ,x:%d  y:%d\n", npos,x,y);
 	drawChars(pstart,npos);
 	pstart += npos;
 	if((*pstart=='\n')&&(! (*(pstart+1)))){
@@ -286,6 +288,7 @@ int putStrScr(int x, int y, int z, char *content)
 		curRasterPosY-= rowHeight;
 		MoveTo2(20,curRasterPosY);
 		npos=getEnterPos(pstart,cWH.w);
+		printf("char num:%d ,x:%d  y:%d\n", npos,20, curRasterPosY);
 		drawChars(pstart,npos);
 		pstart+=npos;
 		if(*pstart=='\n'){
