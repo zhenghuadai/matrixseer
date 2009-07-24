@@ -65,14 +65,17 @@ void Widget::getSxyz(int& sx, int& sy, int& sz)
 {
 	int ax=x(), ay=y(), az=z();
 	Widget* p = mParent;
+	printf(" %d +", ay);
 	while(p){
 		ax += p -> x();
 		ay += p -> y();
 		az += p -> z();
+		printf("+ %d ", p -> y());
 		p = p -> parent();
 	}
 	sx = ax;
 	sy = getWinh() - ay;
 	sz = az;
-	printf("{%d %d %d}\n",sx,sy, sz);
+	printf("= %d ", ay);
+	printf("{%d (%d - %d =%d) %d}\n",sx,getWinh(),ay, sy, sz);
 }
