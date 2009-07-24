@@ -571,8 +571,10 @@ void htmlparser::printNode(pHtmlNode root)
 	if( o == NULL) return ;
 #if NEED_RENDER == 1
 	if(o -> _vptr == (void*)0x1) return ;
-#endif
 	printf("<%d %d %d>", o->x(),o->y(),o->z());
+#else
+	printf("<%d %d 0>", o->x(),o->y());
+#endif
 
 }
 
