@@ -561,17 +561,45 @@ void htmlparser::rendernode(pHtmlNode root)
     visitHtmlNode(root);
     if(root->child)	rendernode(root->child);
     if(root-> wife) { /*	(this ->* tagfunc[root->wife])(root )*/};
-    if(root->mNext)   rendernode(root->mNext);
+    if(root->mNext) rendernode(root->mNext);
+}
+
+
+void htmlparser::printNode(pHtmlNode root)
+{
+	Widget* o = (Widget*) root->obj;
+	if( o == NULL) return ;
+#if NEED_RENDER == 1
+	if(o -> _vptr == (void*)0x1) return ;
+#endif
+	printf("<%d %d %d>", o->x(),o->y(),o->z());
 
 }
+
+
+void htmlparser::printTree(pHtmlNode root)
+{
+	printf("{ ");
+	printNode(root);
+	if(root->child)	printTree(root->child);
+	printf("} ");
+	if(root->mNext) printTree(root->mNext);
+	fflush(stdout);
+}
+
+void htmlparser::printTree()
+{
+	if(phead)   printTree(phead);	
+}
+
 void htmlparser::renderhtml()
 {
-    if(phead)   rendernode(phead);	
+	if(phead)   rendernode(phead);	
 }
 
 int initalparser()
 {
-    return 1;
+	return 1;
 }
 
 void parsehtml(char * htdoc)

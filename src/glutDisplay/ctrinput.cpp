@@ -61,7 +61,7 @@ ctrInput::ctrInput(int sx,int sy,int sz,char *s):Widget(sx,sy,sz)
 	ctrInput(10,20);
 	sprintf(pvalue,"%s",s);
 }
-ctrInput::ctrInput(int sx,int sy,int sz,int sdx,int sdy):Widget(sx,sy,sz,sdx,sdy)
+ctrInput::ctrInput(int sx,int sy,int sz,int sdx,int sdy):Widget(sx,sy,sz,sdx,sdy,0)
 {
 	reset();
 	/*

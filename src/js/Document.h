@@ -2,6 +2,9 @@
 #define _Document_H
 using namespace std;
 #include <string>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 class Document
 {
 public:
