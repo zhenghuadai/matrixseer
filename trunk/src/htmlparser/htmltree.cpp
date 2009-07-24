@@ -49,7 +49,7 @@ HtmlUlNode:: HtmlUlNode(pHtmlNode pHtp, dmToken* t)
 void HtmlUlNode:: endParse()
 {
     pHtmlNode pHtc = this; 
-    pHtmlNode pHtp = this -> parent; 
+    pHtmlNode pHtp = this -> parent(); 
     pTAGattr_t *paattr = (pTAGattr_t*) pHtc ->attr;
     updateSelfAttrEnter(paattr);
     paattr->w += 10;
@@ -71,7 +71,7 @@ void  HtmlUlNode::processValue(dmToken * t)
 void  HtmlUlNode::createRenderObject()
 {
     int x, y;
-    attrBase_t *pAttrp = (attrBase_t*) getAttrBaseP(parent);
+    attrBase_t *pAttrp = (attrBase_t*) getAttrBaseP(parent());
     GetCurXYFromPattr(x,y,pAttrp);
     ctrP * pctrP = new ctrP(x,y ,0);
     obj = (void*) pctrP;
@@ -107,7 +107,7 @@ HtmlTdNode::HtmlTdNode(pHtmlNode pHtp, dmToken* t)
 void HtmlTdNode:: endParse()
 {
     pHtmlNode pHtc = this; 
-    pHtmlNode pHtp = this -> parent; 
+    pHtmlNode pHtp = this -> parent(); 
     trattr_t * tr =(trattr_t*) getAttrBaseP(pHtp);
     tdattr_t * td =(tdattr_t*) getAttrBaseP(pHtc);
 
@@ -138,7 +138,7 @@ void  HtmlTdNode::processValue(dmToken * t)
 void  HtmlTdNode::createRenderObject()
 {
     int x, y;
-    GetCurXYFromPhtmlNode( x,y, parent);
+    GetCurXYFromPhtmlNode( x,y, parent());
     ctrDiv * pctrDiv = new ctrDiv(x,y,1,1,0);
     debprintf("td size: %d %d %d %d\n",x,y,10 ,10);
     this -> obj = (void*) pctrDiv;
@@ -173,7 +173,7 @@ HtmlTrNode::HtmlTrNode(pHtmlNode pHtp, dmToken* t)
 void HtmlTrNode:: endParse()
 {
     pHtmlNode pHtc = this; 
-    pHtmlNode pHtp = this -> parent; 
+    pHtmlNode pHtp = this -> parent(); 
     tableattr_t * table =(tableattr_t*) getAttrBaseP(pHtp);
     trattr_t * tr =(trattr_t*) getAttrBaseP(pHtc);
     pHtc -> wife = tagid;
@@ -200,7 +200,7 @@ void  HtmlTrNode::processValue(dmToken * t)
 void  HtmlTrNode::createRenderObject()
 {
     int x,y;
-    GetCurXYFromPhtmlNode( x,y, parent);
+    GetCurXYFromPhtmlNode( x,y, parent());
     ctrDiv * pctrDiv = new ctrDiv(x,y,10,10,0);
     this -> obj = (void*) pctrDiv;
     debprintf("tr size: %d %d %d %d\n",x,y,10 ,10);
@@ -230,7 +230,7 @@ void HtmlTableNode:: endParse()
     void resetTablePos(pHtmlNode tableP);
 
     pHtmlNode pHtc = this; 
-    pHtmlNode pHtp = this -> parent; 
+    pHtmlNode pHtp = this -> parent(); 
     pHtc -> wife = tagid;
     tableattr_t *tableattr = ( tableattr_t *)getAttrBaseP(pHtc);
     int i;
@@ -297,7 +297,7 @@ void  HtmlTableNode::processValue(dmToken * t)
 void  HtmlTableNode::createRenderObject()
 {
     int x,y;
-	GetCurXYFromPhtmlNode( x,y, parent);
+	GetCurXYFromPhtmlNode( x,y, parent());
     ctrDiv * pctrDiv = new ctrDiv(x,y,1,1,0);
     debprintf("Table Size:%d %d %d %d\n",x,y,1,1);
     this -> obj = (void*) pctrDiv;
@@ -328,7 +328,7 @@ HtmlDivNode::HtmlDivNode(pHtmlNode pHtp, dmToken* t)
 void HtmlDivNode:: endParse()
 {
     pHtmlNode pHtc = this; 
-    pHtmlNode pHtp = this -> parent; 
+    pHtmlNode pHtp = this -> parent(); 
     pHtc -> wife = tagid;
 
     pTAGattr_t *paattr = (pTAGattr_t*) pHtc ->attr;
@@ -374,7 +374,7 @@ void  HtmlDivNode::createRenderObject()
 		pctrDiv -> setFixWH();
 	}
 	else{
-		GetCurXYFromPhtmlNode(x,y, parent);
+		GetCurXYFromPhtmlNode(x,y, parent());
 		pctrDiv = new ctrDiv(x,y,0,0,0);
 		w = pos[4];
 		h = pos[5];
@@ -435,7 +435,7 @@ HtmlPNode::HtmlPNode(pHtmlNode pHtp, dmToken* t)
 void HtmlPNode:: endParse()
 {
 	pHtmlNode pHtc = this; 
-	pHtmlNode pHtp = this -> parent; 
+	pHtmlNode pHtp = this -> parent(); 
 	pHtc -> wife = tagid;
 	pTAGattr_t *paattr = (pTAGattr_t*) pHtc ->attr;
 	updateSelfAttrEnter(paattr);
@@ -462,7 +462,7 @@ void  HtmlPNode::processValue(dmToken * t)
 void  HtmlPNode::createRenderObject()
 {
 	int x=0,y=0;
-	attrBase_t *pAttrp = (attrBase_t*) getAttrBaseP(parent);
+	attrBase_t *pAttrp = (attrBase_t*) getAttrBaseP(parent());
 	GetCurXYFromPattr(x,y,pAttrp);
 	ctrP * pctrP = new ctrP(x,y ,0);
 	debprintf("1 ctrP %d %d x:%d y:%d \n",x,y,pctrP->x(),pctrP->y());
@@ -492,7 +492,7 @@ HtmlANode::HtmlANode(pHtmlNode pHtp, dmToken* t)
 void HtmlANode:: endParse()
 {
 	pHtmlNode pHtc = this; 
-	pHtmlNode pHtp = this -> parent; 
+	pHtmlNode pHtp = this -> parent(); 
 	pHtc -> wife = tagid;
 
 	pTAGattr_t *paattr = (pTAGattr_t*) pHtc ->attr;
@@ -517,7 +517,7 @@ void  HtmlANode::processValue(dmToken * t)
 void  HtmlANode::createRenderObject()
 {
 	int x=0,y=0;
-	attrBase_t *pAttrp = (attrBase_t*) getAttrBaseP(parent);
+	attrBase_t *pAttrp = (attrBase_t*) getAttrBaseP(parent());
 	GetCurXYFromPattr(x,y,pAttrp);
 	ctrP * pctrP = new ctrP(x,y ,0);
 	this -> obj = (void*) pctrP;
@@ -563,10 +563,10 @@ void  HtmlSimpleANode::processValue(dmToken * t)
 void  HtmlSimpleANode::createRenderObject()
 {
 	aattr_t *paattr = (aattr_t*) getAttrBaseP(this);
-	attrBase_t *pobjP = (attrBase_t *) getAttrBaseP(parent);
+	attrBase_t *pobjP = (attrBase_t *) getAttrBaseP(parent());
 	updateSelfAttrEnter(paattr);
 	ctrA * pctrA = new ctrA(pobjP->curW,pobjP->h,paattr->w,paattr->h ,this->value);
-	updateParentHtmlNode(parent,this);
+	updateParentHtmlNode(parent(),this);
 	debprintf("A:%d %d \n",pobjP->curW,pobjP->h);
 	void setdefaultfont(void);
 	pctrA -> labelcolor(216);
@@ -593,7 +593,7 @@ HtmlCenterNode::HtmlCenterNode(pHtmlNode pHtp, dmToken* t)
 void HtmlCenterNode:: endParse()
 {
 	pHtmlNode pHtc = this; 
-	pHtmlNode pHtp = this -> parent; 
+	pHtmlNode pHtp = this -> parent(); 
 	pHtc -> wife = tagid;
 
 	pTAGattr_t *paattr = (pTAGattr_t*) pHtc ->attr;
@@ -620,7 +620,7 @@ void  HtmlCenterNode::processValue(dmToken * t)
 void  HtmlCenterNode::createRenderObject()
 {
 	int x,y;
-	GetCurXYFromPhtmlNode(x,y,parent);
+	GetCurXYFromPhtmlNode(x,y,parent());
 	ctrDiv * pctrDiv;
 	pctrDiv = new ctrDiv(x,y,0,0,0);
 	this -> obj = (void*) pctrDiv;
@@ -651,7 +651,7 @@ void  HtmlInputNode::createRenderObject()
 {
 	int x,y;
 	inputattr_t *p_inputattr=(inputattr_t*) this ->attr;
-	GetCurXYFromPhtmlNode(x,y,parent);
+	GetCurXYFromPhtmlNode(x,y,parent());
 #ifndef __HTMLMAIN 
 	switch(p_inputattr -> type)
 	{

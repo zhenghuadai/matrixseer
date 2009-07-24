@@ -39,9 +39,9 @@ class HtmlNode{
         HtmlNode * child;
         HtmlNode * mPrevious;
         HtmlNode * mNext;
-        HtmlNode * parent;
+        HtmlNode * mParent;
     public:
-        HtmlNode():obj(NULL),child(NULL),mPrevious(NULL),mNext(NULL),parent(NULL){}
+        HtmlNode():obj(NULL),child(NULL),mPrevious(NULL),mNext(NULL),mParent(NULL){}
     private:
         void setNext(HtmlNode* o){
             this -> mNext = o;
@@ -55,9 +55,9 @@ class HtmlNode{
 			child -> mPrevious = child_;
 			child_ -> mNext = 0;
 
-			child_->parent = this;
+			child_->mParent = this;
 		}
-		void addFirstChild(HtmlNode* child_){ child = child_; child_->parent = this; child_->mPrevious= child_;}
+		void addFirstChild(HtmlNode* child_){ child = child_; child_->mParent = this; child_->mPrevious= child_;}
 	public:
 		void addChild(HtmlNode* child_){
 			if(child) {
@@ -67,6 +67,7 @@ class HtmlNode{
 			}
 		}
 		// the follow is for parsing
+		HtmlNode* parent(){return mParent;} 
 	public:
 		Widget* getRenderObject(){ return (Widget*) obj;}
 		void createObject(){
@@ -74,8 +75,8 @@ class HtmlNode{
             if(getRenderObject() -> _vptr == (void*) 0x1)
                 printf("err");
 #if NEED_RENDER == 1
-			if((parent) && ( parent -> getRenderObject()))
-				parent -> getRenderObject() -> addChild( getRenderObject());
+			if((mParent) && ( mParent -> getRenderObject()))
+				mParent -> getRenderObject() -> addChild( getRenderObject());
 #endif
 		}
 	public:
