@@ -425,6 +425,7 @@ void drawToTexture2(GLuint tex,int Sx,int Sy,int Ex,int Ey,char *str)
 		first =0;
 	}
 	hp.renderhtml();
+	hp.printTree();
 	//  drawInput2d(200,340,0,100,20);
 	// drawButton2d(400,340,0,100,20);
 	BITMAPINFO *bmpinfo;

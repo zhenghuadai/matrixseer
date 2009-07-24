@@ -14,7 +14,7 @@ public:
 	Widget(){init();};
 	Widget(int x,int y,int z):Cube(x,y,z){init();};
 	Widget(int dx,int dy):Cube(dx,dy){init();};
-	Widget(int x,int y,int z,int dx,int dy):Cube(x,y,z,dx,dy){init();};
+	Widget(int x,int y,int z,int dx,int dy,const char* l):Cube(x,y,z,dx,dy){init();};
 	Widget(int x,int y,int dx,int dy , const char* l):Cube(x,y,0,dx,dy){init();};
 	void box(Box* b){}
 	void box(int b){}

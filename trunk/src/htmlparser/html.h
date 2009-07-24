@@ -29,6 +29,9 @@ class htmlparser:public __stack
         int addtag(char *tag,int TAGID,tagfunc_t fp);
         int gettag(char *tag);
         int destroy();
+		void printNode(pHtmlNode);
+		void printTree(pHtmlNode);
+		void printTree();
     private:
         char * tagbufp;
         tagfunc_t tagfunc[100];
