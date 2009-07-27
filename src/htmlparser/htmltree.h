@@ -91,9 +91,9 @@ class HtmlNode{
 #endif
 		}
 	public:
-		virtual void endParse() = 0;
-		virtual void processValue(dmToken*) = 0;
-		virtual void createRenderObject() = 0;
+		virtual void endParse() {} ; // = 0;
+		virtual void processValue(dmToken*){};// = 0;
+		virtual void createRenderObject(){};// = 0;
 };
 
 typedef HtmlNode* pHtmlNode;
