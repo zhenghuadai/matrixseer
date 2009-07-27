@@ -62,9 +62,10 @@ void __stack::_printstack()
 }
 pHtmlNode __stack::createHtmlNode(int id)
 {
-    pHtmlNode tmp=(pHtmlNode)malloc(sizeof(HtmlNode)+ sizeof(void*));
-    memset(tmp,0,sizeof(HtmlNode));
-    tmp->tagid=id;
+    //pHtmlNode tmp=(pHtmlNode)malloc(sizeof(HtmlNode)+ sizeof(void*));
+    //memset(tmp,0,sizeof(HtmlNode));
+    //tmp->tagid=id;
+	pHtmlNode tmp = new HtmlNode(id);
     return tmp;
 }
 
@@ -81,9 +82,9 @@ pHtmlNode __stack::createHtmlNode(int id)
 //
 pHtmlNode __stack::createHtmlNode(int id,void * pdrawAttr)
 {
-    pHtmlNode tmp=(pHtmlNode)malloc(sizeof(HtmlNode) + sizeof(void*));
-    memset(tmp,0,sizeof(HtmlNode));
-	//HtmlNode* tmp = new HtmlNode(id);
+    //pHtmlNode tmp=(pHtmlNode)malloc(sizeof(HtmlNode) + sizeof(void*));
+    //memset(tmp,0,sizeof(HtmlNode));
+	HtmlNode* tmp = new HtmlNode(id);
     //tmp->tagid=id;
     attrOfHtmlNode(tmp)=pdrawAttr;
     return tmp;
