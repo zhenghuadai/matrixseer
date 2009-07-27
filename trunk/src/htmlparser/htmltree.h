@@ -41,7 +41,7 @@ class HtmlNode{
         HtmlNode * mNext;
         HtmlNode * mParent;
     public:
-        HtmlNode():obj(NULL),attr(NULL),value(NULL),child(NULL),mPrevious(NULL),mNext(NULL),mParent(NULL){}
+        HtmlNode(int _tag):tagid(_tag),obj(NULL),attr(NULL),value(NULL),child(NULL),mPrevious(NULL),mNext(NULL),mParent(NULL){}
     private:
         void setNext(HtmlNode* o){
             this -> mNext = o;
