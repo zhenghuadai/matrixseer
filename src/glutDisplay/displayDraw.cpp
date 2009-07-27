@@ -274,7 +274,7 @@ int putStrScr(int x, int y, int z, char *content)
 	glGetIntegerv(GL_CURRENT_RASTER_POSITION,(GLint*)&curRasterPos[curWin]);
 	tmpcWH=getWH_Chars(Tex_Win_w-x ,Tex_Win_h,3);
 	npos=getEnterPos(pstart,tmpcWH.w);
-	printf("char num:%d ,x:%d  y:%d\n", npos,x,y);
+	debprintf("char num:%d ,x:%d  y:%d\n", npos,x,y);
 	drawChars(pstart,npos);
 	pstart += npos;
 	if((*pstart=='\n')&&(! (*(pstart+1)))){
@@ -288,7 +288,7 @@ int putStrScr(int x, int y, int z, char *content)
 		curRasterPosY-= rowHeight;
 		MoveTo2(20,curRasterPosY);
 		npos=getEnterPos(pstart,cWH.w);
-		printf("char num:%d ,x:%d  y:%d\n", npos,20, curRasterPosY);
+		debprintf("char num:%d ,x:%d  y:%d\n", npos,20, curRasterPosY);
 		drawChars(pstart,npos);
 		pstart+=npos;
 		if(*pstart=='\n'){
@@ -428,7 +428,7 @@ void drawToTexture2(GLuint tex,int Sx,int Sy,int Ex,int Ey,char *str)
 		first =0;
 	}
 	hp.renderhtml();
-	hp.printTree();
+	//hp.printTree();
 	//hp.checkTree();
 	//  drawInput2d(200,340,0,100,20);
 	// drawButton2d(400,340,0,100,20);

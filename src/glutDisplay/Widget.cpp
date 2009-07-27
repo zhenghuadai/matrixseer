@@ -19,6 +19,7 @@
 #include <stdlib.h>
 #include "Widget.h"
 #include "display.h"
+#include "debprintf.h"
 void Widget::setNext(Widget* o)
 {
 	this -> mNext = o;
@@ -65,17 +66,17 @@ void Widget::getSxyz(int& sx, int& sy, int& sz)
 {
 	int ax=x(), ay=y(), az=z();
 	Widget* p = parent();
-	printf(" %d +", ay);
+	debprintf(" %d +", ay);
 	while(p){
 		ax += p -> x();
 		ay += p -> y();
 		az += p -> z();
-		printf("+ %d ", p -> y());
+		debprintf("+ %d ", p -> y());
 		p = p -> parent();
 	}
 	sx = ax;
 	sy = getWinh() - ay;
 	sz = az;
-	printf("= %d ", ay);
-	printf("{%d (%d - %d =%d) %d}\n",sx,getWinh(),ay, sy, sz);
+	debprintf("= %d ", ay);
+	debprintf("{%d (%d - %d =%d) %d}\n",sx,getWinh(),ay, sy, sz);
 }

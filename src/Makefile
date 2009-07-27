@@ -1,9 +1,16 @@
-all:
-	cd js;make
-	cd io;make
-	cd network;make
-	cd multimedia;make
-	cd glutDisplay; make
+all:dbg
+dbg:
+	cd js;make dbg 
+	cd io;make dbg 
+	cd network;make dbg 
+	cd multimedia;make dbg 
+	cd glutDisplay; make dbg 
+opt:
+	cd js;make opt 
+	cd io;make  opt 
+	cd network;make  opt 
+	cd multimedia;make  opt 
+	cd glutDisplay; make  opt 
 clean:
 	cd network;make clean
 	cd js;make clean
