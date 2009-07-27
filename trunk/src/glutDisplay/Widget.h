@@ -3,6 +3,7 @@
 #include "Cube.h"
 #include "Box.h"
 #include "dmtype.h"
+#include "debprintf.h"
 class Widget: public Cube
 {
 friend class Group;
@@ -32,7 +33,7 @@ public:
 	void parent(Widget* o) { mParent = o;}
 	Widget* next() { return mNext;}
 	void next(Widget* o){ mNext = o;}
-	virtual	void draw(){ printf("Widget draw\n");};
+	virtual	void draw(){ debprintf("Widget draw\n");};
 	virtual void addChild(Widget*){};
 	int getSx();
 	int getSy();

@@ -17,8 +17,10 @@ DBG_DIR 	= ${OUT_DIR}/dbg
 OPT_DIR 	= ${OUT_DIR}/opt
 DEP_DIR 	= ${OUT_DIR}/.dep
 OBJ_DIR     = ${DBG_DIR}
-CFLAG  		= -g  -DXP_UNIX -DDZHP ${MARC} ${MY_FLAG} 
-CFLAG       += -DDEB -DDZHDEB  
+CFLAG  		=  -DXP_UNIX -DDZHP ${MARC} ${MY_FLAG} 
+DBGCFLAG    = ${CFLAG} 
+DBGCFLAG    += -DDEB -DDZHDEB  -g  
+OPTCFLAG    = ${CFLAG}
 LIBPATH		= ${TOPDIR}/lib/
 BINPATH		= ${TOPDIR}/bin/
 
@@ -42,7 +44,9 @@ C_SRCS  	= $(SRCS:%.cpp=%.c)
 DEP_FILES 	= $(C_SRCS:%.c=$(DEP_DIR)/%.dep)	
 DBG_OBJS    = $(C_SRCS:%.c=$(DBG_DIR)/%.o)
 OPT_OBJS    = $(C_SRCS:%.c=$(OPT_DIR)/%.o)
+
 OBJS 		= ${DBG_OBJS}
+#OBJS 		= ${OPT_OBJS}
 
 
 #set lib
@@ -60,4 +64,6 @@ CLEAN_OBJS 	?=${TARGET}
 
 #make entry
 .PHONY: all
-all: createDir ${TARGET} 
+all: createDirdbg ${TARGET} 
+dbg: createDirdbg ${TARGET} 
+opt: createDiropt ${TARGET} 
