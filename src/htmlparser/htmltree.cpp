@@ -35,7 +35,7 @@ void setCSS(T *pctrP,cssAttr_t *pcss)
     }
 }
 
-HtmlUlNode:: HtmlUlNode(pHtmlNode pHtp, dmToken* t)
+HtmlUlNode:: HtmlUlNode(pHtmlNode pHtp, dmToken* t):HtmlNode(ULID)
 {
     tagid = ULID;
     attr = (void *) malloc(sizeof(attrBase_t));    //tmp->attr.value=value;
@@ -82,7 +82,7 @@ void  HtmlUlNode::createRenderObject()
  *
  *
  * ****************************************************************/
-HtmlTdNode::HtmlTdNode(pHtmlNode pHtp, dmToken* t)
+HtmlTdNode::HtmlTdNode(pHtmlNode pHtp, dmToken* t):HtmlNode(TDID)
 {
     //this -> tagid = TDID;
     this -> tagid = t->tagid;//TDID;
@@ -150,7 +150,7 @@ void  HtmlTdNode::createRenderObject()
  *
  *
  * ****************************************************************/
-HtmlTrNode::HtmlTrNode(pHtmlNode pHtp, dmToken* t)
+HtmlTrNode::HtmlTrNode(pHtmlNode pHtp, dmToken* t):HtmlNode(TDID)
 {
     tagid = t -> tagid;
     pHtmlNode tableNodep = pHtp;//curHtml->_3dhtop();
@@ -214,7 +214,7 @@ void  HtmlTrNode::createRenderObject()
  *
  *
  * ****************************************************************/
-HtmlTableNode::HtmlTableNode(pHtmlNode pHtp, dmToken* t)
+HtmlTableNode::HtmlTableNode(pHtmlNode pHtp, dmToken* t):HtmlNode(TABLEID)
 {
     tagid = t-> tagid;
     tableattr_t *tableattr;
@@ -313,7 +313,7 @@ void  HtmlTableNode::createRenderObject()
  * ****************************************************************/
 extern void getRect(int *);
 
-HtmlDivNode::HtmlDivNode(pHtmlNode pHtp, dmToken* t)
+HtmlDivNode::HtmlDivNode(pHtmlNode pHtp, dmToken* t):HtmlNode(DIVID)
 {
     tagid = t-> tagid;
     divattr_t *p_divattr;
@@ -398,7 +398,7 @@ extern int getCharsWidth(char *s);
 extern cssAttr_t* getcssFromID(char*  ,char* tag=NULL );
 extern cssAttr_t* getcssFromClass(char*  ,char* tag=NULL );
 
-HtmlPNode::HtmlPNode(pHtmlNode pHtp, dmToken* t)
+HtmlPNode::HtmlPNode(pHtmlNode pHtp, dmToken* t):HtmlNode(PTAGID)
 {
 	tagid = t-> tagid;
 	pHtp ->addChild(this);
@@ -476,7 +476,7 @@ void  HtmlPNode::createRenderObject()
  *
  *
  * ****************************************************************/
-HtmlANode::HtmlANode(pHtmlNode pHtp, dmToken* t)
+HtmlANode::HtmlANode(pHtmlNode pHtp, dmToken* t):HtmlNode(ATAGID)
 {
 	tagid = t-> tagid;
 	pHtp ->addChild(this);
@@ -530,7 +530,7 @@ void  HtmlANode::createRenderObject()
  *
  *
  * ****************************************************************/
-HtmlSimpleANode::HtmlSimpleANode(pHtmlNode pHtp, dmToken* t)
+HtmlSimpleANode::HtmlSimpleANode(pHtmlNode pHtp, dmToken* t):HtmlNode(ATAGID)
 {
 	tagid = t-> tagid;
 	pHtp ->addChild(this);
@@ -579,7 +579,7 @@ void  HtmlSimpleANode::createRenderObject()
  *
  *
  * ****************************************************************/
-HtmlCenterNode::HtmlCenterNode(pHtmlNode pHtp, dmToken* t)
+HtmlCenterNode::HtmlCenterNode(pHtmlNode pHtp, dmToken* t):HtmlNode(CENTERID)
 {
 	tagid = t-> tagid;
 	pHtp ->addChild(this);
@@ -634,7 +634,7 @@ void  HtmlCenterNode::createRenderObject()
  *
  *
  * ****************************************************************/
-HtmlInputNode::HtmlInputNode(pHtmlNode pHtp, dmToken* t)
+HtmlInputNode::HtmlInputNode(pHtmlNode pHtp, dmToken* t):HtmlNode(INPUTID)
 {
 	tagid = t-> tagid;
 	pHtp ->addChild(this);
@@ -682,7 +682,7 @@ void  HtmlInputNode::createRenderObject()
  *
  *
  * ****************************************************************/
-HtmlImgNode::HtmlImgNode(pHtmlNode pHtp, dmToken* t)
+HtmlImgNode::HtmlImgNode(pHtmlNode pHtp, dmToken* t):HtmlNode(IMGID)
 {
 	tagid = t-> tagid;
 	pHtp ->addChild(this);
@@ -706,7 +706,7 @@ void  HtmlImgNode::createRenderObject()
  *
  *
  * ****************************************************************/
-HtmlBrNode::HtmlBrNode(pHtmlNode pHtp, dmToken* t)
+HtmlBrNode::HtmlBrNode(pHtmlNode pHtp, dmToken* t):HtmlNode(BRID)
 {
 	tagid = t-> tagid;
 	pHtp ->addChild(this);
