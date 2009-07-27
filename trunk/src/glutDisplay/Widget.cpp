@@ -64,7 +64,7 @@ int Widget::getSz()
 void Widget::getSxyz(int& sx, int& sy, int& sz)
 {
 	int ax=x(), ay=y(), az=z();
-	Widget* p = mParent;
+	Widget* p = parent();
 	printf(" %d +", ay);
 	while(p){
 		ax += p -> x();
