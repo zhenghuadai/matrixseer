@@ -135,61 +135,67 @@ int htmlparser::processTag(dmTokenP tp,int which)
     int funcret;
     funcret =  (ctTagFunc[tp->tagid])(this, tp, ATTRIB);
     //if(tp ->value)  (ctTagFunc[tp->tagid])(this, tp, VALUE);
-    processValueOfTag(tp,VALUE);
-    return funcret;
+	if( tp->tagid == SCRIPTID)
+		(ctTagFunc[tp->tagid])(this, tp, VALUE);
+	else
+		processValueOfTag(tp,VALUE);
+	return funcret;
 }
 
 int htmlparser::processSimpleTag(dmTokenP tp,int which)
 {
-    int funcret;
+	int funcret;
 
-    if(tp->tagid == ATAGID){
-        funcret =  (ctTagFunc[tp->tagid])(this,tp,TAGCOMPLETE);
-    }else{
-        funcret =  (ctTagFunc[tp->tagid])(this, tp, ATTRIB);
-        //if(tp->value)  (ctTagFunc[tp->tagid])(this, tp, VALUE);
-        processValueOfTag(tp,VALUE);
-        dmToken nextT(tp->tagid +1,NULL,NULL);
-        funcret =  (ctTagFunc[(tp->tagid )+1])(this, &nextT, ATTRIB);
-    }
-    return funcret;
+	if(tp->tagid == ATAGID){
+		funcret =  (ctTagFunc[tp->tagid])(this,tp,TAGCOMPLETE);
+	}else{
+		funcret =  (ctTagFunc[tp->tagid])(this, tp, ATTRIB);
+		//if(tp->value)  (ctTagFunc[tp->tagid])(this, tp, VALUE);
+		if( tp->tagid == SCRIPTID)
+			(ctTagFunc[tp->tagid])(this, tp, VALUE);
+		else
+			processValueOfTag(tp,VALUE);
+		dmToken nextT(tp->tagid +1,NULL,NULL);
+		funcret =  (ctTagFunc[(tp->tagid )+1])(this, &nextT, ATTRIB);
+	}
+	return funcret;
 }
 
 int htmlparser::processEndTag(dmTokenP tp,int which)
 {
-    int funcret;
-    funcret = (ctTagFunc[tp->tagid])(this,tp, which);
-    return funcret;
+	int funcret;
+	funcret = (ctTagFunc[tp->tagid])(this,tp, which);
+	return funcret;
 }
 
 #undef OP
 #undef ctOP
 #define ctOP(a) int htmlparser::a(htmlparser* curHtml ,dmTokenP tp, int which) \
 {\
-    int tagid = tp -> tagid; \
-    char* attrib= tp -> attrib;\
-    char* value= tp -> value;
+	int tagid = tp -> tagid; \
+	char* attrib= tp -> attrib;\
+	char* value= tp -> value;
 
-    //char* htdoc = tp -> attrib;\
-    char* htdoc2 = tp -> value;
+	//char* htdoc = tp -> attrib;\
+	char* htdoc2 = tp -> value;
 
 #define endctOP() }
 int htmlparser::ctTextFunc(pHtmlNode pHtp,char * htdoc)
 {
-    extern int2 getstrWH(char *);
-    attrBase_t *pAttrp = getAttrBaseP(pHtp); 
-    pHtmlNode pHtc=createHtmlNode(VALUEOBJID);
-    HNinsert(pHtp,pHtc);
-    void setdefaultfont(void);
-    setdefaultfont();
-    pHtc -> value = htdoc;
-    int2 wh = getstrWH(htdoc);
-    int2 ctrwh;
-    int x,y;
-    GetCurXYFromPattr(x,y,pAttrp); 
-    //wh.x = wh.x +5;
-    ctrwh.x = wh.x + 0;
-    ctrText * pctrText = new ctrText(x,y,ctrwh.x,(wh.y)*rowHeight + rowHeight/2,htdoc);
+	extern int2 getstrWH(char *);
+	attrBase_t *pAttrp = getAttrBaseP(pHtp); 
+	pHtmlNode pHtc=createHtmlNode(VALUEOBJID);
+	HNinsert(pHtp,pHtc);
+	void setdefaultfont(void);
+	setdefaultfont();
+	pHtc -> value = htdoc;
+	int2 wh = getstrWH(htdoc);
+	int2 ctrwh;
+	int x,y;
+	GetCurXYFromPattr(x,y,pAttrp); 
+	//wh.x = wh.x +5;
+	ctrwh.x = wh.x + 0;
+	ctrText * pctrText = new ctrText(x,y,ctrwh.x,(wh.y)*rowHeight + rowHeight/2,htdoc);
 	if(pHtp-> getRenderObject())
 		pHtp -> getRenderObject() -> addChild(pctrText);
 	debprintf("%d %d\n",wh.x,wh.y);
@@ -250,10 +256,10 @@ ctOP(ctSscriptfunc)
 		{
 			str = JS_ValueToString(cx,retval);
 			char *s =JS_GetStringBytes(str);
-			//		printf("result:%s\n",s);
+			debprintf("script result:%s\n",s);
 		}
 		else{
-			//		printf("JS no result\n");
+			debprintf("script JS no result\n");
 		}
 	}
 	return 1;
