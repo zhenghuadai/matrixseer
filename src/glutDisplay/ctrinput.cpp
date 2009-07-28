@@ -53,37 +53,36 @@ ctrInput::ctrInput(int sx,int sy,int sz):Widget(sx,sy,sz)
 
 ctrInput::ctrInput(int sx,int sy,int sz,char *s):Widget(sx,sy,sz)
 {
-	/*
-	   x=sx;
-	   y=sy;
-	   z=sz;
-	   */
 	ctrInput(10,20);
 	sprintf(pvalue,"%s",s);
 }
-ctrInput::ctrInput(int sx,int sy,int sz,int sdx,int sdy):Widget(sx,sy,sz,sdx,sdy,0)
+
+ctrInput::ctrInput(int sx,int sy,int sz,int sdx,int sdy, char* l):Widget(sx,sy,sz,sdx,sdy,0)
 {
 	reset();
-	/*
-	   x=sx;
-	   y=sy;
-	   z=sz;
-	   dx=sdx;
-	   dy=sdy;
-	   */
+	ctrInput(10,20);
 }
+
+ctrInput::ctrInput(int sx,int sy,int w, int h, char *s):Widget(sx,sy,0,w,h,s)
+{
+	ctrInput(10,20);
+}
+
+
 void ctrInput::draw()
 {
 	int curRasterPos[4];
 	GLfloat oldcolor[4];
-	glGetIntegerv(GL_CURRENT_RASTER_POSITION,curRasterPos);
-	_x=curRasterPos[0];
-	_y=curRasterPos[1]-2;
-	_z=curRasterPos[2];
+	//glGetIntegerv(GL_CURRENT_RASTER_POSITION,curRasterPos);
+	//_x=curRasterPos[0];
+	//_y=curRasterPos[1]-2;
+	//_z=curRasterPos[2];
+	getSxyz(curRasterPos[0],curRasterPos[1],curRasterPos[2]);
+	MoveTo2(curRasterPos[0],curRasterPos[1]-2);
 	glGetFloatv(GL_CURRENT_COLOR,oldcolor);
 	glColor4f(1,1,1,1);
-	drawInput2d(curRasterPos[0],curRasterPos[1],0,_w,_h);
-	curRasterPos[0] += (_w + 1);
+	drawInput2d(curRasterPos[0],curRasterPos[1],0,w(),h());
+	curRasterPos[0] += (w() + 1);
 	putStrScr(pvalue + startDrawPos,curCursorPos-startDrawPos);
 	drawCursor();
 	putStrScr(pvalue + curCursorPos);
@@ -97,13 +96,15 @@ void ctrInput::redraw()
 	GLfloat oldcolor[4];
 	glGetFloatv(GL_CURRENT_COLOR,oldcolor);
 	glColor4f(1,1,1,1);
+	int sx,sy,sz;
+	getSxyz(sx,sy,sz);
 #if 1 
-	drawInput2d(_x,_y,0,_w,_h);
-	MoveTo2(_x,_y+3);
+	drawInput2d(sx,sy,0,w(),h());
+	MoveTo2(sx,sy+3);
 	putStrScr(pvalue + startDrawPos,curCursorPos-startDrawPos);
 	drawCursor();
 	putStrScr(pvalue + curCursorPos);
-	copyToCurTexture( _x, _y, _w, _h, _x, _y);
+	copyToCurTexture( sx, sy, w(), h(), sx, sy);
 	glutPostRedisplay();
 #else
 #define YoffS 1

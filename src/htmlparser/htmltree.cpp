@@ -659,8 +659,12 @@ void  HtmlInputNode::createRenderObject()
 			{
 				if(! (p_inputattr->w)) p_inputattr->w = 200;
 				if(! (p_inputattr->h)) p_inputattr->h = 22;
-				ctrInput * pctrInput0 = new ctrInput(x,y,200,22,0);
-				this-> obj = (void *) pctrInput0;
+				ctrInput * pctrInput = new ctrInput(x,y,200,22,NULL);
+				this-> obj = (void *) pctrInput;
+				#if 1 //! test input
+				void setFocusInput(ctrInput*);
+				setFocusInput(pctrInput);
+				#endif
 			}
 			break;
 		case INPUTBUTTON:
@@ -668,8 +672,8 @@ void  HtmlInputNode::createRenderObject()
 				char * pbvalue =strdup(p_inputattr -> value);// (char *)malloc(sizeof(pstr)+1);
 				if(! (p_inputattr->w)) p_inputattr->w = 100;
 				if(! (p_inputattr->h)) p_inputattr->h = 22;
-				ctrButton *pctrButton0 = new ctrButton(x,y,100,20,pbvalue);
-				this->obj = (void *) pctrButton0;
+				ctrButton *pctrButton = new ctrButton(x,y,100,20,pbvalue);
+				this->obj = (void *) pctrButton;
 			}
 			break;
 	}

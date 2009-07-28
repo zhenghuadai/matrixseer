@@ -27,10 +27,12 @@ void ctrButton::draw()
 {
     int curRasterPos[4];
     int endPos[4];
-    glGetIntegerv(GL_CURRENT_RASTER_POSITION,curRasterPos);
-    _x=curRasterPos[0];
-    _y=curRasterPos[1]-2;
-    _z=curRasterPos[2];
+    //glGetIntegerv(GL_CURRENT_RASTER_POSITION,curRasterPos);
+    //_x=curRasterPos[0];
+    //_y=curRasterPos[1]-2;
+    //_z=curRasterPos[2];
+	getSxyz(curRasterPos[0],curRasterPos[1],curRasterPos[2]);
+	MoveTo2(curRasterPos[0],curRasterPos[1]-2);
     putStrScr(pvalue);
     glGetIntegerv(GL_CURRENT_RASTER_POSITION,endPos);
     _w = endPos[0] - curRasterPos[0];
