@@ -10,8 +10,9 @@ public:
 ctrInput();
 ctrInput(int sdx,int sdy);
 ctrInput(int sx,int sy, int sz);
-ctrInput(int sx,int sy, int sz,int sdx,int sdy);
+ctrInput(int sx,int sy, int sz,int sdx,int sdy,char* l);
 ctrInput(int sx,int sy,int sz,char * s);
+ctrInput(int sx,int sy, int w,int h, char* l);
 ~ctrInput();
 void reset();
 //void setxyz(int sx,int sy,int sz,int sdx,int sdy);

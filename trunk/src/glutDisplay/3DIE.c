@@ -315,45 +315,48 @@ void ctrlkey(int key,int x,int y)
 }
 void mouse(int button, int state, int x, int y) 
 {
-    switch ( button)
-    {
-        case GLUT_LEFT_BUTTON:
-            switch ( state) {
-                case GLUT_DOWN:
-                    for(int i =0;i<pctrIindex;i++){
-                        ctrInput *pctrInput_tmp = pctrInputs[i];
-                        if(pctrInput_tmp -> inArea(x,Win_h-y,0)) 
-                            pctrInput_tmp -> getFocus();
-                        else
-                            pctrInput_tmp -> loseFocus();
-                    }
-                    for(int i=0;i<pctrBindex;i++){
-                        ctrButton *pctrButton_tmp = pctrButtons[i];
-                        if(pctrButton_tmp ->inArea(x,Win_h -y,0))
-                            pctrButton_tmp -> OnClick();
-                    }
-                    break;
-                case GLUT_UP:
-                    for(int i =0;i<pctrIindex;i++){
-                        ctrInput *pctrInput_tmp = pctrInputs[i];
-                        if(pctrInput_tmp -> inArea(x,Win_h-y,0)) 
-                            pctrInput_tmp -> getFocus();
-                        else
-                            pctrInput_tmp -> loseFocus();
-                    }
-                    for(int i=0;i<pctrBindex;i++){
-                        ctrButton *pctrButton_tmp = pctrButtons[i];
-                        if(pctrButton_tmp ->inArea(x,Win_h -y,0))
-                            pctrButton_tmp -> redraw();
-                    }
+	ctrInput *pctrInput_tmp = pctrInputs[0];
+	pctrInput_tmp -> getFocus();
+	if(0)
+		switch ( button)
+		{
+			case GLUT_LEFT_BUTTON:
+				switch ( state) {
+					case GLUT_DOWN:
+						for(int i =0;i<pctrIindex;i++){
+							ctrInput *pctrInput_tmp = pctrInputs[i];
+							if(pctrInput_tmp -> inArea(x,Win_h-y,0)) 
+								pctrInput_tmp -> getFocus();
+							else
+								pctrInput_tmp -> loseFocus();
+						}
+						for(int i=0;i<pctrBindex;i++){
+							ctrButton *pctrButton_tmp = pctrButtons[i];
+							if(pctrButton_tmp ->inArea(x,Win_h -y,0))
+								pctrButton_tmp -> OnClick();
+						}
+						break;
+					case GLUT_UP:
+						for(int i =0;i<pctrIindex;i++){
+							ctrInput *pctrInput_tmp = pctrInputs[i];
+							if(pctrInput_tmp -> inArea(x,Win_h-y,0)) 
+								pctrInput_tmp -> getFocus();
+							else
+								pctrInput_tmp -> loseFocus();
+						}
+						for(int i=0;i<pctrBindex;i++){
+							ctrButton *pctrButton_tmp = pctrButtons[i];
+							if(pctrButton_tmp ->inArea(x,Win_h -y,0))
+								pctrButton_tmp -> redraw();
+						}
 
-                    break;
-            }
-            break;
-        case GLUT_RIGHT_BUTTON:
-            break;
-    }
-    glutPostRedisplay();
+						break;
+				}
+				break;
+			case GLUT_RIGHT_BUTTON:
+				break;
+		}
+	glutPostRedisplay();
 }
 JSRuntime *rt;
 JSContext *cx;
@@ -361,85 +364,90 @@ JSObject *globalObj;
 #include "JSDocument.h"
 JSClass globalClass =
 {
-    "Global", 0,
-    JS_PropertyStub,  JS_PropertyStub,JS_PropertyStub, JS_PropertyStub,
-    JS_EnumerateStub, JS_ResolveStub, JS_ConvertStub,  JS_FinalizeStub
+	"Global", 0,
+	JS_PropertyStub,  JS_PropertyStub,JS_PropertyStub, JS_PropertyStub,
+	JS_EnumerateStub, JS_ResolveStub, JS_ConvertStub,  JS_FinalizeStub
 };
 int initJS()
 {
-    rt = JS_Init(1000000L);
-    if ( !rt) 
-        return 1;
-    cx = JS_NewContext(rt, 8192);
-    if ( !cx )
-        return 1;
-    globalObj = JS_NewObject(cx, &globalClass, 0, 0);
-    if ( !globalObj )
-        return 1;
+	rt = JS_Init(1000000L);
+	if ( !rt) 
+		return 1;
+	cx = JS_NewContext(rt, 8192);
+	if ( !cx )
+		return 1;
+	globalObj = JS_NewObject(cx, &globalClass, 0, 0);
+	if ( !globalObj )
+		return 1;
 
-    JS_InitStandardClasses(cx, globalObj);
-        JSDocument::JSInit(cx, globalObj);
-    return 0;
+	JS_InitStandardClasses(cx, globalObj);
+	JSDocument::JSInit(cx, globalObj);
+	return 0;
 }
 int destroyJS()
 {
-    JS_DestroyContext(cx);
-    JS_Finish(rt);
-    return 0;
+	JS_DestroyContext(cx);
+	JS_Finish(rt);
+	return 0;
 }
 int testJS()
 {
-    jsval retval;
-    JSString *str;
-    char *myscript0 = "var c = new Customer();\
-                       c.name = \"Franky\";\
-                       c.age = 32;\
-                       c.computeReduction();";
-    char * myscript = " var document = new Document(); ";  
-    uintN lineno=0;
-    JSBool ok ;
-    ok= JS_EvaluateScript(cx,globalObj,myscript,strlen(myscript),"abc",lineno,&retval);
-    if(ok == JS_TRUE)
-    {
-        str = JS_ValueToString(cx,retval);
-        char *s =JS_GetStringBytes(str);
-        debprintf("result:%s\n",s);
-    }
+	jsval retval;
+	JSString *str;
+	char *myscript0 = "var c = new Customer();\
+					   c.name = \"Franky\";\
+					   c.age = 32;\
+					   c.computeReduction();";
+	char * myscript = " var document = new Document(); ";  
+	uintN lineno=0;
+	JSBool ok ;
+	ok= JS_EvaluateScript(cx,globalObj,myscript,strlen(myscript),"abc",lineno,&retval);
+	if(ok == JS_TRUE)
+	{
+		str = JS_ValueToString(cx,retval);
+		char *s =JS_GetStringBytes(str);
+		debprintf("result:%s\n",s);
+	}
 }
 int main(int argc, char** argv)
 {
-    int ret;
-    ret =   initJS();
-    if(ret){
-        debprintf("error");
-        exit(0);
-    }
-    testJS();
-    glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH );
-    glutInitWindowSize(Win_w, Win_h);
-    glutInitWindowPosition (0, 0);
-    glutCreateWindow("Matrix");
-    init(argc,argv);
-    defaultfont();
-//    selectfontfromid(MGLUT_BITMAP_TIMES_ROMAN_24);
-    glutReshapeFunc(reshape);
-    glutKeyboardFunc(keyboard);
-    glutDisplayFunc(display);
-    glutMouseFunc(mouse);
-    glutSpecialFunc(ctrlkey);
-    glutMainLoop();
-    destroyJS();
-    return 0;
+	int ret;
+	ret =   initJS();
+	if(ret){
+		debprintf("error");
+		exit(0);
+	}
+	testJS();
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH );
+	glutInitWindowSize(Win_w, Win_h);
+	glutInitWindowPosition (0, 0);
+	glutCreateWindow("Matrix");
+	init(argc,argv);
+	defaultfont();
+	//    selectfontfromid(MGLUT_BITMAP_TIMES_ROMAN_24);
+	glutReshapeFunc(reshape);
+	glutKeyboardFunc(keyboard);
+	glutDisplayFunc(display);
+	glutMouseFunc(mouse);
+	glutSpecialFunc(ctrlkey);
+	glutMainLoop();
+	destroyJS();
+	return 0;
 }
 
 
 int getWinw()
 {
-    return Win_w;
+	return Win_w;
 }
 
 int getWinh()
 {
-    return Win_h;
+	return Win_h;
+}
+void setFocusInput(ctrInput* ci)
+{
+	pctrInputs[0]=pctrInput0=ci;
+	ci->getFocus();
 }
