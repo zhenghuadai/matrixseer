@@ -24,10 +24,9 @@ void ctrInput::reset()
 	pvalue = 0;
 	//sprintf(pvalue,"%s","");
 }
-ctrInput::ctrInput(int sdx,int sdy):Widget(sdx,sdy)
+
+void ctrInput::initInput(int sdx, int sdy)
 {
-	//	dx=sdx;
-	//	dy=sdy;
 	maxc=1024;
 	pvalue = (char *)malloc(maxc+1);
 	memset(pvalue,0,maxc);
@@ -39,33 +38,58 @@ ctrInput::ctrInput(int sdx,int sdy):Widget(sdx,sdy)
 	focus = 0;
 	//sprintf(pvalue,"%s","");
 	printf("dx:%d\n",_w);
+	w(sdx);
+	h(sdy);
+
+}
+
+ctrInput::ctrInput(int sdx,int sdy):Widget(sdx,sdy)
+{
+	//	dx=sdx;
+	//	dy=sdy;
+	//maxc=1024;
+	//pvalue = (char *)malloc(maxc+1);
+	//memset(pvalue,0,maxc);
+	//curc= -1;
+	//curCursorPos=0;
+	//startDrawPos=0;
+	//curdx =0;
+	//pvalue[0]=0;
+	//focus = 0;
+	////sprintf(pvalue,"%s","");
+	//printf("dx:%d\n",_w);
+	initInput(sdx, sdy);
 }
 ctrInput::ctrInput(int sx,int sy,int sz):Widget(sx,sy,sz)
 {
-	reset();
+	//reset();
 	/*
 	   x=sx;
 	   y=sy;
 	   z=sz;
 	   */
-	ctrInput(10,20);
+	initInput(10,20 );
+	//ctrInput(10,20);
 }
 
 ctrInput::ctrInput(int sx,int sy,int sz,char *s):Widget(sx,sy,sz)
 {
-	ctrInput(10,20);
+	//ctrInput(10,20);
+	initInput(10,20 );
 	sprintf(pvalue,"%s",s);
 }
 
 ctrInput::ctrInput(int sx,int sy,int sz,int sdx,int sdy, char* l):Widget(sx,sy,sz,sdx,sdy,0)
 {
-	reset();
-	ctrInput(10,20);
+	//reset();
+	//ctrInput(10,20);
+	initInput(10,20 );
 }
 
 ctrInput::ctrInput(int sx,int sy,int w, int h, char *s):Widget(sx,sy,0,w,h,s)
 {
-	ctrInput(10,20);
+	//ctrInput(10,20);
+	initInput(w,h );
 }
 
 
@@ -189,7 +213,7 @@ int  ctrInput::appandchar(char c)
 	pvalue[curc+1]=0;
 	curdx += getCharWidth(c);
 	//if(curc - startDrawPos > MAXCS) {
-	while(curdx >= _w -4){
+	while(curdx >= w() -4){
 		curdx -= getCharWidth(pvalue[startDrawPos]);
 		startDrawPos++;
 	}
@@ -209,6 +233,7 @@ INLINE void  ctrInput::drawCursor()
 		glGetFloatv(GL_CURRENT_COLOR,oldcolor);
 		glColor4f(0,1.0,0.0,1);
 		glGetIntegerv(GL_CURRENT_RASTER_POSITION,curpos);
+		//curpos[2] = 0;
 		glBegin(GL_QUADS);
 		glVertex3f(curpos[0],curpos[1],curpos[2]);
 		glVertex3f(curpos[0]+CURSORW,curpos[1],curpos[2]);
@@ -279,6 +304,7 @@ void ctrInput::keyfunc(char  key,int x,int y)
 			appandchar(key);
 		else
 			insertchar(key);
+		printf("%s\n", pvalue);	
 		return ;
 	}
 	switch ( key){

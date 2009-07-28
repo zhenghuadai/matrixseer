@@ -66,7 +66,7 @@ void Widget::getSxyz(int& sx, int& sy, int& sz)
 {
 	int ax=x(), ay=y(), az=z();
 	Widget* p = parent();
-	debprintf(" %d +", ay);
+	debprintf(" %d ", ay);
 	while(p){
 		ax += p -> x();
 		ay += p -> y();

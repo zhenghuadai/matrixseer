@@ -32,6 +32,8 @@ int  deletechar(char c);
 int  insertchar(char c);
 int  backspacechar(char c);
 private:
+void initInput(int sdx,int sdy);
+private:
 //int x,y,z,dx,dy;
 int maxc,curc;
 int startDrawPos;
