@@ -106,20 +106,24 @@ void HNinsert(pHtmlNode pHtp,pHtmlNode pHtc)
 
 int htmlparser::processValueOfTag(dmTokenP tp,int which)
 {
-    int funcret;
-    if(tp->value){ 
-        //(ctTagFunc[tp->tagid])(this, tp, VALUE);
-        char* value = tp -> value;
-        pHtmlNode pHtp=_3dhtop();
-        ctTextFunc(pHtp,value);
-    }
-    return funcret;
+	int funcret;
+	if( tp->tagid == SCRIPTID){
+		if(tp ->value) funcret =  (ctTagFunc[tp->tagid])(this, tp, VALUE);
+		return funcret;
+	}
+	if(tp->value){ 
+		//(ctTagFunc[tp->tagid])(this, tp, VALUE);
+		char* value = tp -> value;
+		pHtmlNode pHtp=_3dhtop();
+		ctTextFunc(pHtp,value);
+	}
+	return funcret;
 }
 #if 1
 #define  insertTextNode(curHtml,value) \
 {\
-        pHtmlNode pHtp=curHtml->_3dhtop();\
-        curHtml->ctTextFunc(pHtp,value);\
+	pHtmlNode pHtp=curHtml->_3dhtop();\
+	curHtml->ctTextFunc(pHtp,value);\
 }
 #else 
 #define  insertTextNode(curHtml,value) 
@@ -132,13 +136,12 @@ int htmlparser::processValueOfTag(dmTokenP tp,int which)
 
 int htmlparser::processTag(dmTokenP tp,int which)
 {
-    int funcret;
-    funcret =  (ctTagFunc[tp->tagid])(this, tp, ATTRIB);
-    //if(tp ->value)  (ctTagFunc[tp->tagid])(this, tp, VALUE);
-	if( tp->tagid == SCRIPTID)
-		(ctTagFunc[tp->tagid])(this, tp, VALUE);
-	else
-		processValueOfTag(tp,VALUE);
+	int funcret;
+	funcret =  (ctTagFunc[tp->tagid])(this, tp, ATTRIB);
+	//if( tp->tagid == SCRIPTID){
+	//if(tp ->value)  (ctTagFunc[tp->tagid])(this, tp, VALUE);
+	//}else
+	processValueOfTag(tp,VALUE);
 	return funcret;
 }
 
@@ -150,11 +153,7 @@ int htmlparser::processSimpleTag(dmTokenP tp,int which)
 		funcret =  (ctTagFunc[tp->tagid])(this,tp,TAGCOMPLETE);
 	}else{
 		funcret =  (ctTagFunc[tp->tagid])(this, tp, ATTRIB);
-		//if(tp->value)  (ctTagFunc[tp->tagid])(this, tp, VALUE);
-		if( tp->tagid == SCRIPTID)
-			(ctTagFunc[tp->tagid])(this, tp, VALUE);
-		else
-			processValueOfTag(tp,VALUE);
+		processValueOfTag(tp,VALUE);
 		dmToken nextT(tp->tagid +1,NULL,NULL);
 		funcret =  (ctTagFunc[(tp->tagid )+1])(this, &nextT, ATTRIB);
 	}
@@ -176,8 +175,6 @@ int htmlparser::processEndTag(dmTokenP tp,int which)
 	char* attrib= tp -> attrib;\
 	char* value= tp -> value;
 
-	//char* htdoc = tp -> attrib;\
-	char* htdoc2 = tp -> value;
 
 #define endctOP() }
 int htmlparser::ctTextFunc(pHtmlNode pHtp,char * htdoc)
