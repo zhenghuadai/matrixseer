@@ -80,11 +80,9 @@ class HtmlNode{
 		}
 		void createObject(){
 			createRenderObject();
-			if(getRenderObject() -> _vptr == (void*) 0x1)
-				printf("err");
+			//if(getRenderObject() -> _vptr == (void*) 0x1)
+				//printf("err");
 #if NEED_RENDER == 1
-			//if((mParent) && ( mParent -> getRenderObject()))
-			//mParent -> getRenderObject() -> addChild( getRenderObject());
 			Widget* pobj = 	getParentRenderObject();
 			if(pobj) 
 				pobj -> addChild(getRenderObject());

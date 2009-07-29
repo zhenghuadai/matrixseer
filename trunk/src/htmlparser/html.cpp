@@ -542,7 +542,8 @@ void htmlparser::visitHtmlNode(pHtmlNode root)
 	Widget* o = (Widget*) root->obj;
     if( o == NULL) return ;
 #if NEED_RENDER == 1
-    if(o -> _vptr == (void*)0x1) return ;
+    if(o -> _vptr == (void*)0x1) 
+	{printf("class hierarchy err\n");return ;}
 #endif
 
     o -> draw();
@@ -570,7 +571,8 @@ void htmlparser::printNode(pHtmlNode root)
 	Widget* o = (Widget*) root->obj;
 	if( o == NULL) return ;
 #if NEED_RENDER == 1
-	if(o -> _vptr == (void*)0x1) return ;
+    if(o -> _vptr == (void*)0x1) 
+	{printf("class hierarchy err\n");return ;}
 	printf("<%d %d %d>", o->x(),o->y(),o->z());
 #else
 	printf("<%d %d 0>", o->x(),o->y());
