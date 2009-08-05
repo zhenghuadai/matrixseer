@@ -28,6 +28,8 @@
 #define ALIGNRIGHT 1
 #define ALIGNCENTER 2
 #define attrOfHtmlNode( pNode) pNode -> attr
+class HtmlNode;
+inline void  updateParentHtmlNode(HtmlNode *pHtp, HtmlNode* pHtc);
 typedef void* attr_t;
 class HtmlNode{
     public:
@@ -88,7 +90,9 @@ class HtmlNode{
 				pobj -> addChild(getRenderObject());
 #endif
 		}
+		void finishParse(){ endParse(); updateParentHtmlNode(parent(),this);}
 	public:
+
 		virtual void endParse() {} ; // = 0;
 		virtual void processValue(dmToken*){};// = 0;
 		virtual void createRenderObject(){};// = 0;
