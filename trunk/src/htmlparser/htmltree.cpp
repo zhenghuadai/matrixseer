@@ -61,7 +61,7 @@ void HtmlUlNode:: endParse()
     pctrP -> labelcolor(216);
     pctrP -> end();
     pHtc -> wife = tagid + 1;
-    updateParentHtmlNode(pHtp,pHtc);
+    //updateParentHtmlNode(pHtp,pHtc);
 }
 
 void  HtmlUlNode::processValue(dmToken * t)
@@ -112,7 +112,7 @@ void HtmlTdNode:: endParse()
     tdattr_t * td =(tdattr_t*) getAttrBaseP(pHtc);
 
     updateSelfHtmlNode(pHtc);
-    updateParentHtmlNode(pHtp,pHtc);
+    //updateParentHtmlNode(pHtp,pHtc);
     if (td -> h  >  tr -> h) tr->h = td->h;
     tr->w += td->w;
     //if((td -> w) > *(td -> colsMaxW)) *(td -> colsMaxW) = td -> w;
@@ -183,7 +183,7 @@ void HtmlTrNode:: endParse()
     if(tr ->cols > table -> cols) table -> cols = tr -> cols;
 
     int w,h;
-    updateParentHtmlNode(pHtp,pHtc);
+    //updateParentHtmlNode(pHtp,pHtc);
     GetCurWHFromhtmlNode(w,h,pHtc);
     debprintf("TR resize : w: %d h:%d\n",w,h);
     ctrDiv* pctr=(ctrDiv*) (pHtc -> obj );
@@ -276,7 +276,7 @@ void HtmlTableNode:: endParse()
 
     debprintf("TABLE: w:%d h:%d\n",tableattr->w,tableattr->h);
     //UPDATEatEnd; 
-    updateParentHtmlNode(pHtp,pHtc);
+    //updateParentHtmlNode(pHtp,pHtc);
     GetCurWHFromhtmlNode(w,h,pHtc);
     debprintf("TABLE resize : w:%d h:%d\n",w,h);
     ctrDiv* pctr=(ctrDiv*) (pHtc -> obj );
@@ -344,7 +344,7 @@ void HtmlDivNode:: endParse()
         pctrDiv -> setWH(w,h);
         //updateParentHtmlNode(pHtp,pHtc);
     }
-    updateParentHtmlNode(pHtp,pHtc);
+    //updateParentHtmlNode(pHtp,pHtc);
     pHtc -> wife = tagid;
     //HNinsert(pHtp,pHtc);
     popRect();
@@ -451,7 +451,7 @@ void HtmlPNode:: endParse()
 	pctrP -> end();
 	pHtc -> wife = tagid;
 	//HNinsert(pHtp,pHtc);
-	updateParentHtmlNode(pHtp,pHtc);
+	//updateParentHtmlNode(pHtp,pHtc);
 	enterHtmlNode(pHtp);
 }
 
@@ -505,7 +505,7 @@ void HtmlANode:: endParse()
 	debprintf("ctrP x:%d y:%d w:%d h:%d\n",pctrP->x(),pctrP->y(),paattr -> w , paattr->h);
 	pctrP -> labelcolor(216);
 	pctrP -> end();
-	updateParentHtmlNode(pHtp,pHtc);
+	//updateParentHtmlNode(pHtp,pHtc);
 	enterHtmlNode(pHtp);
 
 }
@@ -609,7 +609,7 @@ void HtmlCenterNode:: endParse()
 	debprintf("centerX:%d,%d\n",pos[4],w);
 	pctrDiv -> setx(x);
 	pctrDiv -> setWH(w,h);
-	updateParentHtmlNode(pHtp,pHtc);
+	//updateParentHtmlNode(pHtp,pHtc);
 	return ;
 }
 

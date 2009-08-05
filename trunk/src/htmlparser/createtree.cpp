@@ -328,7 +328,7 @@ ctOP(ctEtablefunc)
 {
 	if( curHtml->_stackisSpouse(tagid)){	
 		pHtmlNode pHtc = curHtml->_3dhpop();
-		pHtc -> endParse();
+		pHtc -> finishParse();
 		return 1;
 	}
 	else{
@@ -363,7 +363,7 @@ ctOP(ctEtrfunc)
 {
 	if( curHtml->_stackisSpouse(tagid)){	
 		pHtmlNode pHtc = curHtml->_3dhpop();
-		pHtc -> endParse();
+		pHtc -> finishParse();
 		return 1;
 	}
 	return 0;
@@ -396,7 +396,7 @@ ctOP(ctEtdfunc)
 {
 	if( curHtml->_stackisSpouse(tagid)){	
 		pHtmlNode pHtc = curHtml->_3dhpop();
-		pHtc -> endParse();
+		pHtc -> finishParse();
 		return 1;
 	}
 	return 0;
@@ -424,7 +424,7 @@ ctOP(ctEulfunc)
 	if( curHtml->_stackisSpouse(tagid)){	
 
 		pHtmlNode pHtc = curHtml->_3dhpop();
-		pHtc -> endParse();
+		pHtc -> finishParse();
 		return 1;
 	}
 	return 0;
@@ -480,7 +480,7 @@ ctOP(ctEafunc)
 	if( curHtml->_stackisSpouse(tagid)){	
 
 		pHtmlNode pHtc = curHtml->_3dhpop();
-		pHtc -> endParse();
+		pHtc -> finishParse();
 		return 1;
 
 	}
@@ -506,7 +506,7 @@ ctOP(ctEpfunc)
 {
 	if( curHtml->_stackisSpouse(tagid)){	
 		pHtmlNode pHtc = curHtml->_3dhpop();
-		pHtc -> endParse();
+		pHtc -> finishParse();
 		return 1;
 	}
 	return 0;
@@ -532,7 +532,7 @@ ctOP(ctEdivfunc)
 {
 	if( curHtml->_stackisSpouse(tagid)){	
 		pHtmlNode pHtc = curHtml->_3dhpop();
-		pHtc -> endParse();
+		pHtc -> finishParse();
 		return 1;
 	}
 	return 0;
@@ -652,7 +652,7 @@ ctOP(ctEcenterfunc)
 	//return 1;
 	if( curHtml->_stackisSpouse(tagid)){	
 		pHtmlNode pHtc = curHtml->_3dhpop();
-		pHtc -> endParse();
+		pHtc -> finishParse();
 	}
 	//#endif
 }
