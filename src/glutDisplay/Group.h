@@ -29,6 +29,7 @@ class Group : public Widget
 		Group(int x, int y, int w, int h, const char* l):Widget(x,y,w,h,l),mChild(NULL){}
 	public:
 		virtual void addChild(Widget*);
+		virtual Widget* getObjOnFocus(int x, int y, int z);
 	private:
 		void appandChild(Widget* child_);
 		void addFirstChild(Widget* child_);

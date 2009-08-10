@@ -44,3 +44,14 @@ void Group::addFirstChild(Widget* child_)
     mChild -> mPrevious = mChild;
 	child_->parent ( this);
 }
+
+Widget* Group::getObjOnFocus(int x, int y, int z)
+{
+	if( hitMe(x, y, z) == HIT_NO) return NULL;
+	Widget* o = child();
+	whilie( o){
+		if( o-> hitMe(x, y, z) == HIT_YES) 
+			return o->getObjOnFocus(x, y, z);
+	}
+	return this;
+}

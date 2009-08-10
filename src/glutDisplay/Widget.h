@@ -1,10 +1,10 @@
 #ifndef __WIDGET_HEADER__
 #define __WIDGET_HEADER__
-#include "Cube.h"
+#include "EventTarget.h"
 #include "Box.h"
 #include "dmtype.h"
 #include "debprintf.h"
-class Widget: public Cube
+class Widget: public EventTarget 
 {
 friend class Group;
 protected:
@@ -13,10 +13,10 @@ protected:
 	Widget* mPrevious;
 public:
 	Widget(){init();};
-	Widget(int x,int y,int z):Cube(x,y,z){init();};
-	Widget(int dx,int dy):Cube(dx,dy){init();};
-	Widget(int x,int y,int z,int dx,int dy,const char* l):Cube(x,y,z,dx,dy){init();};
-	Widget(int x,int y,int dx,int dy , const char* l):Cube(x,y,0,dx,dy){init();};
+	Widget(int x,int y,int z):EventTarget(x,y,z){init();};
+	Widget(int dx,int dy):EventTarget(dx,dy){init();};
+	Widget(int x,int y,int z,int dx,int dy,const char* l):EventTarget(x,y,z,dx,dy,l){init();};
+	Widget(int x,int y,int dx,int dy , const char* l):EventTarget(x,y,dx,dy,l){init();};
 	void box(Box* b){}
 	void box(int b){}
 
@@ -40,6 +40,10 @@ public:
 	int getSz();
 	int3 getSxyz();
 	void getSxyz(int& sx, int& sy, int& sz);
+	//!Event handler
+	int hitMe(int xi, int yi, int zi) { int sx,sy,sz; getSxyz(sx,sy, sz); return isPinRect(xi, yi, sx, sy, w(), h());}	
+	Widget* Group::getObjOnFocus(int x, int y, int z){return this;}
+	//!
 private:
     void init(){mParent = mNext = mPrevious = NULL;}
 };
