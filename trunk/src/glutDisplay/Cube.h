@@ -1,6 +1,9 @@
 #ifndef __Cube_header__
 #define __Cube_header__
 #define CubeINLINE 
+#define HIT_YES 1
+#define HIT_NO 0
+#include "Pointer.h"
 class Cube {
 	public:
 		Cube();
@@ -33,6 +36,21 @@ class Cube {
 		CubeINLINE void getFocus();
 		CubeINLINE void loseFocus();
 		CubeINLINE int  onFocus();
+		int isPinCube(Pointer& p, Cube* c);
+		int isPinRect(int x, int y, int z, int x0, int y0, int z0, int w, int h, int d){
+			if( (( x > x0 ) && ( x< x0+w) )  && 
+			    (( y > y0 ) && ( y< y0+h) )  &&
+				(( z > z0 ) && ( z< z0+d) ) 	)
+				return HIT_YES;
+				else return HIT_NO;
+		}
+		int isPinRect(int x, int y, int x0, int y0, int w, int h){
+			if( (( x > x0 ) && ( x< x0+w) )  && 
+			    (( y > y0 ) && ( y< y0+h) )     )
+				return HIT_YES;
+				else return HIT_NO;
+		}
+		
 	protected:
 		int _x,_y,_z;
 		int _w,_h,_d;
