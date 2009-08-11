@@ -39,14 +39,14 @@ class Cube {
 		int isPinCube(Pointer& p, Cube* c);
 		int isPinRect(int x, int y, int z, int x0, int y0, int z0, int w, int h, int d){
 			if( (( x > x0 ) && ( x< x0+w) )  && 
-			    (( y > y0 ) && ( y< y0+h) )  &&
+			    (( y < y0 ) && ( y> y0-h) )  && /*left top w h */
 				(( z > z0 ) && ( z< z0+d) ) 	)
 				return HIT_YES;
 				else return HIT_NO;
 		}
 		int isPinRect(int x, int y, int x0, int y0, int w, int h){
 			if( (( x > x0 ) && ( x< x0+w) )  && 
-			    (( y > y0 ) && ( y< y0+h) )     )
+			    (( y < y0 ) && ( y> y0-h) )     )
 				return HIT_YES;
 				else return HIT_NO;
 		}
