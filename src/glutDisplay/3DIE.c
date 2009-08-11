@@ -254,6 +254,7 @@ void keyboard(unsigned char key, int x, int y)
             pctrInput0 -> redraw();
         }
     }
+    printf("%0x %0x\n", onFocusWidget, pctrInput0);
 	if((  onFocusWidget != NULL)&&(onFocusWidget != curDoc)) return ;
 	switch (key) {
 		case 27:
