@@ -316,6 +316,7 @@ void ctrInput::keyfunc(char  key,int x,int y)
 			break;
 	}
 }
+
 INLINE void ctrInput::skeyfunc(int key,int x,int y)
 {
 	switch ( key){
