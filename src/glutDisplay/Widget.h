@@ -41,7 +41,10 @@ public:
 	int3 getSxyz();
 	void getSxyz(int& sx, int& sy, int& sz);
 	//!Event handler
-	int hitMe(int xi, int yi, int zi) { int sx,sy,sz; getSxyz(sx,sy, sz); return isPinRect(xi, yi, sx, sy, w(), h());}	
+	int hitMe(int xi, int yi, int zi) { int sx,sy,sz; getSxyz(sx,sy, sz); 
+	printf("%d %d hit on %d %d %d %d \n", xi, yi, sx, sy, w(), h());
+	return isPinRect(xi, yi, sx, sy, w(), h()); 
+	}	
 	virtual Widget* getObjOnFocus(int x, int y, int z){return this;}
 	//!
 private:

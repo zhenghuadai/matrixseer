@@ -12,6 +12,7 @@
 #include "font.h"
 #include "debprintf.h"
 using namespace std;
+int getWinh();
 char * httpcont=0;
 int Win_w=1024;
 int Win_h=768;
@@ -253,7 +254,7 @@ void keyboard(unsigned char key, int x, int y)
             pctrInput0 -> redraw();
         }
     }
-	if( ! onFocusWidget) return ;
+	if((  onFocusWidget != NULL)&&(onFocusWidget != curDoc)) return ;
 	switch (key) {
 		case 27:
 			exit(0);
@@ -322,6 +323,7 @@ void mouse(int button, int state, int x, int y)
 	ctrInput *pctrInput_tmp = pctrInputs[0];
 	pctrInput_tmp -> getFocus();
 	int z = 0;
+	y = getWinh() - y;
 	if(curDoc)
 		if( curDoc -> hitMe(x, y, z)) 
 			onFocusWidget = curDoc -> getObjOnFocus(x, y, z);

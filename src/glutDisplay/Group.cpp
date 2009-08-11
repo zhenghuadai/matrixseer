@@ -52,6 +52,7 @@ Widget* Group::getObjOnFocus(int x, int y, int z)
 	while( o){
 		if( o-> hitMe(x, y, z) == HIT_YES) 
 			return o->getObjOnFocus(x, y, z);
+		o = o -> next();	
 	}
 	return this;
 }
