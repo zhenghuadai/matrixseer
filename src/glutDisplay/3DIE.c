@@ -28,6 +28,9 @@ ctrButton *  pctrButtons[10];
 int pctrIindex = 0;
 int pctrBindex =0;
 
+Widget* curDoc=0;
+Widget* onFocusWidget=0;
+
 void MtrxArc(float zoff);
 //extern const BitmapFontRec   MglutBitmapTimesRoman10;//MglutBitmapTimesRoman10;
 //#include "glut_tr10.c"
@@ -248,75 +251,81 @@ void keyboard(unsigned char key, int x, int y)
         if((pctrInput0)&&(pctrInput0 -> onFocus())){
             pctrInput0 -> keyfunc(key,x,y);// appandchar(key);
             pctrInput0 -> redraw();
-            return ;
-            glutPostRedisplay();
         }
     }
-    switch (key) {
-        case 27:
-            exit(0);
-        case 13:
-            glutPostRedisplay();
-            break;
-        case 'e': 
-            //	ra=1;
-            //	if(ra>360)ra=0;
-            glRotatef(RA,0,1,0);
-            glutPostRedisplay();
-            break;
-        case 'q':
-            glRotatef(-RA,0,1,0);
-            glutPostRedisplay();
+	if( ! onFocusWidget) return ;
+	switch (key) {
+		case 27:
+			exit(0);
+		case 13:
+			break;
+		case 'e': 
+			//	ra=1;
+			//	if(ra>360)ra=0;
+			glRotatef(RA,0,1,0);
+			//glutPostRedisplay();
+			break;
+		case 'q':
+			glRotatef(-RA,0,1,0);
+			//glutPostRedisplay();
 
-            break;
-        case 'd': 
-            glTranslatef(.1,0,0);
-            glutPostRedisplay();
-            break;
-        case 'a': 
-            glTranslatef(-.1,0,0);
-            glutPostRedisplay();
-            break;
-        case 'w': 
-            //	eyeZ += 0.01;
-            glTranslatef(0,0,.1);
-            //  gluLookt(.0,.0,5.0,.0,.0,-100.0,.0,1.0,.0);
-            glutPostRedisplay();
-            break;
-        case 's': 
-            //	eyeZ -= .01;
-            //gluLookAt(.0,.0,5.0,.0,.0,-100.0,.0,1.0,.0);
-            glTranslatef(0,0,-.1);
-            glutPostRedisplay();
-            break;
-        case 'j':
-            DisplayMode++;
-            DisplayMode %= 4;
-            glutPostRedisplay();
-        default:
-            //	url[i++]=key;
-            glutPostRedisplay();
-    }
+			break;
+		case 'd': 
+			glTranslatef(.1,0,0);
+			//glutPostRedisplay();
+			break;
+		case 'a': 
+			glTranslatef(-.1,0,0);
+			//glutPostRedisplay();
+			break;
+		case 'w': 
+			//	eyeZ += 0.01;
+			glTranslatef(0,0,.1);
+			//  gluLookt(.0,.0,5.0,.0,.0,-100.0,.0,1.0,.0);
+			//glutPostRedisplay();
+			break;
+		case 's': 
+			//	eyeZ -= .01;
+			//gluLookAt(.0,.0,5.0,.0,.0,-100.0,.0,1.0,.0);
+			glTranslatef(0,0,-.1);
+			//glutPostRedisplay();
+			break;
+		case 'j':
+			DisplayMode++;
+			DisplayMode %= 4;
+			//glutPostRedisplay();
+			break;
+		default:
+			//	url[i++]=key;
+			//glutPostRedisplay();
+			break;
+	}
+	glutPostRedisplay();
 }
 void ctrlkey(int key,int x,int y)
 {
-    if((pctrInput0)&&(pctrInput0 -> onFocus())){
-        pctrInput0->skeyfunc(key,x,y);
-        pctrInput0 -> redraw();
-    }
-    switch (key){
-        case GLUT_KEY_LEFT:
-        case GLUT_KEY_RIGHT:
-            break;
-        default:
-            break;
-    }
-    glutPostRedisplay();
+	if((pctrInput0)&&(pctrInput0 -> onFocus())){
+		pctrInput0->skeyfunc(key,x,y);
+		pctrInput0 -> redraw();
+	}
+	switch (key){
+		case GLUT_KEY_LEFT:
+		case GLUT_KEY_RIGHT:
+			break;
+		default:
+			break;
+	}
+	glutPostRedisplay();
 }
 void mouse(int button, int state, int x, int y) 
 {
 	ctrInput *pctrInput_tmp = pctrInputs[0];
 	pctrInput_tmp -> getFocus();
+	int z = 0;
+	if(curDoc)
+		if( curDoc -> hitMe(x, y, z)) 
+			onFocusWidget = curDoc -> getObjOnFocus(x, y, z);
+	printf("[%d %d]hit  %0x\n", x,y, onFocusWidget);
 	if(0)
 		switch ( button)
 		{
@@ -450,4 +459,9 @@ void setFocusInput(ctrInput* ci)
 {
 	pctrInputs[0]=pctrInput0=ci;
 	ci->getFocus();
+}
+
+void setCurDocument(Widget* o)
+{
+	curDoc = o;
 }

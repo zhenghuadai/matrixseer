@@ -98,6 +98,7 @@ void htmlparser::initialFunc()
         _ctAF2(HEADID,ctSheadfunc,ctEheadfunc);
         _ctAF2(TITLEID,ctStitlefunc,ctEtitlefunc);
         _ctAF2(H2ID,ctSskipfunc,ctEskipfunc);
+        _ctAF2(BODYID,ctSbodyfunc,ctEbodyfunc);
     }
     isFirst = 0;
     //render tree

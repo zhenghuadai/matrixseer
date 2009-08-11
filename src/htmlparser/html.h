@@ -107,6 +107,8 @@ class htmlparser:public __stack
         ctOP(ctEnobrfunc);
         ctOP(ctSsmallfunc);
         ctOP(ctEsmallfunc);
+        ctOP(ctSbodyfunc);
+        ctOP(ctEbodyfunc);
         ctOP2(ctSheadfunc,ctEheadfunc);
         ctOP2(ctStitlefunc,ctEtitlefunc);
         ctOP2(ctSskipfunc,ctEskipfunc);

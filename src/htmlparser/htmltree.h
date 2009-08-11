@@ -44,6 +44,7 @@ class HtmlNode{
         HtmlNode * mParent;
     public:
         HtmlNode(int _tag):tagid(_tag),obj(NULL),attr(NULL),value(NULL),child(NULL),mPrevious(NULL),mNext(NULL),mParent(NULL){}
+        HtmlNode():tagid(-1),obj(NULL),attr(NULL),value(NULL),child(NULL),mPrevious(NULL),mNext(NULL),mParent(NULL){}
     private:
         void setNext(HtmlNode* o){
             this -> mNext = o;
@@ -105,6 +106,7 @@ typedef HtmlNode* pHtmlNode;
 {\
 	public: \
 			className(pHtmlNode pHtp, dmToken* t);\
+			className(){};\
 	public:\
 		   virtual void   endParse();\
 	virtual void   processValue(dmToken * t);\
@@ -147,7 +149,11 @@ declareHtmlNode(HtmlCenterNode);
 declareHtmlUnaryNode(HtmlInputNode);
 declareHtmlUnaryNode(HtmlImgNode);
 declareHtmlUnaryNode(HtmlBrNode);
-
+class HtmlBodyNode:public HtmlDivNode 
+{
+   public: 
+   HtmlBodyNode(pHtmlNode pHtp, dmToken* t);
+};
 class attrBase_t
 {
 	public:
