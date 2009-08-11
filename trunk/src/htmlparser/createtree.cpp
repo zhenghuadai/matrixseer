@@ -740,3 +740,30 @@ ctOP(ctEskipfunc)
 }
 endctOP() 
 
+
+ctOP(ctSbodyfunc)
+{
+	if(which==ATTRIB){
+		callBrfunc(curHtml); 
+		pHtmlNode pHtp = curHtml->_3dhtop();
+		pHtmlNode tmpNode= new HtmlBodyNode(pHtp, tp);
+		curHtml->_3dhpush(tmpNode);
+	}
+	else if(which==VALUE){
+		insertTextNode(curHtml, value);
+	}
+	return 1;
+}
+endctOP() 
+
+ctOP(ctEbodyfunc)
+{
+	if( curHtml->_stackisSpouse(tagid)){	
+		pHtmlNode pHtc = curHtml->_3dhpop();
+		pHtc -> finishParse();
+		return 1;
+	}
+	return 1;
+}
+endctOP() 
+

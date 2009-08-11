@@ -387,6 +387,25 @@ void  HtmlDivNode::createRenderObject()
 
 }
 
+/*******************************************************************
+ *
+ *
+ * ****************************************************************/
+HtmlBodyNode::HtmlBodyNode(pHtmlNode pHtp, dmToken* t):HtmlDivNode()
+{
+    tagid = t-> tagid;
+    divattr_t *p_divattr;
+    htmlparser::DivAttr(t->attrib,(void**)&p_divattr);
+    this -> attr = p_divattr;
+    pHtmlNode pHtc = this; 
+    pHtp ->addChild(this);
+	createObject();
+	extern void setCurDocument(Widget* o);
+	setCurDocument((Widget*) this->obj);
+	printf("Body construct\n");
+}
+
+
 
 /*******************************************************************
  *
