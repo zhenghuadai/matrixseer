@@ -32,7 +32,6 @@ class Cube {
 		void sety(int y0){y(y0);}
 		void setWH(int w0,int h0){w(w0);h(h0);}
 		void size(int w0,int h0){w(w0);h(h0);}
-		int inArea(int ptx,int pty, int ptz );
 		CubeINLINE void getFocus();
 		CubeINLINE void loseFocus();
 		CubeINLINE int  onFocus();
