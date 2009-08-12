@@ -1,5 +1,13 @@
 #ifndef DMTYPE_HEADER__
 #define DMTYPE_HEADER__
+
+typedef unsigned char U8;
+typedef unsigned char* pU8;
+typedef unsigned char  Uchar;
+typedef unsigned char* pUchar;
+typedef unsigned int  U32;
+
+
 typedef union{
     struct{
         int x;
