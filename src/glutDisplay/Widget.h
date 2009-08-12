@@ -4,6 +4,7 @@
 #include "Box.h"
 #include "dmtype.h"
 #include "debprintf.h"
+#include "Event.h"
 class Widget: public EventTarget 
 {
 friend class Group;
@@ -42,12 +43,14 @@ public:
 	void getSxyz(int& sx, int& sy, int& sz);
 	//!Event handler
 	int hitMe(int xi, int yi, int zi) { int sx,sy,sz; getSxyz(sx,sy, sz); 
-	printf("%d %d hit on %d %d %d %d \n", xi, yi, sx, sy, w(), h());
-	return isPinRect(xi, yi, sx, sy, w(), h()); 
+		printf("%d %d hit on %d %d %d %d \n", xi, yi, sx, sy, w(), h());
+		return isPinRect(xi, yi, sx, sy, w(), h()); 
 	}	
 	virtual Widget* getObjOnFocus(int x, int y, int z){return this;}
+	virtual int handleKey(Event e){};
+	virtual int handleKey(int key){};
 	//!
 private:
-    void init(){mParent = mNext = mPrevious = NULL;}
+	void init(){mParent = mNext = mPrevious = NULL;}
 };
 #endif

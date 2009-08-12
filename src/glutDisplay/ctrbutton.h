@@ -6,6 +6,9 @@
 #include "Widget.h"
 class ctrButton: public Widget
 {
+private:
+char *pvalue;
+int curc;
 public:
  ctrButton();
  ctrButton(int sdx,int sdy);
@@ -18,9 +21,8 @@ public:
 ~ctrButton();
 void draw();
 void redraw();
-void keyfunc(char  key,int x,int y);
+virtual int handleKey( int key) { keyfunc(key, 0,0); return 1;}
 private:
-char *pvalue;
-int curc;
+void keyfunc(int key,int x,int y);
 };
 #endif
