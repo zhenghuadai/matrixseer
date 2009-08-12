@@ -23,7 +23,6 @@ public:
 
 
 	void show(){};
-	void redraw(){};
     void begin(){};
     void end(){};
     void color(int){};
@@ -49,6 +48,7 @@ public:
 	virtual Widget* getObjOnFocus(int x, int y, int z){return this;}
 	virtual int handleKey(Event e){};
 	virtual int handleKey(int key){};
+	virtual void redraw(){};
 	//!
 private:
 	void init(){mParent = mNext = mPrevious = NULL;}

@@ -23,8 +23,10 @@ GLuint texName1;
 static int DisplayMode = PLAINMODE;
 float globalColor[4]={1.0,1.0,1.0,1.0};
 float globalColor2[4]={.0,.0,1.0,1.0};
-ctrInput *pctrInput0=0;
-ctrInput * pctrInputs[10];
+//ctrInput *pctrInput0=0;
+//ctrInput * pctrInputs[10];
+Widget *pctrInput0=0;
+Widget * pctrInputs[10];
 ctrButton *  pctrButtons[10];
 int pctrIindex = 0;
 int pctrBindex =0;
@@ -322,7 +324,8 @@ void ctrlkey(int key,int x,int y)
 }
 void mouse(int button, int state, int x, int y) 
 {
-	ctrInput *pctrInput_tmp = pctrInputs[0];
+	//ctrInput *pctrInput_tmp = pctrInputs[0];
+	Widget *pctrInput_tmp = pctrInputs[0];
 	pctrInput_tmp -> getFocus();
 	int z = 0;
 	y = getWinh() - y;
@@ -337,7 +340,7 @@ void mouse(int button, int state, int x, int y)
 				switch ( state) {
 					case GLUT_DOWN:
 						for(int i =0;i<pctrIindex;i++){
-							ctrInput *pctrInput_tmp = pctrInputs[i];
+							Widget *pctrInput_tmp = pctrInputs[i];
 							if(pctrInput_tmp -> inArea(x,Win_h-y,0)) 
 								pctrInput_tmp -> getFocus();
 							else
@@ -351,7 +354,7 @@ void mouse(int button, int state, int x, int y)
 						break;
 					case GLUT_UP:
 						for(int i =0;i<pctrIindex;i++){
-							ctrInput *pctrInput_tmp = pctrInputs[i];
+							Widget *pctrInput_tmp = pctrInputs[i];
 							if(pctrInput_tmp -> inArea(x,Win_h-y,0)) 
 								pctrInput_tmp -> getFocus();
 							else
@@ -459,7 +462,7 @@ int getWinh()
 {
 	return Win_h;
 }
-void setFocusInput(ctrInput* ci)
+void setFocusInput(Widget* ci)
 {
 	pctrInputs[0]=pctrInput0=ci;
 	ci->getFocus();

@@ -3,8 +3,10 @@
 #include "ctrinput.h"
 #include "ctrbutton.h"
 #include <GL/gl.h>
-extern ctrInput * pctrInput0;
-extern ctrInput * pctrInputs[10];
+//extern ctrInput * pctrInput0;
+//extern ctrInput * pctrInputs[10];
+extern Widget* pctrInput0;
+extern Widget* pctrInputs[10];
 extern ctrButton *  pctrButtons[10];
 extern int pctrIindex ;
 extern int pctrBindex ;
