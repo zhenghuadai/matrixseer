@@ -341,28 +341,28 @@ void mouse(int button, int state, int x, int y)
 					case GLUT_DOWN:
 						for(int i =0;i<pctrIindex;i++){
 							Widget *pctrInput_tmp = pctrInputs[i];
-							if(pctrInput_tmp -> inArea(x,Win_h-y,0)) 
+							if(pctrInput_tmp -> hitMe(x,Win_h-y,0)) 
 								pctrInput_tmp -> getFocus();
 							else
 								pctrInput_tmp -> loseFocus();
 						}
 						for(int i=0;i<pctrBindex;i++){
 							ctrButton *pctrButton_tmp = pctrButtons[i];
-							if(pctrButton_tmp ->inArea(x,Win_h -y,0))
+							if(pctrButton_tmp ->hitMe(x,Win_h -y,0))
 								pctrButton_tmp -> OnClick();
 						}
 						break;
 					case GLUT_UP:
 						for(int i =0;i<pctrIindex;i++){
 							Widget *pctrInput_tmp = pctrInputs[i];
-							if(pctrInput_tmp -> inArea(x,Win_h-y,0)) 
+							if(pctrInput_tmp -> hitMe(x,Win_h-y,0)) 
 								pctrInput_tmp -> getFocus();
 							else
 								pctrInput_tmp -> loseFocus();
 						}
 						for(int i=0;i<pctrBindex;i++){
 							ctrButton *pctrButton_tmp = pctrButtons[i];
-							if(pctrButton_tmp ->inArea(x,Win_h -y,0))
+							if(pctrButton_tmp ->hitMe(x,Win_h -y,0))
 								pctrButton_tmp -> redraw();
 						}
 

@@ -56,9 +56,4 @@ CubeINLINE int Cube::onFocus()
     return focus ;
 }
 
-CubeINLINE int Cube::inArea(int ptx,int pty, int ptz )
-{
-    if((ptx > _x)&&(ptx < _x + _w) && (pty > _y)&&(pty < _y + _h)) return 1;
-    return 0;
-}
 
