@@ -29,7 +29,7 @@
 #define ALIGNCENTER 2
 #define attrOfHtmlNode( pNode) pNode -> attr
 class HtmlNode;
-inline void  updateParentHtmlNode(HtmlNode *pHtp, HtmlNode* pHtc);
+void  updateParentHtmlNode(HtmlNode *pHtp, HtmlNode* pHtc);
 typedef void* attr_t;
 class HtmlNode{
     public:
