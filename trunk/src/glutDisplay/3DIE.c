@@ -250,7 +250,8 @@ void keyboard(unsigned char key, int x, int y)
     static int i=0;
     if((key < 127)&&(key >= 0)) {
         if((pctrInput0)&&(pctrInput0 -> onFocus())){
-            pctrInput0 -> keyfunc(key,x,y);// appandchar(key);
+            //pctrInput0 -> keyfunc(key,x,y);// appandchar(key);
+			(Widget*) (pctrInput0) -> handleKey(key);
             pctrInput0 -> redraw();
         }
     }
@@ -307,7 +308,7 @@ void keyboard(unsigned char key, int x, int y)
 void ctrlkey(int key,int x,int y)
 {
 	if((pctrInput0)&&(pctrInput0 -> onFocus())){
-		pctrInput0->skeyfunc(key,x,y);
+		//pctrInput0->skeyfunc(key,x,y);
 		pctrInput0 -> redraw();
 	}
 	switch (key){

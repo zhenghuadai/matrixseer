@@ -62,7 +62,7 @@ void ctrButton::redraw()
     glColor4fv(oldcolor);
     sufRedraw();
 }
-void ctrButton::keyfunc(char  key,int x,int y)
+void ctrButton::keyfunc(int  key,int x,int y)
 {
 }
 void ctrButton::OnClick()

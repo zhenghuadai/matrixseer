@@ -27,12 +27,16 @@ INLINE char *  getValue();
 INLINE void drawCursor();
 INLINE void moveCursor(int drt);
 INLINE void skeyfunc(int key,int x,int y);
-void keyfunc(char  key,int x,int y);
 int  deletechar(char c);
 int  insertchar(char c);
 int  backspacechar(char c);
+
+public:
+virtual int handleKey(int key){keyfunc( key, 0, 0);return 1;};
+
 private:
 void initInput(int sdx,int sdy);
+void keyfunc(char  key,int x,int y);
 private:
 //int x,y,z,dx,dy;
 int maxc,curc;

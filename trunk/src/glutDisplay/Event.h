@@ -26,4 +26,14 @@
 
 typedef struct 
 {
-}event;
+	U32 msg; 
+	U32 reserved; 
+	union{
+		U32 wPara;
+		double wParaD;
+	};
+	union{
+		U32 lPara;
+		double lParaD;
+	};
+}Event;
