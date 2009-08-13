@@ -250,15 +250,14 @@ void reshape(int w, int h)
 void keyboard(unsigned char key, int x, int y)
 {
     static int i=0;
-    if((key < 127)&&(key >= 0)) {
-        if((pctrInput0)&&(pctrInput0 -> onFocus())){
-            //pctrInput0 -> keyfunc(key,x,y);// appandchar(key);
-			(Widget*) (pctrInput0) -> handleKey(key);
-            pctrInput0 -> redraw();
-        }
-    }
-    printf("%0x %0x\n", onFocusWidget, pctrInput0);
-	if((  onFocusWidget != NULL)&&(onFocusWidget != curDoc)) return ;
+	if((key < 127)&&(key >= 0)) {
+		if((  onFocusWidget != NULL)&&(onFocusWidget != curDoc)){ 
+			onFocusWidget ->handleKey(key);
+			onFocusWidget -> redraw();
+			return ;
+		}
+	}
+	printf("%0x %0x\n", onFocusWidget, pctrInput0);
 	switch (key) {
 		case 27:
 			exit(0);
