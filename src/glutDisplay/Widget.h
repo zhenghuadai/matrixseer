@@ -50,6 +50,8 @@ public:
 	virtual int handleKey(int key){};
 	virtual void redraw(){};
 	//!
+public:
+	void getLBpos(int& leftX, int& bottomY, int& z){getSxyz(leftX, bottomY, z); bottomY -= h(); }
 private:
 	void init(){mParent = mNext = mPrevious = NULL;}
 };

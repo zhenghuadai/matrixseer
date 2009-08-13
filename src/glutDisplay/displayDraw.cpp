@@ -46,17 +46,17 @@ void drawLine( int x, int y, int z, int x2, int y2, int z2)
 {
 }
 
-void drawFrame(double x,double y,double z,double dx,double dy)
+void drawFrame(double x,double bottomY,double z,double dx,double dy)
 {
 	//   GLfloat oldcolor[4];
 	//   glGetFloatv(GL_CURRENT_COLOR,oldcolor);
 	glBegin(GL_LINE_STRIP);
 	//    glColor4f(.8,.8,.8,1.0);
-	glVertex3d(x,y,z);
-	glVertex3d(x,y+dy,z);
-	glVertex3d(x+dx,y+dy,z);
-	glVertex3d(x+dx,y,z);
-	glVertex3d(x,y,z);
+	glVertex3d(x,bottomY,z);
+	glVertex3d(x,bottomY+dy,z);
+	glVertex3d(x+dx,bottomY+dy,z);
+	glVertex3d(x+dx,bottomY,z);
+	glVertex3d(x,bottomY,z);
 	glEnd();
 }
 
@@ -65,71 +65,71 @@ void drawFrame(int x, int y, int z, int dx, int dy)
 
 }
 
-void drawButton2dframe(double x,double y,double z,double dx,double dy)
+void drawButton2dframe(double x,double bottomY,double z,double dx,double dy)
 {
 	GLfloat oldcolor[4];
 	glGetFloatv(GL_CURRENT_COLOR,oldcolor);
 	glBegin(GL_LINE_STRIP);
 	glColor4f(.8,.8,.8,1.0);
-	glVertex3d(x,y,z);
-	glVertex3d(x,y+dy,z);
-	glVertex3d(x+dx,y+dy,z);
+	glVertex3d(x,bottomY,z);
+	glVertex3d(x,bottomY+dy,z);
+	glVertex3d(x+dx,bottomY+dy,z);
 	glEnd();
 	glBegin(GL_LINE_STRIP);
 	glColor4f(.1,.1,.1,1.0);
-	glVertex3d(x,y,z);
-	glVertex3d(x+dx,y,z);
-	glVertex3d(x+dx,y+dy,z);
+	glVertex3d(x,bottomY,z);
+	glVertex3d(x+dx,bottomY,z);
+	glVertex3d(x+dx,bottomY+dy,z);
 	glEnd();
 	glColor4fv(oldcolor);
 }
-void drawButton2d(double x,double y,double z,double dx,double dy)
+void drawButton2d(double x,double bottomY,double z,double dx,double dy)
 {
 	GLfloat oldcolor[4];
 	glGetFloatv(GL_CURRENT_COLOR,oldcolor);
 	glBegin(GL_QUADS);
 	glColor4f(.9,.9,.9,1.0);
-	glVertex3d(x,y,z);
-	glVertex3d(x+dx,y,z);
-	glVertex3d(x+dx,y+dy,z);
-	glVertex3d(x,y+dy,z);
+	glVertex3d(x,bottomY,z);
+	glVertex3d(x+dx,bottomY,z);
+	glVertex3d(x+dx,bottomY+dy,z);
+	glVertex3d(x,bottomY+dy,z);
 	glEnd();
 	glBegin(GL_LINE_STRIP);
 	glColor4f(.8,.8,.8,1.0);
-	glVertex3d(x,y,z);
-	glVertex3d(x,y+dy,z);
-	glVertex3d(x+dx,y+dy,z);
+	glVertex3d(x,bottomY,z);
+	glVertex3d(x,bottomY+dy,z);
+	glVertex3d(x+dx,bottomY+dy,z);
 	glEnd();
 	glBegin(GL_LINE_STRIP);
 	glColor4f(.1,.1,.1,1.0);
-	glVertex3d(x,y,z);
-	glVertex3d(x+dx,y,z);
-	glVertex3d(x+dx,y+dy,z);
+	glVertex3d(x,bottomY,z);
+	glVertex3d(x+dx,bottomY,z);
+	glVertex3d(x+dx,bottomY+dy,z);
 	glEnd();
 	glColor4fv(oldcolor);
 }
-void drawInput2d(double x,double y,double z,double dx,double dy)
+void drawInput2d(double x,double bottomY,double z,double dx,double dy)
 {
 	GLfloat oldcolor[4];
 	glGetFloatv(GL_CURRENT_COLOR,oldcolor);
 	glBegin(GL_QUADS);
 	glColor4f(.3,.3,.3,3.0);
-	glVertex3d(x,y,z);
-	glVertex3d(x+dx,y,z);
-	glVertex3d(x+dx,y+dy,z);
-	glVertex3d(x,y+dy,z);
+	glVertex3d(x,bottomY,z);
+	glVertex3d(x+dx,bottomY,z);
+	glVertex3d(x+dx,bottomY+dy,z);
+	glVertex3d(x,bottomY+dy,z);
 	glEnd();
 	glBegin(GL_LINE_STRIP);
 	glColor4f(.1,.1,.1,1.0);
-	glVertex3d(x,y,z);
-	glVertex3d(x,y+dy,z);
-	glVertex3d(x+dx,y+dy,z);
+	glVertex3d(x,bottomY,z);
+	glVertex3d(x,bottomY+dy,z);
+	glVertex3d(x+dx,bottomY+dy,z);
 	glEnd();
 	glBegin(GL_LINE_STRIP);
 	glColor4f(.8,.8,.8,1.0);
-	glVertex3d(x,y,z);
-	glVertex3d(x+dx,y,z);
-	glVertex3d(x+dx,y+dy,z);
+	glVertex3d(x,bottomY,z);
+	glVertex3d(x+dx,bottomY,z);
+	glVertex3d(x+dx,bottomY+dy,z);
 	glEnd();
 	glColor4fv(oldcolor);
 }

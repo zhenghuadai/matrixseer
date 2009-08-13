@@ -101,7 +101,8 @@ void ctrInput::draw()
 	//_x=curRasterPos[0];
 	//_y=curRasterPos[1]-2;
 	//_z=curRasterPos[2];
-	getSxyz(curRasterPos[0],curRasterPos[1],curRasterPos[2]);
+	//getSxyz(curRasterPos[0],curRasterPos[1],curRasterPos[2]);
+	getLBpos(curRasterPos[0],curRasterPos[1],curRasterPos[2]);
 	MoveTo2(curRasterPos[0],curRasterPos[1]-2);
 	glGetFloatv(GL_CURRENT_COLOR,oldcolor);
 	glColor4f(1,1,1,1);
@@ -121,7 +122,8 @@ void ctrInput::redraw()
 	glGetFloatv(GL_CURRENT_COLOR,oldcolor);
 	glColor4f(1,1,1,1);
 	int sx,sy,sz;
-	getSxyz(sx,sy,sz);
+	//getSxyz(sx,sy,sz);
+	getLBpos(sx,sy,sz);
 #if 1 
 	drawInput2d(sx,sy,0,w(),h());
 	MoveTo2(sx,sy+3);
