@@ -190,3 +190,7 @@ void forward0(int x,int y)
     curRasterPosY += y;
     MoveTo2(curRasterPosX,curRasterPosY);
 }
+int getRowHeight()
+{
+    return rowHeight;
+}
