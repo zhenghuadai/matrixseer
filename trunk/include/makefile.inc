@@ -23,8 +23,10 @@ DBGCFLAG    += -DDEB -DDZHDEB  -g
 OPTCFLAG    = ${CFLAG}
 LIBPATH		= ${TOPDIR}/lib/
 BINPATH		= ${TOPDIR}/bin/
+VIRDISPLAY  = display
 
 DISPLAYPATH = ${TOPDIR}/src/${DMDISPLAY}/
+VIRDISPLAYPATH = ${TOPDIR}/src/${VIRDISPLAY}/
 PARSERPATH 	= ${TOPDIR}/src/htmlparser/
 JSPATH  	= ${TOPDIR}/src/js/
 NETWORKPATH = ${TOPDIR}/src/network/
@@ -37,7 +39,7 @@ NET_OUT_DIR=${TOPDIR}/builds/network/dbg
 IO_OUT_DIR=${TOPDIR}/builds/io/dbg
 JS_OUT_DIR=${TOPDIR}/builds/js/dbg
 
-INCLUDEPATH += -I${TOPDIR}/include/  -I${PARSERPATH} -I${JSPATH}/include -I${NETWORKPATH} -I${JSPATH} -I${JSPATH}/include  -I${DISPLAYPATH} -I${IOPATH} -I${MEDIAPATH}
+INCLUDEPATH += -I${TOPDIR}/include/  -I${PARSERPATH} -I${JSPATH}/include -I${NETWORKPATH} -I${JSPATH} -I${JSPATH}/include  -I${DISPLAYPATH} -I${IOPATH} -I${MEDIAPATH} -I${VIRDISPLAYPATH}
 
 #set source file 
 C_SRCS  	= $(SRCS:%.cpp=%.c)

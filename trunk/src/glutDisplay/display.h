@@ -92,5 +92,6 @@ int putStrScr(const char *content,int x,int y,int w,int h,int offsetx);
 int2 getWH_Chars(int w,int h,int id);
 int getWinw();
 int getWinh();
+int getRowHeight();
 #define GM_BLACK 0
 #endif
