@@ -678,7 +678,7 @@ void  HtmlInputNode::createRenderObject()
 				if(! (p_inputattr->h)) p_inputattr->h = 22;
 				ctrInput * pctrInput = new ctrInput(x,y,200,22,NULL);
 				this-> obj = (void *) pctrInput;
-				#if 1 //! test input
+				#if 0 //! test input
 				void setFocusInput(Widget*);
 				setFocusInput(pctrInput);
 				#endif
