@@ -323,9 +323,6 @@ void ctrlkey(int key,int x,int y)
 }
 void mouse(int button, int state, int x, int y) 
 {
-	//ctrInput *pctrInput_tmp = pctrInputs[0];
-	Widget *pctrInput_tmp = pctrInputs[0];
-	pctrInput_tmp -> getFocus();
 	int z = 0;
 	y = getWinh() - y;
 	if(curDoc)
