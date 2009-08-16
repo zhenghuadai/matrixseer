@@ -205,6 +205,7 @@ int htmlparser::ctTextFunc(pHtmlNode pHtp,char * htdoc)
 		//if(rowHeight > pAttrp -> curH) pAttrp -> curH = rowHeight;
 		if(wh.y *rowHeight> pAttrp -> curH) pAttrp -> curH = (wh.y)*rowHeight + rowHeight/2;
 	}
+    //updateParentHtmlNode(pHtp, pHtc);
 }
 
 ctOP(ctSfunc)

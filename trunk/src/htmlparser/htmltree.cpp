@@ -336,17 +336,15 @@ void HtmlDivNode:: endParse()
     int w,h;
     ctrDiv* pctrDiv=(ctrDiv*) (pHtc -> obj );
     GetCurWHFromhtmlNode(w,h,pHtc);
-    //updateParentHtmlNode(pHtp,pHtc);
     debprintf("Divsize  %d %d\n",paattr -> w +5, paattr->h);
     pctrDiv -> labelcolor(216);
     pctrDiv -> end();
     if(!(pctrDiv -> isFixWH())){
         pctrDiv -> setWH(w,h);
-        //updateParentHtmlNode(pHtp,pHtc);
+    }else{
+        //pctrDiv -> setWH(w,h);
     }
-    //updateParentHtmlNode(pHtp,pHtc);
     pHtc -> wife = tagid;
-    //HNinsert(pHtp,pHtc);
     popRect();
 }
 
