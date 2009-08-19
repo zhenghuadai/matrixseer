@@ -27,25 +27,15 @@ void ctrButton::draw()
 {
     int curRasterPos[4];
     int endPos[4];
-    //glGetIntegerv(GL_CURRENT_RASTER_POSITION,curRasterPos);
-    //_x=curRasterPos[0];
-    //_y=curRasterPos[1]-2;
-    //_z=curRasterPos[2];
 	getSxyz(curRasterPos[0],curRasterPos[1],curRasterPos[2]);
 	MoveTo2(curRasterPos[0],curRasterPos[1]-2);
     putStrScr(pvalue);
-    glGetIntegerv(GL_CURRENT_RASTER_POSITION,endPos);
+    getCurrentRasterPos(endPos);
     _w = endPos[0] - curRasterPos[0];
     _h = 22;
     drawButton2dframe(curRasterPos[0],curRasterPos[1]-3,curRasterPos[2],_w,22);
     endPos[0] += 1;
     MoveTo2(endPos[0],endPos[1]);
-    /*
-       drawInput2d(curRasterPos[0],curRasterPos[1],0,_w,_h);
-       curRasterPos[0] += (_w + 1);
-       putStrScr(pvalue ,curc);
-       MoveTo2(curRasterPos[0],curRasterPos[1]);
-       */
 }
 void ctrButton::redraw()
 {

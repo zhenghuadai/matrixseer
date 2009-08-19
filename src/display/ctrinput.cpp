@@ -97,11 +97,6 @@ void ctrInput::draw()
 {
 	int curRasterPos[4];
 	GLfloat oldcolor[4];
-	//glGetIntegerv(GL_CURRENT_RASTER_POSITION,curRasterPos);
-	//_x=curRasterPos[0];
-	//_y=curRasterPos[1]-2;
-	//_z=curRasterPos[2];
-	//getSxyz(curRasterPos[0],curRasterPos[1],curRasterPos[2]);
 	getLBpos(curRasterPos[0],curRasterPos[1],curRasterPos[2]);
 	MoveTo2(curRasterPos[0],curRasterPos[1]-2);
 	glGetFloatv(GL_CURRENT_COLOR,oldcolor);
@@ -234,22 +229,23 @@ INLINE void  ctrInput::drawCursor()
 	{
 		glGetFloatv(GL_CURRENT_COLOR,oldcolor);
 		glColor4f(0,1.0,0.0,1);
-		glGetIntegerv(GL_CURRENT_RASTER_POSITION,curpos);
-		//curpos[2] = 0;
-		glBegin(GL_QUADS);
-		glVertex3f(curpos[0],curpos[1],curpos[2]);
-		glVertex3f(curpos[0]+CURSORW,curpos[1],curpos[2]);
-		glVertex3f(curpos[0]+CURSORW,curpos[1]+CURSORH,curpos[2]);
-		glVertex3f(curpos[0],curpos[1]+CURSORH,curpos[2]);
-		glEnd();
-		glColor4fv(oldcolor);
-	}
-	//visible ++;
-	//visible = visible & 1;
+        //glGetIntegerv(GL_CURRENT_RASTER_POSITION,curpos);
+        getCurrentRasterPos(curpos);
+        //curpos[2] = 0;
+        glBegin(GL_QUADS);
+        glVertex3f(curpos[0],curpos[1],curpos[2]);
+        glVertex3f(curpos[0]+CURSORW,curpos[1],curpos[2]);
+        glVertex3f(curpos[0]+CURSORW,curpos[1]+CURSORH,curpos[2]);
+        glVertex3f(curpos[0],curpos[1]+CURSORH,curpos[2]);
+        glEnd();
+        glColor4fv(oldcolor);
+    }
+    //visible ++;
+    //visible = visible & 1;
 }
 INLINE char * ctrInput::getValue()
 {
-	return pvalue;
+    return pvalue;
 }
 /*
    INLINE void ctrInput::getFocus()
@@ -274,59 +270,59 @@ INLINE char * ctrInput::getValue()
    */
 INLINE void ctrInput::moveCursor(int drt)
 {
-	curCursorPos += drt;
-	if(drt>0){
-		if(curCursorPos > curc+1){ 
-			curCursorPos = curc+1;
-			return ;
-		}
-		curdx += getCharWidth(pvalue[curCursorPos-1]);
-		//	if(curCursorPos - startDrawPos > MAXCS) startDrawPos++;	
-		while(curdx >=  _w -4){
-			curdx -= getCharWidth(pvalue[startDrawPos]);
-			startDrawPos++;
-		}
-	}
-	else{
-		if(curCursorPos<0) {
-			curCursorPos=0;
-			return;
-		}
-		curdx -= getCharWidth(pvalue[curCursorPos]);
-		if(curCursorPos < startDrawPos) {
-			startDrawPos--;
-			curdx = 0;
-		}
-	}
+    curCursorPos += drt;
+    if(drt>0){
+        if(curCursorPos > curc+1){ 
+            curCursorPos = curc+1;
+            return ;
+        }
+        curdx += getCharWidth(pvalue[curCursorPos-1]);
+        //	if(curCursorPos - startDrawPos > MAXCS) startDrawPos++;	
+        while(curdx >=  _w -4){
+            curdx -= getCharWidth(pvalue[startDrawPos]);
+            startDrawPos++;
+        }
+    }
+    else{
+        if(curCursorPos<0) {
+            curCursorPos=0;
+            return;
+        }
+        curdx -= getCharWidth(pvalue[curCursorPos]);
+        if(curCursorPos < startDrawPos) {
+            startDrawPos--;
+            curdx = 0;
+        }
+    }
 }
 void ctrInput::keyfunc(char  key,int x,int y)
 {
-	if(key >31){
-		if(curCursorPos == curc+1) 
-			appandchar(key);
-		else
-			insertchar(key);
-		printf("%s\n", pvalue);	
-		return ;
-	}
-	switch ( key){
-		case 8:
-			backspacechar(key);
-			break;
-		case 27:
-			loseFocus();
-			break;
-	}
+    if(key >31){
+        if(curCursorPos == curc+1) 
+            appandchar(key);
+        else
+            insertchar(key);
+        printf("%s\n", pvalue);	
+        return ;
+    }
+    switch ( key){
+        case 8:
+            backspacechar(key);
+            break;
+        case 27:
+            loseFocus();
+            break;
+    }
 }
 
 INLINE void ctrInput::skeyfunc(int key,int x,int y)
 {
-	switch ( key){
-		case GLUT_KEY_LEFT: 
-			moveCursor(-1);
-			break;
-		case GLUT_KEY_RIGHT:
-			moveCursor(1);
-			break;
-	}
+    switch ( key){
+        case GLUT_KEY_LEFT: 
+            moveCursor(-1);
+            break;
+        case GLUT_KEY_RIGHT:
+            moveCursor(1);
+            break;
+    }
 }

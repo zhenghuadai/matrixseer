@@ -4,6 +4,7 @@
 #define HIT_YES 1
 #define HIT_NO 0
 #include "Pointer.h"
+#include "display.h"
 class Cube {
 	public:
 		Cube();
