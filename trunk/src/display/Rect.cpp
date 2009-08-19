@@ -30,7 +30,8 @@ void Rect::setwh(int dx,int dy)
 void Rect::setxyz()
 {
     int curRasterPos[4];
-    glGetIntegerv(GL_CURRENT_RASTER_POSITION,curRasterPos);
+    //glGetIntegerv(GL_CURRENT_RASTER_POSITION,curRasterPos);
+    getCurrentRasterPos(curRasterPos);
     _x=curRasterPos[0];
     _y=curRasterPos[1]-2;
     _z=curRasterPos[2];

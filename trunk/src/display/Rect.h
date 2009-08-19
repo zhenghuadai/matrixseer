@@ -1,6 +1,7 @@
 #ifndef __Rect_header__
 #define __Rect_header__
 #define RectINLINE 
+#include "display.h"
 class Rect {
 	public:
 		Rect();

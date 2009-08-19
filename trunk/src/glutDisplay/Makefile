@@ -4,7 +4,7 @@ DMDISPLAY =glutDisplay
 EXEC	=
 
 FONT_SRC= font.cpp glut_tr10.c glut_tr24.c glut_hel10.c   glut_hel12.c   glut_hel18.c   glut_mroman.c  glut_roman.c 
-SRCS= ${FONT_SRC} display.cpp ctrinput.cpp Rect.cpp Cube.cpp ctrbutton.cpp displayDraw.cpp 3DIE.c #Widget.cpp Group.cpp 
+SRCS= ${FONT_SRC} display.cpp  displayDraw.cpp 3DIE.c #Widget.cpp Group.cpp ctrinput.cpp Rect.cpp Cube.cpp ctrbutton.cpp
 TARGET= 3DIE_ALL
 include ../../include/makefile.inc 
 OBJECTS =  ${MULTIMEDIA_OUT_DIR}/bmp.o ${NET_OUT_DIR}/httpsocket.o ${NET_OUT_DIR}/smtpsocket.o  ${OBJS}  ${IO_OUT_DIR}/iofile.o ${JS_OUT_DIR}/JSDocument.o
