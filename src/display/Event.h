@@ -24,8 +24,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct 
+class Event
 {
+public:
 	U32 msg; 
 	U32 reserved; 
 	union{
@@ -36,4 +37,14 @@ typedef struct
 		U32 lPara;
 		double lParaD;
 	};
-}Event;
+public:
+    Event(){}
+    Event(U32 aMsg, U32 aW, U32 aL):msg(aMsg),wPara(aW),lPara(aL){}
+};
+
+class ButtonEvent : public Event
+{
+public:
+    ButtonEvent():Event(){}
+    ButtonEvent(U32 aMsg, U32 aW, U32 aL):Event(aMsg,wPara,lPara){}
+};

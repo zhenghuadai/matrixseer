@@ -17,6 +17,7 @@ preBuild:
 	cd ../io;make
 	cd ../multimedia;make
 	cd ../htmlparser;make
+	cd ../display;make
 3DIE: ${OBJECTS}  ${LIBPATH}libhtml.a ../js/libjs.a ${LIBPATH}libDisplay.a
 	${CXX} ${MARC} ${CFLAG} -o ${BINPATH}$@   ${LIB} ${XLIB} $^ -lpthread
 testfont:testfont.o

@@ -59,9 +59,9 @@ class dmRect
 #define curOffsetX ((curRasterPosX) - (curRectX))
 
 void drawToTexture2(GLuint tex,int Sx,int Sy,int Ex,int Ey,char *str);
-void drawInput2d(double x,double y,double z,double dx,double dy);
-void drawButton2d(double x,double y,double z,double dx,double dy);
-void drawButton2dframe(double x,double y,double z,double dx,double dy);
+void drawInput2d(double x,double bottomY,double z,double dx,double dy);
+void drawButton2d(double x,double bottomY,double z,double dx,double dy);
+void drawButton2dframe(double x,double bottomYy,double z,double dx,double dy);
 int putStrScr(char *content);
 int putStrScr(char *content,int len);
 int putStrScr(int x, int y, int z, char *content);
