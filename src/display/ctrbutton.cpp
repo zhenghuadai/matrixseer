@@ -35,12 +35,12 @@ void ctrButton::draw()
     int curRasterPos[4];
     int endPos[4];
 	getLBpos(curRasterPos[0],curRasterPos[1],curRasterPos[2]);
-	MoveTo2(curRasterPos[0],curRasterPos[1]-2);
+	MoveTo2(curRasterPos[0],curRasterPos[1]+3);
     putStrScr(pvalue);
     getCurrentRasterPos(endPos);
     //_w = endPos[0] - curRasterPos[0];
     //_h = 22;
-    drawButton2dframe(curRasterPos[0],curRasterPos[1]-3,curRasterPos[2], _w, 22);
+    drawButton2dframe(curRasterPos[0],curRasterPos[1],curRasterPos[2], w(), h());
     endPos[0] += 1;
     MoveTo2(endPos[0],endPos[1]);
 }

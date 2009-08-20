@@ -24,6 +24,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef enum _EVENT{
+LBUTTON_UP   = 256,
+LBUTTON_DOWN = 257,
+
+}EVENT;
 class Event
 {
 public:
