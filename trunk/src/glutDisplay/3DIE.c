@@ -325,11 +325,12 @@ void mouse(int button, int state, int x, int y)
 {
 	int z = 0;
 	y = getWinh() - y;
-	if(curDoc)
+    if(curDoc)
         if( curDoc -> hitMe(x, y, z)) 
             onFocusWidget = curDoc -> getObjOnFocus(x, y, z);
         else 
             onFocusWidget = curDoc;
+    onFocusWidget->handleButton( ButtonEvent( 1, x, y));
     printf("[%d %d]hit  %0x\n", x,y, onFocusWidget);
     if(0)
         switch ( button)

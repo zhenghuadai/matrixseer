@@ -47,8 +47,9 @@ public:
         return ret;
 	}	
 	virtual Widget* getObjOnFocus(int x, int y, int z){return this;}
-	virtual int handleKey(Event e){};
+	virtual int handleEvent(Event e){};
 	virtual int handleKey(int key){};
+    virtual int handleButton(ButtonEvent e){}
 	virtual void redraw(){};
 	//!
 public:
