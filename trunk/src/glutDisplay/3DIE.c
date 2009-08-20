@@ -330,40 +330,16 @@ void mouse(int button, int state, int x, int y)
             onFocusWidget = curDoc -> getObjOnFocus(x, y, z);
         else 
             onFocusWidget = curDoc;
-    onFocusWidget->handleButton( ButtonEvent( 1, x, y));
     printf("[%d %d]hit  %0x\n", x,y, onFocusWidget);
-    if(0)
         switch ( button)
         {
             case GLUT_LEFT_BUTTON:
                 switch ( state) {
                     case GLUT_DOWN:
-                        for(int i =0;i<pctrIindex;i++){
-                            Widget *pctrInput_tmp = pctrInputs[i];
-                            if(pctrInput_tmp -> hitMe(x,Win_h-y,0)) 
-                                pctrInput_tmp -> getFocus();
-                            else
-                                pctrInput_tmp -> loseFocus();
-                        }
-                        for(int i=0;i<pctrBindex;i++){
-                            ctrButton *pctrButton_tmp = pctrButtons[i];
-                            if(pctrButton_tmp ->hitMe(x,Win_h -y,0))
-                                pctrButton_tmp -> OnClick();
-                        }
+                        onFocusWidget->handleButton( ButtonEvent( 1, x, y));
                         break;
                     case GLUT_UP:
-                        for(int i =0;i<pctrIindex;i++){
-                            Widget *pctrInput_tmp = pctrInputs[i];
-                            if(pctrInput_tmp -> hitMe(x,Win_h-y,0)) 
-                                pctrInput_tmp -> getFocus();
-                            else
-                                pctrInput_tmp -> loseFocus();
-                        }
-                        for(int i=0;i<pctrBindex;i++){
-                            ctrButton *pctrButton_tmp = pctrButtons[i];
-                            if(pctrButton_tmp ->hitMe(x,Win_h -y,0))
-                                pctrButton_tmp -> redraw();
-                        }
+                        onFocusWidget->redraw();
 
                         break;
                 }
@@ -371,7 +347,7 @@ void mouse(int button, int state, int x, int y)
             case GLUT_RIGHT_BUTTON:
                 break;
         }
-    glutPostRedisplay();
+        glutPostRedisplay();
 }
 JSRuntime *rt;
 JSContext *cx;
