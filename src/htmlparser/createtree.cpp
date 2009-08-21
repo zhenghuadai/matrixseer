@@ -107,7 +107,7 @@ void HNinsert(pHtmlNode pHtp,pHtmlNode pHtc)
 int htmlparser::processValueOfTag(dmTokenP tp,int which)
 {
 	int funcret;
-	if( tp->tagid == SCRIPTID){
+	if(( tp->tagid == SCRIPTID )||(tp->tagid == STYLEID)){
 		if(tp ->value) funcret =  (ctTagFunc[tp->tagid])(this, tp, VALUE);
 		return funcret;
 	}
