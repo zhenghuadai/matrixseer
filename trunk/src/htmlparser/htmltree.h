@@ -87,7 +87,7 @@ class HtmlNode{
 				//printf("err");
 #if NEED_RENDER == 1
 			Widget* pobj = 	getParentRenderObject();
-			if(pobj) 
+			if(pobj && (getRenderObject() !=NULL)) 
 				pobj -> addChild(getRenderObject());
 #endif
 		}
