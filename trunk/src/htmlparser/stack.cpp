@@ -51,8 +51,8 @@ int __stack::_stackisSpouse(int id)
 
 int __stack::_stackisempty()
 {
-    if(_tagtop==-1)return 1;
-    return 0;
+    if(_tagtop==-1)return STACK_EMPTY;
+    return STACK_NOT_EMPTY;
 }
 void __stack::_printstack()
 {

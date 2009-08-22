@@ -305,253 +305,255 @@ endctOP()
 
 ctOP(ctEhtmlfunc)
 {
-	//curHtml->phead=curHtml->_3dhpop();
+    pHtmlNode pHtc = curHtml->_3dhpop();
+    pHtc -> finishParse();
+    return 1;
 }
 endctOP() 
 
 ctOP(ctStablefunc)
 {
-	if(which==ATTRIB){
-		callBrfunc(curHtml); 
-		pHtmlNode pHtp = curHtml->_3dhtop();
-		pHtmlNode tmpNode= new HtmlTableNode(pHtp , tp);
-		curHtml->_3dhpush(tmpNode);
+    if(which==ATTRIB){
+        callBrfunc(curHtml); 
+        pHtmlNode pHtp = curHtml->_3dhtop();
+        pHtmlNode tmpNode= new HtmlTableNode(pHtp , tp);
+        curHtml->_3dhpush(tmpNode);
 
-	}
-	else if(which==VALUE){
-		insertTextNode(curHtml, value);
-	}
-	return 1;
+    }
+    else if(which==VALUE){
+        insertTextNode(curHtml, value);
+    }
+    return 1;
 }
 endctOP() 
 
 ctOP(ctEtablefunc)
 {
-	if( curHtml->_stackisSpouse(tagid)){	
-		pHtmlNode pHtc = curHtml->_3dhpop();
-		pHtc -> finishParse();
-		return 1;
-	}
-	else{
-		while(! curHtml->_stackisSpouse(tagid)){
-			int tag = curHtml->gettagfromstack() + 1;
-			dmToken t(tag, NULL,NULL);
-			(curHtml->ctTagFunc[tag])(curHtml,&t,ATTRIB);
-		}
-		//ctEtablefunc( curHtml,tagid,NULL,ATTRIB,NULL);
-		dmToken t(tagid, NULL, NULL);
-		ctEtablefunc( curHtml, &t, ATTRIB);
-	}
-	return 0;
+    if( curHtml->_stackisSpouse(tagid)){	
+        pHtmlNode pHtc = curHtml->_3dhpop();
+        pHtc -> finishParse();
+        return 1;
+    }
+    else{
+        while(! curHtml->_stackisSpouse(tagid)){
+            int tag = curHtml->gettagfromstack() + 1;
+            dmToken t(tag, NULL,NULL);
+            (curHtml->ctTagFunc[tag])(curHtml,&t,ATTRIB);
+        }
+        //ctEtablefunc( curHtml,tagid,NULL,ATTRIB,NULL);
+        dmToken t(tagid, NULL, NULL);
+        ctEtablefunc( curHtml, &t, ATTRIB);
+    }
+    return 0;
 }
 endctOP() 
 
 ctOP(ctStrfunc)
 {
-	if(which==ATTRIB){
-		pHtmlNode pHtp = curHtml->_3dhtop();
-		pHtmlNode tmpNode= new HtmlTrNode(pHtp , tp);
-		curHtml->_3dhpush(tmpNode);
-	}
-	else if(which==VALUE){
-		insertTextNode(curHtml, value);
-	}
-	return 1;
+    if(which==ATTRIB){
+        pHtmlNode pHtp = curHtml->_3dhtop();
+        pHtmlNode tmpNode= new HtmlTrNode(pHtp , tp);
+        curHtml->_3dhpush(tmpNode);
+    }
+    else if(which==VALUE){
+        insertTextNode(curHtml, value);
+    }
+    return 1;
 }
 endctOP() 
 
 ctOP(ctEtrfunc)
 {
-	if( curHtml->_stackisSpouse(tagid)){	
-		pHtmlNode pHtc = curHtml->_3dhpop();
-		pHtc -> finishParse();
-		return 1;
-	}
-	return 0;
+    if( curHtml->_stackisSpouse(tagid)){	
+        pHtmlNode pHtc = curHtml->_3dhpop();
+        pHtc -> finishParse();
+        return 1;
+    }
+    return 0;
 }
 endctOP() 
 
 ctOP(ctStdfunc)
 {
-	if(which==ATTRIB){
-		int prvtag = curHtml->gettagfromstack();
-		debprintf("prv tag: %d, curtag:%d\n",prvtag,tagid);
-		if (prvtag == TDID) {
-			dmToken t(TDID+1, NULL, NULL);
-			curHtml->ctEtdfunc(curHtml,&t,ATTRIB);
-		}
-		pHtmlNode pTrNode = curHtml->_3dhtop();
-		pHtmlNode tmpNode= new HtmlTdNode(pTrNode , tp);
-		curHtml->_3dhpush(tmpNode);
+    if(which==ATTRIB){
+        int prvtag = curHtml->gettagfromstack();
+        debprintf("prv tag: %d, curtag:%d\n",prvtag,tagid);
+        if (prvtag == TDID) {
+            dmToken t(TDID+1, NULL, NULL);
+            curHtml->ctEtdfunc(curHtml,&t,ATTRIB);
+        }
+        pHtmlNode pTrNode = curHtml->_3dhtop();
+        pHtmlNode tmpNode= new HtmlTdNode(pTrNode , tp);
+        curHtml->_3dhpush(tmpNode);
 
-	}
-	else if(which==VALUE){
-		extern int charWidth;
-		insertTextNode(curHtml, value);
-	}
-	return 1;
+    }
+    else if(which==VALUE){
+        extern int charWidth;
+        insertTextNode(curHtml, value);
+    }
+    return 1;
 }
 endctOP() 
 
 ctOP(ctEtdfunc)
 {
-	if( curHtml->_stackisSpouse(tagid)){	
-		pHtmlNode pHtc = curHtml->_3dhpop();
-		pHtc -> finishParse();
-		return 1;
-	}
-	return 0;
+    if( curHtml->_stackisSpouse(tagid)){	
+        pHtmlNode pHtc = curHtml->_3dhpop();
+        pHtc -> finishParse();
+        return 1;
+    }
+    return 0;
 }
 endctOP() 
 
 
 ctOP(ctSulfunc)
 {
-	if(which==ATTRIB){
-		pHtmlNode pHtp = curHtml->_3dhtop();
-		pHtmlNode tmpNode= new HtmlUlNode(pHtp, tp);
-		curHtml->_3dhpush(tmpNode);
+    if(which==ATTRIB){
+        pHtmlNode pHtp = curHtml->_3dhtop();
+        pHtmlNode tmpNode= new HtmlUlNode(pHtp, tp);
+        curHtml->_3dhpush(tmpNode);
 
-	}
-	else if(which==VALUE){
-		insertTextNode(curHtml, value);
-	}
-	return 1;
+    }
+    else if(which==VALUE){
+        insertTextNode(curHtml, value);
+    }
+    return 1;
 }
 endctOP() 
 
 ctOP(ctEulfunc)
 {
-	if( curHtml->_stackisSpouse(tagid)){	
+    if( curHtml->_stackisSpouse(tagid)){	
 
-		pHtmlNode pHtc = curHtml->_3dhpop();
-		pHtc -> finishParse();
-		return 1;
-	}
-	return 0;
+        pHtmlNode pHtc = curHtml->_3dhpop();
+        pHtc -> finishParse();
+        return 1;
+    }
+    return 0;
 }
 endctOP() 
 
 ctOP(ctImgfunc)
 {
-	pHtmlNode pHtp = curHtml->_3dhtop();
-	pHtmlNode tmpNode= new HtmlImgNode(pHtp, tp);
-	return 1;
+    pHtmlNode pHtp = curHtml->_3dhtop();
+    pHtmlNode tmpNode= new HtmlImgNode(pHtp, tp);
+    return 1;
 }
 endctOP() 
 
 ctOP(ctBrfunc)
 {
-	pHtmlNode pHtp = curHtml->_3dhtop();
-	pHtmlNode tmpNode= new HtmlBrNode(pHtp, tp);
+    pHtmlNode pHtp = curHtml->_3dhtop();
+    pHtmlNode tmpNode= new HtmlBrNode(pHtp, tp);
 
-	return 1;
+    return 1;
 }
 endctOP() 
 
 ctOP(ctInputfunc)
 {
-	pHtmlNode pHtp = curHtml->_3dhtop();
-	pHtmlNode tmpNode= new HtmlInputNode(pHtp, tp);
-	return 1;
+    pHtmlNode pHtp = curHtml->_3dhtop();
+    pHtmlNode tmpNode= new HtmlInputNode(pHtp, tp);
+    return 1;
 }
 endctOP() 
 
 ctOP(ctSafunc)
 {
-	extern int getCharsWidth(char *s);
-	extern int2 getstrWH(char *);
-	if(which==ATTRIB){
-		pHtmlNode pHtp = curHtml->_3dhtop();
-		pHtmlNode tmpNode= new HtmlANode(pHtp, tp);
-		curHtml->_3dhpush(tmpNode);
-	}
-	else if(which==VALUE){
-		insertTextNode(curHtml, value);
-	} else if(which == TAGCOMPLETE){
-		pHtmlNode pHtp = curHtml->_3dhtop();
-		pHtmlNode tmpNode= new HtmlSimpleANode(pHtp, tp);
-	}
-	return 1;
+    extern int getCharsWidth(char *s);
+    extern int2 getstrWH(char *);
+    if(which==ATTRIB){
+        pHtmlNode pHtp = curHtml->_3dhtop();
+        pHtmlNode tmpNode= new HtmlANode(pHtp, tp);
+        curHtml->_3dhpush(tmpNode);
+    }
+    else if(which==VALUE){
+        insertTextNode(curHtml, value);
+    } else if(which == TAGCOMPLETE){
+        pHtmlNode pHtp = curHtml->_3dhtop();
+        pHtmlNode tmpNode= new HtmlSimpleANode(pHtp, tp);
+    }
+    return 1;
 }
 endctOP() 
 
 ctOP(ctEafunc)
 {
-	if( curHtml->_stackisSpouse(tagid)){	
+    if( curHtml->_stackisSpouse(tagid)){	
 
-		pHtmlNode pHtc = curHtml->_3dhpop();
-		pHtc -> finishParse();
-		return 1;
+        pHtmlNode pHtc = curHtml->_3dhpop();
+        pHtc -> finishParse();
+        return 1;
 
-	}
-	return 0;
+    }
+    return 0;
 }
 endctOP() 
 
 ctOP(ctSpfunc)
 {
-	if(which==ATTRIB){
-		pHtmlNode pHtp = curHtml->_3dhtop();
-		pHtmlNode tmpNode= new HtmlPNode(pHtp, tp);
-		curHtml->_3dhpush(tmpNode);
-	}
-	else if(which==VALUE){
-		insertTextNode(curHtml, value);
-	}
-	return 1;
+    if(which==ATTRIB){
+        pHtmlNode pHtp = curHtml->_3dhtop();
+        pHtmlNode tmpNode= new HtmlPNode(pHtp, tp);
+        curHtml->_3dhpush(tmpNode);
+    }
+    else if(which==VALUE){
+        insertTextNode(curHtml, value);
+    }
+    return 1;
 }
 endctOP() 
 
 ctOP(ctEpfunc)
 {
-	if( curHtml->_stackisSpouse(tagid)){	
-		pHtmlNode pHtc = curHtml->_3dhpop();
-		pHtc -> finishParse();
-		return 1;
-	}
-	return 0;
+    if( curHtml->_stackisSpouse(tagid)){	
+        pHtmlNode pHtc = curHtml->_3dhpop();
+        pHtc -> finishParse();
+        return 1;
+    }
+    return 0;
 }
 endctOP() 
-	extern void getRect(int *);
+    extern void getRect(int *);
 ctOP(ctSdivfunc)
 {
-	if(which==ATTRIB){
-		callBrfunc(curHtml); 
-		pHtmlNode pHtp = curHtml->_3dhtop();
-		pHtmlNode tmpNode= new HtmlDivNode(pHtp, tp);
-		curHtml->_3dhpush(tmpNode);
-	}
-	else if(which==VALUE){
-		insertTextNode(curHtml, value);
-	}
-	return 1;
+    if(which==ATTRIB){
+        callBrfunc(curHtml); 
+        pHtmlNode pHtp = curHtml->_3dhtop();
+        pHtmlNode tmpNode= new HtmlDivNode(pHtp, tp);
+        curHtml->_3dhpush(tmpNode);
+    }
+    else if(which==VALUE){
+        insertTextNode(curHtml, value);
+    }
+    return 1;
 }
 endctOP() 
 
 ctOP(ctEdivfunc)
 {
-	if( curHtml->_stackisSpouse(tagid)){	
-		pHtmlNode pHtc = curHtml->_3dhpop();
-		pHtc -> finishParse();
-		return 1;
-	}
-	return 0;
+    if( curHtml->_stackisSpouse(tagid)){	
+        pHtmlNode pHtc = curHtml->_3dhpop();
+        pHtc -> finishParse();
+        return 1;
+    }
+    return 0;
 }
 endctOP() 
 
 ctOP(ctSstylefunc)
 {
-	if(which==ATTRIB){
-	}
-	else if(which==VALUE){
-		int parseCss(char *attrstr,void ** pobj);
-		void printcssID();
-		parseCss(value,NULL);
-		printcssID();
-		debprintf(" %s\n",value);
-		free(value);
-	}
+    if(which==ATTRIB){
+    }
+    else if(which==VALUE){
+        int parseCss(char *attrstr,void ** pobj);
+        void printcssID();
+        parseCss(value,NULL);
+        printcssID();
+        debprintf(" %s\n",value);
+        free(value);
+    }
 }
 endctOP() 
 
@@ -562,209 +564,209 @@ endctOP()
 
 ctOP(ctSspanfunc)
 {
-	// 2008-5-24 skip it
-	void printRect();
-	printRect();
-	SKIPTHISTAG
-		return 1;
-	if(which==ATTRIB){
-		spanattr_t *pspanattr =(spanattr_t*) malloc(sizeof(spanattr_t)); 
-		setZero(pspanattr,spanattr_t);
-		curHtml->_3dhpush(tagid,(void*)pspanattr);
-	}
-	else if(which==VALUE){
-	} 
+    // 2008-5-24 skip it
+    void printRect();
+    printRect();
+    SKIPTHISTAG
+        return 1;
+    if(which==ATTRIB){
+        spanattr_t *pspanattr =(spanattr_t*) malloc(sizeof(spanattr_t)); 
+        setZero(pspanattr,spanattr_t);
+        curHtml->_3dhpush(tagid,(void*)pspanattr);
+    }
+    else if(which==VALUE){
+    } 
 }
 endctOP() 
 
 ctOP(ctEspanfunc)
 {
-	return 1;
+    return 1;
 }
 endctOP() 
 
 
 ctOP(ctSformfunc)
 {
-	// 2008-5-24 skip it
-	return 1;
+    // 2008-5-24 skip it
+    return 1;
 }
 endctOP() 
 
 ctOP(ctEformfunc)
 {
-	return 1;
+    return 1;
 }
 endctOP() 
 
 ctOP(ctSfontfunc)
 {
-	// 2008-5-24 skip it
-	SKIPTHISTAG
-		return 1;
+    // 2008-5-24 skip it
+    SKIPTHISTAG
+        return 1;
 }
 endctOP() 
 
 ctOP(ctEfontfunc)
 {
-	return 1;
+    return 1;
 }
 endctOP() 
 
 ctOP(ctSbfunc)
 {
-	// 2008-5-24 skip it
-	int curtag = curHtml->gettagfromstack();
-	if(which==ATTRIB){
-	}
-	else if(which==VALUE){
-		dmToken upT(curtag, NULL,tp->value);
-		(curHtml->ctTagFunc[curtag])(curHtml,&upT, VALUE);
-	}
-	return 1;
+    // 2008-5-24 skip it
+    int curtag = curHtml->gettagfromstack();
+    if(which==ATTRIB){
+    }
+    else if(which==VALUE){
+        dmToken upT(curtag, NULL,tp->value);
+        (curHtml->ctTagFunc[curtag])(curHtml,&upT, VALUE);
+    }
+    return 1;
 }
 endctOP() 
 
 ctOP(ctEbfunc)
 {
-	return 1;
+    return 1;
 }
 endctOP() 
 
 ctOP(ctScenterfunc)
 {
 #if 1
-	if(which==ATTRIB){
-		callBrfunc(curHtml); 
-		pHtmlNode pHtp = curHtml->_3dhtop();
-		pHtmlNode tmpNode= new HtmlCenterNode(pHtp, tp);
-		curHtml->_3dhpush(tmpNode);
-	}
-	else if(which==VALUE){
-		insertTextNode(curHtml, value);
-	}
+    if(which==ATTRIB){
+        callBrfunc(curHtml); 
+        pHtmlNode pHtp = curHtml->_3dhtop();
+        pHtmlNode tmpNode= new HtmlCenterNode(pHtp, tp);
+        curHtml->_3dhpush(tmpNode);
+    }
+    else if(which==VALUE){
+        insertTextNode(curHtml, value);
+    }
 #endif
-	return 1;
+    return 1;
 }
 endctOP() 
 
 ctOP(ctEcenterfunc)
 {
-	//return 1;
-	if( curHtml->_stackisSpouse(tagid)){	
-		pHtmlNode pHtc = curHtml->_3dhpop();
-		pHtc -> finishParse();
-	}
-	//#endif
+    //return 1;
+    if( curHtml->_stackisSpouse(tagid)){	
+        pHtmlNode pHtc = curHtml->_3dhpop();
+        pHtc -> finishParse();
+    }
+    //#endif
 }
 endctOP() 
 
 ctOP(ctSnobrfunc)
 {
-	// 2008-5-24 skip it
-	SKIPTHISTAG
-		return 1;
+    // 2008-5-24 skip it
+    SKIPTHISTAG
+        return 1;
 }
 endctOP() 
 
 ctOP(ctEnobrfunc)
 {
-	return 1;
+    return 1;
 }
 endctOP() 
 
 ctOP(ctSufunc)
 {
-	// 2008-5-24 skip it
-	SKIPTHISTAG
-		return 1;
+    // 2008-5-24 skip it
+    SKIPTHISTAG
+        return 1;
 }
 endctOP() 
 
 ctOP(ctEufunc)
 {
-	return 1;
+    return 1;
 }
 endctOP() 
 
 ctOP(ctSsmallfunc)
 {
-	// 2008-5-24 skip it
-	SKIPTHISTAG
-		return 1;
+    // 2008-5-24 skip it
+    SKIPTHISTAG
+        return 1;
 }
 endctOP() 
 
 ctOP(ctEsmallfunc)
 {
-	return 1;
+    return 1;
 }
 endctOP() 
 
 ctOP(ctSheadfunc)
 {
-	// 2008-5-24 skip it
-	return 1;
+    // 2008-5-24 skip it
+    return 1;
 }
 endctOP() 
 
 ctOP(ctEheadfunc)
 {
-	return 1;
+    return 1;
 }
 endctOP() 
 
 ctOP(ctStitlefunc)
 {
-	// 2008-5-24 skip it
-	return 1;
+    // 2008-5-24 skip it
+    return 1;
 }
 endctOP() 
 
 ctOP(ctEtitlefunc)
 {
-	return 1;
+    return 1;
 }
 endctOP() 
 
 ctOP(ctSskipfunc)
 {
-	// 2008-5-24 skip it
-	SKIPTHISTAG
-		return 1;
+    // 2008-5-24 skip it
+    SKIPTHISTAG
+        return 1;
 }
 endctOP() 
 
 ctOP(ctEskipfunc)
 {
-	return 1;
+    return 1;
 }
 endctOP() 
 
 
 ctOP(ctSbodyfunc)
 {
-	if(which==ATTRIB){
-		callBrfunc(curHtml); 
-		pHtmlNode pHtp = curHtml->_3dhtop();
-		pHtmlNode tmpNode= new HtmlBodyNode(pHtp, tp);
-		curHtml->_3dhpush(tmpNode);
-	}
-	else if(which==VALUE){
-		insertTextNode(curHtml, value);
-	}
-	return 1;
+    if(which==ATTRIB){
+        callBrfunc(curHtml); 
+        pHtmlNode pHtp = curHtml->_3dhtop();
+        pHtmlNode tmpNode= new HtmlBodyNode(pHtp, tp);
+        curHtml->_3dhpush(tmpNode);
+    }
+    else if(which==VALUE){
+        insertTextNode(curHtml, value);
+    }
+    return 1;
 }
 endctOP() 
 
 ctOP(ctEbodyfunc)
 {
-	if( curHtml->_stackisSpouse(tagid)){	
-		pHtmlNode pHtc = curHtml->_3dhpop();
-		pHtc -> finishParse();
-		return 1;
-	}
-	return 1;
+    if( curHtml->_stackisSpouse(tagid)){	
+        pHtmlNode pHtc = curHtml->_3dhpop();
+        pHtc -> finishParse();
+        return 1;
+    }
+    return 1;
 }
 endctOP() 
 

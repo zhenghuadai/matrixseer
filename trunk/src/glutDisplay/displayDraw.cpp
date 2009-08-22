@@ -425,6 +425,7 @@ void drawToTexture2(GLuint tex,int Sx,int Sy,int Ex,int Ey,char *str)
 	static int first =1;
 	if(first){
 		hp.parsehtml(str);
+        hp.finishParse();
 		first =0;
 	}
 	hp.renderhtml();

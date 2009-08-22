@@ -535,16 +535,26 @@ scanValue:
 #endif
 
     }
+
+}
+
+void htmlparser::finishParse()
+{
+    //! if there are nodes on stack , process them
+    while(_stackisempty() == STACK_NOT_EMPTY){
+        HtmlNode* tHtmlNode = this -> _3dhpop();
+        tHtmlNode -> finishParse();
+    }
 }
 
 void htmlparser::visitHtmlNode(pHtmlNode root)
 {
     int tag = root -> tagid;
-	Widget* o = (Widget*) root->obj;
+    Widget* o = (Widget*) root->obj;
     if( o == NULL) return ;
 #if NEED_RENDER == 1
     if(o -> _vptr == (void*)0x1) 
-	{printf("class hierarchy err\n");return ;}
+    {printf("class hierarchy err\n");return ;}
 #endif
 
     o -> draw();
@@ -569,14 +579,14 @@ void htmlparser::rendernode(pHtmlNode root)
 
 void htmlparser::printNode(pHtmlNode root)
 {
-	Widget* o = (Widget*) root->obj;
-	if( o == NULL) return ;
+    Widget* o = (Widget*) root->obj;
+    if( o == NULL) return ;
 #if NEED_RENDER == 1
     if(o -> _vptr == (void*)0x1) 
-	{printf("class hierarchy err\n");return ;}
-	printf("<%d %d %d>", o->x(),o->y(),o->z());
+    {printf("class hierarchy err\n");return ;}
+    printf("<%d %d %d>", o->x(),o->y(),o->z());
 #else
-	printf("<%d %d 0>", o->x(),o->y());
+    printf("<%d %d 0>", o->x(),o->y());
 #endif
 
 }
@@ -584,52 +594,52 @@ void htmlparser::printNode(pHtmlNode root)
 
 void htmlparser::printTree(pHtmlNode root)
 {
-	printf("{ ");
-	printNode(root);
-	if(root->child)	printTree(root->child);
-	printf("} ");
-	if(root->mNext) printTree(root->mNext);
-	fflush(stdout);
+    printf("{ ");
+    printNode(root);
+    if(root->child)	printTree(root->child);
+    printf("} ");
+    if(root->mNext) printTree(root->mNext);
+    fflush(stdout);
 }
 
 void htmlparser::printTree()
 {
-	if(phead)   printTree(phead);	
+    if(phead)   printTree(phead);	
 }
 
 
 void htmlparser::checkNode(pHtmlNode root)
 {
-	if( root -> parent()){
-		Widget* objc = (Widget*)root -> obj;
-		Widget* objp = (Widget*) root -> parent() -> obj;
-		if( objc -> parent() != objp) {
-			printf("obj parent not match:%0x != %0x\n", objc, objp);
-		}
-	}
+    if( root -> parent()){
+        Widget* objc = (Widget*)root -> obj;
+        Widget* objp = (Widget*) root -> parent() -> obj;
+        if( objc -> parent() != objp) {
+            printf("obj parent not match:%0x != %0x\n", objc, objp);
+        }
+    }
 }
 
 void htmlparser::checkTree(pHtmlNode root)
 {
-	checkNode(root);
-	if(root->child)	checkNode(root->child);
-	if(root->mNext) checkNode(root->mNext);
+    checkNode(root);
+    if(root->child)	checkNode(root->child);
+    if(root->mNext) checkNode(root->mNext);
 }
 
 void htmlparser::checkTree()
 {
-	if(phead)   checkTree(phead);	
+    if(phead)   checkTree(phead);	
 }
 
 
 void htmlparser::renderhtml()
 {
-	if(phead)   rendernode(phead);	
+    if(phead)   rendernode(phead);	
 }
 
 int initalparser()
 {
-	return 1;
+    return 1;
 }
 
 void parsehtml(char * htdoc)
