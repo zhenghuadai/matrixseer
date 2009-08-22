@@ -272,7 +272,8 @@ inline void updateSelfAttrEnter(attrBase_t * pAttrc)
 }
 inline void  updateParentHtmlNode(pHtmlNode pHtp, pHtmlNode pHtc)
 {
-	if((pHtp -> attr )&&(pHtc -> attr))
+    
+	if(pHtp && pHtc && (pHtp -> attr )&&(pHtc -> attr))
 	{
 		attrBase_t *pAttrp = getAttrBaseP(pHtp);
 		attrBase_t *pAttrc = getAttrBaseP(pHtc);

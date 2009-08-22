@@ -3,6 +3,10 @@
 #include "htmltree.h"
 //#define   stack_ele_t int  
 #define stack_ele_t pHtmlNode  
+#define STACK_EMPTY 1
+#define STACK_FULL 2
+#define STACK_NOT_EMPTY 0
+#define STACK_NOT_FULL 3
 class __stack
 {
 public:

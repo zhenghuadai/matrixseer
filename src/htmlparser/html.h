@@ -19,6 +19,7 @@ class htmlparser:public __stack
         ~htmlparser();
         void initialFunc();
         int parsehtml(char *htdoc);
+        void finishParse();
         void renderhtml();
         int lookuptag(char *tag);
         typedef int (htmlparser::*tagfunc_t)(OParg);
