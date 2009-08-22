@@ -37,7 +37,7 @@ void ctrInput::initInput(int sdx, int sdy)
 	pvalue[0]=0;
 	focus = 0;
 	//sprintf(pvalue,"%s","");
-	printf("dx:%d\n",_w);
+	printf("dx:%d\n",w());
 	w(sdx);
 	h(sdy);
 
@@ -57,7 +57,7 @@ ctrInput::ctrInput(int sdx,int sdy):Widget(sdx,sdy)
 	//pvalue[0]=0;
 	//focus = 0;
 	////sprintf(pvalue,"%s","");
-	//printf("dx:%d\n",_w);
+	//printf("dx:%d\n",w());
 	initInput(sdx, sdy);
 }
 ctrInput::ctrInput(int sx,int sy,int sz):Widget(sx,sy,sz)
@@ -130,14 +130,14 @@ void ctrInput::redraw()
 #else
 #define YoffS 1
 #define XoffS 100
-	drawInput2d(_x  ,_y+ YoffS,0,_w,_h);
-	MoveTo2(_x ,_y+3);
+	drawInput2d(sx  ,sy+ YoffS,0,w(), h());
+	MoveTo2(sx , sy+3);
 	putStrScr(pvalue + startDrawPos,curCursorPos-startDrawPos);
 	drawCursor();
 	putStrScr(pvalue + curCursorPos);
 	glReadBuffer(GL_BACK);
 	glDrawBuffer(GL_FRONT);
-	copyBackToFrt(_x,_y+YoffS,_w,_h,_x,_y+YoffS);
+	copyBackToFrt(sx, sy+YoffS, w(), h(), sx, sy+YoffS);
 	glDrawBuffer(GL_BACK);
 #endif
 	sufRedraw();
@@ -278,7 +278,7 @@ INLINE void ctrInput::moveCursor(int drt)
         }
         curdx += getCharWidth(pvalue[curCursorPos-1]);
         //	if(curCursorPos - startDrawPos > MAXCS) startDrawPos++;	
-        while(curdx >=  _w -4){
+        while(curdx >=  w() -4){
             curdx -= getCharWidth(pvalue[startDrawPos]);
             startDrawPos++;
         }
