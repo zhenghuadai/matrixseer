@@ -1,0 +1,11 @@
+a take for lowercase chars
+A take for uppercase chars
+
+1 variable(v):  first char is lowercase, 1st char of word(except for the 1st word)  in the variable is uppercase.
+2. member variable: _v or mV
+3. tmp variable:   tV
+4. arg         :   aV
+5. class name (C):  1st char is uppercase      for example : class  HtmlNode{...};
+6. pointer class name(pC):  for example : typedef HtmlNode* pHtmlNode;
+7. macro name : all uppercase with "_"
+ 

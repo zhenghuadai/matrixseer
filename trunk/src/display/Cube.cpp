@@ -5,44 +5,44 @@
 #include "debprintf.h"
 Cube::Cube()
 {
-	debprintf("create0 :::::: z :%d \n", _z);
+	debprintf("create0 :::::: z :%d \n", mZ);
 }
 Cube::Cube(int x,int y,int z)
 {
-    _x=x;
-    _y=y;
-    _z=z;
-	debprintf("create1 :::::: z :%d \n", _z);
+    mX=x;
+    mY=y;
+    mZ=z;
+	debprintf("create1 :::::: z :%d \n", mZ);
 }
 Cube::Cube(int x,int y,int z,int dx,int dy)
 {
-    _x=x;
-    _y=y;
-    _z=z;
-    _w=dx;
-    _h=dy;
-	debprintf("create2:::::: z :%d \n", _z);
-	debprintf("create2:::::: %d %d %d %d %d \n", _x, _y ,_z, _w ,_h);
+    mX=x;
+    mY=y;
+    mZ=z;
+    mW=dx;
+    mH=dy;
+	debprintf("create2:::::: z :%d \n", mZ);
+	debprintf("create2:::::: %d %d %d %d %d \n", mX, mY ,mZ, mW ,mH);
 }
 Cube::Cube(int dx,int dy)
 {
-    _w=dx;
-    _h=dy;
-	debprintf("create3:::::: z :%d \n", _z);
+    mW=dx;
+    mH=dy;
+	debprintf("create3:::::: z :%d \n", mZ);
 }
 void Cube::setwh(int dx,int dy)
 {
-    _w=dx;
-    _h=dy;
+    mW=dx;
+    mH=dy;
 }
 void Cube::setxyz()
 {
     int curRasterPos[4];
     //glGetIntegerv(GL_CURRENT_RASTER_POSITION,curRasterPos);
     getCurrentRasterPos(curRasterPos);
-    _x=curRasterPos[0];
-    _y=curRasterPos[1]-2;
-    _z=curRasterPos[2];
+    mX=curRasterPos[0];
+    mY=curRasterPos[1]-2;
+    mZ=curRasterPos[2];
 }
 CubeINLINE void Cube::getFocus()
 {
