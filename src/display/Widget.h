@@ -45,7 +45,7 @@ public:
 	//!Event handler
 	int hitMe(int xi, int yi, int zi) { int sx,sy,sz; getSxyz(sx,sy, sz); 
 		int ret= isPinRect(xi, yi, sx, sy, w(), h()); 
-		printf("%d %d hitMe test %0x  %d %d %d %d == %d\n", xi, yi, this, sx, sy, w(), h(), ret);
+		debprintf("%d %d hitMe test %0x  %d %d %d %d == %d\n", xi, yi, this, sx, sy, w(), h(), ret);
         return ret;
 	}	
 	virtual Widget* getObjOnFocus(int x, int y, int z){return this;}

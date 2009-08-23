@@ -48,7 +48,7 @@ void Group::addFirstChild(Widget* child_)
 Widget* Group::getObjOnFocus(int x, int y, int z)
 {
 	//if( hitMe(x, y, z) == HIT_NO) return NULL;
-    printf("hit test Group:%0x\n: %d %d %d in? %d %d %d %d\n", this, x, y, z, 
+    debprintf("hit test Group:%0x\n: %d %d %d in? %d %d %d %d\n", this, x, y, z, 
     this->x(), this->y(), this->w(),this->h());
 	Widget* o = child();
 	while( o){

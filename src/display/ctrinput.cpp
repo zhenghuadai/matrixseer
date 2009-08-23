@@ -35,7 +35,7 @@ void ctrInput::initInput(int sdx, int sdy)
 	curdx =0;
 	pvalue[0]=0;
 	focus = 0;
-	printf("dx:%d\n",w());
+	debprintf("dx:%d\n",w());
     if(sdx==0) sdx = 10;
 	w(sdx);
 	h(sdy);

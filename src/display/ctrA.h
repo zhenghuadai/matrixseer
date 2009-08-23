@@ -29,7 +29,6 @@ class ctrA : public ctrText{
         ctrA(int x,int y,int w,int h,const char *l)
             : ctrText(x,y,w,h,l) 
         {box(BOX_BODER_SHAPE);pushed = 0; 
-            //labelsize(16);
         }
 
         ctrA(Box* b,int x,int y,int w,int h,const char *l)
