@@ -17,6 +17,7 @@ public:
  ctrButton(int sx,int sy, int sz,int sdx,int sdy);
  ctrButton(int sx,int sy,int sz,char * s);
  ctrButton(int x, int y, int w, int h, char* l);
+ ctrButton(int x, int y, int z, int w, int h, int d, char* l);
  void OnClick();
 ~ctrButton();
 void draw();
