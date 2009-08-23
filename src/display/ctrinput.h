@@ -6,44 +6,43 @@
 #include "Widget.h"
 class ctrInput: public Widget
 {
-public:
-ctrInput();
-ctrInput(int sdx,int sdy);
-ctrInput(int sx,int sy, int sz);
-ctrInput(int sx,int sy, int sz,int sdx,int sdy,char* l);
-ctrInput(int sx,int sy,int sz,char * s);
-ctrInput(int sx,int sy, int w,int h, char* l);
-~ctrInput();
-void reset();
-//void setxyz(int sx,int sy,int sz,int sdx,int sdy);
-int appandchar(char c);
-virtual void draw();
-void redraw();
-//INLINE int inArea(int ptx,int pty, int ptz );
-//INLINE void getFocus();
-//INLINE void loseFocus();
-//INLINE int  onFocus();
-INLINE char *  getValue();
-INLINE void drawCursor();
-INLINE void moveCursor(int drt);
-INLINE void skeyfunc(int key,int x,int y);
-int  deletechar(char c);
-int  insertchar(char c);
-int  backspacechar(char c);
+    private:
+        int maxc,curc;
+        int startDrawPos;
+        int curCursorPos;
+        int curdx;
+        char *pvalue;
 
-public:
-virtual int handleKey(int key){keyfunc( key, 0, 0);return 1;};
+    public:
+        ctrInput();
+        ctrInput(int w, int h);
+        ctrInput(int x,int y, int z);
+        ctrInput(int x,int y, int z,int sdx,int sdy,char* l);
+        ctrInput(int x,int y, int z,char * s);
+        ctrInput(int x,int y, int w,int h, char* l);
+        ctrInput(int x,int y, int z, int w,int h, int d, char* l);
 
-private:
-void initInput(int sdx,int sdy);
-void keyfunc(char  key,int x,int y);
-private:
-//int x,y,z,dx,dy;
-int maxc,curc;
-int startDrawPos;
-int curCursorPos;
-int curdx;
-//int focus;
-char *pvalue;
+        ~ctrInput();
+        void reset();
+        char* getValue();
+        void attachBuffer(char* buf){}
+        int appandchar(char c);
+        int deletechar(char c);
+        int insertchar(char c);
+        int backspacechar(char c);
+
+    public:
+        virtual void draw();
+        virtual void redraw();
+        virtual int handleKey(int key){keyfunc( key, 0, 0);return 1;};
+        void skeyfunc(int key,int x,int y);
+
+    private:
+        void initInput(int sdx,int sdy);
+        void keyfunc(char  key,int x,int y);
+    private:
+        void init();
+        void drawCursor();
+        void moveCursor(int drt);
 };
 #endif

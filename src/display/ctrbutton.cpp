@@ -26,6 +26,12 @@ ctrButton::ctrButton(int x, int y, int w, int h, char* pstr):Widget(x,y,w,h,pstr
     curc = strlen(pvalue);
 }
 
+ctrButton::ctrButton(int x, int y, int z, int w, int h, int d, char* pstr):Widget(x,y,z,w,h,d,pstr)
+{
+    pvalue=pstr;
+    curc = strlen(pvalue);
+}
+
 ctrButton::~ctrButton()
 {
     if(pvalue)free(pvalue);

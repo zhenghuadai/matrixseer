@@ -24,8 +24,8 @@ class EventTarget: public Cube
 	EventTarget(){init();};
 	EventTarget(int x,int y,int z):Cube(x,y,z){init();};
 	EventTarget(int dx,int dy):Cube(dx,dy){init();};
-	EventTarget(int x,int y,int z,int dx,int dy,const char* l):Cube(x,y,z,dx,dy){init();};
-	EventTarget(int x,int y,int dx,int dy , const char* l):Cube(x,y,0,dx,dy){init();};
+	EventTarget(int x,int y,int z,int dx,int dy):Cube(x,y,z,dx,dy){init();};
+	EventTarget(int x,int y,int dx,int dy ):Cube(x,y,0,dx,dy){init();};
     EventTarget(int x, int y, int z, int w, int h, int d):Cube(x, y, z, w, h, d){init();}
 	private:
 	void	init(){}

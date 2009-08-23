@@ -22,7 +22,6 @@ void ctrInput::reset()
 	curdx =0;
 	focus = 0;
 	pvalue = 0;
-	//sprintf(pvalue,"%s","");
 }
 
 void ctrInput::initInput(int sdx, int sdy)
@@ -36,62 +35,43 @@ void ctrInput::initInput(int sdx, int sdy)
 	curdx =0;
 	pvalue[0]=0;
 	focus = 0;
-	//sprintf(pvalue,"%s","");
 	printf("dx:%d\n",w());
+    if(sdx==0) sdx = 10;
 	w(sdx);
 	h(sdy);
-
 }
 
 ctrInput::ctrInput(int sdx,int sdy):Widget(sdx,sdy)
 {
-	//	dx=sdx;
-	//	dy=sdy;
-	//maxc=1024;
-	//pvalue = (char *)malloc(maxc+1);
-	//memset(pvalue,0,maxc);
-	//curc= -1;
-	//curCursorPos=0;
-	//startDrawPos=0;
-	//curdx =0;
-	//pvalue[0]=0;
-	//focus = 0;
-	////sprintf(pvalue,"%s","");
-	//printf("dx:%d\n",w());
-	initInput(sdx, sdy);
+		initInput(sdx, sdy);
 }
+
 ctrInput::ctrInput(int sx,int sy,int sz):Widget(sx,sy,sz)
 {
-	//reset();
-	/*
-	   x=sx;
-	   y=sy;
-	   z=sz;
-	   */
 	initInput(10,20 );
-	//ctrInput(10,20);
 }
 
 ctrInput::ctrInput(int sx,int sy,int sz,char *s):Widget(sx,sy,sz)
 {
-	//ctrInput(10,20);
 	initInput(10,20 );
 	sprintf(pvalue,"%s",s);
 }
 
 ctrInput::ctrInput(int sx,int sy,int sz,int sdx,int sdy, char* l):Widget(sx,sy,sz,sdx,sdy,0)
 {
-	//reset();
-	//ctrInput(10,20);
 	initInput(10,20 );
+	sprintf(pvalue,"%s",l);
 }
 
 ctrInput::ctrInput(int sx,int sy,int w, int h, char *s):Widget(sx,sy,0,w,h,s)
 {
-	//ctrInput(10,20);
 	initInput(w,h );
 }
 
+ctrInput::ctrInput(int x,int y, int z, int w, int h, int d ,char *s):Widget(x,y,z,w,h,d,s)
+{
+	initInput(w,h );
+}
 
 void ctrInput::draw()
 {
