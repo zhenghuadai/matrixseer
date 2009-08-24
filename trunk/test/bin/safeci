@@ -4,9 +4,6 @@ args=$@
 curDir=`pwd`
 testDir=$HOME
 buildLog="/tmp/"$(USER)-log-x879873
-cd $testDir 
-svn co  
-cd matrixseer_test/test/
 ./runSelfTest &> $buildLog 
 ret=$?
 
@@ -15,3 +12,7 @@ if ["$ret" == "0"]; then
 fi 
 # if  test pass, then commit
 echo svn ci $@
+# test after ci
+cd $testDir 
+svn co  
+cd matrixseer_test/test/
