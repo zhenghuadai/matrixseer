@@ -1,0 +1,14 @@
+#!/bin/bash
+dstDir=$1
+if ["$1" != ""]; then 
+cd $dstDir
+fi
+svn checkout http://matrixseer.googlecode.com/svn/trunk/ matrixseer-read-only # &>/dev/null
+
+cd ./matrixseer-read-only/test/bin
+./runSelfTest
+ret=$?
+if [ "$ret" == "0"]; then
+    exit 0 # sucess
+fi
+exit 1
