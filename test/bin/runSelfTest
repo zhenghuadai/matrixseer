@@ -2,4 +2,4 @@
 buildLog= /tmp/log-0000110-$USER
 cd ../../
 make &> $buildLog 
-
+# parse the $buildLog
