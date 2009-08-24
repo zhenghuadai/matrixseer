@@ -19,6 +19,11 @@ class ctrText : public Output {
     : Output(x,y,w,h,0)
     {type(5);textfont(TIMES);textsize(14);value(l); debprintf("this ->%0x, text:%s\n", this, value());
     }
+
+    ctrText(int x,int y,int z, int w,int h, int d, const char *l) 
+    : Output(x,y,z,w,h,d,0)
+    {type(5);textfont(TIMES);textsize(14);value(l); 
+    }
 };
 
 #endif

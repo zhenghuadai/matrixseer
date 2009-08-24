@@ -31,8 +31,10 @@ class ctrA : public ctrText{
         }
 
         ctrA(Box* b,int x,int y,int w,int h,const char *l)
-            : ctrText(x,y,w,h,l) 
-        {}
+            : ctrText(x,y,w,h,l) {}
+        ctrA(int x,int y,int z, int w,int h,int d, const char *l)
+            : ctrText(x,y,z,w,h,d,l) {}
+        
 };
 
 #endif
