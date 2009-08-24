@@ -36,6 +36,6 @@ class Output: public Widget
         void textsize(int f){}
         char* value() {return text;}
         void value(const char* l){text = (char*)l;}
-        virtual void draw(){  int sx,sy,sz; getSxyz(sx,sy,sz);putStrScr(sx,sy-getRowHeight(),sz,text);printf("<%d %d %d> <%s> next->%0x\n",sx,sy,sz,text, this-> next());}
+        virtual void draw(){  int sx,sy,sz; getSxyz(sx,sy,sz);putStrScr(sx,sy-getRowHeight(),sz,text);debprintf("<%d %d %d> <%s> this->%0x next->%0x parent->%0x\n",sx,sy,sz,text, this, this-> next(), this->parent());}
 };
 #endif
