@@ -1,5 +1,12 @@
 #!/bin/bash 
-buildLog= /tmp/log-0000110-$USER
+buildLog=/tmp/matrix-buildlog-0000110-$USER
 cd ../../
 make &> $buildLog 
 # parse the $buildLog
+errmsg=`grep error $buildLog`
+if [ "$errmsg" == "" ]; then
+echo "build success"
+exit 0
+fi
+echo $errmsg
+exit 1

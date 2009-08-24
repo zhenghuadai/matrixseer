@@ -4,15 +4,24 @@ args=$@
 curDir=`pwd`
 testDir=$HOME
 buildLog="/tmp/"$(USER)-log-x879873
-./runSelfTest &> $buildLog 
+SelfTestDir=`which runSelfTest`
+if [ "$SelfTestDir" == ""]; then
+    exit 1
+fi
+cd $SelfTestDir
+./runSelfTest 
 ret=$?
 
-if ["$ret" == "0"]; then 
-	exit 0
+if ["$ret" == "1"]; then 
+	exit 1
 fi 
 # if  test pass, then commit
 echo svn ci $@
+
 # test after ci
-cd $testDir 
-svn co  
-cd matrixseer_test/test/
+./runSelfRegress
+ret=$?
+if ["$ret" == "1"]; then 
+	exit 1
+fi 
+exit 0
