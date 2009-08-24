@@ -26,6 +26,7 @@ void Group::addChild(Widget* child_)
 	}else{
 		addFirstChild(child_);
 	}
+    debprintf("this->%0x; child->%0x\n",  this, child_ );
 }
 
 void Group::appandChild(Widget* child_)

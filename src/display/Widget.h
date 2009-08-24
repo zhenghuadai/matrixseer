@@ -17,7 +17,7 @@ public:
 	Widget(int x,int y,int z):EventTarget(x,y,z){init();};
 	Widget(int w,int h):EventTarget(w,h){init();};
 	Widget(int x,int y,int z,int w,int h,const char* l):EventTarget(x,y,z,w,h){init();};
-	Widget(int x,int y,int w,int h , const char* l):EventTarget(x,y,w,h){init();};
+	Widget(int x,int y,int w,int h , const char* l):EventTarget(x,y,w,h){init(); debprintf("Widget->%0x\n",this);};
     Widget(int x, int y, int z, int w, int h, int d, const char* l):EventTarget(x, y, z, w, h, d){init();}
 
 	void box(Box* b){}

@@ -400,7 +400,7 @@ HtmlBodyNode::HtmlBodyNode(pHtmlNode pHtp, dmToken* t):HtmlDivNode()
 	createObject();
 	extern void setCurDocument(Widget* o);
 	setCurDocument((Widget*) this->obj);
-	printf("Body construct\n");
+	printf("Body construct obj:%0x", this->obj);
 }
 
 

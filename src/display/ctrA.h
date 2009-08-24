@@ -13,7 +13,6 @@ class ctrA : public ctrText{
         int handle(int);
     public:
         int pushed ;
-        void draw(){};
         ctrA(Box* b,int w,int h,const char *l)
             : ctrText(0,0,w,h,l) 
         {box(b);pushed = 0;};
