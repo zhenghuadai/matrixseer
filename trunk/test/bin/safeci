@@ -1,0 +1,17 @@
+#!/bin/bash 
+args=$@
+# test first
+curDir=`pwd`
+testDir=$HOME
+buildLog="/tmp/"$(USER)-log-x879873
+cd $testDir 
+svn co  
+cd matrixseer_test/test/
+./runSelfTest &> $buildLog 
+ret=$?
+
+if ["$ret" == "0"]; then 
+	exit 0
+fi 
+# if  test pass, then commit
+echo svn ci $@
