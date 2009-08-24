@@ -1,5 +1,6 @@
 #!/bin/bash 
-buildLog=/tmp/matrix-buildlog-0000110-$USER
+randomN=`awk 'BEGIN{srand();print rand()}'`
+buildLog=/tmp/matrix-buildlog-$randomN-$USER
 cd ../../
 make &> $buildLog 
 # parse the $buildLog
