@@ -1,14 +1,14 @@
 #!/bin/bash
 dstDir=$1
-if ["$1" != ""]; then 
-cd $dstDir
+if [ "$dstDir" == "" ]; then 
+    dstDir=/tmp/
 fi
-svn checkout http://matrixseer.googlecode.com/svn/trunk/ matrixseer-read-only # &>/dev/null
-
+cd $dstDir
+svn checkout http://matrixseer.googlecode.com/svn/trunk/ matrixseer-read-only  &>/dev/null
 cd ./matrixseer-read-only/test/bin
 ./runSelfTest
 ret=$?
-if [ "$ret" == "0"]; then
+if [ "$ret" == "0" ]; then
     exit 0 # sucess
 fi
 exit 1

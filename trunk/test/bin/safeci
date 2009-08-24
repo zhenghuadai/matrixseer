@@ -3,25 +3,28 @@ args=$@
 # test first
 curDir=`pwd`
 testDir=$HOME
-buildLog="/tmp/"$(USER)-log-x879873
-SelfTestDir=`which runSelfTest`
-if [ "$SelfTestDir" == ""]; then
+buildLog=/tmp/${USER}-log-x879873
+SelfTestPath=`which runSelfTest`
+SelfTestDir=${SelfTestPath%/*}
+if [ "$SelfTestDir" == "" ]; then
     exit 1
 fi
 cd $SelfTestDir
 ./runSelfTest 
 ret=$?
 
-if ["$ret" == "1"]; then 
+if [ "$ret" == "1" ]; then 
 	exit 1
 fi 
 # if  test pass, then commit
+cd -
 echo svn ci $@
 
 # test after ci
-./runSelfRegress
+cd -
+echo ./runSelfRegress
 ret=$?
-if ["$ret" == "1"]; then 
+if [ "$ret" == "1" ]; then 
 	exit 1
 fi 
 exit 0
