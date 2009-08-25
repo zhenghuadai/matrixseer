@@ -13,17 +13,16 @@ class ctrText : public Output {
     int startx;
     ctrText(int w,int h,const char *l)
     : Output(0,0,w,h,0)
-    {type(5);textfont(TIMES);textsize(14);value(l);}
+    {type(5);textfont(TIMES);textsize(14);}
 
     ctrText(int x,int y,int w,int h,const char *l) 
     : Output(x,y,w,h,0)
-    {type(5);textfont(TIMES);textsize(14);value(l); debprintf("this ->%0x, text:%s\n", this, value());
+    {type(5);textfont(TIMES);textsize(14);debprintf("this ->%0x, text:%s\n", this, value());
     }
 
     ctrText(int x,int y,int z, int w,int h, int d, const char *l) 
     : Output(x,y,z,w,h,d,0)
-    {type(5);textfont(TIMES);textsize(14);value(l); 
-    }
+    {type(5);textfont(TIMES);textsize(14);    }
 };
 
 #endif
