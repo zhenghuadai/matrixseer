@@ -687,9 +687,12 @@ void  HtmlInputNode::createRenderObject()
 		case INPUTBUTTON:
 			{
 				char * pbvalue =strdup(p_inputattr -> value);// (char *)malloc(sizeof(pstr)+1);
-				if(! (p_inputattr->w)) p_inputattr->w = 100;
-				if(! (p_inputattr->h)) p_inputattr->h = 22;
-				ctrButton *pctrButton = new ctrButton(x,y,100,20,pbvalue);
+                int2 wh = getstrWH(pbvalue);
+				//if(! (p_inputattr->w)) p_inputattr->w = 100;
+				//if(! (p_inputattr->h)) p_inputattr->h = 22;
+				if(! (p_inputattr->w)) p_inputattr->w = wh.w;
+				if(! (p_inputattr->h)) p_inputattr->h = wh.h;
+				ctrButton *pctrButton = new ctrButton(x,y,p_inputattr->w,p_inputattr->h,pbvalue);
 				this->obj = (void *) pctrButton;
 			}
 			break;

@@ -9,6 +9,7 @@
 #include "dmtype.h"
 extern void getCurrentRasterPos(int *pos);
 extern int getCurRectW();
+int getRowHeight();
 #define UPPERFONT 0
 BitmapFontPtr curFont = NULL;
 int charWidth = 10;
@@ -285,6 +286,8 @@ int2 getstrWH(char *str,int width)
 	}
 	//w -= (1*(strE -str)/8); // correct the width;
 	wh.y += (w-1)/width +1;
+    wh.y *=  getRowHeight();
+
 	if(w > width) wh.x =width;
 	else{
 		if(wh.x<w+FirstLineIndent)wh.x =w+FirstLineIndent;
