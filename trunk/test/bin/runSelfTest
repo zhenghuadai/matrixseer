@@ -7,7 +7,8 @@ make &> $buildLog
 errmsg=`grep error $buildLog`
 if [ "$errmsg" == "" ]; then
 echo "build success"
+rm -f $buildLog
 exit 0
 fi
-echo $errmsg
+echo "\033[36mBuild Err $errmsg \033[0m" 
 exit 1
