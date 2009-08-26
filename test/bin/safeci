@@ -9,7 +9,8 @@ SelfTestDir=${SelfTestPath%/*}
 if [ "$SelfTestDir" == "" ]; then
     exit 1
 fi
-cd $SelfTestDir
+echo "test before commit ..."
+cd $SelfTestDir &>/dev/null
 ./runSelfTest 
 ret=$?
 
@@ -17,14 +18,26 @@ if [ "$ret" == "1" ]; then
 	exit 1
 fi 
 # if  test pass, then commit
-cd -
-echo svn ci $@
+cd - &>/dev/null
+#svnCiCmd="svn ci "
+#for arg in "$args" 
+#do
+#echo $arg 
+#if [[ $arg  =~ " " ]]; then 
+#svnCiCmd+="\"$arg\" "
+#else
+#svnCiCmd+="$arg "
+#fi
+#done
+echo "svn ci $@"
+svn ci "$@" 
 
 # test after ci
-cd -
-echo ./runSelfRegress
+echo "test after commit"
+cd - &>/dev/null
+./runSelfRegress
 ret=$?
-if [ "$ret" == "1" ]; then 
-	exit 1
-fi 
+if [ "$ret" == "0" ]; then 
 exit 0
+fi 
+exit 1

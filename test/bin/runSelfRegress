@@ -4,11 +4,16 @@ if [ "$dstDir" == "" ]; then
     dstDir=/tmp/
 fi
 cd $dstDir
-svn checkout http://matrixseer.googlecode.com/svn/trunk/ matrixseer-read-only  &>/dev/null
+if [ -d "matrixseer-read-only" ]; then
+svn up ./matrixseer-read-only
+else
+svn checkout http://matrixseer.googlecode.com/svn/trunk/ matrixseer-read-only  #&>/dev/null
+fi
 cd ./matrixseer-read-only/test/bin
 ./runSelfTest
 ret=$?
 if [ "$ret" == "0" ]; then
+    echo "self regression test sucess"
     exit 0 # sucess
 fi
 exit 1
