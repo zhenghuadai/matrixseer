@@ -26,17 +26,20 @@
 class Output: public Widget
 {
     private:
-        char* text;
+        char* mText;
+		int mTextColor;
     public:
-        Output(int x, int y, int z, int w, int h ,const char*l):Widget(x,y,z,w,h,l),text((char*)l){}
-        Output(int x, int y, int w, int h, const char* l):Widget(x,y,w,h,l),text((char*)l){}
-        Output(int x, int y, int z, int w, int h, int d, const char* l):Widget(x,y,z,w,h,d,l),text((char*)l){}
+        Output(int x, int y, int z, int w, int h ,const char*l):Widget(x,y,z,w,h,l),mText((char*)l){}
+        Output(int x, int y, int w, int h, const char* l):Widget(x,y,w,h,l),mText((char*)l){}
+        Output(int x, int y, int z, int w, int h, int d, const char* l):Widget(x,y,z,w,h,d,l),mText((char*)l){}
 
         void type(int t){}
         void textfont(int f){}
         void textsize(int f){}
-        char* value() {return text;}
-        void value(const char* l){text = (char*)l;}
-        virtual void draw(){  int sx,sy,sz; getSxyz(sx,sy,sz);putStrScr(sx,sy-getRowHeight(),sz,text);debprintf("<%d %d %d> <%s> this->%0x next->%0x parent->%0x\n",sx,sy,sz,text, this, this-> next(), this->parent());}
+		void textColor(int c){mTextColor = c;}
+		int textColor(){return mTextColor;}
+        char* value() {return mText;}
+        void value(const char* l){mText = (char*)l;}
+        virtual void draw(){  int sx,sy,sz; getSxyz(sx,sy,sz);putStrScr(sx,sy-getRowHeight(),sz,mText);debprintf("<%d %d %d> <%s> this->%0x next->%0x parent->%0x\n",sx,sy,sz,mText, this, this-> next(), this->parent());}
 };
 #endif

@@ -8,7 +8,7 @@ class ctrButton: public Widget
 {
 private:
 char *pvalue;
-int curc;
+int state;
 public:
  ctrButton();
  ctrButton(int sdx,int sdy);
