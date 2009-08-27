@@ -35,8 +35,6 @@ public:
 	void parent(Widget* o) { mParent = o;}
 	Widget* next() { return mNext;}
 	void next(Widget* o){ mNext = o;}
-	virtual	void draw(){ debprintf("Widget draw\n");};
-	virtual void addChild(Widget*){};
 	int getSx();
 	int getSy();
 	int getSz();
@@ -53,6 +51,8 @@ public:
 	virtual int handleKey(int key){};
     virtual int handleButton(ButtonEvent e){}
 	virtual void redraw(){};
+	virtual	void draw(){ debprintf("Widget draw\n");};
+	virtual void addChild(Widget*){};
 	//!
 public:
 	void getLBpos(int& leftX, int& bottomY, int& z){getSxyz(leftX, bottomY, z); bottomY -= h(); }

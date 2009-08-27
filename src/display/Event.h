@@ -21,14 +21,21 @@
  *
  * =====================================================================================
  */
+#ifndef __EVENT_HEADER__
+#define __EVENT_HEADER__
 #include <stdio.h>
 #include <stdlib.h>
 
 typedef enum _EVENT{
 LBUTTON_UP   = 256,
 LBUTTON_DOWN = 257,
-
 }EVENT;
+
+enum {
+UNTOUCH=0,
+CLICKED=1
+};
+
 class Event
 {
 public:
@@ -53,3 +60,4 @@ public:
     ButtonEvent():Event(){}
     ButtonEvent(U32 aMsg, U32 aW, U32 aL):Event(aMsg,wPara,lPara){}
 };
+#endif
