@@ -552,13 +552,21 @@ int copyToCurTexture(int tx,int ty,int dsx,int dsy,int sw,int sh)
    }
    */
 
-int  getColor()
+Color  getColor()
 {
-	//return fl_color();
+    GLint buf[4];
+    glGetIntegerv(GL_CURRENT_COLOR, buf);
+    return Color(buf[0], buf[1],buf[2],buf[4]);
 }
-int setColor(int color)
+
+void setColor(Color color)
 {
-	//int old = fl_color();
-	//fl_color(color);
-	//return old;
+  //glColor4b(color.r, color.g, color.b, color.a);  
+  glColor4f(color.r/255, color.g/255, color.b/255, color.a/255);  
+
+  printf("set color r %d g %d b %d a %d\n", color.r, color.g, color.b, color.a);
+}
+
+void setColor(int color)
+{
 }

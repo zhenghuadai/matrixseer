@@ -93,5 +93,7 @@ int2 getWH_Chars(int w,int h,int id);
 int getWinw();
 int getWinh();
 int getRowHeight();
+Color getColor();
+void setColor(Color);
 #define GM_BLACK 0
 #endif

@@ -32,9 +32,21 @@ class ctrA : public ctrText{
 		int state(){return mState;}
 	public:
 	virtual int handleKey(int key){};
-    virtual int handleButton(ButtonEvent e){ mState = CLICKED;}
-	virtual void redraw(){ if (state() == CLICKED) glColor4f(1,0,.1,1.0); Output::draw(); glColor4f(.1,.1,.1,1.0);};
-    
+    virtual int handleButton(ButtonEvent e){if(state()!=CLICKED) setState(); }
+    virtual void redraw(){
+        preRedraw();
+        int sx, sy, sz;
+        getSxyz(sx,sy,sz);
+        Color oldColor= getColor();
+        setColor(textColor());
+        //glColor4f(1,.0,.0,1.0);
+        putStrScr(sx, sy-getRowHeight(), sz, text());
+        copyToCurTexture( sx, sy-h()-3, w(), h(), sx, sy-h()-3);
+        setColor(oldColor);
+        sufRedraw();
+    }
+    private:
+    void setState(){ mState= CLICKED; textColor( Color((U8)255, 0,0,255));} 
 
 };
 
