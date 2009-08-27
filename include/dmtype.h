@@ -62,8 +62,9 @@ class Color
 			U32 c;
 		};
 	public:
+        Color():c(0){}
 		Color(U32 tC):c(tC){}
-		Color(double r, double g, double b, double a){}
+		//Color(double r, double g, double b, double a){}
 		Color(U8 tR, U8 tG, U8 tB, U8 tA):r(tR),g(tG),b(tB),a(tA){}
 };
 #endif

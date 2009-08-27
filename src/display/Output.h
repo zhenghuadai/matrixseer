@@ -27,7 +27,7 @@ class Output: public Widget
 {
     private:
         char* mText;
-		int mTextColor;
+		Color mTextColor;
     public:
         Output(int x, int y, int z, int w, int h ,const char*l):Widget(x,y,z,w,h,l),mText((char*)l){}
         Output(int x, int y, int w, int h, const char* l):Widget(x,y,w,h,l),mText((char*)l){}
@@ -36,9 +36,10 @@ class Output: public Widget
         void type(int t){}
         void textfont(int f){}
         void textsize(int f){}
-		void textColor(int c){mTextColor = c;}
-		int textColor(){return mTextColor;}
+		void textColor(Color c){mTextColor=c;}
+		Color textColor(){return mTextColor;}
         char* value() {return mText;}
+        char* text(){return mText;}
         void value(const char* l){mText = (char*)l;}
         virtual void draw(){  int sx,sy,sz; getSxyz(sx,sy,sz);putStrScr(sx,sy-getRowHeight(),sz,mText);debprintf("<%d %d %d> <%s> this->%0x next->%0x parent->%0x\n",sx,sy,sz,mText, this, this-> next(), this->parent());}
 };
