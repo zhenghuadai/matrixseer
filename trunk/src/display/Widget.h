@@ -50,13 +50,21 @@ public:
 	virtual int handleEvent(Event e){};
 	virtual int handleKey(int key){};
     virtual int handleButton(ButtonEvent e){}
-	virtual void redraw(){};
-	virtual	void draw(){ debprintf("Widget draw\n");};
-	virtual void addChild(Widget*){};
-	//!
+    void redraw(){ 
+        Color oldColor= getColor();
+        preRedraw();
+        reDraw();
+        sufRedraw();
+        setColor(oldColor);
+    }
+    virtual	void draw(){ debprintf("Widget draw\n");};
+    virtual void addChild(Widget*){};
+    //!
 public:
-	void getLBpos(int& leftX, int& bottomY, int& z){getSxyz(leftX, bottomY, z); bottomY -= h(); }
+    void getLBpos(int& leftX, int& bottomY, int& z){getSxyz(leftX, bottomY, z); bottomY -= h(); }
 private:
-	void init(){mParent = mNext = mPrevious = NULL;}
+    void init(){mParent = mNext = mPrevious = NULL;}
+protected:
+    virtual void reDraw(){}
 };
 #endif

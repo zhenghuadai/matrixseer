@@ -33,17 +33,17 @@ class ctrA : public ctrText{
 	public:
 	virtual int handleKey(int key){};
     virtual int handleButton(ButtonEvent e){if(state()!=CLICKED) setState(); }
-    virtual void redraw(){
-        preRedraw();
+    virtual void reDraw(){
+        //Color oldColor= getColor();
+        //preRedraw();
         int sx, sy, sz;
         getSxyz(sx,sy,sz);
-        Color oldColor= getColor();
         setColor(textColor());
         //glColor4f(1,.0,.0,1.0);
         putStrScr(sx, sy-getRowHeight(), sz, text());
         copyToCurTexture( sx, sy-h()-3, w(), h(), sx, sy-h()-3);
-        setColor(oldColor);
-        sufRedraw();
+        //sufRedraw();
+        //setColor(oldColor);
     }
     private:
     void setState(){ mState= CLICKED; textColor( Color((U8)255, 0,0,255));} 

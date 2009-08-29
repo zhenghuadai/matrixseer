@@ -90,11 +90,11 @@ void ctrInput::draw()
 	glColor4fv(oldcolor);
 }
 
-void ctrInput::redraw()
+void ctrInput::reDraw()
 {
-	preRedraw();
-	GLfloat oldcolor[4];
-	glGetFloatv(GL_CURRENT_COLOR,oldcolor);
+	//preRedraw();
+	//GLfloat oldcolor[4];
+	//glGetFloatv(GL_CURRENT_COLOR,oldcolor);
 	glColor4f(1,1,1,1);
 	int sx,sy,sz;
 	//getSxyz(sx,sy,sz);
@@ -120,8 +120,8 @@ void ctrInput::redraw()
 	copyBackToFrt(sx, sy+YoffS, w(), h(), sx, sy+YoffS);
 	glDrawBuffer(GL_BACK);
 #endif
-	sufRedraw();
-	glColor4fv(oldcolor);
+	//sufRedraw();
+	//glColor4fv(oldcolor);
 
 }
 int  ctrInput::insertchar(char c)

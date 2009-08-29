@@ -45,13 +45,13 @@ void ctrButton::draw()
     endPos[0] += 1;
     MoveTo2(endPos[0],endPos[1]);
 }
-void ctrButton::redraw()
+void ctrButton::reDraw()
 {
-    preRedraw();
-    GLfloat oldcolor[4];
+    //preRedraw();
+    //GLfloat oldcolor[4];
     int sx, sy, sz;
     getLBpos(sx, sy, sz);
-    glGetFloatv(GL_CURRENT_COLOR,oldcolor);
+    //glGetFloatv(GL_CURRENT_COLOR,oldcolor);
     glColor4f(.1,.1,.1,1.0);
     drawButton2d(sx,sy,0,w(),h());
     MoveTo2(sx,sy+3);
@@ -59,8 +59,8 @@ void ctrButton::redraw()
     putStrScr(pvalue ,strlen(pvalue));
     copyToCurTexture( sx, sy, w(), h(), sx, sy);
 
-    glColor4fv(oldcolor);
-    sufRedraw();
+    //sufRedraw();
+    //glColor4fv(oldcolor);
 }
 void ctrButton::keyfunc(int  key,int x,int y)
 {

@@ -33,7 +33,7 @@ class ctrInput: public Widget
 
     public:
         virtual void draw();
-        virtual void redraw();
+        virtual void reDraw();
         virtual int handleKey(int key){keyfunc( key, 0, 0);return 1;};
         void skeyfunc(int key,int x,int y);
 
