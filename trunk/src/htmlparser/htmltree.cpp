@@ -582,7 +582,7 @@ void  HtmlSimpleANode::createRenderObject()
 	aattr_t *paattr = (aattr_t*) getAttrBaseP(this);
 	attrBase_t *pobjP = (attrBase_t *) getAttrBaseP(parent());
 	updateSelfAttrEnter(paattr);
-	ctrA * pctrA = new ctrA(pobjP->curW,pobjP->h,paattr->w,paattr->h ,this->value);
+	ctrSimpleA * pctrA = new ctrSimpleA(pobjP->curW,pobjP->h,paattr->w,paattr->h ,this->value);
 	updateParentHtmlNode(parent(),this);
 	debprintf("A:%d %d \n",pobjP->curW,pobjP->h);
 	void setdefaultfont(void);

@@ -444,7 +444,7 @@ OP( Estylefunc)
 OP(Safunc)
 {
     if((htnode -> obj)){	
-        ctrA *mpctrA = (ctrA*)(htnode ->obj);
+        ctrSimpleA *mpctrA = (ctrSimpleA*)(htnode ->obj);
         mpctrA -> setxyz();
     //    mpctrA -> active();
     //    mpctrA -> show();
