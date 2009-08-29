@@ -9,24 +9,24 @@
 #include "Box.h"
 #include "ctrText.h"
 #include "Event.h"
-class ctrA : public ctrText{
+class ctrSimpleA : public ctrText{
 	private:
 		int mState;
 	public:
 		int handle(int);
 	public:
-		ctrA(int w,int h,const char *l): ctrText(0,0,w,h,l)
+		ctrSimpleA(int w,int h,const char *l): ctrText(0,0,w,h,l)
 		{box(BOX_BODER_SHAPE);mState = 0;}
 
-		ctrA(int w,int h):ctrText (0,0,w,h,(const char *)0) 
+		ctrSimpleA(int w,int h):ctrText (0,0,w,h,(const char *)0) 
 		{box(BOX_BODER_SHAPE);mState = 0;}
 
-		ctrA(int x,int y,int w,int h,const char *l): ctrText(x,y,w,h,l) 
+		ctrSimpleA(int x,int y,int w,int h,const char *l): ctrText(x,y,w,h,l) 
 		{box(BOX_BODER_SHAPE);mState = 0; }
 		
 
-		ctrA(Box* b,int x,int y,int w,int h,const char *l): ctrText(x,y,w,h,l) {}
-		ctrA(int x,int y,int z, int w,int h,int d, const char *l): ctrText(x,y,z,w,h,d,l) {}
+		ctrSimpleA(Box* b,int x,int y,int w,int h,const char *l): ctrText(x,y,w,h,l) {}
+		ctrSimpleA(int x,int y,int z, int w,int h,int d, const char *l): ctrText(x,y,z,w,h,d,l) {}
 			
 	public:
 		int state(){return mState;}
