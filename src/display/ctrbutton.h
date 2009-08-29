@@ -21,7 +21,7 @@ public:
  void OnClick();
 ~ctrButton();
 void draw();
-void redraw();
+virtual void reDraw();
 virtual int handleKey( int key) { keyfunc(key, 0,0); return 1;}
 virtual int handleButton(ButtonEvent e){ OnClick();}
 private:
