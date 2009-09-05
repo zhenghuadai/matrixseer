@@ -29,12 +29,13 @@ int testhtml(int argc, char *argv[]){
         fprintf(stderr,"Please enter the server's hostname!\n");
         exit(1);
     }
-    printf("%s\n",argv[1]);
+    printf("argv[1]: %s\n",argv[1]);
     http_t ht;
-    //httpget(argv[1],&ht,NULL);
-    //printf("%s",ht.content);
+    httpget(argv[1],&ht,NULL);
+    printf("%s",ht.content);
 }
 int main(int argc, char *argv[]){
     //testFile(argc,argv);
-    httpDownLoad(argv[1],argv[2]);
+    //httpDownLoad(argv[1],argv[2]);
+    testhtml(argc, argv);
 }

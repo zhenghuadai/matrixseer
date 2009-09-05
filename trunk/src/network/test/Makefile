@@ -1,10 +1,11 @@
 TOPDIR=../../../
+TARGET=testhttpsocket
 include ${TOPDIR}/include/makefile.inc 
 
 sendip:sendip.o
 	${CC} ${CFLAG} ${CDEBFLAG} -o ${BINPATH}$@ -L${LIBPATH} ${SORDLIB} -l3Dhttp -l3Dsmtp -lpthread $^
 testhttpsocket:testhttpsocket.o
-	${CC} ${CFLAG} ${CDEBFLAG} -o ${BINPATH}$@ -L${LIBPATH} ${SORDLIB} -l3Dhttp -lpthread $^
+	${CC} ${CFLAG} ${CDEBFLAG} -o ${BINPATH}$@ -L${LIBPATH}  -l3Dhttp -lpthread $^
 testsmtpsocket:testsmtpsocket.o
 	${CC} ${CFLAG}  ${CDEBFLAG}  -o ${BINPATH}$@ -L${LIBPATH}  ${SORDLIB} -l3Dsmtp $^
 %.exe:%.o
@@ -12,7 +13,5 @@ testsmtpsocket:testsmtpsocket.o
 	
 include  ${TOPDIR}/include/rules.mk	
 clean:
-	rm -f ${TestEXEC}
-	rm -f *.o htmlparser/*.o
-	rm -f ${LIBPATH}lib*
+	rm -f *.o 
 

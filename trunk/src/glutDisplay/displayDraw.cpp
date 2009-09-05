@@ -428,7 +428,10 @@ void drawToTexture2(GLuint tex,int Sx,int Sy,int Ex,int Ey,char *str)
         hp.finishParse();
 		first =0;
 	}
-	hp.renderhtml();
+	//hp.renderhtml();
+    extern Widget* curDoc;
+    curDoc->draw();
+
 	//hp.printTree();
 	//hp.checkTree();
 	//  drawInput2d(200,340,0,100,20);
