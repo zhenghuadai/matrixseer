@@ -31,9 +31,12 @@ class Group : public Widget
 	public:
 		virtual void addChild(Widget*);
 		virtual Widget* getObjOnFocus(int x, int y, int z);
+        virtual	void draw(){drawMe(); drawChilds();};
 	public:
 		Widget* child(){return mChild;}
 	private:
+        void drawMe(){}
+        void drawChilds(){Widget* tChild = child(); while(tChild){ tChild->draw(); tChild=tChild->next();}}
 		void appandChild(Widget* child_);
 		void addFirstChild(Widget* child_);
 
