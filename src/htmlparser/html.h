@@ -20,7 +20,7 @@ class htmlparser:public __stack
         void initialFunc();
         int parsehtml(char *htdoc);
         void finishParse();
-        void renderhtml();
+        //void renderhtml();
         int lookuptag(char *tag);
         typedef int (htmlparser::*tagfunc_t)(OParg);
         //typedef int (htmlparser::*ctTagFunc_t)(htmlparser*,int tagid,char *htdoc,int which,char *htdoc2);
@@ -30,6 +30,8 @@ class htmlparser:public __stack
         int addtag(char *tag,int TAGID,tagfunc_t fp);
         int gettag(char *tag);
         int destroy();
+        pHtmlNode htmlDocument(){return phead;}
+        //! for debug
 		void printNode(pHtmlNode);
 		void printTree(pHtmlNode);
 		void printTree();
@@ -52,7 +54,7 @@ class htmlparser:public __stack
         int releaseNode(pHtmlNode root);
         int releaseTree(pHtmlNode root);
         void visitHtmlNode(pHtmlNode root);
-        void rendernode(pHtmlNode root);
+        //void rendernode(pHtmlNode root);
         void _printstack();
         //int processTag(int tagid,char *attributes,int which,char *value=0);
         //int processValueOfTag(int tagid,char *attributes,int which,char *value);

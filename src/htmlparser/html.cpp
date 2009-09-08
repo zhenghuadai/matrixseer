@@ -568,15 +568,15 @@ void htmlparser::visitHtmlNode(pHtmlNode root)
        if( tag == INPUTID) (this ->* tagfunc[tag])(root->attr.value,VALUE);
        */
 }
-void htmlparser::rendernode(pHtmlNode root)
-{
-    visitHtmlNode(root);
-    if(root->child)	rendernode(root->child);
-    if(root-> wife) { /*	(this ->* tagfunc[root->wife])(root )*/};
-    if(root->mNext) rendernode(root->mNext);
-}
-
-
+//void htmlparser::rendernode(pHtmlNode root)
+//{
+//    visitHtmlNode(root);
+//    if(root->child)	rendernode(root->child);
+//    if(root-> wife) { /*	(this ->* tagfunc[root->wife])(root )*/};
+//    if(root->mNext) rendernode(root->mNext);
+//}
+//
+//
 void htmlparser::printNode(pHtmlNode root)
 {
     Widget* o = (Widget*) root->obj;
@@ -632,11 +632,11 @@ void htmlparser::checkTree()
 }
 
 
-void htmlparser::renderhtml()
-{
-    if(phead)   rendernode(phead);	
-}
-
+//void htmlparser::renderhtml()
+//{
+//    if(phead)   rendernode(phead);	
+//}
+//
 int initalparser()
 {
     return 1;
