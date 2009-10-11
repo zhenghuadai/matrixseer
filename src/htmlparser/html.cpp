@@ -121,6 +121,7 @@ void htmlparser::initialFunc()
     _AF1(INPUTID,inputfunc);
     _AF2(DIVID,Sdivfunc,Edivfunc);
 }
+#if 1
 int htmlparser::gettag(char *tag)
 {
     int i;
@@ -139,6 +140,44 @@ int htmlparser::gettag(char *tag)
 
     return i;
 }
+#else 
+#include "taghash.h"
+static int hastagHash = 0;
+static unsigned char tagHash(char* tag)
+{   
+    if((tag==NULL) || (*tag == 0)) return 0x255;
+    int v = 0;
+    char* p = tag;
+    while(*p){
+        if( *p >= 'a' )&&(*p<='z') 
+            v += (*p) - 26;
+        else
+            v += (*p); 
+        p++;
+    }
+    v += len;
+    return v & 255;
+}
+
+int htmlparser::gettag(char *tag)
+{
+    if(hastagHash==0) {
+        hastagHash =1;
+    }
+    unsigned char h = tagHash(tag);
+    if(( Hash2tag[h] != tagHashEmpty ) && (Hash2tag[h] != tagHashConflict)){
+        return Hash2tag[h];
+    }else if(Hash2tag[h] != tagHashConflict){
+        for(int i=Hash2tag[h]; i< Hash2tag[h+1];i++){
+            if(strcasecmp(tag,alltag[Hash2tagCList[i]]) == 0) 
+                return Hash2tagCList[i];
+        }
+        return -1;
+    } else {
+        return -1;
+    }
+}
+#endif
 
 void htmlparser::_printstack()
 {
@@ -438,7 +477,7 @@ findouttag:
             attributes=getattrstr(&pcur);
         }
 #ifdef DEB
-            printf("\033[35mATTRIB\033[0m:[%s]",attributes);
+        printf("\033[35mATTRIB\033[0m:[%s]",attributes);
 #endif
         ret=isendtag(curtag);
         int funcret;
@@ -490,11 +529,11 @@ scanValue:
                 if(curtag == -1) return 0;
                 ret = ENDTAG;
 #ifdef DEB
-            printf("\n\033[33mstack:");
-            _printstack();
-            printf("\033[0m\n");
-            fflush(stdout);
-            printf("\n");
+                printf("\n\033[33mstack:");
+                _printstack();
+                printf("\033[0m\n");
+                fflush(stdout);
+                printf("\n");
 #endif
                 goto scanValue;
             }
@@ -508,16 +547,16 @@ scanValue:
         else if(ret == ENDTAG){
             //! the last is endTag, so this value is belong to previous; 
             //processValueOfTag(curtag, NULL,VALUE,value);
-            
+
             dmToken t(curtag,NULL, value);
             processValueOfTag(&t,VALUE);
         }
 #ifdef DEB
-            printf("\n\033[33mstack:");
-            _printstack();
-            printf("\033[0m\n");
-            fflush(stdout);
-            printf("\n");
+        printf("\n\033[33mstack:");
+        _printstack();
+        printf("\033[0m\n");
+        fflush(stdout);
+        printf("\n");
 #endif
         fflush(stdout);
 
