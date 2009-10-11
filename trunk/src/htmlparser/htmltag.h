@@ -13,7 +13,7 @@
 "script","/script",	"p","/p",	"table","/table",	"tr","/tr",	"td","/td", 	\
 "div","/div",		"","img",	"ul","/ul",		 "li","/li",	"font","/font",	\
 "h1","/h1",		"h2","/h2",	"h3","/h3",		 "h4","/h4",	"h5","/h5",\
-"style","/style",	"title","/title","","meta",		 "","link","	","input",\
+"style","/style",	"title","/title","","meta",		 "","link","","input",\
 "b","/b",		"i","/i",	"form","/form",		  "center","/center","nobr","/nobr", \
 "noscript","/noscript", "u","/u",	"strong","/strong",	"small","/small","iframe",  "/iframe",\
 "span","/span" ,\
