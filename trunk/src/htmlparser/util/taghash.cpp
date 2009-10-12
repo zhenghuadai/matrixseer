@@ -27,6 +27,7 @@
 #include <stdlib.h>
 #include "../htmltag.h"
 #include "string.h"
+#include "str2hash.h" 
 #define HASHLEN 256 
 #define HASHLENMASK HASHLEN 
 
@@ -72,4 +73,11 @@ int main(int argc, char** argv)
     for(int i=0;i<HASHLEN;i++){
         if(tagHash[i]) printf("<%d %d>\n", i, tagHash[i]);
     }
+	Str2hash str2hash(alltag, MAXTAGID);
+	str2hash.print();
+	#define test(s) id=str2hash.get(s);printf("%d %s\n", id, s);
+	int id = str2hash.get("a");
+	printf("%d %s\n", id, "a");
+	test("/a");
+	test("/abc");
 }
