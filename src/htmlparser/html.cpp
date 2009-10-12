@@ -121,7 +121,7 @@ void htmlparser::initialFunc()
     _AF1(INPUTID,inputfunc);
     _AF2(DIVID,Sdivfunc,Edivfunc);
 }
-#if 1
+#if 0
 int htmlparser::gettag(char *tag)
 {
     int i;
@@ -141,41 +141,47 @@ int htmlparser::gettag(char *tag)
     return i;
 }
 #else 
-#include "taghash.h"
-static int hastagHash = 0;
-static unsigned char tagHash(char* tag)
-{   
-    if((tag==NULL) || (*tag == 0)) return 0x255;
-    int v = 0;
-    char* p = tag;
-    while(*p){
-        if( *p >= 'a' )&&(*p<='z') 
-            v += (*p) - 26;
-        else
-            v += (*p); 
-        p++;
-    }
-    v += len;
-    return v & 255;
-}
-
-int htmlparser::gettag(char *tag)
+//#include "taghash.h"
+//static int hastagHash = 0;
+//static unsigned char tagHash(char* tag)
+//{   
+//    if((tag==NULL) || (*tag == 0)) return 0x255;
+//    int v = 0;
+//    char* p = tag;
+//    while(*p){
+//        if( *p >= 'a' )&&(*p<='z') 
+//            v += (*p) - 26;
+//        else
+//            v += (*p); 
+//        p++;
+//    }
+//    v += len;
+//    return v & 255;
+//}
+//
+//int htmlparser::gettag(char *tag)
+//{
+//    if(hastagHash==0) {
+//        hastagHash =1;
+//    }
+//    unsigned char h = tagHash(tag);
+//    if(( Hash2tag[h] != tagHashEmpty ) && (Hash2tag[h] != tagHashConflict)){
+//        return Hash2tag[h];
+//    }else if(Hash2tag[h] != tagHashConflict){
+//        for(int i=Hash2tag[h]; i< Hash2tag[h+1];i++){
+//            if(strcasecmp(tag,alltag[Hash2tagCList[i]]) == 0) 
+//                return Hash2tagCList[i];
+//        }
+//        return -1;
+//    } else {
+//        return -1;
+//    }
+//}
+#include "util/str2hash.h"
+int htmlparser::gettag(char* tag)
 {
-    if(hastagHash==0) {
-        hastagHash =1;
-    }
-    unsigned char h = tagHash(tag);
-    if(( Hash2tag[h] != tagHashEmpty ) && (Hash2tag[h] != tagHashConflict)){
-        return Hash2tag[h];
-    }else if(Hash2tag[h] != tagHashConflict){
-        for(int i=Hash2tag[h]; i< Hash2tag[h+1];i++){
-            if(strcasecmp(tag,alltag[Hash2tagCList[i]]) == 0) 
-                return Hash2tagCList[i];
-        }
-        return -1;
-    } else {
-        return -1;
-    }
+	static Str2hash str2hash(alltag, MAXTAGID);
+	return str2hash.get(tag); 
 }
 #endif
 
