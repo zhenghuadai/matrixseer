@@ -80,4 +80,5 @@ int main(int argc, char** argv)
 	printf("%d %s\n", id, "a");
 	test("/a");
 	test("/abc");
+    str2hash.print2file("tmp.h");
 }

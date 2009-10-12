@@ -178,9 +178,11 @@ int htmlparser::gettag(char *tag)
 //    }
 //}
 #include "util/str2hash.h"
+#include "taghash.h"
 int htmlparser::gettag(char* tag)
 {
-	static Str2hash str2hash(alltag, MAXTAGID);
+	//static Str2hash str2hash(alltag, MAXTAGID);
+	static Str2hash str2hash(alltag, preHash2ID, preHash2IDC, preHash2IDCList);
 	return str2hash.get(tag); 
 }
 #endif

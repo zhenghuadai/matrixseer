@@ -30,6 +30,7 @@ class Str2hash
 		char** allstr;
 	public:
 		Str2hash(char** allStr, int n){clean(); hash=hashSum; create(allStr,n);};
+		Str2hash(char** allStr, unsigned char* preHash2ID, unsigned char* preHash2IDC, unsigned char* preHash2IDCList){ hash=hashSum; memcpy(Hash2ID, preHash2ID, 256);memcpy(Hash2IDC, preHash2IDC, 256);memcpy(Hash2IDCList, preHash2IDCList, 256);};
 		void clean(){ memset(this, 0, sizeof(Str2hash));}
 		void setHashFunc(hashFunc hf){hash = hf;}
 
@@ -51,6 +52,7 @@ class Str2hash
 	public:
 		unsigned int get(char* str);
 		void print();
+        void print2file(char*);
 };
 
 inline void Str2hash::create(char** allStr, int n)
@@ -111,4 +113,36 @@ inline void Str2hash::print()
 	for(int i=0;i<256;i++) {
 		printf("%d %d\n", i, Hash2IDCList[i]);
 	}
+}
+
+inline void Str2hash::print2file(char *fn)
+{
+    int i;
+    FILE* fp = fopen(fn, "w");
+    fprintf(fp, "#ifndef __TAG_HASH__HEADER\n");
+    fprintf(fp, "#define __TAG_HASH__HEADER\n");
+
+    //! Hash2ID
+    fprintf(fp,"unsigned char preHash2ID[]={\n");
+    for(i=0;i<255;i++) {
+        fprintf(fp, "%d, ", Hash2ID[i]);
+    }
+    fprintf(fp, "%d};\n", Hash2ID[i]);
+
+    //! Hash2ID
+    fprintf(fp,"unsigned char preHash2IDC[]={\n");
+    for(i=0;i<255;i++) {
+        fprintf(fp, "%d, ", Hash2IDC[i]);
+    }
+    fprintf(fp, "%d};\n", Hash2IDC[i]);
+
+    //! Hash2ID
+    fprintf(fp,"unsigned char preHash2IDCList[]={\n");
+    for(i=0;i<255;i++) {
+        fprintf(fp, "%d, ", Hash2IDCList[i]);
+    }
+    fprintf(fp, "%d};\n", Hash2IDCList[i]);
+    
+    fprintf(fp, "#endif");
+    fclose(fp);
 }
