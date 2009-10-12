@@ -143,6 +143,6 @@ inline void Str2hash::print2file(char *fn)
     }
     fprintf(fp, "%d};\n", Hash2IDCList[i]);
     
-    fprintf(fp, "#endif");
+    fprintf(fp, "#endif\n");
     fclose(fp);
 }
