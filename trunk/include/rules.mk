@@ -34,6 +34,10 @@ ${OPT_DIR}/%.o:%.cpp
 	${CC}  ${MARC}  ${CFLAG}  ${INCLUDEPATH}  -MMD -c -o $@ $<
 %.o:%.cpp
 	${CXX} ${MARC}  ${CFLAG}  ${INCLUDEPATH}  -MMD -c -o $@ $<
+${LIBTARGET}d.a: ${DBG_OBJS}	
+	ar ${ARFLAG} ${LIBPATH}/$@ $^
+${LIBTARGET}.a: ${DBG_OBJS}	
+	ar ${ARFLAG} ${LIBPATH}/$@ $^
 ${LIBPATH}:
 	@mkdir -p $@
 -include ${DEP_FILES} 
