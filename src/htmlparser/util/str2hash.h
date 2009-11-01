@@ -66,7 +66,7 @@ inline void Str2hash::create(char** allStr, int n)
 	for(int i=0;i<n;i++){
 		if(allStr[i][0] == 0) continue;
 		unsigned int h = hash(allStr[i]);
-		if(Hash2ID[h]) 
+		if(Hash2ID[h] != HashEmpty) 
 			tmp[ Hash2ID[h] ] = i;
 		Hash2ID[h] = i;
 	}
@@ -93,8 +93,8 @@ inline unsigned int Str2hash::get(char *tag)
 	if(( Hash2ID[h] != HashEmpty ) && (Hash2ID[h] != HashConflict)){
 		if(strcasecmp(tag,allstr[Hash2ID[h]]) == 0) 
 			return Hash2ID[h];
-	}else if(Hash2ID[h] != HashConflict){
-		for(int i=Hash2ID[h]; i< Hash2ID[h+1];i++){
+	}else if(Hash2ID[h] == HashConflict){
+		for(int i=Hash2IDC[h]; i< Hash2IDC[h+1];i++){
 			if(strcasecmp(tag,allstr[Hash2IDCList[i]]) == 0) 
 				return Hash2IDCList[i];
 		}
