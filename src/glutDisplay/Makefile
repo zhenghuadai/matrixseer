@@ -18,7 +18,7 @@ preBuild:
 	cd ../multimedia;make
 	cd ../htmlparser;make
 	cd ../display;make
-3DIE: ${OBJECTS}  ${LIBPATH}libhtml.a ../js/libjs.a ${LIBPATH}libDisplay.a
+3DIE: ${OBJECTS}  ${LIBPATH}libhtml.a ../js/libjs.a ${LIBPATH}libDisplayd.a
 	${CXX} ${MARC} ${CFLAG} -o ${BINPATH}$@   ${LIB} ${XLIB} $^ -lpthread
 testfont:testfont.o
 	${CC} ${CFLAG}  -o ${BINPATH}$@  ${SORDLIB} -l3Dfont -L${LIBPATH} -WI,-Bdynamic ${XLIB} $^

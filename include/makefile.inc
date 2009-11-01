@@ -60,12 +60,36 @@ ARFLAG  = cqs
 
 
 #set clean
-TARGET 		?=${OBJS}
+ifdef TARGET
+DBG_TARGET  ?=${TARGET}
+OPT_TARGET  ?=${TARGET}
+endif
+
+ifdef LIBTARGET
+DBG_LIBTARGET  ?=${LIBTARGET}d.a
+OPT_LIBTARGET  ?=${LIBTARGET}.a
+TARGET 		?=${DBG_LIBTARGET}
+DBG_TARGET  ?=${DBG_LIBTARGET}
+OPT_TARGET  ?=${OPT_LIBTARGET}
+endif
+
+ifndef TARGET
+TARGET		?=${OBJS}
+DBG_TARGET  ?=${TARGET}
+OPT_TARGET  ?=${TARGET}
+endif
+
+
 CLEAN_OBJS 	?=${TARGET}
 
 
 #make entry
 .PHONY: all
 all: createDirdbg ${TARGET} 
-dbg: createDirdbg ${TARGET} 
-opt: createDiropt ${TARGET} 
+dbg: createDirdbg ${DBG_TARGET} 
+opt: createDiropt ${OPT_TARGET} 
+testecho:
+	echo ${TARGET} 
+	echo ${DBG_TARGET} 
+	echo ${OPT_TARGET} 
+
