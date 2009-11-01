@@ -5,6 +5,7 @@
 #include "dmtype.h"
 #include "debprintf.h"
 #include "Event.h"
+class HtmlNode;
 class Widget: public EventTarget 
 {
 friend class Group;
@@ -12,6 +13,7 @@ protected:
 	Widget* mParent;
 	Widget* mNext;
 	Widget* mPrevious;
+    HtmlNode* mHtmlNode;
 public:
 	Widget(){init();};
 	Widget(int x,int y,int z):EventTarget(x,y,z){init();};
@@ -59,11 +61,13 @@ public:
     }
     virtual	void draw(){ debprintf("Widget draw\n");};
     virtual void addChild(Widget*){};
+    HtmlNode* htmlNode(){return mHtmlNode;}
+    void htmlNode(HtmlNode* ht){/*mHtmlNode = ht;*/}
     //!
 public:
     void getLBpos(int& leftX, int& bottomY, int& z){getSxyz(leftX, bottomY, z); bottomY -= h(); }
 private:
-    void init(){mParent = mNext = mPrevious = NULL;}
+    void init(){mParent = mNext = mPrevious =  NULL;mHtmlNode =NULL;}
 protected:
     virtual void reDraw(){}
 };
