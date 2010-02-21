@@ -410,7 +410,7 @@ int main(int argc, char** argv)
     }
     testJS();
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH );
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH );
     glutInitWindowSize(Win_w, Win_h);
     glutInitWindowPosition (0, 0);
     glutCreateWindow("Matrix");

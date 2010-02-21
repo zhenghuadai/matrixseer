@@ -62,7 +62,7 @@ public:
     virtual	void draw(){ debprintf("Widget draw\n");};
     virtual void addChild(Widget*){};
     HtmlNode* htmlNode(){return mHtmlNode;}
-    void htmlNode(HtmlNode* ht){/*mHtmlNode = ht;*/}
+    void htmlNode(HtmlNode* ht){mHtmlNode = ht;}
     //!
 public:
     void getLBpos(int& leftX, int& bottomY, int& z){getSxyz(leftX, bottomY, z); bottomY -= h(); }

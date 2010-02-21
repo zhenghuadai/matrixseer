@@ -6,7 +6,7 @@ LINK= g++
 #set arch
 arch=$(shell uname -m)
 ifeq "$(arch)" "x86_64"
-MARC ?= -m32 
+MARC ?= #-m32 
 LIBJS = libjs32.a
 else 
 MARC ?=  
