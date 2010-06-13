@@ -81,14 +81,14 @@ void Email::setAuth(char* user, char* pass){
     char* p;
     p = strchr(user, '@') +1;
     smtpserver=strdup(p);
-    myaccount=user;
-    mypasswd=pass;
+    myaccount=strdup(user);
+    mypasswd=strdup(pass);
 }
 
 void Email::setAuth(char* server, char* user, char* pass){
-    smtpserver=server;
-    myaccount=user;
-    mypasswd=pass;
+    smtpserver=strdup(server);
+    myaccount=strdup(user);
+    mypasswd=strdup(pass);
 }
 
 int Email::mailfrom(char *sender,char * passwd)
@@ -102,7 +102,7 @@ int Email::mailserver(char *server)
     smtpserver=server;
 }
 
-int Email::mailto(char *mailtoaddr,char *data,char *subject)
+int Email::mailto(char *mailtoaddr,char *subject,char *data)
 {
     int sockfd;
     struct sockaddr_in server_addr;
@@ -260,7 +260,7 @@ resend1:
     return (0);
 }
 
-int Email::mailto2(char *mailtoaddr,char *data,char *subject,char* fn)
+int Email::mailto(char *mailtoaddr,char *subject,char *data,char* fn)
 {
     int sockfd;
     struct sockaddr_in server_addr;
@@ -398,19 +398,20 @@ resend2:
     {
         char mimeHeader[1024];
         char attachHeader[1024];
-        char *fileContent;
-        char *filebase64;
-        int fsize;
-        int base64size;
+        char *fileContent=0;
+        char *filebase64=0;
+        int fsize=-1;
+        int attachBase64Size;
         extern        char * readFile(char *fn,int *fsize);
-        sprintf(mimeHeader,"FROM:%s\nTO:%s\nSUBJEXT:%s\nDate:2008-05-08\nMIME-Version: 1.0\nContent-type: multipart/mixed; boundary=\"#BOUNDARY#\"\n\n",smtpsendaddr,mailtoaddr,subject);
+        sprintf(mimeHeader,"FROM:%s\nTO:%s\nSUBJECT:%s\nDate:2008-05-08\nMIME-Version: 1.0\nContent-type: multipart/mixed; boundary=\"#BOUNDARY#\"\n\n",smtpsendaddr,mailtoaddr,subject);
         sprintf(attachHeader,ATT_HEADER_TEMPLATE,getBaseFilename(fn),getBaseFilename(fn));
         fileContent = readFile(fn,&fsize);   
         debprintf("attach Size:%s %d\n", fn ,fsize);
-        //filebase64 = base64str(fileContent,fsize,&base64size);
-        filebase64 = ANSIToBase64(fileContent,fsize,&base64size);
+        //filebase64 = base64str(fileContent,fsize,&attachBase64Size);
+        if(fsize>0)
+            filebase64 = ANSIToBase64(fileContent,fsize,&attachBase64Size);
         debprintf("send mimeHeader\n");
-        if((numbytes=send(sockfd,mimeHeader,base64size,0))==-1)
+        if((numbytes=send(sockfd,mimeHeader,attachBase64Size,0))==-1)
         {
             perror("send mimeHeader error");
             return -1;
@@ -421,16 +422,18 @@ resend2:
             perror("send smtpdatabuf error");
             return -1;
         }
-        if((numbytes=send(sockfd,attachHeader,strlen(attachHeader),0))==-1)
-        {
-            perror("send attachHeader error");
-            return -1;
-        }
-        debprintf("send attach file len:%d \n",  base64size);
-        if((numbytes=send(sockfd,filebase64, base64size/*  strlen(filebase64)*/,0))==-1)
-        {
-            perror("send filebase64 error");
-            return -1;
+        if(fsize>0){
+            if((numbytes=send(sockfd,attachHeader,strlen(attachHeader),0))==-1)
+            {
+                perror("send attachHeader error");
+                return -1;
+            }
+            debprintf("send attach file len:%d \n",  attachBase64Size);
+            if((numbytes=send(sockfd,filebase64, attachBase64Size/*  strlen(filebase64)*/,0))==-1)
+            {
+                perror("send filebase64 error");
+                return -1;
+            }
         }
         if((numbytes=send(sockfd,"\n.\n",strlen("\n.\n"),0))==-1)
         {
