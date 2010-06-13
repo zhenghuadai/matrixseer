@@ -7,11 +7,14 @@ public:
 	int mailto2(char *mailaddr,char *data,char *subject,char *fn);
 	int mailfrom(char *sender,char * passwd);
 	int mailserver(char *server);
+    void setAuth(char* server, char* user, char* pass);
+    void setAuth(char* user, char* pass);
+    ~Email();
 private:
-	char * smtpserver;//="smtp.gmail.com";
-	char * smtpsendaddr;//="djx.zhenghua@gmai.com";
-	char * myaccount;//="djx.zhenghua@gmail.com";
-	char * mypasswd;//="djx_zh010";
+	char * smtpserver;
+	char * smtpsendaddr;
+	char * myaccount;
+	char * mypasswd;
 
 };
 #endif

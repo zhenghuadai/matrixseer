@@ -34,10 +34,15 @@ ${OPT_DIR}/%.o:%.cpp
 	${CC}  ${MARC}  ${CFLAG}  ${INCLUDEPATH}  -MMD -c -o $@ $<
 %.o:%.cpp
 	${CXX} ${MARC}  ${CFLAG}  ${INCLUDEPATH}  -MMD -c -o $@ $<
-${LIBTARGET}d.a: ${DBG_OBJS}	
+${LIB_TARGET}d.a: ${DBG_OBJS}	
 	ar ${ARFLAG} ${LIBPATH}/$@ $^
-${LIBTARGET}.a: ${DBG_OBJS}	
+${LIB_TARGET}.a: ${OPT_OBJS}	
 	ar ${ARFLAG} ${LIBPATH}/$@ $^
+${EXEC_TARGET}d:${EXEC_TARGET}.cpp	
+	${CC} ${CFLAG} ${CDEBFLAG} -o $@ -L${LIBPATH}  -l3Dhttp -l3Dsmtp -lpthread $^
+${EXEC_TARGET}:	 ${EXEC_TARGET}.cpp	
+	${CC} ${CFLAG} ${CDEBFLAG} -o $@ -L${LIBPATH}  -l3Dhttp -l3Dsmtp -lpthread $^
+
 ${LIBPATH}:
 	@mkdir -p $@
 -include ${DEP_FILES} 
@@ -48,4 +53,4 @@ createDiropt:
 	@test -x ${OPT_DIR} || mkdir -p ${OPT_DIR}
 	@test -x ${DEP_DIR} || mkdir -p ${DEP_DIR}
 clean:
-	rm -rf ${OBJS} ${CLEAN_OBJS} 
+	rm -rf ${OBJS} ${DBG_OBJS} ${OPT_OBJS} ${CLEAN_OBJS} 

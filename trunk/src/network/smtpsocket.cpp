@@ -8,9 +8,13 @@
 #include <netinet/in.h>
 #include <signal.h>
 #include <netdb.h>
+//#define DZHDEB
+#include "debprintf.h"
 #include "lib.h"
 
-//#define DZHDEB
+#define SMTPSERVER "smtp.sina.com.cn"
+#define MYACCOUNT "djx_zh"
+#define MYPASSWD "test123"
 //#define SMTP_MAIN
 #define PORT 25 //smtp port
 #define SIZE 1024 
@@ -51,20 +55,46 @@ const char BASE64_TAB[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
    const char * myaccount="djx.zhenghua@gmail.com";
    const char * mypasswd="djx_zh010";
    */
+char* getBaseFilename(const char* fn);
 void base64enc(const char *,char *);
 char * base64str(const char *instr,int instrSize = 0,int *outSize = 0);
 char * ANSIToBase64(const char *szInANSI, int nInLen,  int *nOutLen);
+Email::~Email()
+{
+    if( smtpserver !=  SMTPSERVER)
+        free(smtpserver);
+    if( myaccount!=    MYACCOUNT) 
+        free(myaccount);
+    if( mypasswd!=    MYPASSWD )
+        free(mypasswd);
+}
+
 Email::Email()
 {
-    smtpserver="smtp.sina.com.cn";
+    smtpserver=SMTPSERVER;
     smtpsendaddr="djx_zh@sina.com";
-    myaccount="djx_zh";
-    mypasswd="djx_zh010";
+    myaccount=MYACCOUNT;
+    mypasswd=MYPASSWD ;
 }
+
+void Email::setAuth(char* user, char* pass){
+    char* p;
+    p = strchr(user, '@') +1;
+    smtpserver=strdup(p);
+    myaccount=user;
+    mypasswd=pass;
+}
+
+void Email::setAuth(char* server, char* user, char* pass){
+    smtpserver=server;
+    myaccount=user;
+    mypasswd=pass;
+}
+
 int Email::mailfrom(char *sender,char * passwd)
 {
-    myaccount= sender;
-    mypasswd= passwd;
+    myaccount=sender;
+    mypasswd=passwd;
 }
 
 int Email::mailserver(char *server)
@@ -162,8 +192,8 @@ int Email::mailto(char *mailtoaddr,char *data,char *subject)
     if(strncmp(buff,"220",3)!=0)
         return (-1);
 #ifdef DZHDEB
-        printf("connect:\n");
-        printf("return buff:\n|%s|\n",buff);
+    printf("connect:\n");
+    printf("return buff:\n|%s|\n",buff);
 #endif
 
 resend1:
@@ -216,16 +246,16 @@ resend1:
     }
 
     //for(i=0;i<SMTPQUIT;i++)
-        //free(msg[i          ]);
-        free(msg[SMTPEHLO]);
-        free(msg[SMTPAUTH]);
-        free(msg[SMTPUSER]);
-        free(msg[SMTPPASS]);
-        free(msg[MAILFROM]);
-        free(msg[SMTPRCPT]);
-        free(msg[SMTPDATA]);
-        free(msg[SMTPCONT]);
-        free(msg[SMTPQUIT]);
+    //free(msg[i          ]);
+    free(msg[SMTPEHLO]);
+    free(msg[SMTPAUTH]);
+    free(msg[SMTPUSER]);
+    free(msg[SMTPPASS]);
+    free(msg[MAILFROM]);
+    free(msg[SMTPRCPT]);
+    free(msg[SMTPDATA]);
+    free(msg[SMTPCONT]);
+    free(msg[SMTPQUIT]);
     close(sockfd);
     return (0);
 }
@@ -320,8 +350,8 @@ int Email::mailto2(char *mailtoaddr,char *data,char *subject,char* fn)
     if(strncmp(buff,n_return[i],3)==0) 
         return (-1);
 #ifdef DZHDEB
-        printf("connect:\n");
-        printf("return buff:\n|%s|\n",buff);
+    printf("connect:\n");
+    printf("return buff:\n|%s|\n",buff);
 #endif
 resend2:
     retry ++;
@@ -374,33 +404,37 @@ resend2:
         int base64size;
         extern        char * readFile(char *fn,int *fsize);
         sprintf(mimeHeader,"FROM:%s\nTO:%s\nSUBJEXT:%s\nDate:2008-05-08\nMIME-Version: 1.0\nContent-type: multipart/mixed; boundary=\"#BOUNDARY#\"\n\n",smtpsendaddr,mailtoaddr,subject);
-        sprintf(attachHeader,ATT_HEADER_TEMPLATE,fn,fn);
+        sprintf(attachHeader,ATT_HEADER_TEMPLATE,getBaseFilename(fn),getBaseFilename(fn));
         fileContent = readFile(fn,&fsize);   
+        debprintf("attach Size:%s %d\n", fn ,fsize);
         //filebase64 = base64str(fileContent,fsize,&base64size);
         filebase64 = ANSIToBase64(fileContent,fsize,&base64size);
+        debprintf("send mimeHeader\n");
         if((numbytes=send(sockfd,mimeHeader,base64size,0))==-1)
         {
-            perror("send error");
+            perror("send mimeHeader error");
             return -1;
         }
+        debprintf("send smtpdatabuf \n");
         if((numbytes=send(sockfd,smtpdatabuf,strlen(smtpdatabuf),0))==-1)
         {
-            perror("send error");
+            perror("send smtpdatabuf error");
             return -1;
         }
         if((numbytes=send(sockfd,attachHeader,strlen(attachHeader),0))==-1)
         {
-            perror("send error");
+            perror("send attachHeader error");
             return -1;
         }
-        if((numbytes=send(sockfd,filebase64,strlen(filebase64),0))==-1)
+        debprintf("send attach file len:%d \n",  base64size);
+        if((numbytes=send(sockfd,filebase64, base64size/*  strlen(filebase64)*/,0))==-1)
         {
-            perror("send error");
+            perror("send filebase64 error");
             return -1;
         }
         if((numbytes=send(sockfd,"\n.\n",strlen("\n.\n"),0))==-1)
         {
-            perror("send error");
+            perror("send end error");
             return -1;
         }
         delete (fileContent);
@@ -418,7 +452,7 @@ resend2:
         perror("send error");
         return(-1);
     }
-
+    debprintf("send OK\n");
     free(msg[SMTPEHLO]);
     free(msg[SMTPAUTH]);
     free(msg[SMTPUSER]);
@@ -509,86 +543,93 @@ void base64enc(const char *instr,char *outstr)
 
 char * ANSIToBase64(const char *szInANSI, int nInLen,  int *nOutLen)
 {
-	//Input Parameter validation
-	//if ((szInANSI == NULL) || (nInLen == 0) || (szOutBase64 == NULL) || (nOutLen == 0))
-		//return 0;
-	//if (nOutLen < (nInLen*4/3 + 1 + nInLen*4/3/BASE64_MAXLINE*2 + 1 + 4))
-		//return 0;
+    //Input Parameter validation
+    //if ((szInANSI == NULL) || (nInLen == 0) || (szOutBase64 == NULL) || (nOutLen == 0))
+    //return 0;
+    //if (nOutLen < (nInLen*4/3 + 1 + nInLen*4/3/BASE64_MAXLINE*2 + 1 + 4))
+    //return 0;
     char *szOutBase64;
     szOutBase64 = new char[2*nInLen];
-	//Set up the parameters prior to the main encoding loop
-	int nInPos  = 0;
-	int nOutPos = 0;
-	int nLineLen = 0;
-	int c1, c2, c3;
-	int i;
+    //Set up the parameters prior to the main encoding loop
+    int nInPos  = 0;
+    int nOutPos = 0;
+    int nLineLen = 0;
+    int c1, c2, c3;
+    int i;
 
-	// Get three characters at a time from the input buffer and encode them
-	for (i=0; i<nInLen/3; ++i)
-	{
-		//Get the next 2 characters
-		c1 = szInANSI[nInPos++] & 0xFF;
-		c2 = szInANSI[nInPos++] & 0xFF;
-		c3 = szInANSI[nInPos++] & 0xFF;
+    // Get three characters at a time from the input buffer and encode them
+    for (i=0; i<nInLen/3; ++i)
+    {
+        //Get the next 2 characters
+        c1 = szInANSI[nInPos++] & 0xFF;
+        c2 = szInANSI[nInPos++] & 0xFF;
+        c3 = szInANSI[nInPos++] & 0xFF;
 
-		//Encode into the 4 6 bit characters
-		szOutBase64[nOutPos++] = BASE64_TAB[c1 >> 2];
-		szOutBase64[nOutPos++] = BASE64_TAB[((c1 << 4) | (c2 >> 4)) & 0x3F];
-		szOutBase64[nOutPos++] = BASE64_TAB[((c2 << 2) | (c3 >> 6)) & 0x3F];
-		szOutBase64[nOutPos++] = BASE64_TAB[c3 & 0x3F];
-		nLineLen += 4;
+        //Encode into the 4 6 bit characters
+        szOutBase64[nOutPos++] = BASE64_TAB[c1 >> 2];
+        szOutBase64[nOutPos++] = BASE64_TAB[((c1 << 4) | (c2 >> 4)) & 0x3F];
+        szOutBase64[nOutPos++] = BASE64_TAB[((c2 << 2) | (c3 >> 6)) & 0x3F];
+        szOutBase64[nOutPos++] = BASE64_TAB[c3 & 0x3F];
+        nLineLen += 4;
 
-		//Handle the case where we have gone over the max line boundary
-		if (nLineLen > BASE64_MAXLINE - 4)
-		{
-			szOutBase64[nOutPos++] = EOL[0];
-			szOutBase64[nOutPos++] = EOL[1];
-			nLineLen = 0;
-		}
-	}
+        //Handle the case where we have gone over the max line boundary
+        if (nLineLen > BASE64_MAXLINE - 4)
+        {
+            szOutBase64[nOutPos++] = EOL[0];
+            szOutBase64[nOutPos++] = EOL[1];
+            nLineLen = 0;
+        }
+    }
 
-	// Encode the remaining one or two characters in the input buffer
-	switch (nInLen % 3)
-	{
-		case 0:
-			{
-				szOutBase64[nOutPos++] = EOL[0];
-				szOutBase64[nOutPos++] = EOL[1];
-				break;
-			}
-		case 1:
-			{
-				c1 = szInANSI[nInPos] & 0xFF;
-				szOutBase64[nOutPos++] = BASE64_TAB[(c1 & 0xFC) >> 2];
-				szOutBase64[nOutPos++] = BASE64_TAB[((c1 & 0x03) << 4)];
-				szOutBase64[nOutPos++] = '=';
-				szOutBase64[nOutPos++] = '=';
-				szOutBase64[nOutPos++] = EOL[0];
-				szOutBase64[nOutPos++] = EOL[1];
-				break;
-			}
-		case 2:
-			{
-				c1 = szInANSI[nInPos++] & 0xFF;
-				c2 = szInANSI[nInPos] & 0xFF;
-				szOutBase64[nOutPos++] = BASE64_TAB[(c1 & 0xFC) >> 2];
-				szOutBase64[nOutPos++] = BASE64_TAB[((c1 & 0x03) << 4) | ((c2 & 0xF0) >> 4)];
-				szOutBase64[nOutPos++] = BASE64_TAB[((c2 & 0x0F) << 2)];
-				szOutBase64[nOutPos++] = '=';
-				szOutBase64[nOutPos++] = EOL[0];
-				szOutBase64[nOutPos++] = EOL[1];
-				break;
-			}
-		default:
-			{
-				return 0;
-			}
-	}
+    // Encode the remaining one or two characters in the input buffer
+    switch (nInLen % 3)
+    {
+        case 0:
+            {
+                szOutBase64[nOutPos++] = EOL[0];
+                szOutBase64[nOutPos++] = EOL[1];
+                break;
+            }
+        case 1:
+            {
+                c1 = szInANSI[nInPos] & 0xFF;
+                szOutBase64[nOutPos++] = BASE64_TAB[(c1 & 0xFC) >> 2];
+                szOutBase64[nOutPos++] = BASE64_TAB[((c1 & 0x03) << 4)];
+                szOutBase64[nOutPos++] = '=';
+                szOutBase64[nOutPos++] = '=';
+                szOutBase64[nOutPos++] = EOL[0];
+                szOutBase64[nOutPos++] = EOL[1];
+                break;
+            }
+        case 2:
+            {
+                c1 = szInANSI[nInPos++] & 0xFF;
+                c2 = szInANSI[nInPos] & 0xFF;
+                szOutBase64[nOutPos++] = BASE64_TAB[(c1 & 0xFC) >> 2];
+                szOutBase64[nOutPos++] = BASE64_TAB[((c1 & 0x03) << 4) | ((c2 & 0xF0) >> 4)];
+                szOutBase64[nOutPos++] = BASE64_TAB[((c2 & 0x0F) << 2)];
+                szOutBase64[nOutPos++] = '=';
+                szOutBase64[nOutPos++] = EOL[0];
+                szOutBase64[nOutPos++] = EOL[1];
+                break;
+            }
+        default:
+            {
+                return 0;
+            }
+    }
 
-	szOutBase64[nOutPos] = 0;
+    szOutBase64[nOutPos] = 0;
     *nOutLen = nOutPos; 
-	return szOutBase64;
+    return szOutBase64;
 }
+
+char* getBaseFilename(const char * fn){
+    const char* p = fn + strlen(fn); 
+    while( (p >= fn) && (*p != '/') &&(*p != '\\')) p--;
+    return (char*)p;
+}
+
 #ifdef SMTP_MAIN
 int main(int argc,char *argv[])
 {

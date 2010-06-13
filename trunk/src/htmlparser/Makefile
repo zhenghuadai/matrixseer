@@ -2,7 +2,7 @@ TOPDIR = ../..
 PROJ=htmlparser
 DMDISPLAY ?=glutDisplay
 SRCS = html.cpp tagfunc.cpp stack.cpp createtree.cpp attrfunc.cpp cssfunc.cpp htmltree.cpp
-TARGET=libhtml
+LIB_TARGET=libhtml
 CLEAN_OBJS= ${LIBPATH}libhtml.a
 
 ifeq "$(DMDISPLAY)" "glutDisplay"
