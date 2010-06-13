@@ -7,8 +7,8 @@ EXEC_TARGET=sendip
 include ../../include/makefile.inc 
 
 
-sendip:sendip.cpp
-	${CC} ${CFLAG} ${CDEBFLAG} -o ${BINPATH}$@ -L${LIBPATH}   -l3Dhttp -l3Dsmtp -lpthread $^
+#sendip:sendip.cpp
+#	${CC} ${CFLAG} ${CDEBFLAG} -o ${BINPATH}$@ -L${LIBPATH}   -l3Dhttp -l3Dsmtp -lpthread $^
 
 lib:libso liba
 liba: ${LIBA}

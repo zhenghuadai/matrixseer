@@ -42,6 +42,8 @@ ${EXEC_TARGET}d:${EXEC_TARGET}.cpp
 	${CC} ${CFLAG} ${CDEBFLAG} -o $@ -L${LIBPATH}  -l3Dhttp -l3Dsmtp -lpthread $^
 ${EXEC_TARGET}:	 ${EXEC_TARGET}.cpp	
 	${CC} ${CFLAG} ${CDEBFLAG} -o $@ -L${LIBPATH}  -l3Dhttp -l3Dsmtp -lpthread $^
+%.exe:%.cpp	
+	${CC} ${CFLAG} ${CDEBFLAG} ${INCLUDEPATH} -o $@ -L${LIBPATH}  -l3Dhttp -l3Dsmtp -lpthread $^
 
 ${LIBPATH}:
 	@mkdir -p $@

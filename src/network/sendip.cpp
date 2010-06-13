@@ -4,44 +4,44 @@
 #include "string.h"
 
 int main(int argc, char *argv[]){
-char *cont;
-char *email="djx_zh@sina.com";//"djx.zhenghua@gmail.com";
-char * data;
-char *subj="ip";
-char* preIP = "[";
-char *ip;
-char buffIP[32];
-int i=0;
-FILE *fp;
-char oldIP[32];
-Email mailServer;
-cont=httpsock("http://www.ip138.com/ips.asp",NULL);
+    char *cont;
+    char *email="djx_zh@sina.com";//"djx.zhenghua@gmail.com";
+    char * data;
+    char *subj="ip";
+    char* preIP = "[";
+    char *ip;
+    char buffIP[32];
+    int i=0;
+    FILE *fp;
+    char oldIP[32];
+    Email mailServer;
+    cont=httpsock("http://www.ip138.com/ips.asp",NULL);
 
-ip = cont;
-while((ip = strstr(ip,preIP)) !=NULL){
-    ip++;
-    if((ip[0]>='0')&&(ip[0]<='9')) break;
-}
-while((*ip) && (*ip != ']') && (i<30)){
-    buffIP[i++] = *ip++;
-}
-buffIP[i] =0;
+    ip = cont;
+    while((ip = strstr(ip,preIP)) !=NULL){
+        ip++;
+        if((ip[0]>='0')&&(ip[0]<='9')) break;
+    }
+    while((*ip) && (*ip != ']') && (i<30)){
+        buffIP[i++] = *ip++;
+    }
+    buffIP[i] =0;
 
-fp = fopen("/tmp/IP","r");
-if(fp == NULL) return 1;
-fgets(oldIP,16,fp);
-fclose(fp);
-//if( strcmp(buffIP,oldIP) !=0)
-{
-    mailServer.mailto2(email,buffIP,subj,"2120.jpg");
-    //if(ip)printf("%s",buffIP);
-    fp = fopen("/tmp/IP","w");
-    fputs(buffIP,fp);  
+    fp = fopen("/tmp/IP","r");
+    if(fp == NULL) return 1;
+    fgets(oldIP,16,fp);
     fclose(fp);
-    //fprintf(fp,"%s",buffIP);
-}
-//mailServer.mailto(email,buffIP,subj);
-//if(ip)printf("%s",buffIP);
-//printf("%s",cont);
-//printf("%s",oldIP);
+    //if( strcmp(buffIP,oldIP) !=0)
+    {
+        mailServer.mailto2(email,buffIP,subj,"2120.jpg");
+        //if(ip)printf("%s",buffIP);
+        fp = fopen("/tmp/IP","w");
+        fputs(buffIP,fp);  
+        fclose(fp);
+        //fprintf(fp,"%s",buffIP);
+    }
+    //mailServer.mailto(email,buffIP,subj);
+    //if(ip)printf("%s",buffIP);
+    //printf("%s",cont);
+    //printf("%s",oldIP);
 }
