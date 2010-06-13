@@ -3,11 +3,12 @@ LIBA    = lib3Dhttp.a lib3Dsmtp.a #lib3Dfont.a
 TOPDIR=../../
 PROJ=network
 TARGET=liba
+EXEC_TARGET=sendip
 include ../../include/makefile.inc 
 
 
-sendip:sendip.o
-	${CC} ${CFLAG} ${CDEBFLAG} -o ${BINPATH}$@ -L${LIBPATH} ${SORDLIB} -l3Dhttp -l3Dsmtp -lpthread $^
+sendip:sendip.cpp
+	${CC} ${CFLAG} ${CDEBFLAG} -o ${BINPATH}$@ -L${LIBPATH}   -l3Dhttp -l3Dsmtp -lpthread $^
 
 lib:libso liba
 liba: ${LIBA}
@@ -41,7 +42,7 @@ install:
 	if ! test  -f /usr/local/lib3Dfont.so; then  \
 	ln -s ${LIBPATH}httpsocket.so /usr/local/lib3Dfont.so; \
 	fi;
-clean:
+clean0:
 	rm -f ${TestEXEC}
 	rm -f *.o htmlparser/*.o
 	rm -f ${LIBPATH}lib*

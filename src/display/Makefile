@@ -3,7 +3,7 @@ PROJ=display
 EXEC	=
 
 SRCS= Widget.cpp Group.cpp ctrinput.cpp Rect.cpp Cube.cpp ctrbutton.cpp #display.cpp displayDraw.cpp 3DIE.c  
-LIBTARGET=libDisplay
+LIB_TARGET=libDisplay
 #TARGET= libDisplay.a 
 include ../../include/makefile.inc 
 

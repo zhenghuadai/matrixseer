@@ -18,12 +18,12 @@ char * readFile(char *fn,int *fsize)
     char c;
     char *content ;
     int size=-1;
-#ifdef LINUX
+#ifdef __GNUC__
     struct stat fsc;
     fsc.st_size = -1;
     stat(fn, &fsc);
     *fsize = size = fsc.st_size;
-    printf("size:%d\n",size);
+    //printf("size:%d\n",size);
 #endif
     if(size<=0) {
         //printf("size err\n");
