@@ -39,6 +39,11 @@ void MtrxArc(float zoff);
 //#include "glut_tr10.c"
 //void * MGLUT_BITMAP_TIMES_ROMAN_10=(void *)&MglutBitmapTimesRoman10;//MglutBitmapTimesRoman10;
 
+#define turnOnLight0() { \
+    glEnable(GL_LIGHTING);\
+    glEnable(GL_LIGHT0);\
+}
+
 #define TEXW   2048 
 #define TEXH  1024 
 #define RW Win_w//*5/6
@@ -50,85 +55,144 @@ static int ra=0;
 static float eyeZ = 5.0;
 static void inittex()
 {
-	int i;
+    int i;
 #ifdef HTTPTEX
-	httptex1=(GLubyte *)malloc(TEXW * TEXH * 4 * sizeof(GLubyte));
-        for(i=0;i<TEXW * TEXH ;i+=4)
-	{
-		httptex1[i]=(GLubyte)225;
-		httptex1[i+1]=(GLubyte)0;
-		httptex1[i+2]=(GLubyte)0;
-		httptex1[i+3]=(GLubyte)255;
-	}
+    httptex1=(GLubyte *)malloc(TEXW * TEXH * 4 * sizeof(GLubyte));
+    for(i=0;i<TEXW * TEXH ;i+=4)
+    {
+        httptex1[i]=(GLubyte)225;
+        httptex1[i+1]=(GLubyte)0;
+        httptex1[i+2]=(GLubyte)0;
+        httptex1[i+3]=(GLubyte)255;
+    }
 #endif
-	glGenTextures(1, &texName1);
-	glBindTexture(GL_TEXTURE_2D, texName1);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, TEXW , TEXH,
-                0, GL_RGBA, GL_UNSIGNED_BYTE,NULL/* httptex1*/);
- glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	
+    glGenTextures(1, &texName1);
+    glBindTexture(GL_TEXTURE_2D, texName1);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, TEXW , TEXH,
+            0, GL_RGBA, GL_UNSIGNED_BYTE,NULL/* httptex1*/);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
 }
+
+void setLight0()
+{
+    GLfloat l_pos[]={0.0,.0,5.0, 0.0};
+    GLfloat l_color[]={1.0,1,1,1.0};
+    glLightfv(GL_LIGHT0,GL_POSITION,l_pos);
+    glLightfv(GL_LIGHT0,GL_DIFFUSE,l_color);
+    GLfloat ambient[] = {0.0, 0.0, 0.0, 1.0};
+    GLfloat diffuse[] = {1.0, 1.0, 1.0, 1.0};
+    GLfloat position[] = {0.0, 3.0, 3.0, 0.0};
+
+    GLfloat lmodel_ambient[] = {0.2, 0.2, 0.2, 1.0};
+    GLfloat local_view[] = {0.0};
+
+    glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
+    glLightfv(GL_LIGHT0, GL_POSITION, position);
+    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
+    glLightModelfv(GL_LIGHT_MODEL_LOCAL_VIEWER, local_view);
+
+    glFrontFace(GL_CW);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    glEnable(GL_AUTO_NORMAL);
+    glEnable(GL_NORMALIZE);
+    glEnable(GL_DEPTH_TEST); 
+
+}
+
+
+void initGL()
+{
+    turnOnLight0();
+    setLight0();
+
+}
+
 void init(int argc,char * argv[])
 {
     char * url;
-	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-	inittex();
+    initGL();
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+    inittex();
     if(argc ==1) 
         url = "www.google.com";
     else
         url = argv[1];
     if(isfile(url)){
-    httpcont = getsfromfile(url);
-    if(httpcont == 0) {
-        exit(0);
-    }
+        httpcont = getsfromfile(url);
+        if(httpcont == 0) {
+            exit(0);
+        }
     }
     else
-    httpcont=httpsock(url,(int*)NULL);
+        httpcont=httpsock(url,(int*)NULL);
     if(httpcont == NULL) 
-    httpcont = getsfromfile("err.html");
+        httpcont = getsfromfile("err.html");
 }
 void setProjectionP()
 {
 }
-void setLight0()
+
+/*
+ * Move object into position.  Use 3rd through 12th 
+ * parameters to specify the material property.  Draw a teapot.
+ */
+void renderTeapot(GLfloat x, GLfloat y, GLfloat z,
+        GLfloat ambr, GLfloat ambg, GLfloat ambb,
+        GLfloat difr, GLfloat difg, GLfloat difb,
+        GLfloat specr, GLfloat specg, GLfloat specb, GLfloat shine)
 {
-    GLfloat l_pos[]={5.0,0,0,1.0};
-    GLfloat l_color[]={1.0,1,1,1.0};
-    glLightfv(GL_LIGHT0,GL_POSITION,l_pos);
-    glLightfv(GL_LIGHT0,GL_DIFFUSE,l_color);
+    GLfloat mat[4];
+
+    glPushMatrix();
+    glTranslatef(x, y, z);
+    //   glRotatef(spin, 0.0, 0.0, 1.0);
+#if 0 
+    mat[0] = ambr; mat[1] = ambg; mat[2] = ambb; mat[3] = 1.0;
+    glMaterialfv(GL_FRONT, GL_AMBIENT, mat);
+    mat[0] = difr; mat[1] = difg; mat[2] = difb;
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, mat);
+    mat[0] = specr; mat[1] = specg; mat[2] = specb;
+    glMaterialfv(GL_FRONT, GL_SPECULAR, mat);
+    glMaterialf(GL_FRONT, GL_SHININESS, shine * 128.0);
+#endif
+    //   glCallList(teapotList);
+    glDisable(GL_TEXTURE_2D);
+    glutSolidTeapot(.2);
+    glPopMatrix();
+    glEnable(GL_TEXTURE_2D);
 }
 
-#define turnOnLight0() { \
-    glEnable(GL_LIGHTING);\
-    glEnable(GL_LIGHT0);\
-}
-#define LX -1 
-#define BY -1 
+
+#define LX (-1) 
+#define BY (-1) 
 #define RX 1 
 #define TY 1
-#define LX2 -1 
-#define BY2 -1 
-#define RX2 1 
-#define TY2 1
+#define LX2 ( LX) 
+#define BY2 ( BY) 
+#define RX2 ( RX) 
+#define TY2 ( TY)
 #define ZF 0
 #define ZB -6 
+
 void MtrxPlane(float zoff)
 {
     glBegin(GL_QUADS);
 #if 1 
-    glTexCoord2f(0.0, 0.0);    		  glVertex3f(LX2, BY2, zoff);
-    glTexCoord2f( DRW / TEXW, 0.0);      	  glVertex3f(RX2, BY2, zoff);
-    glTexCoord2f(DRW / TEXW,DRH/TEXH);      glVertex3f(RX2, TY2, zoff);
-    glTexCoord2f(.0, DRH/TEXH);       	  glVertex3f(LX2, TY2, zoff);
+    glTexCoord2f(0.0, 0.0);    		   glVertex3f(LX2, BY2, zoff);
+    glTexCoord2f( DRW / TEXW, 0.0);    glVertex3f(RX2, BY2, zoff);
+    glTexCoord2f(DRW / TEXW,DRH/TEXH); glVertex3f(RX2, TY2, zoff);
+    glTexCoord2f(.0, DRH/TEXH);        glVertex3f(LX2, TY2, zoff);
 #else
-    glTexCoord2i(0, 0);    		  glVertex3f(LX2, BY2, zoff);
-    glTexCoord2i(2, 0);      	  glVertex3f(RX2, BY2, zoff);
-    glTexCoord2i(2,2);      glVertex3f(RX2, TY2, zoff);
-    glTexCoord2i(0, 2);       	  glVertex3f(LX2, TY2, zoff);
+    glTexCoord2i(0, 0);      		   glVertex3f(LX2, BY2, zoff);
+    glTexCoord2i(2, 0);         	   glVertex3f(RX2, BY2, zoff);
+    glTexCoord2i(2,2);                 glVertex3f(RX2, TY2, zoff);
+    glTexCoord2i(0, 2);       	       glVertex3f(LX2, TY2, zoff);
 #endif
     glEnd();
 
@@ -138,19 +202,19 @@ void MtrxCubic()
     // glRotatef(ra,1,0,0);
 
     glBegin(GL_QUADS);
-    glTexCoord2f(0.0, 0.0);    		  glVertex3f(LX, BY, ZF);
-    glTexCoord2f( DRW / TEXW, 0.0);      	  glVertex3f(LX2, BY2, ZB);
-    glTexCoord2f(DRW / TEXW,DRH/TEXH);      glVertex3f(LX2, TY2, ZB);
+    glTexCoord2f(0.0, 0.0);     		  glVertex3f(LX, BY, ZF);
+    glTexCoord2f( DRW / TEXW, 0.0);   	  glVertex3f(LX2, BY2, ZB);
+    glTexCoord2f(DRW / TEXW,DRH/TEXH);    glVertex3f(LX2, TY2, ZB);
     glTexCoord2f(.0, DRH/TEXH);       	  glVertex3f(LX, TY, ZF);
 
-    glTexCoord2f(0.0, 0.0);    		  glVertex3f(LX2, BY2, ZB);
-    glTexCoord2f( DRW / TEXW, 0.0);      	  glVertex3f(RX2, BY2, ZB);
-    glTexCoord2f(DRW / TEXW,DRH/TEXH);      glVertex3f(RX2, TY2, ZB);
+    glTexCoord2f(0.0, 0.0);    		      glVertex3f(LX2, BY2, ZB);
+    glTexCoord2f( DRW / TEXW, 0.0);       glVertex3f(RX2, BY2, ZB);
+    glTexCoord2f(DRW / TEXW,DRH/TEXH);    glVertex3f(RX2, TY2, ZB);
     glTexCoord2f(.0, DRH/TEXH);       	  glVertex3f(LX2, TY2, ZB);
 
-    glTexCoord2f(0.0, 0.0);    		  glVertex3f(RX2, BY2, ZB);
-    glTexCoord2f( DRW / TEXW, 0.0);      	  glVertex3f(RX, BY, ZF);
-    glTexCoord2f(DRW / TEXW,DRH/TEXH);      glVertex3f(RX, TY, ZF);
+    glTexCoord2f(0.0, 0.0);    		      glVertex3f(RX2, BY2, ZB);
+    glTexCoord2f( DRW / TEXW, 0.0);       glVertex3f(RX, BY, ZF);
+    glTexCoord2f(DRW / TEXW,DRH/TEXH);    glVertex3f(RX, TY, ZF);
     glTexCoord2f(.0, DRH/TEXH);       	  glVertex3f(RX2, TY2, ZB);
 
     glEnd();
@@ -161,15 +225,15 @@ void MtrxCubicArc()
     // glRotatef(ra,1,0,0);
 
     glBegin(GL_QUADS);
-    glTexCoord2f(0.0, 0.0);    		  glVertex3f(LX, BY, ZF);
-    glTexCoord2f( DRW / TEXW, 0.0);      	  glVertex3f(LX2, BY2, ZB);
-    glTexCoord2f(DRW / TEXW,DRH/TEXH);      glVertex3f(LX2, TY2, ZB);
-    glTexCoord2f(.0, DRH/TEXH);       	  glVertex3f(LX, TY, ZF);
+    glTexCoord2f(0.0, 0.0);    		   glVertex3f(LX, BY, ZF);
+    glTexCoord2f( DRW / TEXW, 0.0);    glVertex3f(LX2, BY2, ZB);
+    glTexCoord2f(DRW / TEXW,DRH/TEXH); glVertex3f(LX2, TY2, ZB);
+    glTexCoord2f(.0, DRH/TEXH);        glVertex3f(LX, TY, ZF);
 
-    glTexCoord2f(0.0, 0.0);    		  glVertex3f(RX2, BY2, ZB);
-    glTexCoord2f( DRW / TEXW, 0.0);      	  glVertex3f(RX, BY, ZF);
-    glTexCoord2f(DRW / TEXW,DRH/TEXH);      glVertex3f(RX, TY, ZF);
-    glTexCoord2f(.0, DRH/TEXH);       	  glVertex3f(RX2, TY2, ZB);
+    glTexCoord2f(0.0, 0.0);    		   glVertex3f(RX2, BY2, ZB);
+    glTexCoord2f( DRW / TEXW, 0.0);    glVertex3f(RX, BY, ZF);
+    glTexCoord2f(DRW / TEXW,DRH/TEXH); glVertex3f(RX, TY, ZF);
+    glTexCoord2f(.0, DRH/TEXH);        glVertex3f(RX2, TY2, ZB);
 
     glEnd();
     MtrxArc(ZB);
@@ -178,7 +242,10 @@ void MtrxCubicArc()
 void MtrxArc(float zoff)
 {
     int i;
-    static 	float arc[22]={-1.000000,0.000000,-0.813473,-0.380160,-0.618034,-0.680249,-0.415823,-0.896978,-0.209057,-1.027972,-0.000000,-1.071797,0.209057,-1.027972,0.415823,-0.896978,0.618034,-0.680249,0.813473,-0.380160,1.000000,0.000000};
+    static 	float arc[22]={-1.000000,0.000000,-0.813473,-0.380160,-0.618034,-0.680249,
+        -0.415823,-0.896978,-0.209057,-1.027972,-0.000000,-1.071797,
+        0.209057,-1.027972,0.415823,-0.896978,0.618034,-0.680249,
+        0.813473,-0.380160,1.000000,0.000000};
     float stepw =DRW/TEXW;
     float h =DRH/TEXH;
     float w=.0;
@@ -193,11 +260,12 @@ void MtrxArc(float zoff)
         w+=stepw;
         glEnd();
     }
+    //    glutSolidTeapot(0.2);
 }
+
 void display(void)
 {
-    //setLight0();
-    turnOnLight0();
+    initGL();
     glColor4fv(globalColor);
     /*
     //glReadPixels(0,0,TEXW,TEXH,GL_RGBA,GL_UNSIGNED_BYTE,httptex1);
@@ -222,6 +290,8 @@ void display(void)
             MtrxArc(0.0);
             break;
     }
+    renderTeapot(0., -.6,  -1.0, 0.05, 0.0, 0.0, 0.5, 0.4, 0.4,
+            0.7, 0.04, 0.04, .078125);
     glDisable(GL_TEXTURE_2D);
     glutSwapBuffers();
 
@@ -237,11 +307,13 @@ void reshape(int w, int h)
     glLoadIdentity();
     // glOrtho (0.0, w, 0.0, h, -100.0, 100.0);
     //   gluPerspective(120.0, (GLfloat) w/(GLfloat) h, 1.0, 30.0);
-    glFrustum(-1.0,1.0,-1.0,1.0,5.0,25.0);
+    glFrustum(LX,RX,BY,TY,5.0,25.0);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     //	glTranslatef(0.0, 0.0, -3.6);
-    gluLookAt(.0,.0,eyeZ,.0,.0,-100.0,.0,1.0,.0);
+    gluLookAt((RX+LX)/2.0, (TY+BY)/2.0, eyeZ,
+            (RX+LX)/2.0, (TY+BY)/2.0, -100.0,
+            .0,1.0,.0);
     glColor4fv(globalColor2);
     drawToTexture2(texName1,0,0,RW,RH,httpcont);
     glViewport(0, 0, (GLsizei) w, (GLsizei) h);
@@ -250,104 +322,104 @@ void reshape(int w, int h)
 void keyboard(unsigned char key, int x, int y)
 {
     static int i=0;
-	if((key < 127)&&(key >= 0)) {
-		if((  onFocusWidget != NULL)&&(onFocusWidget != curDoc)){ 
-			onFocusWidget ->handleKey(key);
-			onFocusWidget -> redraw();
-			return ;
-		}
-	}
-	printf("%0x %0x\n", onFocusWidget, pctrInput0);
-	switch (key) {
-		case 27:
-			exit(0);
-		case 13:
-			break;
-		case 'e': 
-			//	ra=1;
-			//	if(ra>360)ra=0;
-			glRotatef(RA,0,1,0);
-			//glutPostRedisplay();
-			break;
-		case 'q':
-			glRotatef(-RA,0,1,0);
-			//glutPostRedisplay();
+    if((key < 127)&&(key >= 0)) {
+        if((  onFocusWidget != NULL)&&(onFocusWidget != curDoc)){ 
+            onFocusWidget ->handleKey(key);
+            onFocusWidget -> redraw();
+            return ;
+        }
+    }
+    debprintf("%0x %0x\n", onFocusWidget, pctrInput0);
+    switch (key) {
+        case 27:
+            exit(0);
+        case 13:
+            break;
+        case 'e': 
+            //	ra=1;
+            //	if(ra>360)ra=0;
+            glRotatef(RA,0,1,0);
+            //glutPostRedisplay();
+            break;
+        case 'q':
+            glRotatef(-RA,0,1,0);
+            //glutPostRedisplay();
 
-			break;
-		case 'd': 
-			glTranslatef(.1,0,0);
-			//glutPostRedisplay();
-			break;
-		case 'a': 
-			glTranslatef(-.1,0,0);
-			//glutPostRedisplay();
-			break;
-		case 'w': 
-			//	eyeZ += 0.01;
-			glTranslatef(0,0,.1);
-			//  gluLookt(.0,.0,5.0,.0,.0,-100.0,.0,1.0,.0);
-			//glutPostRedisplay();
-			break;
-		case 's': 
-			//	eyeZ -= .01;
-			//gluLookAt(.0,.0,5.0,.0,.0,-100.0,.0,1.0,.0);
-			glTranslatef(0,0,-.1);
-			//glutPostRedisplay();
-			break;
-		case 'j':
-			DisplayMode++;
-			DisplayMode %= 4;
-			//glutPostRedisplay();
-			break;
-		default:
-			//	url[i++]=key;
-			//glutPostRedisplay();
-			break;
-	}
-	glutPostRedisplay();
+            break;
+        case 'd': 
+            glTranslatef(.1,0,0);
+            //glutPostRedisplay();
+            break;
+        case 'a': 
+            glTranslatef(-.1,0,0);
+            //glutPostRedisplay();
+            break;
+        case 'w': 
+            //	eyeZ += 0.01;
+            glTranslatef(0,0,.1);
+            //  gluLookt(.0,.0,5.0,.0,.0,-100.0,.0,1.0,.0);
+            //glutPostRedisplay();
+            break;
+        case 's': 
+            //	eyeZ -= .01;
+            //gluLookAt(.0,.0,5.0,.0,.0,-100.0,.0,1.0,.0);
+            glTranslatef(0,0,-.1);
+            //glutPostRedisplay();
+            break;
+        case 'j':
+            DisplayMode++;
+            DisplayMode %= 4;
+            //glutPostRedisplay();
+            break;
+        default:
+            //	url[i++]=key;
+            //glutPostRedisplay();
+            break;
+    }
+    glutPostRedisplay();
 }
 void ctrlkey(int key,int x,int y)
 {
-	if((pctrInput0)&&(pctrInput0 -> onFocus())){
-		//pctrInput0->skeyfunc(key,x,y);
-		pctrInput0 -> redraw();
-	}
-	switch (key){
-		case GLUT_KEY_LEFT:
-		case GLUT_KEY_RIGHT:
-			break;
-		default:
-			break;
-	}
-	glutPostRedisplay();
+    if((pctrInput0)&&(pctrInput0 -> onFocus())){
+        //pctrInput0->skeyfunc(key,x,y);
+        pctrInput0 -> redraw();
+    }
+    switch (key){
+        case GLUT_KEY_LEFT:
+        case GLUT_KEY_RIGHT:
+            break;
+        default:
+            break;
+    }
+    glutPostRedisplay();
 }
 void mouse(int button, int state, int x, int y) 
 {
-	int z = 0;
-	y = getWinh() - y;
+    int z = 0;
+    y = getWinh() - y;
     if(curDoc)
         if( curDoc -> hitMe(x, y, z)) 
             onFocusWidget = curDoc -> getObjOnFocus(x, y, z);
         else 
             onFocusWidget = curDoc;
-    printf("[%d %d]hit  %0x\n", x,y, onFocusWidget);
-        switch ( button)
-        {
-            case GLUT_LEFT_BUTTON:
-                switch ( state) {
-                    case GLUT_DOWN:
-                        onFocusWidget->handleButton( ButtonEvent( 1, x, y));
-                        break;
-                    case GLUT_UP:
-                        onFocusWidget->redraw();
+    debprintf("[%d %d]hit  %0x\n", x,y, onFocusWidget);
+    switch ( button)
+    {
+        case GLUT_LEFT_BUTTON:
+            switch ( state) {
+                case GLUT_DOWN:
+                    onFocusWidget->handleButton( ButtonEvent( 1, x, y));
+                    break;
+                case GLUT_UP:
+                    onFocusWidget->redraw();
 
-                        break;
-                }
-                break;
-            case GLUT_RIGHT_BUTTON:
-                break;
-        }
-        glutPostRedisplay();
+                    break;
+            }
+            break;
+        case GLUT_RIGHT_BUTTON:
+            break;
+    }
+    glutPostRedisplay();
 }
 JSRuntime *rt;
 JSContext *cx;
