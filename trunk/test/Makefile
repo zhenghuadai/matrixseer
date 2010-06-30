@@ -9,4 +9,4 @@ include ../include/makefile.inc
 include ../include/rules.mk	
 
 clean0:
-
+	rm *.exe

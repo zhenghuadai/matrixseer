@@ -38,12 +38,13 @@ ${LIB_TARGET}d.a: ${DBG_OBJS}
 	ar ${ARFLAG} ${LIBPATH}/$@ $^
 ${LIB_TARGET}.a: ${OPT_OBJS}	
 	ar ${ARFLAG} ${LIBPATH}/$@ $^
-${EXEC_TARGET}d:${EXEC_TARGET}.cpp	
-	${CC} ${CFLAG} ${CDEBFLAG} -o $@ -L${LIBPATH}  -l3Dhttp -l3Dsmtp -lpthread $^
-${EXEC_TARGET}:	 ${EXEC_TARGET}.cpp	
-	${CC} ${CFLAG} ${CDEBFLAG} -o $@ -L${LIBPATH}  -l3Dhttp -l3Dsmtp -lpthread $^
+#${EXEC_TARGET}d:${EXEC_TARGET}.cpp	
+${EXEC_TARGET}d:${DBG_OBJS}	
+	${CXX} ${CFLAG} ${CDEBFLAG}  ${MARC} -o $@ $^ ${DEB_LIB} ${XLIB}  
+${EXEC_TARGET}:	 ${OPT_OBJS} 
+	${CXX} ${CFLAG} ${CDEBFLAG}  ${MARC} -o $@ $^ ${OPT_LIB} ${XLIB} 
 %.exe:%.cpp	
-	${CC} ${CFLAG} ${CDEBFLAG} ${INCLUDEPATH} -o $@ -L${LIBPATH}  -l3Dhttp -l3Dsmtp -lpthread $^
+	${CXX}  ${CFLAG} ${CDEBFLAG} ${INCLUDEPATH} -o $@  $^ ${LIB} ${XLIB} 
 
 ${LIBPATH}:
 	@mkdir -p $@
