@@ -7,10 +7,10 @@ LINK= g++
 arch=$(shell uname -m)
 ifeq "$(arch)" "x86_64"
 MARC ?= #-m32 
-LIBJS = libjs32.a
+LIBJS = libjs64.a
 else 
 MARC ?=  
-LIBJS = libjs64.a
+LIBJS = libjs.a
 endif
 
 #set PATH
@@ -54,12 +54,13 @@ OBJS 		= ${DBG_OBJS}
 
 
 #set lib
-XLIB	+= -lGL -lglut
-LIBOBJ  ?= lib3Dhttp.so lib3Dsmtp.so lib3Dfont.so
-LIB     ?= -L${LIBPATH} -l3Dhttp -l3Dsmtp #lib3Dfont.a $(LIBJS)
 SORDLIB = -WI,-Bdynamic #static
 ARFLAG  = cqs
-
+XLIB	+= -lGL -lglut
+LIBOBJ  ?= lib3Dhttp.so lib3Dsmtp.so lib3Dfont.so
+DBG_LIB =  -L${LIBPATH} -l3Dhttpd -l3Dsmtpd -lhtmld -lDisplayd ${JSPATH}$(LIBJS)
+OPT_LIB =  -L${LIBPATH} -l3Dhttp -l3Dsmtp -lhtml -lDisplay ${JSPATH}$(LIBJS)
+LIB     += -L${LIBPATH} -l3Dhttp -l3Dsmtp -lhtmld -lDisplayd  ${JSPATH}$(LIBJS)#lib3Dfont.a $(LIBJS)
 
 #set clean
 ifdef TARGET
