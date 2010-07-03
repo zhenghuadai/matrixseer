@@ -567,7 +567,7 @@ void setColor(Color color)
   //glColor4b(color.r, color.g, color.b, color.a);  
   glColor4f(color.r/255, color.g/255, color.b/255, color.a/255);  
 
-  printf("set color r %d g %d b %d a %d\n", color.r, color.g, color.b, color.a);
+//  printf("set color r %d g %d b %d a %d\n", color.r, color.g, color.b, color.a);
 }
 
 void setColor(int color)

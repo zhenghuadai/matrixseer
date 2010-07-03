@@ -177,12 +177,21 @@ int htmlparser::gettag(char *tag)
 //        return -1;
 //    }
 //}
+inline void lowcase(char* s)
+{
+    while(*s){
+        if((*s>='A')&&(*s<='Z'))
+            *s += ('a' - 'A');
+        s++;
+    }
+}
 #include "util/str2hash.h"
 #include "taghash.h"
 int htmlparser::gettag(char* tag)
 {
 	static Str2hash str2hash(alltag, MAXTAGID);
 	//static Str2hash str2hash(alltag, preHash2ID, preHash2IDC, preHash2IDCList);
+    lowcase(tag);
 	return str2hash.get(tag); 
 }
 #endif

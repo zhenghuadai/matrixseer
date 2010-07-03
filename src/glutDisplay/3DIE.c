@@ -11,6 +11,8 @@
 #include "dmfile.h"
 #include "font.h"
 #include "debprintf.h"
+#include "globject.h"
+
 using namespace std;
 int getWinh();
 char * httpcont=0;
@@ -53,6 +55,8 @@ void MtrxArc(float zoff);
 #define RA 1
 static int ra=0;
 static float eyeZ = 5.0;
+GLfloat teaPotX=0.0, teaPotY=-.6, teaPotZ =-1.0;
+
 static void inittex()
 {
     int i;
@@ -137,37 +141,6 @@ void init(int argc,char * argv[])
 void setProjectionP()
 {
 }
-
-/*
- * Move object into position.  Use 3rd through 12th 
- * parameters to specify the material property.  Draw a teapot.
- */
-void renderTeapot(GLfloat x, GLfloat y, GLfloat z,
-        GLfloat ambr, GLfloat ambg, GLfloat ambb,
-        GLfloat difr, GLfloat difg, GLfloat difb,
-        GLfloat specr, GLfloat specg, GLfloat specb, GLfloat shine)
-{
-    GLfloat mat[4];
-
-    glPushMatrix();
-    glTranslatef(x, y, z);
-    //   glRotatef(spin, 0.0, 0.0, 1.0);
-#if 0 
-    mat[0] = ambr; mat[1] = ambg; mat[2] = ambb; mat[3] = 1.0;
-    glMaterialfv(GL_FRONT, GL_AMBIENT, mat);
-    mat[0] = difr; mat[1] = difg; mat[2] = difb;
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, mat);
-    mat[0] = specr; mat[1] = specg; mat[2] = specb;
-    glMaterialfv(GL_FRONT, GL_SPECULAR, mat);
-    glMaterialf(GL_FRONT, GL_SHININESS, shine * 128.0);
-#endif
-    //   glCallList(teapotList);
-    glDisable(GL_TEXTURE_2D);
-    glutSolidTeapot(.2);
-    glPopMatrix();
-    glEnable(GL_TEXTURE_2D);
-}
-
 
 #define LX (-1) 
 #define BY (-1) 
@@ -290,7 +263,7 @@ void display(void)
             MtrxArc(0.0);
             break;
     }
-    renderTeapot(0., -.6,  -1.0, 0.05, 0.0, 0.0, 0.5, 0.4, 0.4,
+    renderTeapot(teaPotX, teaPotY,  teaPotZ, 0.05, 0.0, 0.0, 0.5, 0.4, 0.4,
             0.7, 0.04, 0.04, .078125);
     glDisable(GL_TEXTURE_2D);
     glutSwapBuffers();
@@ -371,6 +344,12 @@ void keyboard(unsigned char key, int x, int y)
             DisplayMode %= 4;
             //glutPostRedisplay();
             break;
+        case 'f': teaPotX -= .02; if(teaPotX <LX) teaPotX = LX; break;
+        case 'h': teaPotX += .02; if(teaPotX >RX) teaPotX = RX; break;
+        case 't': teaPotY -= .02; if(teaPotY >TY) teaPotX = TY; break;
+        case 'g': teaPotY += .02; if(teaPotY <BY) teaPotX = BY; break;
+        case 'r': teaPotZ += .02; if(teaPotZ >ZF) teaPotZ = ZF; break;
+        case 'y': teaPotZ -= .02; if(teaPotZ <ZB) teaPotZ = ZB; break;
         default:
             //	url[i++]=key;
             //glutPostRedisplay();
