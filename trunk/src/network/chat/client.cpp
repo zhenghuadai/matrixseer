@@ -58,7 +58,7 @@ int main()
     printf("client use port%d\n",ntohs(client_addr.sin_port));
 
     server_addr.sin_family=AF_INET;
-    server_addr.sin_addr.s_addr=inet_addr("192.168.18.12");
+    server_addr.sin_addr.s_addr=inet_addr("192.168.10.101");
     server_addr.sin_port=htons(1236);
     user=login();
     if(fork()==0)
@@ -69,8 +69,10 @@ int main()
             memset(buff,0,200);
             //	sprintf(buff,"very good\n");
             sprintf(buff,"%s ",user);
+            printf("please input you msg:");
             fgets(buff+strlen(buff),200,stdin);
-            if(sendto(client,buff,strlen(buff),0,(struct sockaddr*)&server_addr,server_len)<0)
+            printf("you input msg: %s", buff);
+            if(sendto(client,buff,strlen(buff),0,(struct sockaddr*)&server_addr,server_len) <0)
             {
                 perror(" send err\n");
 

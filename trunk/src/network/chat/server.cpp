@@ -20,7 +20,8 @@ int processMsg(char *buf,struct sockaddr_in addr);
 int login[MAXES];
 int main()
 {
-    socklen_t server_len;
+    int ret;
+    socklen_t server_len=16;
     struct sockaddr_in server_addr,client_addr;
     int i;
     memset(addrs,0,MAXES * sizeof(struct sockaddr_in));
@@ -34,13 +35,14 @@ int main()
     server_addr.sin_family=AF_INET;
     server_addr.sin_addr.s_addr=htonl(0);
     server_addr.sin_port=htons(PORT);
-    if(bind(server,(struct sockaddr*)&server_addr,16)<0)
+    if(bind(server,(struct sockaddr*)&server_addr,16) !=0)
     {
         perror("bind err\n");
         exit(0);
     }
-    if(getsockname(server,(struct sockaddr *)&server_addr,&server_len)<0)
+    if((ret = getsockname(server,(struct sockaddr *)&server_addr,&server_len)) !=0)
     {
+        printf("getsockname err %d\n", ret);
         exit(0);
     }
     printf("server use port%d\n",ntohs(server_addr.sin_port));
@@ -56,7 +58,7 @@ int main()
             exit(0);
         }
         buff[n]='\0';
-        //		fprintf(stdout,"<%s",buff);
+        fprintf(stdout,"<%s",buff);
         processMsg(buff,client_addr);
         //		fprintf(stdout,"addr:%d,port:%d\n",client_addr.sin_addr.s_addr,client_addr.sin_port);
         //		fprintf(stdout,">%s",buff);
@@ -76,11 +78,12 @@ int processMsg(char *buf,struct sockaddr_in addr)
     int i;
     int slen=strlen(buf);
     int cmd=0;
-    if(slen<4)
-    {
+    if(slen<4){
 
         sprintf(buf,"sorry");
-        sendto(server,buf,strlen(buf),0,(struct sockaddr*)&addr,tolen);
+        if( sendto(server,buf,strlen(buf),0,(struct sockaddr*)&addr,tolen) !=0){
+
+        }
         return 0;
     }
 
@@ -89,7 +92,7 @@ int processMsg(char *buf,struct sockaddr_in addr)
         who[i]=buf[i];
     who[i]='\0';
     if(buf[i]=='q')cmd=LOGOFF;
-    //printf("recv %s\n",who);
+    printf("recv %s\n",who);
     if(strcmp(who,DZH)==0)
     {
         if(cmd==LOGOFF)
@@ -106,7 +109,10 @@ int processMsg(char *buf,struct sockaddr_in addr)
         else
         {
             sprintf(buf,"NC does not login");
-            sendto(server,buf,strlen(buf),0,(struct sockaddr*)&addrs[DZHTH],tolen);
+            printf(buf,"NC does not login");
+            if(sendto(server,buf,strlen(buf),0,(struct sockaddr*)&addrs[DZHTH],tolen) <0){
+                printf("send back err\n");
+            };
 
         }
         return 1;
