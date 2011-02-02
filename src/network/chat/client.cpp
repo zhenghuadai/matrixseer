@@ -8,32 +8,51 @@
 #include <arpa/inet.h>
 #include <signal.h>
 #include "dqq.h"
+#include "threadWrapper.h"
 int client;
+struct sockaddr_in client_addr,server_addr;
+char	buff[200];
+socklen_t server_len=sizeof(client_addr);
 void quitp(int sig);
 char *user;
+THREAD_VAR;
 char *login()
 {
-	char tmp[20];
-	char *pn;
-	int dt;
-	printf("please input your name\n");
-	fgets(tmp,19,stdin);
-	dt=strlen(tmp);
-	if(tmp[dt-1]==10)
-	{	
-		tmp[dt-1]=0;//tmp[strlen(tmp)-2]==0;
-	}
-	pn=(char*)malloc(strlen(tmp)+1);
-	strcpy(pn,tmp);
-	return pn;
+    char tmp[20];
+    char *pn;
+    int dt;
+    printf("please input your name\n");
+    fgets(tmp,19,stdin);
+    dt=strlen(tmp);
+    if(tmp[dt-1]==10)
+    {	
+        tmp[dt-1]=0;//tmp[strlen(tmp)-2]==0;
+    }
+    pn=(char*)malloc(strlen(tmp)+1);
+    strcpy(pn,tmp);
+    return pn;
 }
+
+kernel_ret recvkernel()
+{	
+    int n;
+    while(1)
+    {
+        if((n=recvfrom(client,buff,200,0,(struct sockaddr*)&server_addr,&server_len))<0)
+        {
+            perror("recv err\n");
+            close(client);
+            exit(0);
+        }
+        buff[n]='\0';
+        fprintf(stdout,"recv: %s\n",buff);
+    }
+}
+
 int main()
 {
     int client_len;
-    struct sockaddr_in client_addr,server_addr;
-    char	buff[200];
     int n;
-    socklen_t server_len=sizeof(client_addr);
     signal(SIGQUIT,quitp);
     if((client=socket(AF_INET,SOCK_DGRAM,0))<0)
     {
@@ -54,14 +73,14 @@ int main()
     //    perror("get sockname err\n");
     //    exit(0);
     //}
-//
+    //
     printf("client use port%d\n",ntohs(client_addr.sin_port));
 
     server_addr.sin_family=AF_INET;
     server_addr.sin_addr.s_addr=inet_addr("192.168.10.101");
     server_addr.sin_port=htons(1236);
     user=login();
-    if(fork()==0)
+    slaunch0(recvkernel)()
     {	
         while(1)
         {
@@ -82,19 +101,6 @@ int main()
             memset(buff,0,200);
         }//end while
     }
-    else
-    {	while(1)
-        {
-            if((n=recvfrom(client,buff,200,0,(struct sockaddr*)&server_addr,&server_len))<0)
-            {
-                perror("recv err\n");
-                close(client);
-                exit(0);
-            }
-            buff[n]='\0';
-            fprintf(stdout,"%s",buff);
-        }
-    }//else fork()
     close(client);
 }
 void quitp(int sig)

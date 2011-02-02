@@ -56,7 +56,7 @@ OBJS 		= ${DBG_OBJS}
 #set lib
 SORDLIB = -WI,-Bdynamic #static
 ARFLAG  = cqs
-XLIB	+= -lGL -lglut
+XLIB	+= -lGL -lglut -lGLU
 LIBOBJ  ?= lib3Dhttp.so lib3Dsmtp.so lib3Dfont.so
 DBG_LIB =  -L${LIBPATH} -l3Dhttpd -l3Dsmtpd -lhtmld -lDisplayd ${JSPATH}$(LIBJS)
 OPT_LIB =  -L${LIBPATH} -l3Dhttp -l3Dsmtp -lhtml -lDisplay ${JSPATH}$(LIBJS)

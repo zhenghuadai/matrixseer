@@ -35,6 +35,8 @@ int pctrBindex =0;
 
 Widget* curDoc=0;
 Widget* onFocusWidget=0;
+Widget* objList=0;
+Widget* onFocusObj=0;
 
 void MtrxArc(float zoff);
 //extern const BitmapFontRec   MglutBitmapTimesRoman10;//MglutBitmapTimesRoman10;
@@ -137,6 +139,7 @@ void init(int argc,char * argv[])
         httpcont=httpsock(url,(int*)NULL);
     if(httpcont == NULL) 
         httpcont = getsfromfile("err.html");
+    objList= new Widget(0, -600, -1000);
 }
 void setProjectionP()
 {
@@ -235,6 +238,15 @@ void MtrxArc(float zoff)
     }
     //    glutSolidTeapot(0.2);
 }
+void drawObjList()
+{
+   Widget* pCur = objList;
+   while(pCur){
+       renderTeapot((float)pCur->x()/1000, (float)pCur->y()/1000, (float)pCur->z()/1000 , 0.05, 0.0, 0.0, 0.5, 0.4, 0.4,
+            0.7, 0.04, 0.04, .078125);
+       pCur = pCur->next();
+   }
+}
 
 void display(void)
 {
@@ -263,8 +275,9 @@ void display(void)
             MtrxArc(0.0);
             break;
     }
-    renderTeapot(teaPotX, teaPotY,  teaPotZ, 0.05, 0.0, 0.0, 0.5, 0.4, 0.4,
-            0.7, 0.04, 0.04, .078125);
+    drawObjList();
+//    renderTeapot(teaPotX, teaPotY,  teaPotZ, 0.05, 0.0, 0.0, 0.5, 0.4, 0.4,
+//            0.7, 0.04, 0.04, .078125);
     glDisable(GL_TEXTURE_2D);
     glutSwapBuffers();
 
@@ -312,47 +325,38 @@ void keyboard(unsigned char key, int x, int y)
             //	ra=1;
             //	if(ra>360)ra=0;
             glRotatef(RA,0,1,0);
-            //glutPostRedisplay();
             break;
         case 'q':
             glRotatef(-RA,0,1,0);
-            //glutPostRedisplay();
 
             break;
         case 'd': 
             glTranslatef(.1,0,0);
-            //glutPostRedisplay();
             break;
         case 'a': 
             glTranslatef(-.1,0,0);
-            //glutPostRedisplay();
             break;
         case 'w': 
             //	eyeZ += 0.01;
             glTranslatef(0,0,.1);
             //  gluLookt(.0,.0,5.0,.0,.0,-100.0,.0,1.0,.0);
-            //glutPostRedisplay();
             break;
         case 's': 
             //	eyeZ -= .01;
             //gluLookAt(.0,.0,5.0,.0,.0,-100.0,.0,1.0,.0);
             glTranslatef(0,0,-.1);
-            //glutPostRedisplay();
             break;
         case 'j':
             DisplayMode++;
             DisplayMode %= 4;
-            //glutPostRedisplay();
             break;
-        case 'f': teaPotX -= .02; if(teaPotX <LX) teaPotX = LX; break;
-        case 'h': teaPotX += .02; if(teaPotX >RX) teaPotX = RX; break;
-        case 't': teaPotY -= .02; if(teaPotY >TY) teaPotX = TY; break;
-        case 'g': teaPotY += .02; if(teaPotY <BY) teaPotX = BY; break;
-        case 'r': teaPotZ += .02; if(teaPotZ >ZF) teaPotZ = ZF; break;
-        case 'y': teaPotZ -= .02; if(teaPotZ <ZB) teaPotZ = ZB; break;
+        case 'f': if(onFocusObj) onFocusObj->stepx(-20); break;
+        case 'h': if(onFocusObj) onFocusObj->stepx( 20); break;
+        case 't': if(onFocusObj) onFocusObj->stepy( 20); break;
+        case 'g': if(onFocusObj) onFocusObj->stepy(-20); break;
+        case 'r': if(onFocusObj) onFocusObj->stepz( 20); break;
+        case 'y': if(onFocusObj) onFocusObj->stepz(-20); break;
         default:
-            //	url[i++]=key;
-            //glutPostRedisplay();
             break;
     }
     glutPostRedisplay();
@@ -381,6 +385,7 @@ void mouse(int button, int state, int x, int y)
             onFocusWidget = curDoc -> getObjOnFocus(x, y, z);
         else 
             onFocusWidget = curDoc;
+    onFocusObj= objList;
     debprintf("[%d %d]hit  %0x\n", x,y, onFocusWidget);
     switch ( button)
     {

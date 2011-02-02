@@ -3,18 +3,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "debprintf.h"
-Cube::Cube()
+#define defineCubeHeader(type) template<typename T> type Cube<T>
+
+template<typename T> 
+Cube<T>::Cube()
 {
 	debprintf("create0 :::::: z :%d \n", mZ);
 }
-Cube::Cube(int x,int y,int z)
+
+template<typename T> 
+Cube<T>::Cube(T x,T y,T z)
 {
     mX=x;
     mY=y;
     mZ=z;
 	debprintf("create1 :::::: z :%d \n", mZ);
 }
-Cube::Cube(int x,int y,int z,int dx,int dy)
+
+template<typename T> 
+Cube<T>::Cube(T x,T y,T z,T dx,T dy)
 {
     mX=x;
     mY=y;
@@ -24,35 +31,47 @@ Cube::Cube(int x,int y,int z,int dx,int dy)
 	debprintf("create2:::::: z :%d \n", mZ);
 	debprintf("create2:::::: %d %d %d %d %d \n", mX, mY ,mZ, mW ,mH);
 }
-Cube::Cube(int dx,int dy)
+
+template<typename T> 
+Cube<T>::Cube(T dx,T dy)
 {
     mW=dx;
     mH=dy;
 	debprintf("create3:::::: z :%d \n", mZ);
 }
-void Cube::setwh(int dx,int dy)
+
+template<typename T> 
+void Cube<T>::setwh(T dx,T dy)
 {
     mW=dx;
     mH=dy;
 }
-void Cube::setxyz()
+
+template<typename T> 
+void Cube<T>::setxyz()
 {
-    int curRasterPos[4];
+    T curRasterPos[4];
     //glGetIntegerv(GL_CURRENT_RASTER_POSITION,curRasterPos);
     getCurrentRasterPos(curRasterPos);
     mX=curRasterPos[0];
     mY=curRasterPos[1]-2;
     mZ=curRasterPos[2];
 }
-CubeINLINE void Cube::getFocus()
+
+template<typename T> 
+CubeINLINE void Cube<T>::getFocus()
 {
     focus = 1;
 }
-CubeINLINE void Cube::loseFocus()
+
+template<typename T> 
+CubeINLINE void Cube<T>::loseFocus()
 {
     focus = 0;
 }
-CubeINLINE int Cube::onFocus()
+
+template<typename T> 
+CubeINLINE T Cube<T>::onFocus()
 {
     return focus ;
 }
