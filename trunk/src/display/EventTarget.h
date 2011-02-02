@@ -18,15 +18,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Cube.h"
-class EventTarget: public Cube
+template<typename T=int>
+class EventTarget: public Cube<T>
 {
 	public:
 	EventTarget(){init();};
-	EventTarget(int x,int y,int z):Cube(x,y,z){init();};
-	EventTarget(int dx,int dy):Cube(dx,dy){init();};
-	EventTarget(int x,int y,int z,int dx,int dy):Cube(x,y,z,dx,dy){init();};
-	EventTarget(int x,int y,int dx,int dy ):Cube(x,y,0,dx,dy){init();};
-    EventTarget(int x, int y, int z, int w, int h, int d):Cube(x, y, z, w, h, d){init();}
+	EventTarget(T x,T y,T z):Cube<T>(x,y,z){init();};
+	EventTarget(T dx,T dy):Cube<T>(dx,dy){init();};
+	EventTarget(T x,T y,T z,T dx,T dy):Cube<T>(x,y,z,dx,dy){init();};
+	EventTarget(T x,T y,T dx,T dy ):Cube<T>(x,y,0,dx,dy){init();};
+    EventTarget(T x, T y, T z, T w, T h, T d):Cube<T>(x, y, z, w, h, d){init();}
 	private:
 	void	init(){}
 };

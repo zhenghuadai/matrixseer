@@ -1,6 +1,7 @@
 LIBOBJ  = lib3Dhttp.so lib3Dsmtp.so #lib3Dfont.so
 LIBA    = lib3Dhttp.a lib3Dsmtp.a #lib3Dfont.a 
 TOPDIR=../../../
+TARGET=downer
 include ${TOPDIR}include/makefile.inc 
 
 downer:webpage.o ../httpsocket.o smthBBS.o downer.o urlManager.o
