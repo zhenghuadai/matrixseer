@@ -8,22 +8,20 @@
 #include "html.h"
 #include "display.h"
 #include "app.h"
+#include "page.h"
 extern int charWidth;
-extern int mDC_w;
-extern int mDC_h;
 extern int rowHeight ;
 
-extern int2 fontSize;
-extern dmRect curRasterPos[10];
-extern dmRect curStartPos[10];
-extern int curWin;
-extern int2 cWH;
-extern dmRect stackStartPos[20];
-extern int topStartPos ;
+static int Tex_Win_h = 0;
+static int Tex_Win_w = 0;
 
-extern int Tex_Win_h;
-extern int Tex_Win_w;
+//! widht and height measured in characters
+int2   cWH;
 
+void getCurrentRasterPos(int *pos)
+{
+    glGetIntegerv(GL_CURRENT_RASTER_POSITION,pos);
+}
 
 void drawLine(double x,double y,double z,double x2,double y2,double z2)
 {
@@ -186,7 +184,7 @@ int putStrScr(char *content,int len)
 	int npos;
 	int2 tmpcWH;	
 	if((!content)||(! *content))return 0;
-	glGetIntegerv(GL_CURRENT_RASTER_POSITION,(GLint*)&curRasterPos[curWin]);
+    GET_CUR_RASTER_POS();
 	//	printf("%d,%d\n",curRasterPosX,curRasterPosY);
 	tmpcWH=getWH_Chars(Tex_Win_w-curRasterPosX,Tex_Win_h,3);
 	npos=getEnterPos(pstart,tmpcWH.w);
@@ -228,7 +226,7 @@ int putStrScr(char *content)
 
 	int2 tmpcWH;	
 	if((!content)||(! *content))return 0;
-	glGetIntegerv(GL_CURRENT_RASTER_POSITION,(GLint*)&curRasterPos[curWin]);
+    GET_CUR_RASTER_POS();
 	//	printf("%d,%d\n",curRasterPosX,curRasterPosY);
 	tmpcWH=getWH_Chars(Tex_Win_w-curRasterPosX,Tex_Win_h,3);
 	npos=getEnterPos(pstart,tmpcWH.w);
@@ -271,7 +269,7 @@ int putStrScr(int x, int y, int z, char *content)
 
 	if((!content)||(! *content))return 0;
     MoveTo2(x,y);
-	glGetIntegerv(GL_CURRENT_RASTER_POSITION,(GLint*)&curRasterPos[curWin]);
+    GET_CUR_RASTER_POS();
 	tmpcWH=getWH_Chars(Tex_Win_w-x ,Tex_Win_h,3);
 	npos=getEnterPos(pstart,tmpcWH.w);
 	debprintf("char num:%d ,x:%d  y:%d\n", npos,x,y);
@@ -573,3 +571,14 @@ void setColor(Color color)
 void setColor(int color)
 {
 }
+
+void dmPostRedisplay()
+{
+    glutPostRedisplay();
+}
+
+void MoveTo2(int x,int y)
+{
+    glRasterPos2i(x,y);
+}
+

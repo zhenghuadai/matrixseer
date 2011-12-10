@@ -106,7 +106,7 @@ void ctrInput::reDraw()
 	drawCursor();
 	putStrScr(pvalue + curCursorPos);
 	copyToCurTexture( sx, sy, w(), h(), sx, sy);
-	glutPostRedisplay();
+	dmPostRedisplay();
 #else
 #define YoffS 1
 #define XoffS 100
@@ -295,6 +295,9 @@ void ctrInput::keyfunc(char  key,int x,int y)
     }
 }
 
+#define  GLUT_KEY_LEFT                      0x0064
+#define  GLUT_KEY_UP                        0x0065
+#define  GLUT_KEY_RIGHT                     0x0066
 INLINE void ctrInput::skeyfunc(int key,int x,int y)
 {
     switch ( key){

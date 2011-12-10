@@ -7,6 +7,7 @@
 #include "bmp.h"
 #include "html.h"
 #include "display.h"
+#include "page.h"
 /********************************
  *0:x;
  *1:y;
@@ -21,19 +22,14 @@ int mDC_w;
 int mDC_h;
 int rowHeight = 20;
 
-int2 fontSize={10,20};
+int2   fontSize={10,20};
 dmRect curRasterPos[10];
 dmRect curStartPos[10];
 dmRect stackStartPos[20];
 int curWin=0;
-int2 cWH;
 int topStartPos = -1;
 
-int Tex_Win_h=0;
-int Tex_Win_w=0;
 
-extern int Win_w;
-extern int Win_h;
 
 void resetDisplay()
 {
@@ -151,11 +147,6 @@ void MoveToxy(int x,int y)
     glRasterPos2i(x,y);
 }
 
-void getCurrentRasterPos(int *pos)
-{
-    glGetIntegerv(GL_CURRENT_RASTER_POSITION,pos);
-}
-
 int getCurRectW()
 {
     return curRectW; 
@@ -163,7 +154,7 @@ int getCurRectW()
 
 void moveToNextLine(int dy)
 {
-    glGetIntegerv(GL_CURRENT_RASTER_POSITION,(GLint*)&curRasterPos[curWin]);
+    GET_CUR_RASTER_POS();
     curRasterPosY-= dy;//rowHeight;
     curRasterPosX = curRectX;
     MoveTo2(curRasterPosX,curRasterPosY);
@@ -171,7 +162,7 @@ void moveToNextLine(int dy)
 
 void moveToNextLine()
 {
-    glGetIntegerv(GL_CURRENT_RASTER_POSITION,(GLint*)&curRasterPos[curWin]);
+    GET_CUR_RASTER_POS();
     curRasterPosY-= rowHeight;
     curRasterPosX = curRectX;
     MoveTo2(curRasterPosX,curRasterPosY);
@@ -179,7 +170,7 @@ void moveToNextLine()
 
 void goDown(int y)
 {
-    glGetIntegerv(GL_CURRENT_RASTER_POSITION,(GLint*)&curRasterPos[curWin]);
+    GET_CUR_RASTER_POS();
     curRasterPosY-= y;
     MoveTo2(curRasterPosX,curRasterPosY);
 }
