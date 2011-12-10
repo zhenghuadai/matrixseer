@@ -57,3 +57,4 @@ createDiropt:
 	@test -x ${DEP_DIR} || mkdir -p ${DEP_DIR}
 clean:
 	rm -rf ${OBJS} ${DBG_OBJS} ${OPT_OBJS} ${CLEAN_OBJS} 
+	rm -rf ${OUT_DIR}

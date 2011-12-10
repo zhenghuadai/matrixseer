@@ -46,4 +46,5 @@ clean0:
 	rm -f ${TestEXEC}
 	rm -f *.o htmlparser/*.o
 	rm -f ${LIBPATH}lib*
+	rm ../io/iofile.o
 

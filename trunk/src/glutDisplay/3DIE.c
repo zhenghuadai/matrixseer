@@ -13,6 +13,7 @@
 #include "debprintf.h"
 #include "globject.h"
 
+void drawToTexture2(GLuint tex,int Sx,int Sy,int Ex,int Ey,char *str);
 using namespace std;
 int getWinh();
 char * httpcont=0;

@@ -1,6 +1,6 @@
 #ifndef MATRIXFONTH
 #define MATRIXFONTH
-#include "glutbitmap.h"
+//#include "glutbitmap.h"
 /*
 extern const BitmapFontRec   MglutBitmapTimesRoman10;//MglutBitmapTimesRoman10;
 #define MGLUT_BITMAP_TIMES_ROMAN_10 (void *)&MglutBitmapTimesRoman10;//MglutBitmapTimesRoman10;
@@ -29,9 +29,9 @@ extern const BitmapFontRec   MglutBitmapTimesRoman10;//MglutBitmapTimesRoman10;
 #   define  MGLUT_BITMAP_HELVETICA_18        ((void *) &MglutBitmapHelvetica18)
 
 void defaultfont(void);
-BitmapFontPtr selectfontfromid(void * id);
-#define  MoveTo2(x,y) glRasterPos2i(x,y)
-#define MoveTo3(x,y,z) glRasterPos2i(x,y,z)
+//BitmapFontPtr selectfontfromid(void * id);
+//#define  MoveTo2(x,y) glRasterPos2i(x,y)
+//#define MoveTo3(x,y,z) glRasterPos2i(x,y,z)
 #ifndef INLINE
 #define INLINE //inline
 #endif

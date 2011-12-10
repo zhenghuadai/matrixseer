@@ -14,6 +14,7 @@ opt:
 #	cd multimedia;make  opt 
 	cd glutDisplay; make  opt 
 clean:
+	rm -rf ../builds
 	cd network;make clean
 	cd js;make clean
 	cd io;make clean

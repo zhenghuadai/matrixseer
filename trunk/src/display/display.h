@@ -4,7 +4,6 @@
 #define CUBICMODE 1
 #define ARCMODE   2
 #define PLAINMODE 3
-#include <GL/gl.h>
 #include "dmtype.h"
 #include "font.h"
 class dmRect2D
@@ -35,30 +34,6 @@ class dmRect
     private:
     void    setUndef(){x=y=z=a=w=h=d=-1;}
 };
-
-#define curRectX curStartPos[curWin].x
-#define curRectY curStartPos[curWin].y
-#define curRectZ curStartPos[curWin].z
-#define curRectA curStartPos[curWin].a
-#define curRectW curStartPos[curWin].w
-#define curRectH curStartPos[curWin].h
-#define curRectD curStartPos[curWin].d
-#define  stackStartPosX stackStartPos[topStartPos].x  
-#define  stackStartPosY stackStartPos[topStartPos].y
-#define  stackStartPosZ stackStartPos[topStartPos].z
-#define  stackStartPosA stackStartPos[topStartPos].a
-#define  stackStartPosW stackStartPos[topStartPos].w
-#define  stackStartPosH stackStartPos[topStartPos].h
-#define  stackStartPosD stackStartPos[topStartPos].d
-#define curRect curStartPos[curWin]
-#define stackTopRect stackStartPos[topStartPos]  
-#define curRasterPosX curRasterPos[curWin].x
-#define curRasterPosY curRasterPos[curWin].y
-#define curRasterPosZ curRasterPos[curWin].z
-
-#define curOffsetX ((curRasterPosX) - (curRectX))
-
-void drawToTexture2(GLuint tex,int Sx,int Sy,int Ex,int Ey,char *str);
 void drawInput2d(double x,double bottomY,double z,double dx,double dy);
 void drawButton2d(double x,double bottomY,double z,double dx,double dy);
 void drawButton2dframe(double x,double bottomYy,double z,double dx,double dy);
@@ -95,5 +70,6 @@ int getWinh();
 int getRowHeight();
 Color getColor();
 void setColor(Color);
+void dmPostRedisplay();
 #define GM_BLACK 0
 #endif
