@@ -6,6 +6,7 @@
 #include <string.h>
 #include "glutbitmap.h"
 #include "font.h"
+#include "fontinner.h"
 #include "dmtype.h"
 extern void getCurrentRasterPos(int *pos);
 extern int getCurRectW();
@@ -240,7 +241,7 @@ void setdefaultfont(void)
 	defaultfont();
 }
 
-INLINE int getCharWidth(char c)
+INLINE int fontCharWidth(char c)
 {
 	if(c < 32) return 0;
 	return 10;
@@ -281,7 +282,7 @@ int2 getstrWH(char *str,int width)
 		//if (x >= 0 && x <= b) w += (p[x].width);
 		//else w += fl_xfont->min_bounds.width;
 		//printf("[%d %c %d]\n",w,*(strE-1),p[x].width);
-		w += getCharWidth(*strE);
+		w += fontCharWidth(*strE);
 		strE++;
 	}
 	//w -= (1*(strE -str)/8); // correct the width;
@@ -322,16 +323,7 @@ BitmapFontPtr selectfontfromid(void * id)
 	 */
 	return NULL;
 }
-/*
-   inline void MoveTo2(int x, int y)
-   {
-   glRasterPos2i(x,y);
-   }
-   inline void MoveTo3(int x, int y,int z)
-   {
-   glRasterPos3i(x,y,z);
-   }
-   */
+
 void drawChars(char *s,int len)
 {
 	glPushAttrib (GL_LIST_BIT);

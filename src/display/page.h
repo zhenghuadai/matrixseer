@@ -16,6 +16,9 @@
  * =====================================================================================
  */
 
+#ifndef  page_INC
+#define  page_INC
+
 #define GET_CUR_RASTER_POS()   getCurrentRasterPos((GLint*)&curRasterPos[curWin])
 
 #define curRectX curStartPos[curWin].x
@@ -45,3 +48,14 @@ extern int Win_w;
 extern int Win_h;
 extern dmRect curRasterPos[10];
 extern int    curWin;
+void pushRect();
+void popRect();
+void getRect(int*);
+void setRect(int,int,int,int);
+int  getRectW();
+int  getRectH();
+int  getCurRectW();
+void pushStartPos();
+void popStartPos();
+void setStartPos(int x,int y);
+#endif   /* ----- #ifndef page_INC  ----- */

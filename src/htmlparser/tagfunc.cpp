@@ -10,6 +10,7 @@
 #include "app.h"
 #include "font.h"
 #include "display.h"
+#include "page.h"
 #define UPY 1
 #define DOWNY -1
 #define FORWDY UPY
