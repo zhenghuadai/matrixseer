@@ -63,6 +63,16 @@ void drawFrame(int x, int y, int z, int dx, int dy)
 
 }
 
+void drawQuads(double x,double y,double z,double dx,double dy)
+{
+    glBegin(GL_QUADS);
+    glVertex3f(x,y,z);
+    glVertex3f(x+dx,y,z);
+    glVertex3f(x+dx,y+dy,z);
+    glVertex3f(x,y+dy,z);
+    glEnd();
+}
+
 void drawButton2dframe(double x,double bottomY,double z,double dx,double dy)
 {
 	GLfloat oldcolor[4];
@@ -558,6 +568,11 @@ Color  getColor()
     GLint buf[4];
     glGetIntegerv(GL_CURRENT_COLOR, buf);
     return Color(buf[0], buf[1],buf[2],buf[4]);
+}
+
+void setColor(float r, float g, float b, float a)
+{
+  glColor4f(r, g, b, a);  
 }
 
 void setColor(Color color)

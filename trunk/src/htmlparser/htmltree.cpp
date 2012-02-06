@@ -8,6 +8,7 @@
 #include "ctrText.h"
 #include "ctrbutton.h"
 #include "display.h"
+#include "page.h"
 #include "debprintf.h"
 #include "css.h"
 #include "stackTemplate.h"

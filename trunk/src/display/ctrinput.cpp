@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <GL/gl.h>
+#include <GL/glut.h>
 #include "font.h"
 #include "string.h"
 #include "ctrinput.h"
 #include "display.h"
+#include "dmtype.h"
 #define MAXCS 20
 ctrInput::ctrInput()
 {
@@ -76,31 +77,34 @@ ctrInput::ctrInput(int x,int y, int z, int w, int h, int d ,char *s):Widget(x,y,
 void ctrInput::draw()
 {
 	int curRasterPos[4];
-	GLfloat oldcolor[4];
+    Color oldcolor;
 	getLBpos(curRasterPos[0],curRasterPos[1],curRasterPos[2]);
 	MoveTo2(curRasterPos[0],curRasterPos[1]-2);
-	glGetFloatv(GL_CURRENT_COLOR,oldcolor);
-	glColor4f(1,1,1,1);
+    oldcolor = getColor();
+
+    setColor(1.0,1.0,1.0,1.0);
 	drawInput2d(curRasterPos[0],curRasterPos[1],0,w(),h());
 	curRasterPos[0] += (w() + 1);
 	putStrScr(pvalue + startDrawPos,curCursorPos-startDrawPos);
 	drawCursor();
 	putStrScr(pvalue + curCursorPos);
 	MoveTo2(curRasterPos[0],curRasterPos[1]);
-	glColor4fv(oldcolor);
+    setColor(oldcolor);
+    printf("ctrinput draw\n");
 }
 
 void ctrInput::reDraw()
 {
+    printf("ctrinput redraw\n");
 	//preRedraw();
 	//GLfloat oldcolor[4];
 	//glGetFloatv(GL_CURRENT_COLOR,oldcolor);
-	glColor4f(1,1,1,1);
+    setColor(1.0,1.0,1.0,1.0);
 	int sx,sy,sz;
 	//getSxyz(sx,sy,sz);
 	getLBpos(sx,sy,sz);
 #if 1 
-	drawInput2d(sx,sy,0,w(),h());
+	//drawInput2d(sx,sy,0,w(),h());
 	MoveTo2(sx,sy+3);
 	putStrScr(pvalue + startDrawPos,curCursorPos-startDrawPos);
 	drawCursor();
@@ -145,7 +149,7 @@ int  ctrInput::backspacechar(char c)
 #if 0
 	{
 		if(curc <0) return 0;
-		curdx -= getCharWidth(pvalue[curc]);
+		curdx -= fontCharWidth(pvalue[curc]);
 		pvalue[curc]=0;
 		curc--;
 		curCursorPos--;
@@ -154,7 +158,7 @@ int  ctrInput::backspacechar(char c)
 			curdx = 0;
 			if(startDrawPos <0) startDrawPos = 0;
 			for(int i=startDrawPos;i<curCursorPos;i++)
-				curdx +=getCharWidth(pvalue[i]);
+				curdx +=fontCharWidth(pvalue[i]);
 		}
 		return 0;
 	}
@@ -162,7 +166,7 @@ int  ctrInput::backspacechar(char c)
 #if 1
 	if(curCursorPos ==0) return 0;
 	char * ppcur = pvalue + curCursorPos -1;
-	curdx -= getCharWidth(*ppcur);
+	curdx -= fontCharWidth(*ppcur);
 	while(*(ppcur+1)){
 		*ppcur = *(ppcur+1);
 		printf("%c",*ppcur);
@@ -176,7 +180,7 @@ int  ctrInput::backspacechar(char c)
 		curdx = 0;
 		if(startDrawPos <0) startDrawPos = 0;
 		for(int i=startDrawPos;i<curCursorPos;i++)
-			curdx +=getCharWidth(pvalue[i]);
+			curdx +=fontCharWidth(pvalue[i]);
 	}
 
 #endif
@@ -188,37 +192,32 @@ int  ctrInput::appandchar(char c)
 	curCursorPos++;
 	pvalue[curc]=c;
 	pvalue[curc+1]=0;
-	curdx += getCharWidth(c);
+	curdx += fontCharWidth(c);
 	//if(curc - startDrawPos > MAXCS) {
 	while(curdx >= w() -4){
-		curdx -= getCharWidth(pvalue[startDrawPos]);
+		curdx -= fontCharWidth(pvalue[startDrawPos]);
 		startDrawPos++;
 	}
-	//printf("%d,%c\n",curdx,c);
+	printf("ctrInput %d,%c\n",curdx,c);
 	return 0;
 }
 
 INLINE void  ctrInput::drawCursor()
 {
 	//static int visible = 1;
-	GLfloat oldcolor[4];
-	GLint curpos[4];
+    Color oldcolor;
+	int curpos[4];
 #define CURSORW 8
 #define CURSORH 20
 	//if(!visible)
 	{
-		glGetFloatv(GL_CURRENT_COLOR,oldcolor);
+        oldcolor = getColor();
 		glColor4f(0,1.0,0.0,1);
         //glGetIntegerv(GL_CURRENT_RASTER_POSITION,curpos);
         getCurrentRasterPos(curpos);
-        //curpos[2] = 0;
-        glBegin(GL_QUADS);
-        glVertex3f(curpos[0],curpos[1],curpos[2]);
-        glVertex3f(curpos[0]+CURSORW,curpos[1],curpos[2]);
-        glVertex3f(curpos[0]+CURSORW,curpos[1]+CURSORH,curpos[2]);
-        glVertex3f(curpos[0],curpos[1]+CURSORH,curpos[2]);
-        glEnd();
-        glColor4fv(oldcolor);
+
+        drawQuads(curpos[0], curpos[1],curpos[2], CURSORW, CURSORH);
+        setColor(oldcolor);
     }
     //visible ++;
     //visible = visible & 1;
@@ -256,10 +255,10 @@ INLINE void ctrInput::moveCursor(int drt)
             curCursorPos = curc+1;
             return ;
         }
-        curdx += getCharWidth(pvalue[curCursorPos-1]);
+        curdx += fontCharWidth(pvalue[curCursorPos-1]);
         //	if(curCursorPos - startDrawPos > MAXCS) startDrawPos++;	
         while(curdx >=  w() -4){
-            curdx -= getCharWidth(pvalue[startDrawPos]);
+            curdx -= fontCharWidth(pvalue[startDrawPos]);
             startDrawPos++;
         }
     }
@@ -268,7 +267,7 @@ INLINE void ctrInput::moveCursor(int drt)
             curCursorPos=0;
             return;
         }
-        curdx -= getCharWidth(pvalue[curCursorPos]);
+        curdx -= fontCharWidth(pvalue[curCursorPos]);
         if(curCursorPos < startDrawPos) {
             startDrawPos--;
             curdx = 0;
