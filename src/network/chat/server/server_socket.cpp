@@ -12,6 +12,7 @@ void Server_socket::init()
     socklen_t server_len=16;
     struct sockaddr_in server_addr;
     int i;
+    int& server= m_socket;
     if((server=socket(AF_INET,SOCK_DGRAM,0))<0)
     {
         perror("socket err\n");

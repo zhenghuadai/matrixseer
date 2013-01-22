@@ -21,7 +21,7 @@
 #include <sys/socket.h>
 #include "dmsocket.h"
 #define DZH "DZH"
-#define NC "NC"
+#define NC "NCC"
 #define DZHTH 1
 #define NCTH 0
 #define MAXES 10

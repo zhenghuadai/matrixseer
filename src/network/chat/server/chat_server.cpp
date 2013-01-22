@@ -58,7 +58,6 @@ int Chat_server::processMsg(char *buf,struct sockaddr_in addr)
         who[i]=buf[i];
     who[i]='\0';
     if(buf[i]=='q')cmd=LOGOFF;
-    printf("recv %s\n",who);
     if(strcmp(who,DZH)==0)
     {
         if(cmd==LOGOFF)
