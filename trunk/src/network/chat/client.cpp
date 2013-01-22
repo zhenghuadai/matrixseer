@@ -30,10 +30,11 @@ char *login()
     }
     pn=(char*)malloc(strlen(tmp)+1);
     strcpy(pn,tmp);
+    fprintf(stdout, "user:%s\n", pn);
     return pn;
 }
 
-kernel_ret recvkernel()
+__kernel recvkernel()
 {	
     int n;
     while(1)
@@ -49,19 +50,22 @@ kernel_ret recvkernel()
     }
 }
 
-int main()
+int main( int argc, char* argv[])
 {
     int client_len;
     int n;
+    int myport = 65537;
     signal(SIGQUIT,quitp);
     if((client=socket(AF_INET,SOCK_DGRAM,0))<0)
     {
         perror("socket err\n");
         exit(0);
     }
+    if(argc == 2)
+        myport = atoi(argv[1]);
     client_addr.sin_family=AF_INET;
     client_addr.sin_addr.s_addr=htonl(0);
-    client_addr.sin_port=htons(1235);
+    client_addr.sin_port=htons(myport);
     if(bind(client,(struct sockaddr*)&client_addr,16)<0)
     {
         perror("bind err\n");
@@ -77,7 +81,7 @@ int main()
     printf("client use port%d\n",ntohs(client_addr.sin_port));
 
     server_addr.sin_family=AF_INET;
-    server_addr.sin_addr.s_addr=inet_addr("192.168.10.101");
+    server_addr.sin_addr.s_addr=inet_addr("192.168.10.110");
     server_addr.sin_port=htons(1236);
     user=login();
     slaunch0(recvkernel)()
@@ -86,9 +90,8 @@ int main()
         {
 
             memset(buff,0,200);
-            //	sprintf(buff,"very good\n");
             sprintf(buff,"%s ",user);
-            printf("please input you msg:");
+            printf("\n\n-------------------\nplease input you msg:\n");
             fgets(buff+strlen(buff),200,stdin);
             printf("you input msg: %s", buff);
             if(sendto(client,buff,strlen(buff),0,(struct sockaddr*)&server_addr,server_len) <0)
@@ -98,7 +101,6 @@ int main()
                 close(client);
                 exit(0);
             }
-            memset(buff,0,200);
         }//end while
     }
     close(client);
