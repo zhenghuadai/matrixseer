@@ -513,8 +513,14 @@ int main(int argc, char *argv[]){
     if (argc < 2) {
         fprintf(stderr,"Please enter the server's hostname!\n");
         exit(1);
+    }else if(argc ==2){
+        cont=httpsock(argv[1]);
+    }else if(argc ==3){
+        http_t tmp;
+        int error;
+            httpget(argv[1],&tmp,100 ,200,&error);
+        cont = tmp.content; 
     }
-    cont=httpsock(argv[1]);
     printf("%s",cont);
 }
 #endif
